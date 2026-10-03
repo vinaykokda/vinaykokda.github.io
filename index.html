@@ -150,6 +150,10 @@ details[open] summary::after{content:"–"}
 .timer{margin-top:10px;font-size:13px;font-weight:700;color:var(--mu)}
 .timer b{color:var(--acc);font-variant-numeric:tabular-nums;font-size:15px}
 .timer.low b{color:#dc2626}
+
+.apps{display:flex;gap:8px;margin-top:10px}
+.apps a{flex:1;padding:11px 6px;border-radius:12px;border:1px solid var(--bd);color:var(--tx);text-decoration:none;font-weight:700;font-size:13px;text-align:center}
+.apps a:active{transform:scale(.97)}
 </style>
 </head>
 <body>
@@ -210,8 +214,13 @@ details[open] summary::after{content:"–"}
       <div class="timer" id="tm">⏱ QR expire hoga: <b id="tt">05:00</b></div>
       <div class="qrbox"><div id="qr"></div><div class="exp" id="exp" hidden><div class="mi">⏰</div><b>Time out</b><div class="mu">QR expire ho gaya</div><button class="btn" onclick="refreshQR()">🔄 QR refresh karo</button></div></div>
       <div class="mu">GPay, PhonePe, Paytm ya kisi bhi UPI app se scan karo</div>
+      <div class="warn" style="background:#eff6ff;border-color:#bfdbfe;color:#1e40af">📱 <b>Isi phone se pay kar rahe ho?</b> To QR scan nahi ho sakta. Neeche apne app ka button dabao, ya QR save karke GPay/PhonePe me <b>gallery se scan</b> karo.</div>
+      <div class="apps"><a id="a1" onclick="payApp()">GPay</a><a id="a2" onclick="payApp()">PhonePe</a><a id="a3" onclick="payApp()">Paytm</a></div>
+      <button class="btn ghost" id="sv" onclick="saveQR()">⬇️ QR save karo</button>
+      <div class="mu" style="margin-top:8px">Button na khule? Page ko <b>Chrome</b> me kholo (⋮ → Open in Chrome).</div>
+      
       <div class="upi"><code id="upiid"></code><button id="cp" onclick="copyUpi()">Copy</button></div>
-      <a class="btn ghost" id="payapp" target="_blank" rel="noopener" onclick="payApp()">📱 Tap to pay via UPI app</a>
+      <a class="btn ghost" id="payapp" onclick="payApp()">📱 Tap to pay via UPI app</a>
       <div class="mu" id="hint" style="margin-top:6px"></div>
       <label for="utr">Payment ke baad Transaction ID / UTR</label><input id="utr" inputmode="numeric" maxlength="12" placeholder="12-digit UTR number">
       <div class="warn">⚠️ UTR sahi likhna. Usi se payment confirm hoga.</div>
@@ -349,9 +358,25 @@ function fmt(n){return (n<10?"0":"")+n}
 function drawQR(){var q=$("qr");q.innerHTML="";q.style.display="inline-block";try{if(typeof QRCode!=="undefined")new QRCode(q,{text:upiLink(),width:190,height:190});else q.style.display="none"}catch(e){q.style.display="none"}}
 function stopTimer(){if(tmr){clearInterval(tmr);tmr=null}}
 function tick(){$("tt").textContent=fmt(Math.floor(left/60))+":"+fmt(left%60);$("tm").classList.toggle("low",left<=60);if(left<=0){stopTimer();expire();return}left--}
-function expire(){$("exp").hidden=false;var a=$("payapp");a.removeAttribute("href");a.style.opacity=".4";a.style.pointerEvents="none"}
-function startTimer(){stopTimer();left=300;$("exp").hidden=true;var a=$("payapp");a.href=upiLink();a.style.opacity="";a.style.pointerEvents="";$("hint").textContent="";drawQR();tick();tmr=setInterval(tick,1000)}
+function expire(){$("exp").hidden=false;setPayLinks(false)}
+function startTimer(){stopTimer();left=300;$("exp").hidden=true;setPayLinks(true);$("sv").textContent="⬇️ QR save karo";$("hint").textContent="";drawQR();tick();tmr=setInterval(tick,1000)}
 function refreshQR(){startTimer()}
+
+function payQ(){return "pa="+encodeURIComponent(UPI_ID)+"&pn="+encodeURIComponent(UPI_NAME)+"&am="+PRICE+"&cu=INR&tn="+encodeURIComponent("Mentorship call")}
+function it(pkg){return "intent://pay?"+payQ()+"#Intent;scheme=upi;"+(pkg?"package="+pkg+";":"")+"end"}
+function setPayLinks(on){
+  var and=/Android/i.test(navigator.userAgent);
+  var m=and?{payapp:it(""),a1:it("com.google.android.apps.nbu.paisa.user"),a2:it("com.phonepe.app"),a3:it("net.one97.paytm")}:{payapp:upiLink(),a1:"tez://upi/pay?"+payQ(),a2:"phonepe://pay?"+payQ(),a3:"paytmmp://pay?"+payQ()};
+  Object.keys(m).forEach(function(k){var a=$(k);if(on){a.href=m[k];a.style.opacity="";a.style.pointerEvents=""}else{a.removeAttribute("href");a.style.opacity=".4";a.style.pointerEvents="none"}});
+}
+function saveQR(){
+  if(left<=0)return;
+  var q=$("qr"),c=q.querySelector("canvas"),i=q.querySelector("img");
+  var u=c?c.toDataURL("image/png"):(i?i.src:"");if(!u)return;
+  try{var b=atob(u.split(",")[1]),n=b.length,arr=new Uint8Array(n);while(n--)arr[n]=b.charCodeAt(n);
+    var url=URL.createObjectURL(new Blob([arr],{type:"image/png"}));var a=document.createElement("a");a.download="payment-qr.png";a.href=url;document.body.appendChild(a);a.click();a.remove()}catch(e){}
+  modal('<h2>QR save karo</h2><img src="'+u+'" alt="Payment QR" style="width:220px;max-width:100%;background:#fff;padding:10px;border-radius:14px"><p class="mu">Agar Downloads me save na hua ho, to is <b>image par ungli dabake rakho</b> aur <b>Download image</b> chuno. Phir GPay/PhonePe me <b>gallery se scan</b> karo.</p><button class="btn" onclick="closeM()">Theek hai</button>');
+}
 </script>
 </body>
 </html>
