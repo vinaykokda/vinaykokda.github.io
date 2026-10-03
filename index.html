@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Vinay Kokda | 1-on-1 Creator Mentorship</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#060913;--card:#0f172a;--tx:#f8fafc;--mu:#94a3b8;--gold:#f59e0b;--ok:#34d399;--bd:rgba(255,255,255,.12);box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:light){:root:not([data-theme="dark"]){--bg:#f1f5f9;--card:#fff;--tx:#0f172a;--mu:#475569;--bd:rgba(0,0,0,.14)}}
+:root[data-theme="light"]{--bg:#f1f5f9;--card:#fff;--tx:#0f172a;--mu:#475569;--bd:rgba(0,0,0,.14)}
+html{scroll-padding-top:env(safe-area-inset-top,0px);scroll-behavior:smooth}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tx);font-family:'Plus Jakarta Sans',system-ui,sans-serif;padding:14px 14px 48px;overflow-x:hidden}
+body::before{content:"";position:fixed;inset:-20%;background:radial-gradient(circle at 20% 10%,rgba(245,158,11,.16),transparent 40%),radial-gradient(circle at 85% 30%,rgba(59,130,246,.14),transparent 40%);animation:drift 14s ease-in-out infinite alternate;z-index:-1}
+@keyframes drift{to{transform:translate(4%,6%) scale(1.1)}}
+@keyframes up{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+@keyframes glow{0%,100%{box-shadow:0 0 22px rgba(245,158,11,.35)}50%{box-shadow:0 0 42px rgba(245,158,11,.65)}}
+@keyframes shine{from{transform:translateX(-120%)}to{transform:translateX(220%)}}
+@keyframes draw{to{stroke-dashoffset:0}}
+@keyframes pop{0%{transform:scale(.6);opacity:0}70%{transform:scale(1.08)}100%{transform:scale(1);opacity:1}}
+main{max-width:480px;margin:0 auto;display:flex;flex-direction:column;gap:14px}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:22px;padding:20px;animation:up .6s both}
+.card:nth-child(2){animation-delay:.12s}.card:nth-child(3){animation-delay:.24s}
+.hero{text-align:center}
+.av{width:96px;height:96px;margin:0 auto 12px;border-radius:50%;background:linear-gradient(135deg,#f59e0b,#fde047);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:30px;color:#0f172a;animation:glow 3s infinite}
+h1{margin:0;font-size:24px;font-weight:800}
+h2{margin:0;font-size:17px;font-weight:800}
+.mu{color:var(--mu);font-size:13px;line-height:1.55}
+.gold{color:var(--gold);font-weight:800;font-size:14px;margin:12px 0 6px}
+.row{display:flex;gap:10px;margin-top:14px}
+.row a{flex:1;padding:10px;border-radius:12px;color:#fff;font-weight:700;font-size:13px;text-decoration:none;text-align:center;transition:transform .2s}
+.row a:active,.btn:active{transform:scale(.97)}
+.yt{background:#dc2626}.ig{background:linear-gradient(90deg,#db2777,#9333ea)}
+.top{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;border-bottom:1px solid var(--bd);padding-bottom:14px;margin-bottom:14px}
+.price{text-align:right}.price s{color:var(--mu);font-size:13px}.price b{display:block;font-size:28px;color:var(--ok)}
+.tag{font-size:10px;font-weight:800;color:var(--gold);text-transform:uppercase;letter-spacing:.06em}
+ul{list-style:none;padding:0;margin:0;display:grid;gap:9px;font-size:13px}
+li::before{content:"✓ ";color:var(--ok);font-weight:800}
+.btn{position:relative;overflow:hidden;width:100%;margin-top:16px;padding:15px;border:0;border-radius:14px;background:linear-gradient(90deg,#f59e0b,#fbbf24);color:#0f172a;font:inherit;font-weight:800;font-size:15px;cursor:pointer;display:block;text-align:center;text-decoration:none;transition:transform .2s,box-shadow .2s}
+.btn:hover{box-shadow:0 8px 24px rgba(245,158,11,.4)}
+.btn.shine::after{content:"";position:absolute;top:0;left:0;width:40%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.55),transparent);animation:shine 2.6s infinite}
+.btn.ghost{background:transparent;color:var(--tx);border:1px solid var(--bd);margin-top:10px}
+#wiz{display:none}#wiz.show{display:block}
+.prog{display:flex;align-items:center;margin-bottom:18px}
+.dot{flex:0 0 auto;display:flex;flex-direction:column;align-items:center;gap:4px;font-size:11px;color:var(--mu);font-weight:700}
+.dot i{width:28px;height:28px;border-radius:50%;border:2px solid var(--bd);display:flex;align-items:center;justify-content:center;font-style:normal;font-size:13px;transition:.4s}
+.dot.on i{background:var(--gold);border-color:var(--gold);color:#0f172a}.dot.on{color:var(--tx)}
+.line{flex:1;height:3px;background:var(--bd);margin:0 6px 16px;border-radius:3px;overflow:hidden}
+.line b{display:block;height:100%;width:0;background:var(--gold);transition:width .5s}
+.line.on b{width:100%}
+.pane{display:none;text-align:center}.pane.on{display:block;animation:up .45s both}
+label{display:block;text-align:left;font-size:12px;font-weight:700;margin:14px 0 5px}
+input{width:100%;padding:13px;border-radius:12px;border:1px solid var(--bd);background:transparent;color:var(--tx);font:inherit;font-size:15px;transition:border .2s}
+input:focus{outline:0;border-color:var(--gold)}
+.err{color:#f87171;font-size:12px;margin-top:8px;min-height:16px;text-align:left}
+.amt{font-size:36px;font-weight:800;color:var(--ok);margin-top:6px}
+#qr{background:#fff;padding:12px;border-radius:16px;display:inline-block;margin:12px 0}
+.upi{display:flex;gap:8px;align-items:center;justify-content:space-between;padding:10px 12px;border:1px solid var(--bd);border-radius:12px;margin-top:10px;text-align:left}
+.upi code{font-size:14px;word-break:break-all}
+.upi button{border:0;border-radius:10px;background:#2563eb;color:#fff;font:inherit;font-weight:700;padding:8px 14px;cursor:pointer}
+.ck{width:84px;height:84px;margin:4px auto 10px;animation:pop .5s both}
+.ck circle{fill:rgba(52,211,153,.15);stroke:var(--ok);stroke-width:3}
+.ck path{fill:none;stroke:var(--ok);stroke-width:5;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:50;stroke-dashoffset:50;animation:draw .6s .35s forwards}
+.note{margin-top:14px;padding:12px;border-radius:12px;background:rgba(245,158,11,.12);font-size:13px;line-height:1.5;text-align:left}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}.ck path{stroke-dashoffset:0}}
+</style>
+</head>
+<body>
+<main>
+  <section class="card hero">
+    <div class="av">VK</div>
+    <h1>Vinay Kokda</h1>
+    <div class="mu">@vinaykokda • 1-on-1 Content &amp; Growth Mentorship</div>
+    <div class="gold">Real talk on building a channel that actually grows.</div>
+    <div class="mu">I started with zero subscribers and a camera I barely knew how to use. We'll audit your channel, fix your retention hooks, and build an honest posting system you can stick with.</div>
+    <div class="row">
+      <a class="yt" href="https://youtube.com/@vinaykokda?si=IsK6Tj7EoGx1vfgI" target="_blank" rel="noopener">YouTube</a>
+      <a class="ig" href="https://www.instagram.com/vinaykokda?stkn=cGUxM2wydWp2aGl5" target="_blank" rel="noopener">Instagram</a>
+    </div>
+  </section>
+
+  <section class="card">
+    <div class="top">
+      <div><div class="tag">Exclusive 1-on-1 Call</div><h2>Creator Clarity &amp; Content Strategy</h2><div class="mu">28 Minutes • Google Meet</div></div>
+      <div class="price"><s>₹499</s><b id="pr">₹1</b><span class="tag" style="color:var(--ok)">Test price</span></div>
+    </div>
+    <ul>
+      <li><b>Channel Audit:</b> see exactly what makes viewers stay or leave.</li>
+      <li><b>Retention Framework:</b> craft a first 30 seconds that hooks people.</li>
+      <li><b>Weekly Plan:</b> a realistic posting routine without burnout.</li>
+    </ul>
+    <button class="btn shine" id="buy" onclick="openWiz()">Book now — <span id="pr2">₹1</span> →</button>
+  </section>
+
+  <section class="card" id="wiz">
+    <div class="prog">
+      <div class="dot on" id="d1"><i>1</i>Details</div><div class="line" id="l1"><b></b></div>
+      <div class="dot" id="d2"><i>2</i>Payment</div><div class="line" id="l2"><b></b></div>
+      <div class="dot" id="d3"><i>3</i>Slot</div>
+    </div>
+
+    <div class="pane on" id="p1">
+      <h2 style="text-align:left">Tumhari details</h2>
+      <label for="nm">Naam</label><input id="nm" placeholder="Full name" autocomplete="name">
+      <label for="ph">WhatsApp number</label><input id="ph" type="tel" inputmode="numeric" maxlength="10" placeholder="10-digit number" autocomplete="tel-national">
+      <div class="err" id="e1"></div>
+      <button class="btn" onclick="toPay()">Continue to payment →</button>
+    </div>
+
+    <div class="pane" id="p2">
+      <h2>UPI se payment karo</h2>
+      <div class="amt" id="amt">₹1</div>
+      <div id="qr"></div>
+      <div class="mu">GPay, PhonePe, Paytm ya kisi bhi UPI app se scan karo</div>
+      <div class="upi"><code id="upiid"></code><button id="cp" onclick="copyUpi()">Copy</button></div>
+      <a class="btn ghost" id="payapp" target="_blank" rel="noopener" onclick="payApp()">📱 Tap to pay via UPI app</a>
+      <div class="mu" id="hint" style="margin-top:6px"></div>
+      <label for="utr">Payment ke baad Transaction ID / UTR</label><input id="utr" placeholder="12-digit UTR number">
+      <div class="err" id="e2"></div>
+      <button class="btn" onclick="toSlot()">Payment ho gaya →</button>
+      <button class="btn ghost" onclick="go(1)">← Back</button>
+    </div>
+
+    <div class="pane" id="p3">
+      <svg class="ck" viewBox="0 0 84 84"><circle cx="42" cy="42" r="38"/><path d="M26 43l11 11 21-23"/></svg>
+      <h2>Bas ek step aur!</h2>
+      <div class="mu" style="margin-top:6px">Ab apna slot chuno. Roz 10:30 AM aur 6:30 PM (Mon–Fri, IST). Jo slot book ho chuka hoga wo dikhega nahi.</div>
+      <a class="btn shine" id="cal" target="_blank" rel="noopener">📅 Slot chuno</a>
+      <div class="note">Vinay tumhara payment check karke booking confirm karenge. Confirm hote hi <b>Google Meet link tumhari email pe</b> aa jayega.</div>
+    </div>
+  </section>
+</main>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script>
+// ===== SETTINGS =====
+var UPI_ID = "6367349916@ybl";
+var UPI_NAME = "Vinay Kokda";
+var PRICE = 0; // 0 = FREE test (payment step skip). Asli price: 499
+var CAL = "https://cal.com/vinaykokda/mentorship";
+// ====================
+function $(i){return document.getElementById(i)}
+var info={};
+var PT=PRICE>0?"₹"+PRICE:"FREE";
+$("pr").textContent=$("pr2").textContent=$("amt").textContent=PT;
+$("upiid").textContent=UPI_ID;
+function upiLink(){return "upi://pay?pa="+encodeURIComponent(UPI_ID)+"&pn="+encodeURIComponent(UPI_NAME)+"&am="+PRICE+"&cu=INR&tn="+encodeURIComponent("Mentorship call")}
+$("payapp").href=upiLink();
+try{if(typeof QRCode!=="undefined")new QRCode($("qr"),{text:upiLink(),width:190,height:190});else $("qr").style.display="none"}catch(e){$("qr").style.display="none"}
+function openWiz(){$("wiz").classList.add("show");setTimeout(function(){$("wiz").scrollIntoView({behavior:"smooth"})},50)}
+function go(n){
+  [1,2,3].forEach(function(i){
+    $("p"+i).classList.toggle("on",i===n);
+    $("d"+i).classList.toggle("on",i<=n);
+    if(i<3)$("l"+i).classList.toggle("on",i<n);
+  });
+  $("wiz").scrollIntoView({behavior:"smooth"});
+}
+function toPay(){
+  var nm=$("nm").value.trim(),ph=$("ph").value.replace(/\D/g,"");
+  if(nm.length<2){$("e1").textContent="Apna naam likho.";return}
+  if(ph.length!==10){$("e1").textContent="Sahi 10-digit WhatsApp number likho.";return}
+  $("e1").textContent="";info={name:nm,phone:ph};
+  if(PRICE===0){buildCal("FREE-TEST");go(3);return}
+  go(2);
+}
+function toSlot(){
+  var u=$("utr").value.replace(/\s/g,"");
+  if(u.length<8){$("e2").textContent="Payment ke baad ka Transaction ID / UTR likho.";return}
+  $("e2").textContent="";
+  buildCal(u);go(3);
+}
+function buildCal(u){
+  $("cal").href=CAL+"?name="+encodeURIComponent(info.name)+"&attendeePhoneNumber="+encodeURIComponent("+91"+info.phone)+"&utr="+encodeURIComponent(u);
+}
+function payApp(){
+  $("hint").textContent="UPI app khul raha hai...";
+  setTimeout(function(){if(!document.hidden)$("hint").textContent="App nahi khula? QR scan karo, ya UPI ID copy karke GPay/PhonePe me paste karo."},1800);
+}
+function copyUpi(){
+  try{navigator.clipboard.writeText(UPI_ID).then(function(){$("cp").textContent="Copied ✓"},function(){$("cp").textContent="Khud copy karo"})}catch(e){$("cp").textContent="Khud copy karo"}
+}
+</script>
+</body>
+</html>
