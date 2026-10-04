@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Vinay Kokda | Mentorship</title>
+  <title>Vinay Kokda | 28-Min 1-on-1 Mentorship</title>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800;900&display=swap" rel="stylesheet">
   <style>
     :root {
@@ -12,16 +12,24 @@
       --gold-primary: #f59e0b;
       --text-white: #f8fafc;
       --accent-blue: #0b7cff;
+      --whatsapp-green: #16a34a;
     }
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Plus Jakarta Sans', sans-serif; }
-    body { background: var(--bg-dark); color: var(--text-white); padding: 14px; min-height: 100vh; display: flex; justify-content: center; }
+    body { background: var(--bg-dark); color: var(--text-white); padding: 14px 14px 100px; min-height: 100vh; display: flex; justify-content: center; }
     .app-wrapper { width: 100%; max-width: 440px; }
     .screen-panel { display: none; }
     .screen-panel.active { display: block; }
     .dark-card { background: var(--card-dark); border: 1px solid rgba(255,255,255,0.08); border-radius: 26px; padding: 24px 20px; margin-bottom: 14px; text-align: center; }
     .hero-title { font-size: 22px; font-weight: 900; margin-bottom: 12px; }
     .hero-title span { color: var(--gold-primary); }
+    .mini-social-row { display: flex; justify-content: center; gap: 8px; margin-bottom: 14px; }
+    .mini-social-badge { display: inline-flex; align-items: center; gap: 5px; text-decoration: none; padding: 6px 14px; border-radius: 99px; font-size: 11.5px; font-weight: 700; color: #cbd5e1; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); }
     .btn-book-gold { background: linear-gradient(90deg, #f59e0b, #fbbf24); color: #090e1a; border: none; padding: 12px 24px; border-radius: 99px; font-size: 14px; font-weight: 800; cursor: pointer; width: 100%; margin-top: 20px; }
+    .wizard-white-card { background: #ffffff; color: #0f172a; border-radius: 28px; padding: 24px 20px; }
+    .input-group { margin-bottom: 14px; text-align: left; }
+    .input-label { display: block; font-size: 13px; font-weight: 700; color: #334155; margin-bottom: 6px; }
+    .text-input-field { width: 100%; padding: 13px 14px; border-radius: 14px; border: 1.5px solid #cbd5e1; font-size: 14px; color: #0f172a; outline: none; }
+    .btn-primary-blue { width: 100%; padding: 15px; border: none; border-radius: 16px; background: var(--accent-blue); color: #ffffff; font-size: 14.5px; font-weight: 800; cursor: pointer; margin-top: 10px; }
   </style>
 </head>
 <body>
@@ -30,6 +38,10 @@
   <!-- Home Screen -->
   <div id="screen-home" class="screen-panel active">
     <div class="dark-card">
+      <div class="mini-social-row">
+        <a href="https://instagram.com" target="_blank" class="mini-social-badge">📸 Instagram</a>
+        <a href="https://youtube.com" target="_blank" class="mini-social-badge">▶️ YouTube</a>
+      </div>
       <h1 class="hero-title">Views ruk gaye hain aur <span>direction nahi mil rahi?</span></h1>
       <p style="color: #94a3b8; font-size: 13px; margin-bottom: 20px;">28-Minute 1-on-1 Call with Vinay Kokda</p>
       <button class="btn-book-gold" id="btn-goto-sessions">Book Session Now →</button>
@@ -38,10 +50,28 @@
 
   <!-- Sessions Screen -->
   <div id="screen-sessions" class="screen-panel">
-    <div class="dark-card" style="background: #fff; color: #0f172a; text-align: left;">
-      <h2 style="font-size: 18px; font-weight: 800; margin-bottom: 8px;">Creator Clarity & Strategy</h2>
-      <p style="font-size: 12.5px; color: #64748b; margin-bottom: 16px;">28-minute focused video call.</p>
-      <button class="btn-book-gold" id="btn-back-home" style="width:auto; padding: 8px 16px;">← Back</button>
+    <div class="wizard-white-card">
+      <h2 style="font-size: 18px; font-weight: 800; margin-bottom: 8px; color:#0f172a;">Creator Clarity & Strategy</h2>
+      <p style="font-size: 13px; color: #64748b; margin-bottom: 16px;">28-minute focused video call.</p>
+      <button class="btn-primary-blue" id="btn-goto-step2">Select Slot & Details →</button>
+      <button style="background:none; border:none; color:#64748b; font-weight:700; margin-top:12px; cursor:pointer;" id="btn-back-home">← Back</button>
+    </div>
+  </div>
+
+  <!-- Details Screen -->
+  <div id="screen-step2" class="screen-panel">
+    <div class="wizard-white-card">
+      <h2 style="font-size: 18px; font-weight: 800; margin-bottom: 16px; color:#0f172a;">Apni Details Bharein</h2>
+      <div class="input-group">
+        <label class="input-label">Full Name *</label>
+        <input type="text" id="inp-name" class="text-input-field" placeholder="Rahul Sharma">
+      </div>
+      <div class="input-group">
+        <label class="input-label">WhatsApp Number *</label>
+        <input type="tel" id="inp-phone" class="text-input-field" maxlength="10" placeholder="9876543210">
+      </div>
+      <button class="btn-primary-blue" id="btn-submit-booking">Submit Booking →</button>
+      <button style="background:none; border:none; color:#64748b; font-weight:700; margin-top:12px; cursor:pointer;" id="btn-back-sessions">← Back</button>
     </div>
   </div>
 </div>
@@ -55,7 +85,22 @@
     document.getElementById('screen-sessions').classList.remove('active');
     document.getElementById('screen-home').classList.add('active');
   });
+  document.getElementById('btn-goto-step2').addEventListener('click', () => {
+    document.getElementById('screen-sessions').classList.remove('active');
+    document.getElementById('screen-step2').classList.add('active');
+  });
+  document.getElementById('btn-back-sessions').addEventListener('click', () => {
+    document.getElementById('screen-step2').classList.remove('active');
+    document.getElementById('screen-sessions').classList.add('active');
+  });
+  document.getElementById('btn-submit-booking').addEventListener('click', () => {
+    const name = document.getElementById('inp-name').value;
+    const phone = document.getElementById('inp-phone').value;
+    if(!name || !phone) { alert('Kripya details bharein'); return; }
+    alert('Booking submitted successfully!');
+  });
 </script>
 
 </body>
-</html>
+  </html>
+  
