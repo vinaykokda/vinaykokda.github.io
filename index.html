@@ -2,2275 +2,1804 @@
 <html lang="hi">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-  <title>Vinay Kokda | 28-Min 1-on-1 Creator Mentorship</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Vinay Kokda | 1-on-1 Creator Mentorship</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 
   <style>
     :root {
-      --bg-dark: #060913;
-      --card-dark: #0e1626;
-      --card-dark-subtle: #131c31;
-      --text-white: #f8fafc;
-      --text-muted: #94a3b8;
-      --gold-primary: #f59e0b;
-      --gold-glow: #fbbf24;
-      --border-dark: rgba(255, 255, 255, 0.08);
+      --bg-dark: #07192b;
+      --bg-banner: #091e34;
+      --bg-banner-grad: linear-gradient(180deg, #061524 0%, #0c2b4a 100%);
       --accent-blue: #0b7cff;
       --accent-blue-hover: #0066dc;
-      --whatsapp-green: #16a34a;
+      --tx-dark: #0f172a;
+      --tx-muted: #64748b;
+      --border-light: #e2e8f0;
+      --emerald: #059669;
+      --emerald-glow: rgba(16, 185, 129, 0.35);
     }
 
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
-      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
       -webkit-tap-highlight-color: transparent;
     }
 
-    body {
+    html, body {
       background: var(--bg-dark);
-      color: var(--text-white);
-      padding: 14px 14px 120px;
-      min-height: 100vh;
+      color: var(--tx-dark);
+      min-height: 100%;
+      width: 100%;
+      overflow-x: clip;
+      -webkit-overflow-scrolling: touch;
+      scroll-behavior: smooth;
+    }
+
+    body {
       display: flex;
       justify-content: center;
       align-items: flex-start;
-      overflow-x: hidden;
+      padding-bottom: 24px;
     }
 
-    .app-wrapper {
+    main {
       width: 100%;
       max-width: 440px;
+      min-height: 100vh;
+      background: #f8fafc;
       position: relative;
-    }
-
-    /* Screen Transitions */
-    .screen-panel {
-      display: none;
-      opacity: 0;
-      transform: translateY(18px);
-    }
-    .screen-panel.active {
-      display: block;
-      animation: slideUpFadeIn 0.32s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-    }
-    @keyframes slideUpFadeIn {
-      0% { opacity: 0; transform: translateY(18px); }
-      100% { opacity: 1; transform: translateY(0); }
-    }
-
-    /* Interactive Tap Feedback */
-    button, .slot-card-opt, .date-pill-opt, .mini-social-badge, .footer-soc-btn {
-      transition: transform 0.15s ease, filter 0.15s ease, background 0.2s ease, border-color 0.2s ease;
-      cursor: pointer;
-    }
-    button:active, .slot-card-opt:not(.locked-slot):active, .date-pill-opt:active, .mini-social-badge:active, .footer-soc-btn:active {
-      transform: scale(0.965);
-    }
-
-    /* Header & Radar Dot */
-    .home-top-header {
       display: flex;
+      flex-direction: column;
+      box-shadow: 0 0 45px rgba(0, 0, 0, 0.5);
+      overflow-x: clip;
+    }
+
+    /* Strict constraints on all SVGs so they never overflow */
+    svg {
+      display: inline-block;
+      vertical-align: middle;
+      max-width: 100%;
+      max-height: 100%;
+      flex-shrink: 0;
+    }
+
+    .home-top-sticky-header {
+      position: fixed;
+      top: 0;
+      left: 50%;
+      transform: translate(-50%, -100%);
+      width: 100%;
+      max-width: 440px;
+      background: rgba(7, 25, 43, 0.98);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      color: #ffffff;
+      padding: 10px 14px;
+      z-index: 120;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+      display: flex;
+      align-items: center;
       justify-content: space-between;
-      align-items: center;
-      margin-bottom: 12px;
-      padding: 0 4px;
+      opacity: 0;
+      pointer-events: none;
+      transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.25s ease;
     }
-    .header-secret-trigger {
-      font-size: 13.5px;
-      font-weight: 700;
-      color: #94a3b8;
-      cursor: pointer;
-      user-select: none;
-      display: inline-flex;
-      align-items: center;
-      gap: 7px;
+    .home-top-sticky-header.visible {
+      transform: translate(-50%, 0);
+      opacity: 1;
+      pointer-events: auto;
     }
-    .pulse-wrapper {
-      position: relative;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 10px;
-      height: 10px;
-    }
-    .radar-pulse-ring {
-      position: absolute;
-      width: 18px;
-      height: 18px;
-      border-radius: 50%;
-      background: rgba(16, 185, 129, 0.45);
-      animation: radarPing 2.2s cubic-bezier(0, 0, 0.2, 1) infinite;
-    }
-    @keyframes radarPing {
-      0% { transform: scale(0.6); opacity: 0.95; }
-      80%, 100% { transform: scale(2.4); opacity: 0; }
-    }
-    .online-dot-mini {
-      width: 7.5px;
-      height: 7.5px;
-      border-radius: 50%;
-      background: #10b981;
-      box-shadow: 0 0 8px #10b981;
-      z-index: 2;
-    }
-
-    /* Hero Card & Avatar */
-    .dark-card {
-      background: var(--card-dark);
-      border: 1px solid var(--border-dark);
-      border-radius: 26px;
-      padding: 24px 20px;
-      margin-bottom: 14px;
-      box-shadow: 0 10px 30px -10px rgba(0,0,0,0.6);
-      position: relative;
-    }
-    .hero {
-      text-align: center;
-    }
-
-    .slot-badge-top {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 6.5px 15px;
+    .top-header-book-btn {
+      background: linear-gradient(90deg, #0b7cff, #2563eb);
+      color: #ffffff;
+      border: none;
+      padding: 8px 16px;
       border-radius: 99px;
-      background: rgba(245, 158, 11, 0.1);
-      border: 1px solid rgba(245, 158, 11, 0.35);
-      color: var(--gold-primary);
-      font-size: 12px;
+      font-size: 13px;
       font-weight: 800;
-      margin-bottom: 18px;
+      cursor: pointer;
+      box-shadow: 0 4px 14px rgba(11, 124, 255, 0.4);
+      transition: transform 0.12s ease;
     }
-    .slot-dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: #10b981;
-      box-shadow: 0 0 10px #10b981;
+    .top-header-book-btn:active {
+      transform: scale(0.93);
     }
 
-    .avatar-ring-container {
-      position: relative;
-      width: 138px;
-      height: 138px;
-      margin: 0 auto 16px;
+    /* Sticky App Bar on Inner Pages */
+    .top-app-header-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: rgba(7, 25, 43, 0.98);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      color: #ffffff;
+      padding: 12px 14px;
+      position: -webkit-sticky;
+      position: sticky;
+      top: 0;
+      left: 0;
+      right: 0;
+      width: 100%;
+      z-index: 100;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35);
+    }
+    .top-app-left-group {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .top-back-circle-btn {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.12);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: #ffffff;
+      font-size: 16px;
+      font-weight: 800;
       display: flex;
       align-items: center;
       justify-content: center;
       cursor: pointer;
-      user-select: none;
+      transition: transform 0.15s ease, background 0.15s ease;
     }
-    .avatar-breathing-aura {
-      position: absolute;
-      inset: -8px;
+    .top-back-circle-btn:active {
+      transform: scale(0.9);
+      background: rgba(255, 255, 255, 0.25);
+    }
+    .top-thumb-avatar {
+      width: 36px;
+      height: 36px;
       border-radius: 50%;
-      background: radial-gradient(circle, rgba(245, 158, 11, 0.45) 0%, rgba(245, 158, 11, 0) 70%);
-      animation: auraPulse 3.5s ease-in-out infinite;
-      z-index: 1;
-    }
-    @keyframes auraPulse {
-      0%, 100% { transform: scale(0.93); opacity: 0.45; }
-      50% { transform: scale(1.15); opacity: 0.9; }
-    }
-    .ring-spin {
-      position: absolute;
-      inset: 0;
-      border-radius: 50%;
-      background: conic-gradient(#f59e0b, #fde047, #38bdf8, #f59e0b);
-      animation: spin 7.5s linear infinite;
-      z-index: 2;
-    }
-    @keyframes spin {
-      to { transform: rotate(360deg); }
-    }
-    .avatar-inner {
-      position: relative;
-      z-index: 3;
-      width: 124px;
-      height: 124px;
-      border-radius: 50%;
-      background: #000000;
-      border: 3.5px solid var(--card-dark);
-      overflow: hidden;
+      border: 1.5px solid rgba(255, 255, 255, 0.35);
+      background: #0f172a;
       display: flex;
       align-items: center;
       justify-content: center;
-      box-shadow: 0 6px 18px rgba(0,0,0,0.5);
+      font-weight: 800;
+      font-size: 12px;
+      color: #ffffff;
+      overflow: hidden;
     }
-    .avatar-inner img {
+    .top-thumb-avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .top-header-session-info {
+      display: flex;
+      flex-direction: column;
+    }
+    .top-header-title {
+      font-size: 13.5px;
+      font-weight: 800;
+      color: #ffffff;
+      line-height: 1.25;
+    }
+    .top-header-subtitle {
+      font-size: 11px;
+      color: #94a3b8;
+      font-weight: 600;
+    }
+    .top-header-price-tag {
+      font-size: 14px;
+      font-weight: 900;
+      color: #38bdf8;
+      background: rgba(56, 189, 248, 0.12);
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      padding: 4px 12px;
+      border-radius: 99px;
+    }
+
+    .scr-view {
+      display: none;
+      width: 100%;
+      opacity: 0;
+    }
+    .scr-view.on {
+      display: block;
+      opacity: 1;
+    }
+    .scr-view.slide-forward {
+      animation: viewSlideInRight 0.34s cubic-bezier(0.22, 1, 0.36, 1) both;
+    }
+    .scr-view.slide-backward {
+      animation: viewSlideInLeft 0.34s cubic-bezier(0.22, 1, 0.36, 1) both;
+    }
+    @keyframes viewSlideInRight {
+      0% {
+        opacity: 0;
+        transform: translate3d(45px, 0, 0);
+      }
+      100% {
+        opacity: 1;
+        transform: translate3d(0, 0, 0);
+      }
+    }
+    @keyframes viewSlideInLeft {
+      0% {
+        opacity: 0;
+        transform: translate3d(-45px, 0, 0);
+      }
+      100% {
+        opacity: 1;
+        transform: translate3d(0, 0, 0);
+      }
+    }
+
+    .scroll-anim {
+      opacity: 0;
+      transform: translateY(22px);
+      transition: opacity 0.45s cubic-bezier(0.22, 1, 0.36, 1), transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+      will-change: opacity, transform;
+    }
+    .scroll-anim.revealed {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .creator-hero-banner {
+      background: var(--bg-banner-grad);
+      padding: 34px 20px 28px;
+      text-align: center;
+      color: #ffffff;
+      position: relative;
+    }
+    .avatar-circle-wrap {
+      width: 92px;
+      height: 92px;
+      border-radius: 50%;
+      margin: 0 auto 12px;
+      border: 3.5px solid rgba(255, 255, 255, 0.25);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
+      background: #0f172a;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 32px;
+      font-weight: 900;
+      color: #ffffff;
+      letter-spacing: -0.5px;
+      overflow: hidden;
+    }
+    .avatar-circle-wrap img {
       width: 100%;
       height: 100%;
       object-fit: cover;
       display: block;
-      border-radius: 50%;
     }
-    .avatar-status-dot {
-      position: absolute;
-      bottom: 8px;
-      right: 10px;
-      width: 22px;
-      height: 22px;
-      border-radius: 50%;
-      background: #10b981;
-      border: 3.5px solid var(--card-dark);
-      box-shadow: 0 0 10px #10b981;
-      z-index: 4;
+    .creator-title-name {
+      font-size: 24px;
+      font-weight: 800;
+      color: #ffffff;
+      margin-bottom: 4px;
+      letter-spacing: -0.3px;
     }
-
-    .creator-handle-tag {
+    .creator-sub-tagline {
       font-size: 13.5px;
-      font-weight: 700;
-      color: #cbd5e1;
-      margin-bottom: 8px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 5px;
-    }
-    .verified-tick {
-      color: #38bdf8;
-      font-size: 14px;
+      color: #94a3b8;
+      font-weight: 500;
+      max-width: 290px;
+      margin: 0 auto;
+      line-height: 1.4;
     }
 
-    /* Small Vector Badges */
-    .mini-social-row {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 8px;
-      margin-bottom: 14px;
+    .sheet-content-container {
+      background: #ffffff;
+      border-radius: 26px 26px 0 0;
+      margin-top: -16px;
+      padding: 22px 18px 28px;
+      position: relative;
+      z-index: 10;
+      box-shadow: 0 -8px 24px rgba(0, 0, 0, 0.04);
     }
-    .mini-social-badge {
+    .section-label-headline {
+      font-size: 19px;
+      font-weight: 800;
+      color: #0f172a;
+      margin-bottom: 14px;
+      letter-spacing: -0.3px;
+    }
+
+    .session-swati-card {
+      background: #ffffff;
+      border: 1.5px solid var(--border-light);
+      border-radius: 20px;
+      padding: 18px 16px;
+      position: relative;
+      box-shadow: 0 4px 18px rgba(15, 23, 42, 0.05);
+      margin-bottom: 22px;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .session-swati-card:hover {
+      box-shadow: 0 6px 24px rgba(15, 23, 42, 0.08);
+    }
+
+    /* Top-Right Corner ONLY Active Status */
+    .card-top-active-corner {
+      position: absolute;
+      top: 16px;
+      right: 16px;
       display: inline-flex;
       align-items: center;
-      gap: 5px;
-      text-decoration: none;
+      gap: 6px;
+      background: #ecfdf5;
+      color: #047857;
+      border: 1px solid #a7f3d0;
       padding: 4px 10px;
       border-radius: 99px;
-      font-size: 11px;
-      font-weight: 700;
-      color: #cbd5e1;
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-    }
-    .mini-social-badge:hover {
-      background: rgba(255, 255, 255, 0.1);
-      border-color: rgba(255, 255, 255, 0.25);
-      color: #ffffff;
-    }
-    .mini-social-badge svg {
-      width: 13px;
-      height: 13px;
-      display: block;
-      flex-shrink: 0;
-    }
-
-    .hero-title {
-      font-size: 24.5px;
-      line-height: 1.35;
-      font-weight: 900;
-      color: #ffffff;
-      margin-bottom: 12px;
-      letter-spacing: -0.4px;
-    }
-    .hero-title .gold-accent {
-      background: linear-gradient(90deg, #f59e0b, #fbbf24);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-    .call-duration-sub {
-      font-size: 13.2px;
-      font-weight: 600;
-      color: #cbd5e1;
-      line-height: 1.5;
-      margin-bottom: 18px;
-    }
-
-    .feature-chips {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 8px;
-    }
-    .chip-pill {
-      font-size: 11.5px;
-      font-weight: 700;
-      padding: 6.5px 12.5px;
-      border-radius: 99px;
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      color: #e2e8f0;
-    }
-
-    /* Content Cards */
-    .content-block-card {
-      background: var(--card-dark);
-      border: 1px solid var(--border-dark);
-      border-radius: 24px;
-      padding: 20px 18px;
-      margin-bottom: 14px;
-    }
-    .block-heading {
-      font-size: 15.5px;
-      font-weight: 800;
-      color: #ffffff;
-      margin-bottom: 14px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-    .check-list-group {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      margin-bottom: 14px;
-    }
-    .check-item-row {
-      display: flex;
-      align-items: flex-start;
-      gap: 10px;
-      font-size: 13px;
-      line-height: 1.48;
-      color: #e2e8f0;
-      font-weight: 600;
-    }
-    .check-icon-green {
-      color: #10b981;
-      font-size: 14px;
-      font-weight: 900;
-      flex-shrink: 0;
-      margin-top: 1px;
-    }
-    .not-for-box {
-      margin-top: 14px;
-      padding: 12px 14px;
-      background: rgba(239, 68, 68, 0.08);
-      border: 1px dashed rgba(239, 68, 68, 0.35);
-      border-radius: 14px;
-      font-size: 12.5px;
-      color: #fca5a5;
-      line-height: 1.5;
-      font-weight: 600;
-    }
-
-    .timeline-list {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-    .timeline-item {
-      display: flex;
-      gap: 12px;
-      align-items: flex-start;
-      background: rgba(255, 255, 255, 0.02);
-      border: 1px solid rgba(255, 255, 255, 0.05);
-      padding: 10px 12px;
-      border-radius: 14px;
-    }
-    .timeline-stamp {
-      background: rgba(11, 124, 255, 0.15);
-      color: #38bdf8;
-      font-weight: 800;
-      font-size: 11.5px;
-      padding: 4px 8px;
-      border-radius: 8px;
-      flex-shrink: 0;
-    }
-    .timeline-text {
-      font-size: 12.5px;
-      color: #cbd5e1;
-      line-height: 1.4;
-      font-weight: 600;
-    }
-    .timeline-text b {
-      color: #ffffff;
-    }
-
-    /* FAQ Section */
-    .faq-section {
-      background: var(--card-dark);
-      border: 1px solid var(--border-dark);
-      border-radius: 24px;
-      padding: 20px 18px;
-      margin-bottom: 14px;
-    }
-    .faq-item {
-      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-      padding: 12px 0;
-    }
-    .faq-item:first-child {
-      padding-top: 0;
-    }
-    .faq-item:last-child {
-      border-bottom: none;
-      padding-bottom: 0;
-    }
-    .faq-q {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-size: 13.5px;
-      font-weight: 700;
-      color: #e2e8f0;
-      cursor: pointer;
-      user-select: none;
-    }
-    .faq-icon {
-      color: var(--gold-primary);
-      font-size: 18px;
-      font-weight: 800;
-      line-height: 1;
-      transition: transform 0.25s ease, color 0.2s ease;
-    }
-    .faq-a {
-      display: none;
-      font-size: 12.8px;
-      line-height: 1.55;
-      color: var(--text-muted);
-      padding-top: 8px;
-    }
-    .faq-item.active .faq-a {
-      display: block;
-    }
-    .faq-item.active .faq-icon {
-      transform: rotate(45deg);
-      color: #ef4444;
-    }
-
-    /* Footer Social Card */
-    .footer-social-card {
-      background: rgba(255, 255, 255, 0.02);
-      border: 1px solid var(--border-dark);
-      border-radius: 22px;
-      padding: 18px 16px;
-      text-align: center;
-      margin-bottom: 14px;
-    }
-    .footer-social-title {
-      font-size: 12px;
-      font-weight: 800;
-      color: #94a3b8;
-      text-transform: uppercase;
-      letter-spacing: 0.8px;
-      margin-bottom: 12px;
-    }
-    .footer-social-links {
-      display: flex;
-      justify-content: center;
-      gap: 10px;
-    }
-    .footer-soc-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 7px;
-      text-decoration: none;
-      padding: 8px 14px;
-      border-radius: 12px;
-      font-size: 12px;
-      font-weight: 700;
-      color: #ffffff;
-      background: rgba(255, 255, 255, 0.06);
-      border: 1px solid rgba(255, 255, 255, 0.12);
-    }
-    .footer-soc-btn svg {
-      width: 15px;
-      height: 15px;
-      display: block;
-      flex-shrink: 0;
-    }
-
-    /* Sticky Bottom CTA with Shimmer Wave */
-    .bottom-sticky-bar {
-      position: fixed;
-      bottom: 14px;
-      left: 14px;
-      right: 14px;
-      max-width: 440px;
-      margin: 0 auto;
-      background: rgba(9, 14, 26, 0.95);
-      border: 1.5px solid rgba(255, 255, 255, 0.12);
-      border-radius: 99px;
-      padding: 9px 9px 9px 20px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      box-shadow: 0 16px 36px rgba(0,0,0,0.7);
-      z-index: 50;
-      backdrop-filter: blur(10px);
-    }
-    .bottom-info-pill b {
-      font-size: 13.5px;
-      font-weight: 800;
-      color: #ffffff;
-      display: block;
-    }
-    .bottom-info-pill span {
-      font-size: 11.5px;
-      color: var(--gold-primary);
-      font-weight: 700;
-    }
-    .btn-book-gold {
-      position: relative;
-      background: linear-gradient(90deg, #f59e0b, #fbbf24);
-      color: #090e1a;
-      border: none;
-      padding: 12px 24px;
-      border-radius: 99px;
-      font-size: 14px;
-      font-weight: 800;
-      cursor: pointer;
-      box-shadow: 0 4px 15px rgba(245, 158, 11, 0.35);
-      overflow: hidden;
-    }
-    .btn-book-gold::after {
-      content: '';
-      position: absolute;
-      top: -50%;
-      left: -120%;
-      width: 70%;
-      height: 200%;
-      background: linear-gradient(
-        60deg,
-        rgba(255, 255, 255, 0) 20%,
-        rgba(255, 255, 255, 0.55) 50%,
-        rgba(255, 255, 255, 0) 80%
-      );
-      transform: rotate(25deg);
-      animation: shimmerWave 4s cubic-bezier(0.4, 0, 0.2, 1) infinite;
-    }
-    @keyframes shimmerWave {
-      0%, 65% { left: -120%; }
-      100% { left: 160%; }
-    }
-
-    /* Wizard Card */
-    .wizard-white-card {
-      background: #ffffff;
-      color: #0f172a;
-      border-radius: 28px;
-      padding: 24px 20px;
-      box-shadow: 0 16px 40px rgba(0,0,0,0.5);
-    }
-    .wizard-header-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 16px;
-    }
-    .header-actions-left {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-    .btn-home-nav-chip {
-      background: #f1f5f9;
-      border: 1px solid #cbd5e1;
-      color: #334155;
-      padding: 5px 12px;
-      border-radius: 99px;
-      font-size: 12px;
-      font-weight: 700;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
-    }
-    .back-arrow-link {
-      background: none;
-      border: none;
-      color: #64748b;
-      font-size: 13px;
-      font-weight: 700;
-      cursor: pointer;
-    }
-    .step-counter-pill {
-      background: #fef3c7;
-      color: #b45309;
-      padding: 4px 12px;
-      border-radius: 99px;
       font-size: 11.5px;
       font-weight: 800;
     }
-    .wizard-title {
-      font-size: 20px;
+    .green-live-pulse-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #10b981;
+      box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
+      animation: pulseGlow 1.8s infinite;
+    }
+    @keyframes pulseGlow {
+      0% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
+      70% { box-shadow: 0 0 0 6px rgba(16, 185, 129, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+    }
+
+    .session-emoji-icon {
+      font-size: 28px;
+      margin-bottom: 8px;
+      display: inline-block;
+    }
+    .session-card-heading {
+      font-size: 17px;
       font-weight: 800;
       color: #0f172a;
       margin-bottom: 4px;
     }
-    .wizard-subtitle {
+    .session-card-desc {
       font-size: 13px;
       color: #64748b;
-      margin-bottom: 18px;
-    }
-
-    /* Course Page & Rating Strip */
-    .session-active-card {
-      border: 1.5px solid #e2e8f0;
-      border-radius: 22px;
-      padding: 20px;
-      background: #ffffff;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
-    }
-    .session-card-top {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 14px;
-    }
-    .session-active-badge {
-      background: #ecfdf5;
-      color: #059669;
-      border: 1px solid #a7f3d0;
-      padding: 4px 12px;
-      border-radius: 99px;
-      font-size: 11.5px;
-      font-weight: 800;
-    }
-    .session-heading-title {
-      font-size: 18px;
-      font-weight: 800;
-      color: #0f172a;
-      margin-bottom: 8px;
-      line-height: 1.35;
-    }
-    .session-desc-text {
-      font-size: 13px;
-      color: #475569;
-      line-height: 1.55;
-      margin-bottom: 16px;
-    }
-    .session-point-item {
-      display: flex;
-      align-items: flex-start;
-      gap: 8px;
-      font-size: 12.5px;
-      color: #1e293b;
-      margin-bottom: 8px;
-      font-weight: 600;
       line-height: 1.45;
-    }
-    .session-point-item span.chk {
-      color: #0b7cff;
-      font-weight: 800;
-    }
-
-    .session-metrics-box {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 6px;
-      background: #f8fafc;
-      border: 1px solid #e2e8f0;
-      border-radius: 16px;
-      padding: 12px 6px;
-      margin-top: 16px;
       margin-bottom: 16px;
-      text-align: center;
-    }
-    .session-metric-cell {
-      border-right: 1px solid #e2e8f0;
-    }
-    .session-metric-cell:last-child {
-      border-right: none;
-    }
-    .session-metric-cell b {
-      display: block;
-      font-size: 14px;
-      font-weight: 900;
-      color: #0f172a;
-    }
-    .session-metric-cell span {
-      display: block;
-      font-size: 9.5px;
-      font-weight: 700;
-      color: #64748b;
-      text-transform: uppercase;
-      margin-top: 2px;
-      letter-spacing: 0.3px;
+      max-width: 90%;
     }
 
-    .session-card-footer {
+    .session-card-bottom {
       display: flex;
       justify-content: space-between;
-      align-items: center;
-      padding-top: 14px;
+      align-items: flex-end;
+      padding-top: 12px;
       border-top: 1px solid #f1f5f9;
     }
-    .session-meta-info {
-      font-size: 12.5px;
-      font-weight: 800;
-      color: #0f172a;
+    .session-meta-tag {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
     }
-    .session-meta-info span {
-      display: block;
-      font-size: 11px;
+    .session-meta-tag b {
+      font-size: 14px;
+      color: #0f172a;
+      font-weight: 800;
+    }
+    .meet-meta-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
       color: #64748b;
       font-weight: 600;
     }
-    .btn-select-session-price {
-      background: #0b7cff;
+    .meet-icon-svg {
+      width: 14px;
+      height: 14px;
+      flex-shrink: 0;
+    }
+
+    /* Rating directly on top of payment button */
+    .action-right-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 5px;
+    }
+    .btn-top-rating-badge {
+      display: inline-flex;
+      align-items: center;
+      font-size: 11.5px;
+      font-weight: 800;
+      color: #b45309;
+      background: #fef3c7;
+      border: 1px solid #fde68a;
+      padding: 2px 8px;
+      border-radius: 99px;
+    }
+    .btn-book-action {
+      background: var(--accent-blue);
       color: #ffffff;
       border: none;
       padding: 10px 18px;
       border-radius: 99px;
-      font-size: 13.5px;
+      font-size: 14px;
       font-weight: 800;
       cursor: pointer;
+      box-shadow: 0 4px 14px rgba(11, 124, 255, 0.35);
+      transition: transform 0.12s ease, background 0.15s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .btn-book-action:active {
+      transform: scale(0.95);
+      background: var(--accent-blue-hover);
+    }
+    .btn-book-action s {
+      color: rgba(255, 255, 255, 0.65);
+      font-weight: 500;
+      font-size: 12px;
     }
 
-    /* Date & Slot Selector */
-    .date-selector-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 8px;
-      margin-bottom: 16px;
+    .expectations-card {
+      background: #f8fafc;
+      border: 1px solid var(--border-light);
+      border-radius: 18px;
+      padding: 18px 16px;
+      margin-bottom: 22px;
     }
-    .date-pill-opt {
-      border: 1.5px solid #e2e8f0;
-      border-radius: 16px;
-      padding: 12px 6px;
-      text-align: center;
-      cursor: pointer;
-      background: #ffffff;
-    }
-    .date-pill-opt.selected {
-      border-color: #0b7cff;
-      background: #eff6ff;
-    }
-    .date-pill-opt .d-day {
-      font-size: 11px;
-      font-weight: 700;
-      color: #64748b;
-      text-transform: uppercase;
-    }
-    .date-pill-opt .d-num {
-      font-size: 18px;
+    .expectations-card h4 {
+      font-size: 14.5px;
       font-weight: 800;
       color: #0f172a;
-      margin: 3px 0;
+      margin-bottom: 12px;
     }
-    .date-pill-opt .d-mon {
-      font-size: 11px;
-      font-weight: 700;
-      color: #64748b;
+    .swati-bullet-list {
+      list-style: none;
+      display: grid;
+      gap: 10px;
+    }
+    .swati-bullet-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 13px;
+      color: #334155;
+      line-height: 1.45;
+    }
+    .swati-bullet-item::before {
+      content: "•";
+      color: var(--accent-blue);
+      font-size: 20px;
+      line-height: 14px;
+      font-weight: 900;
+      flex-shrink: 0;
     }
 
-    .slot-choice-grid {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      margin-bottom: 20px;
+    /* FAQs */
+    .faq-wrap-box {
+      margin-bottom: 24px;
     }
-    .slot-card-opt {
+    .faq-wrap-box h4 {
+      font-size: 15px;
+      font-weight: 800;
+      color: #0f172a;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .faq-accordion-item {
+      background: #ffffff;
+      border: 1px solid var(--border-light);
+      border-radius: 14px;
+      margin-bottom: 8px;
+      overflow: hidden;
+      transition: border-color 0.2s ease;
+    }
+    .faq-head-btn {
+      width: 100%;
+      background: transparent;
+      border: none;
+      padding: 14px 16px;
+      text-align: left;
+      font-size: 13.5px;
+      font-weight: 700;
+      color: #0f172a;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 14px 16px;
-      border: 1.5px solid #e2e8f0;
-      border-radius: 16px;
       cursor: pointer;
-      background: #ffffff;
     }
-    .slot-card-opt.selected {
-      border-color: #0b7cff;
-      background: #eff6ff;
+    .faq-head-btn .arrow {
+      font-size: 16px;
+      color: #64748b;
+      transition: transform 0.25s ease;
     }
-    .slot-card-opt.locked-slot {
-      opacity: 0.5;
-      background: #f8fafc;
-      border-color: #cbd5e1;
-      cursor: not-allowed;
-      pointer-events: none;
+    .faq-body-text {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s cubic-bezier(0.22, 1, 0.36, 1), padding 0.3s ease;
+      font-size: 13px;
+      color: #475569;
+      line-height: 1.5;
+      padding: 0 16px;
     }
-    .slot-card-opt.locked-slot .time-title {
-      text-decoration: line-through;
-      color: #94a3b8;
+    .faq-accordion-item.active .faq-body-text {
+      max-height: 160px;
+      padding: 0 16px 14px;
     }
-    .time-tag {
-      font-size: 11px;
-      font-weight: 700;
-      color: #0b7cff;
-      background: #dbeafe;
-      padding: 4px 8px;
-      border-radius: 99px;
-    }
-    .time-tag-locked {
-      background: #fee2e2;
-      color: #ef4444;
-      font-size: 11px;
-      font-weight: 800;
-      padding: 4px 8px;
-      border-radius: 99px;
-      border: 1px solid #fecaca;
+    .faq-accordion-item.active .faq-head-btn .arrow {
+      transform: rotate(45deg);
+      color: var(--accent-blue);
     }
 
-    /* Form Inputs */
-    .input-group {
+    /* Dhruv Rathee Inspired "ABOUT VINAY KOKDA" */
+    .dhruv-about-card {
+      background: linear-gradient(145deg, #091e34 0%, #061524 100%);
+      color: #ffffff;
+      border-radius: 20px;
+      padding: 24px 20px;
+      margin-bottom: 20px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+    }
+    .dhruv-about-subhead {
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #38bdf8;
+      margin-bottom: 4px;
+    }
+    .dhruv-about-title {
+      font-size: 28px;
+      font-weight: 900;
+      line-height: 1.1;
+      letter-spacing: -0.5px;
+      margin-bottom: 8px;
+      color: #ffffff;
+    }
+    .dhruv-about-pill {
+      display: inline-block;
+      background: rgba(56, 189, 248, 0.15);
+      color: #38bdf8;
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      padding: 4px 12px;
+      border-radius: 99px;
+      font-size: 11.5px;
+      font-weight: 700;
       margin-bottom: 14px;
     }
-    .input-label {
-      display: block;
+    .dhruv-about-body {
+      display: grid;
+      gap: 10px;
       font-size: 13px;
+      line-height: 1.6;
+      color: #cbd5e1;
+    }
+    .dhruv-about-body b {
+      color: #ffffff;
+    }
+
+    /* Social Capsule Card - Constrained SVG icons */
+    .dhruv-capsule-card {
+      background: #f8fafc;
+      border: 1px solid var(--border-light);
+      border-radius: 18px;
+      padding: 16px;
+      text-align: center;
+      margin-bottom: 14px;
+    }
+    .dhruv-capsule-title {
+      font-size: 12.5px;
+      font-weight: 800;
+      color: #475569;
+      margin-bottom: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .dhruv-social-icons-row {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 14px;
+    }
+    .dhruv-round-btn {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: #0f172a;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: #ffffff;
+      text-decoration: none;
+      transition: transform 0.15s ease, background 0.15s ease;
+      box-shadow: 0 4px 12px rgba(15, 23, 42, 0.15);
+      flex-shrink: 0;
+    }
+    .dhruv-round-btn:active {
+      transform: scale(0.92);
+      background: var(--accent-blue);
+    }
+    .dhruv-round-btn svg {
+      width: 20px;
+      height: 20px;
+      fill: #ffffff;
+    }
+
+    .stepper-header-box {
+      text-align: center;
+      padding: 16px 16px 4px;
+    }
+    .step-counter-tag {
+      font-size: 12px;
+      font-weight: 800;
+      color: var(--accent-blue);
+      background: #eff6ff;
+      border: 1px solid #bfdbfe;
+      padding: 4px 12px;
+      border-radius: 99px;
+      display: inline-block;
+    }
+    .stepper-progress-row {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 24px;
+      padding: 10px 16px 16px;
+      position: relative;
+    }
+    .step-bubble-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      position: relative;
+      z-index: 2;
+    }
+    .step-circle {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background: #e2e8f0;
+      color: #64748b;
+      font-size: 12.5px;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s ease;
+    }
+    .step-bubble-item.active .step-circle {
+      background: var(--accent-blue);
+      color: #ffffff;
+      box-shadow: 0 4px 12px rgba(11, 124, 255, 0.35);
+    }
+    .step-label {
+      font-size: 11px;
+      font-weight: 700;
+      color: #94a3b8;
+    }
+    .step-bubble-item.active .step-label {
+      color: #0f172a;
+    }
+
+    .form-wrapper-card {
+      background: #ffffff;
+      border: 1.5px solid var(--border-light);
+      border-radius: 22px;
+      padding: 20px 18px;
+      margin: 0 16px 20px;
+      box-shadow: 0 4px 20px rgba(15, 23, 42, 0.05);
+    }
+    .form-title-heading {
+      font-size: 18px;
+      font-weight: 800;
+      color: #0f172a;
+      margin-bottom: 4px;
+    }
+    .form-sub-heading {
+      font-size: 12.5px;
+      color: #64748b;
+      margin-bottom: 18px;
+    }
+
+    .custom-input-group {
+      margin-bottom: 14px;
+    }
+    .custom-input-label {
+      display: block;
+      font-size: 12.5px;
       font-weight: 700;
       color: #334155;
       margin-bottom: 6px;
     }
-    .text-input-field {
+    .custom-input-field {
       width: 100%;
-      padding: 13px 14px;
-      border-radius: 14px;
-      border: 1.5px solid #cbd5e1;
+      padding: 12px 14px;
+      border-radius: 12px;
+      border: 1.5px solid var(--border-light);
+      background: #f8fafc;
       font-size: 14px;
       color: #0f172a;
       outline: none;
+      transition: border-color 0.2s ease, background 0.2s ease;
+    }
+    .custom-input-field:focus {
+      border-color: var(--accent-blue);
       background: #ffffff;
     }
-    .text-input-field:focus {
-      border-color: #0b7cff;
+    .custom-input-field.error {
+      border-color: #ef4444;
+      background: #fef2f2;
     }
-    .field-error-text {
-      font-size: 12px;
-      font-weight: 600;
+    .err-hint-text {
       color: #ef4444;
+      font-size: 11.5px;
+      font-weight: 600;
       margin-top: 4px;
       display: none;
     }
-    .btn-primary-blue {
-      width: 100%;
-      padding: 15px;
-      border: none;
-      border-radius: 16px;
-      background: var(--accent-blue);
-      color: #ffffff;
-      font-size: 14.5px;
-      font-weight: 800;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-    }
-    .btn-primary-blue:disabled {
-      opacity: 0.5;
-      cursor: not-allowed;
-    }
-    .btn-secondary-link {
-      width: 100%;
-      padding: 12px;
-      background: none;
-      border: none;
-      color: #64748b;
-      font-size: 13px;
-      font-weight: 700;
-      cursor: pointer;
-      text-align: center;
-      margin-top: 8px;
-    }
 
-    /* QR Container */
-    .qr-beige-card {
-      background: #fdf5d7;
-      border: 1px solid #f6e4a2;
-      border-radius: 22px;
-      padding: 16px;
-      text-align: center;
-      margin-bottom: 16px;
-    }
-    .qr-image-wrapper {
-      position: relative;
-      width: 220px;
-      height: 220px;
-      margin: 0 auto 14px;
-      background: #ffffff;
-      border-radius: 16px;
-      padding: 8px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.06);
-    }
-    .qr-image-wrapper img {
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
-      border-radius: 12px;
-    }
-    .upi-clipboard-pill {
-      background: #ffffff;
-      border: 1px solid #f1e29c;
-      border-radius: 14px;
-      padding: 8px 12px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    .upi-text-display {
-      font-family: monospace;
-      font-size: 14px;
-      font-weight: 700;
-      color: #0f172a;
-    }
-    .btn-copy-upi {
-      background: #1e293b;
-      color: #ffffff;
-      border: none;
-      padding: 6px 14px;
-      border-radius: 10px;
-      font-size: 12px;
-      font-weight: 700;
-      cursor: pointer;
-    }
-
-    /* Modal Sheets */
-    .modal-overlay-sheet {
-      position: fixed;
-      inset: 0;
-      background: rgba(0, 0, 0, 0.75);
-      backdrop-filter: blur(4px);
-      display: flex;
-      align-items: flex-end;
-      justify-content: center;
-      z-index: 100;
-      padding: 12px;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.25s ease;
-    }
-    .modal-overlay-sheet.active {
-      opacity: 1;
-      pointer-events: auto;
-    }
-    .modal-inner-white-sheet {
-      background: #ffffff;
-      color: #0f172a;
-      width: 100%;
-      max-width: 440px;
-      border-radius: 28px;
-      padding: 24px 20px 20px;
-      box-shadow: 0 -10px 40px rgba(0,0,0,0.3);
-      transform: translateY(100%);
-      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-    .modal-overlay-sheet.active .modal-inner-white-sheet {
-      transform: translateY(0);
-    }
-    .modal-icon-header {
-      font-size: 34px;
-      text-align: center;
-      margin-bottom: 8px;
-    }
-    .modal-heading {
-      font-size: 20px;
-      font-weight: 800;
-      text-align: center;
-      margin-bottom: 16px;
-      color: #0f172a;
-    }
-    .modal-summary-container {
-      border: 1px solid #e2e8f0;
-      background: #f8fafc;
-      border-radius: 18px;
-      padding: 12px 16px;
-      margin-bottom: 14px;
-    }
-    .modal-data-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 8px 0;
-      border-bottom: 1px solid #edf2f7;
-      font-size: 13px;
-    }
-    .modal-data-row:last-child {
-      border-bottom: none;
-    }
-    .modal-data-row span.key {
-      color: #64748b;
-      font-weight: 600;
-    }
-    .modal-data-row b.val {
-      color: #0f172a;
-      font-weight: 700;
-      text-align: right;
-      max-width: 65%;
-      word-break: break-all;
-    }
-    .modal-consent-checkbox-row {
-      display: flex;
-      align-items: flex-start;
-      gap: 12px;
-      margin-bottom: 18px;
-      font-size: 12.5px;
-      font-weight: 600;
-      color: #334155;
-      line-height: 1.45;
-      cursor: pointer;
-    }
-    .modal-consent-checkbox-row input[type="checkbox"] {
-      width: 19px;
-      height: 19px;
-      margin-top: 1px;
-      accent-color: #0b7cff;
-    }
-
-    .utr-highlight-box {
-      background: #f1f5f9;
-      border: 1px solid #cbd5e1;
-      border-radius: 14px;
-      padding: 12px;
-      text-align: center;
-      font-family: monospace;
-      font-size: 22px;
-      font-weight: 800;
-      color: #0f172a;
-      letter-spacing: 2px;
-      margin-bottom: 12px;
-    }
-    .utr-warning-text {
-      font-size: 12px;
-      line-height: 1.45;
-      color: #b91c1c;
-      background: #fef2f2;
-      border: 1px solid #fecaca;
-      padding: 10px 12px;
-      border-radius: 12px;
-      margin-bottom: 16px;
-      text-align: left;
-    }
-
-    /* Spring Pop on Success Step 4 */
-    .success-card-content {
-      text-align: center;
-    }
-    .success-pop-container {
-      position: relative;
-      width: 84px;
-      height: 84px;
-      margin: 6px auto 14px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    .success-glow-ring {
-      position: absolute;
-      inset: 0;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(16, 185, 129, 0.35) 0%, rgba(16, 185, 129, 0) 70%);
-      animation: successPulse 1.8s ease-out infinite;
-    }
-    @keyframes successPulse {
-      0% { transform: scale(0.8); opacity: 0.85; }
-      100% { transform: scale(1.65); opacity: 0; }
-    }
-    .success-pop-icon {
-      font-size: 64px;
-      line-height: 1;
-      z-index: 2;
-      animation: springPop 0.65s cubic-bezier(0.175, 0.885, 0.32, 1.35) both;
-    }
-    @keyframes springPop {
-      0% { transform: scale(0) rotate(-45deg); opacity: 0; }
-      70% { transform: scale(1.25) rotate(10deg); }
-      100% { transform: scale(1) rotate(0deg); opacity: 1; }
-    }
-
-    .status-pill-amber {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      padding: 6px 14px;
-      border-radius: 99px;
-      background: #fef3c7;
-      border: 1px solid #fde68a;
-      color: #b45309;
-      font-size: 12px;
-      font-weight: 800;
-      margin-bottom: 16px;
-    }
-    .meet-notice-banner {
+    .info-callout-pill {
       background: #eff6ff;
       border: 1px solid #bfdbfe;
-      border-radius: 14px;
-      padding: 12px 14px;
-      font-size: 12.5px;
-      line-height: 1.5;
+      border-radius: 12px;
+      padding: 10px 12px;
+      font-size: 12px;
       color: #1e40af;
-      text-align: left;
+      line-height: 1.45;
       margin-bottom: 16px;
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
     }
-    .btn-whatsapp-team {
+
+    .primary-submit-btn {
       width: 100%;
-      padding: 15px;
-      border: none;
-      border-radius: 16px;
-      background: var(--whatsapp-green);
+      background: var(--accent-blue);
       color: #ffffff;
+      border: none;
+      padding: 14px;
+      border-radius: 14px;
       font-size: 15px;
       font-weight: 800;
       cursor: pointer;
+      box-shadow: 0 4px 14px rgba(11, 124, 255, 0.35);
+      transition: transform 0.12s ease, background 0.15s ease, opacity 0.2s ease;
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 8px;
-      margin-top: 10px;
-      box-shadow: 0 4px 14px rgba(22, 163, 74, 0.3);
+      gap: 6px;
+    }
+    .primary-submit-btn:active {
+      transform: scale(0.97);
+    }
+    .primary-submit-btn:disabled {
+      background: #94a3b8;
+      opacity: 0.55;
+      cursor: not-allowed;
+      box-shadow: none;
+      pointer-events: none;
     }
 
-    .copy-toast {
-      position: fixed;
-      top: 20px;
-      left: 50%;
-      transform: translateX(-50%);
+    /* QR Container */
+    .qr-card-container {
+      text-align: center;
+      margin-bottom: 16px;
+    }
+    .qr-img-box {
+      width: 210px;
+      height: 210px;
+      margin: 0 auto 10px;
+      border-radius: 16px;
+      border: 2px solid var(--border-light);
+      padding: 8px;
+      background: #ffffff;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+    }
+    .qr-img-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+    }
+    .qr-price-pill {
+      font-size: 16px;
+      font-weight: 900;
+      color: #15803d;
+    }
+    .qr-price-pill s {
+      color: #94a3b8;
+      font-size: 13px;
+      margin-left: 4px;
+    }
+
+    .upi-copy-pill {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #ffffff;
+      border: 1.5px solid var(--border-light);
+      border-radius: 14px;
+      padding: 10px 14px;
+      margin-bottom: 18px;
+    }
+    .upi-val-txt {
+      font-weight: 800;
+      font-size: 14px;
+      color: #0f172a;
+      letter-spacing: 0.3px;
+    }
+    .btn-copy-action {
       background: #0f172a;
       color: #ffffff;
-      padding: 10px 20px;
+      border: 0;
+      padding: 7px 14px;
       border-radius: 99px;
-      font-size: 13px;
-      font-weight: 700;
-      z-index: 200;
-      display: none;
-      box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+      font-size: 12px;
+      font-weight: 800;
+      cursor: pointer;
     }
 
-    /* Admin 2-Tab Dashboard */
-    .admin-tabs-nav {
-      display: flex;
-      gap: 8px;
-      margin-bottom: 14px;
-      border-bottom: 1px solid #e2e8f0;
-      padding-bottom: 8px;
-    }
-    .admin-tab-btn {
-      flex: 1;
-      padding: 9px;
-      border: none;
-      background: #f1f5f9;
-      border-radius: 10px;
-      font-size: 13px;
-      font-weight: 700;
-      color: #64748b;
-      cursor: pointer;
-    }
-    .admin-tab-btn.active {
-      background: #0b7cff;
-      color: #ffffff;
-    }
-    .admin-lead-card {
-      background: #f8fafc;
-      border: 1px solid #e2e8f0;
-      border-radius: 14px;
-      padding: 12px;
-      text-align: left;
-      font-size: 13px;
-      margin-bottom: 10px;
-    }
-    .admin-actions-row {
-      display: flex;
-      gap: 8px;
-      margin-top: 10px;
-    }
-    .btn-admin-act-approve {
-      background: #10b981;
-      color: white;
-      border: none;
-      padding: 8px 12px;
-      border-radius: 8px;
-      font-weight: 700;
-      font-size: 12px;
-      cursor: pointer;
-      flex: 1;
-    }
-    .btn-admin-act-reject {
-      background: #ef4444;
-      color: white;
-      border: none;
-      padding: 8px 12px;
-      border-radius: 8px;
-      font-weight: 700;
-      font-size: 12px;
-      cursor: pointer;
-      flex: 1;
-    }
-    .btn-admin-act-delete {
-      background: #64748b;
-      color: white;
-      border: none;
-      padding: 8px 12px;
-      border-radius: 8px;
-      font-weight: 700;
-      font-size: 12px;
-      cursor: pointer;
-      width: 100%;
-      margin-top: 6px;
-    }
-    .pass-input-wrapper {
-      position: relative;
-      margin: 14px auto;
-      width: 220px;
-    }
-    .admin-password-field {
-      width: 100%;
-      letter-spacing: 2px;
+    .success-badge-wrap {
       text-align: center;
-      font-size: 17px;
-      font-weight: 800;
-      padding: 12px 36px 12px 14px;
-      border-radius: 14px;
-      border: 2px solid #cbd5e1;
-      outline: none;
+      padding: 30px 18px 12px;
+      position: relative;
     }
-    .pass-toggle-eye {
+
+    .celebration-ripple-aura {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 18px;
+    }
+
+    .ripple-ring {
       position: absolute;
-      right: 10px;
-      top: 50%;
-      transform: translateY(-50%);
+      inset: -14px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(16, 185, 129, 0.22) 0%, rgba(16, 185, 129, 0) 70%);
+      animation: ripplePulse 2s cubic-bezier(0.22, 1, 0.36, 1) infinite;
+      pointer-events: none;
+      z-index: 1;
+    }
+    @keyframes ripplePulse {
+      0% {
+        transform: scale(0.85);
+        opacity: 0.8;
+      }
+      50% {
+        transform: scale(1.35);
+        opacity: 0.2;
+      }
+      100% {
+        transform: scale(1.55);
+        opacity: 0;
+      }
+    }
+
+    /* Spring Pop Checkmark Circle matching User's Exact Image */
+    .spring-check-badge-card {
+      position: relative;
+      z-index: 2;
+      width: 86px;
+      height: 86px;
+      border-radius: 50%;
+      background: #e6f9f0;
+      border: 3.5px solid #059669;
+      box-shadow: 0 0 0 6px rgba(16, 185, 129, 0.12), 0 10px 28px rgba(16, 185, 129, 0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      will-change: transform;
+      animation: springPopEngage 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+    }
+
+    @keyframes springPopEngage {
+      0% {
+        opacity: 0;
+        transform: scale(0.2) rotate(-20deg);
+      }
+      45% {
+        transform: scale(1.24) rotate(4deg);
+      }
+      65% {
+        transform: scale(0.92) rotate(-2deg);
+      }
+      82% {
+        transform: scale(1.08) rotate(1deg);
+      }
+      100% {
+        opacity: 1;
+        transform: scale(1) rotate(0deg);
+      }
+    }
+
+    .spring-check-svg {
+      width: 44px;
+      height: 44px;
+    }
+
+    .spring-check-path {
+      stroke: #059669;
+      stroke-width: 4.8;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      fill: none;
+      stroke-dasharray: 60;
+      stroke-dashoffset: 60;
+      animation: drawCheckPath 0.5s cubic-bezier(0.22, 1, 0.36, 1) 0.25s forwards;
+    }
+
+    @keyframes drawCheckPath {
+      to {
+        stroke-dashoffset: 0;
+      }
+    }
+
+    .success-main-headline {
+      font-size: 24px;
+      font-weight: 900;
+      color: #0f172a;
+      margin-bottom: 6px;
+    }
+    .pending-status-pill {
+      display: inline-block;
+      background: #fef3c7;
+      color: #b45309;
+      font-size: 12.5px;
+      font-weight: 800;
+      padding: 6px 14px;
+      border-radius: 99px;
+      margin-bottom: 20px;
+      border: 1px solid #fde68a;
+    }
+
+    .booking-summary-card {
+      background: #ffffff;
+      border: 1.5px solid var(--border-light);
+      border-radius: 18px;
+      padding: 16px;
+      margin: 0 18px 18px;
+      display: grid;
+      gap: 10px;
+    }
+    .summary-line-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 13.5px;
+    }
+    .summary-label-txt {
+      color: #64748b;
+      font-weight: 600;
+    }
+    .summary-val-txt {
+      font-weight: 800;
+      color: #0f172a;
+    }
+
+    .btn-choose-slot-cta {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      background: linear-gradient(90deg, #f59e0b, #d97706);
+      color: #ffffff;
+      text-decoration: none;
+      font-size: 16px;
+      font-weight: 800;
+      padding: 14px 20px;
+      border-radius: 16px;
+      margin: 0 18px 16px;
+      box-shadow: 0 6px 20px rgba(245, 158, 11, 0.35);
+      border: none;
       cursor: pointer;
+      transition: transform 0.12s ease;
+    }
+    .btn-choose-slot-cta:active {
+      transform: scale(0.97);
+    }
+
+    .meet-notice-container {
+      background: #eff6ff;
+      border: 1px solid #bfdbfe;
+      border-radius: 16px;
+      padding: 14px;
+      margin: 0 18px 24px;
+      font-size: 12.5px;
+      line-height: 1.55;
+      color: #1e3a8a;
+    }
+
+    .app-modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+      z-index: 200;
+      display: none;
+      align-items: flex-end;
+      justify-content: center;
+    }
+    .app-modal-backdrop.active {
+      display: flex;
+    }
+    .app-modal-sheet {
+      width: 100%;
+      max-width: 440px;
+      background: #ffffff;
+      border-radius: 28px 28px 0 0;
+      padding: 24px 20px 28px;
+      animation: modalSlideUp 0.3s cubic-bezier(0.22, 1, 0.36, 1) both;
+    }
+    @keyframes modalSlideUp {
+      from { transform: translateY(100%); }
+      to { transform: translateY(0); }
+    }
+    .modal-head-title {
       font-size: 18px;
+      font-weight: 800;
+      color: #0f172a;
+      text-align: center;
+      margin-bottom: 16px;
+    }
+    .modal-meta-box {
+      background: #f8fafc;
+      border: 1px solid var(--border-light);
+      border-radius: 16px;
+      padding: 14px;
+      display: grid;
+      gap: 8px;
+      font-size: 13px;
+      margin-bottom: 14px;
+    }
+    .modal-checkbox-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 12.5px;
+      line-height: 1.45;
+      color: #334155;
+      font-weight: 600;
+      margin-bottom: 18px;
+      cursor: pointer;
+    }
+    .modal-checkbox-row input[type="checkbox"] {
+      margin-top: 2px;
+      accent-color: var(--accent-blue);
+      width: 18px;
+      height: 18px;
+      flex-shrink: 0;
+      cursor: pointer;
+    }
+
+    /* Universal Global Footer */
+    .app-global-footer {
+      text-align: center;
+      color: #94a3b8;
+      font-size: 12px;
+      font-weight: 600;
+      padding: 20px 0 24px;
       user-select: none;
     }
   </style>
 </head>
 <body>
 
-<!-- Copy Toast Notification -->
-<div id="copy-toast-msg" class="copy-toast">Details copied! Group me paste karein 📋</div>
-
-<div class="app-wrapper">
-
-  <!-- ==================== SCREEN: HOME ==================== -->
-  <div id="screen-home" class="screen-panel active">
-    <div class="home-top-header">
-      <div class="header-secret-trigger" id="secret-admin-trigger">
-        <span>@vinaykokda</span>
-        <div class="pulse-wrapper">
-          <div class="radar-pulse-ring"></div>
-          <div class="online-dot-mini"></div>
-        </div>
+<main>
+  <header class="home-top-sticky-header" id="home-sticky-top-bar">
+    <div class="top-app-left-group">
+      <div class="top-thumb-avatar">
+        <img src="avatar.jpg" alt="VK" onerror="this.style.display='none'; this.parentNode.textContent='VK';">
       </div>
-      <div style="font-size: 12px; color: #64748b; font-weight: 700;">1-on-1 Mentorship</div>
-    </div>
-
-    <!-- Hero Card with Profile Ring & Social Micro Badges -->
-    <div class="dark-card hero">
-      <div class="slot-badge-top">
-        <span class="slot-dot"></span> Sirf 3 slots roz • Mon–Fri
-      </div>
-
-      <div class="avatar-ring-container" id="avatar-secret-trigger" title="Vinay Kokda Profile">
-        <div class="avatar-breathing-aura"></div>
-        <div class="ring-spin"></div>
-        <div class="avatar-inner">
-          <img src="profile.png" 
-               alt="Vinay Kokda" 
-               onerror="this.style.display='none'; document.getElementById('vk-fallback-icon').style.display='flex';">
-          <div id="vk-fallback-icon" style="display:none; width:100%; height:100%; align-items:center; justify-content:center; font-size:36px; font-weight:900; color:#070b14; background:#f59e0b;">
-            VK
-          </div>
-        </div>
-        <div class="avatar-status-dot" title="Available for calls"></div>
-      </div>
-
-      <div class="creator-handle-tag">
-        <span>Vinay Kokda</span>
-        <span class="verified-tick">✓</span>
-        <span style="color:#64748b;">• @vinaykokda</span>
-      </div>
-
-      <!-- Real Small Vector Badges -->
-      <div class="mini-social-row">
-        <a href="https://www.instagram.com/vinaykokda?stkn=cGUxM2wydWp2aGl5" target="_blank" rel="noopener noreferrer" class="mini-social-badge" title="Instagram">
-          <svg viewBox="0 0 24 24" fill="none">
-            <defs>
-              <radialGradient id="igG" r="150%" cx="30%" cy="107%">
-                <stop offset="0" stop-color="#fdf497"/>
-                <stop offset="0.05" stop-color="#fdf497"/>
-                <stop offset="0.45" stop-color="#fd5949"/>
-                <stop offset="0.6" stop-color="#d6249f"/>
-                <stop offset="0.9" stop-color="#285AEB"/>
-              </radialGradient>
-            </defs>
-            <rect width="24" height="24" rx="6" fill="url(#igG)"/>
-            <path d="M12 7.03c-2.74 0-4.97 2.23-4.97 4.97s2.23 4.97 4.97 4.97 4.97-2.23 4.97-4.97c0-2.74-2.23-4.97-4.97-4.97zm0 8.24c-1.8 0-3.27-1.47-3.27-3.27s1.47-3.27 3.27-3.27 3.27 1.47 3.27 3.27-1.47 3.27-3.27 3.27zm6.33-8.41a1.16 1.16 0 11-2.32 0 1.16 1.16 0 012.32 0z" fill="#ffffff"/>
-            <path d="M17.43 3H6.57A3.57 3.57 0 003 6.57v10.86A3.57 3.57 0 006.57 21h10.86A3.57 3.57 0 0021 17.43V6.57A3.57 3.57 0 0017.43 3zm2.14 14.43a2.14 2.14 0 01-2.14 2.14H6.57a2.14 2.14 0 01-2.14-2.14V6.57a2.14 2.14 0 012.14-2.14h10.86a2.14 2.14 0 012.14 2.14v10.86z" fill="#ffffff"/>
-          </svg>
-          <span>Instagram</span>
-        </a>
-
-        <a href="https://youtube.com/@vinaykokda?si=xX7w-1NPS0F0w1UD" target="_blank" rel="noopener noreferrer" class="mini-social-badge" title="YouTube">
-          <svg viewBox="0 0 24 24" fill="#FF0000">
-            <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814z"/>
-            <polygon points="9.545,15.568 15.818,12 9.545,8.432" fill="#ffffff"/>
-          </svg>
-          <span>YouTube</span>
-        </a>
-      </div>
-
-      <h1 class="hero-title">
-        Views ruk gaye hain aur <span class="gold-accent">direction nahi mil rahi?</span>
-      </h1>
-      <p class="call-duration-sub">
-        28-Minute 1-on-1 Call: Honest Channel Audit, Retention Fixes & Clear Growth Plan.
-      </p>
-
-      <div class="feature-chips">
-        <span class="chip-pill">🎯 1-on-1 Call</span>
-        <span class="chip-pill">🎥 Google Meet</span>
-        <span class="chip-pill">⚡ No BS, Pure Action</span>
+      <div class="top-header-session-info">
+        <span class="top-header-title">Creator Clarity Call</span>
+        <span class="top-header-subtitle">Vinay Kokda • 28 mins</span>
       </div>
     </div>
+    <button class="top-header-book-btn" onclick="startBooking('Creator Clarity Call', 499)">₹499 →</button>
+  </header>
 
-    <!-- Who is this call for -->
-    <div class="content-block-card">
-      <h3 class="block-heading">
-        <span>🎯</span> Ye 28-min call aapke liye hai agar:
-      </h3>
-      <div class="check-list-group">
-        <div class="check-item-row">
-          <span class="check-icon-green">✓</span>
-          <span>Consistent videos daal rahe ho par views freeze ho chuke hain.</span>
-        </div>
-        <div class="check-item-row">
-          <span class="check-icon-green">✓</span>
-          <span>Hook, storytelling aur retention drops samajh nahi aa rahe.</span>
-        </div>
-        <div class="check-item-row">
-          <span class="check-icon-green">✓</span>
-          <span>Channel ko hobby se serious career & monetization me badalna hai.</span>
-        </div>
+  <div class="scr-view on" id="view-home">
+    
+    <!-- Dark Hero Top Banner -->
+    <section class="creator-hero-banner">
+      <div class="avatar-circle-wrap">
+        <img id="creator-avatar-img" src="avatar.jpg" alt="Vinay Kokda" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+        <span style="display:none;">VK</span>
       </div>
+      <h1 class="creator-title-name">Vinay Kokda</h1>
+      <p class="creator-sub-tagline">Let's fix your content &amp; channel direction, together!</p>
+    </section>
 
-      <div class="not-for-box">
-        ⚠️ <b>Yeh call un logo ke liye bilkul nahi hai</b> jo overnight viral tricks, shortcut ya bina mehnat ke views chahte hain.
-      </div>
-    </div>
+    <!-- White Sheet Body -->
+    <section class="sheet-content-container">
+      <h2 class="section-label-headline">1-on-1 session</h2>
 
-    <!-- 28 Mins Roadmap Breakdown -->
-    <div class="content-block-card">
-      <h3 class="block-heading">
-        <span>⏱️</span> 28 Mins Call Breakdown:
-      </h3>
-      <div class="timeline-list">
-        <div class="timeline-item">
-          <span class="timeline-stamp">00–10m</span>
-          <div class="timeline-text"><b>Channel & Retention Audit:</b> Kahan reach bleed ho rahi hai aur content packaging ka analysis.</div>
+      <!-- Single Primary Card: Creator Clarity Call -->
+      <div class="session-swati-card scroll-anim">
+        <!-- Top-Right Corner: ONLY Active Status -->
+        <div class="card-top-active-corner">
+          <span class="green-live-pulse-dot"></span>
+          <span>Active</span>
         </div>
-        <div class="timeline-item">
-          <span class="timeline-stamp">10–20m</span>
-          <div class="timeline-text"><b>Fixing the Leaks:</b> Hooks, script flow aur audience psychology pe specific fixes.</div>
-        </div>
-        <div class="timeline-item">
-          <span class="timeline-stamp">20–28m</span>
-          <div class="timeline-text"><b>Next 30 Days Action Roadmap:</b> Exact topic strategy, consistency blueprint aur clear plan.</div>
-        </div>
-      </div>
-    </div>
 
-    <!-- FAQ Accordion -->
-    <div class="faq-section">
-      <h3 class="faq-title" style="margin-bottom:14px; font-size:15.5px; font-weight:800; color:#fff;">
-        <span>💡</span> Aksar pooche jaane wale sawal
-      </h3>
-      
-      <div class="faq-item">
-        <div class="faq-q">
-          <span>Payment kaise karna hai?</span>
-          <span class="faq-icon">+</span>
-        </div>
-        <div class="faq-a">
-          Aap official QR code scan karke UPI ID (meena.inn@fam) par kisi bhi UPI app se ₹1 fee pay karke 12-digit UTR enter kar sakte hain.
-        </div>
-      </div>
-
-      <div class="faq-item">
-        <div class="faq-q">
-          <span>Meet link kab milega?</span>
-          <span class="faq-icon">+</span>
-        </div>
-        <div class="faq-a">
-          Payment verify hone ke baad session wale din morning me aapke WhatsApp number aur Gmail par direct Google Meet link bhej diya jayega.
-        </div>
-      </div>
-
-      <div class="faq-item">
-        <div class="faq-q">
-          <span>Refund policy kya hai?</span>
-          <span class="faq-icon">+</span>
-        </div>
-        <div class="faq-a">
-          Yeh slot locking consultation fee hai, isliye payment ke baad refund nahi hoga. Kripya details dhyan se bharein.
-        </div>
-      </div>
-    </div>
-
-    <!-- Authentic Footer Verification Block -->
-    <div class="footer-social-card">
-      <div class="footer-social-title">Connect with Vinay Kokda</div>
-      <div class="footer-social-links">
-        <a href="https://www.instagram.com/vinaykokda?stkn=cGUxM2wydWp2aGl5" target="_blank" rel="noopener noreferrer" class="footer-soc-btn">
-          <svg viewBox="0 0 24 24" fill="none">
-            <defs>
-              <radialGradient id="igGFooter" r="150%" cx="30%" cy="107%">
-                <stop offset="0" stop-color="#fdf497"/>
-                <stop offset="0.05" stop-color="#fdf497"/>
-                <stop offset="0.45" stop-color="#fd5949"/>
-                <stop offset="0.6" stop-color="#d6249f"/>
-                <stop offset="0.9" stop-color="#285AEB"/>
-              </radialGradient>
-            </defs>
-            <rect width="24" height="24" rx="6" fill="url(#igGFooter)"/>
-            <path d="M12 7.03c-2.74 0-4.97 2.23-4.97 4.97s2.23 4.97 4.97 4.97 4.97-2.23 4.97-4.97c0-2.74-2.23-4.97-4.97-4.97zm0 8.24c-1.8 0-3.27-1.47-3.27-3.27s1.47-3.27 3.27-3.27 3.27 1.47 3.27 3.27-1.47 3.27-3.27 3.27zm6.33-8.41a1.16 1.16 0 11-2.32 0 1.16 1.16 0 012.32 0z" fill="#ffffff"/>
-            <path d="M17.43 3H6.57A3.57 3.57 0 003 6.57v10.86A3.57 3.57 0 006.57 21h10.86A3.57 3.57 0 0021 17.43V6.57A3.57 3.57 0 0017.43 3zm2.14 14.43a2.14 2.14 0 01-2.14 2.14H6.57a2.14 2.14 0 01-2.14-2.14V6.57a2.14 2.14 0 012.14-2.14h10.86a2.14 2.14 0 012.14 2.14v10.86z" fill="#ffffff"/>
-          </svg>
-          <span>Instagram</span>
-        </a>
-        <a href="https://youtube.com/@vinaykokda?si=xX7w-1NPS0F0w1UD" target="_blank" rel="noopener noreferrer" class="footer-soc-btn">
-          <svg viewBox="0 0 24 24" fill="#FF0000">
-            <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814z"/>
-            <polygon points="9.545,15.568 15.818,12 9.545,8.432" fill="#ffffff"/>
-          </svg>
-          <span>YouTube Channel</span>
-        </a>
-      </div>
-    </div>
-  </div>
-
-  <!-- ==================== SCREEN: SESSIONS CATALOG ==================== -->
-  <div id="screen-sessions" class="screen-panel">
-    <div class="wizard-white-card">
-      <div class="wizard-header-row">
-        <div class="header-actions-left">
-          <button class="btn-home-nav-chip nav-to-home-btn">🏠 Home</button>
-          <button class="back-arrow-link" id="btn-back-home-from-sessions">← Back</button>
-        </div>
-        <span class="step-counter-pill">Sessions</span>
-      </div>
-      <h2 class="wizard-title">1-on-1 Mentorship Sessions</h2>
-      <p class="wizard-subtitle">Select a session below to view full details and choose your date & slot.</p>
-
-      <div class="session-active-card">
-        <div class="session-card-top">
-          <div style="font-size: 26px;">🎯</div>
-          <div class="session-active-badge">✓ Active Booking</div>
-        </div>
-        <h3 class="session-heading-title">Creator Clarity & Content Strategy</h3>
-        <p class="session-desc-text">One focused 28-minute call combining Channel Audit, Retention Fixes & Monetization Roadmap.</p>
+        <div class="session-emoji-icon">😎</div>
+        <h3 class="session-card-heading">Creator Clarity Call</h3>
+        <p class="session-card-desc">One problem. One focused conversation. One clear next step.</p>
         
-        <div class="session-point-item"><span class="chk">✓</span><div>Channel niche & audience positioning audit</div></div>
-        <div class="session-point-item"><span class="chk">✓</span><div>Hook analysis & fixing viewer retention drop-offs</div></div>
-        <div class="session-point-item"><span class="chk">✓</span><div>Sustainable posting system that avoids creative burnout</div></div>
+        <div class="session-card-bottom">
+          <div class="session-meta-tag">
+            <b>28 mins</b>
+            <span class="meet-meta-tag">
+              <svg class="meet-icon-svg" viewBox="0 0 24 24" fill="none">
+                <path d="M15 8.5L20 4.5V19.5L15 15.5V8.5Z" fill="#00832D"/>
+                <rect x="2" y="5" width="13" height="14" rx="2" fill="#00AC47"/>
+                <path d="M2 16.5C2 17.88 3.12 19 4.5 19H15V15.5H2V16.5Z" fill="#2684FC"/>
+                <path d="M2 7.5V16.5H8.5V5H4.5C3.12 5 2 6.12 2 7.5Z" fill="#EA4335"/>
+                <path d="M8.5 5H13C14.1 5 15 5.9 15 7V15.5H8.5V5Z" fill="#FFBA00"/>
+              </svg>
+              Google Meet
+            </span>
+          </div>
 
-        <!-- RELOCATED RATINGS & METRICS STRIP ABOVE PRICING -->
-        <div class="session-metrics-box">
-          <div class="session-metric-cell">
-            <b>⭐ 4.4/5</b>
-            <span>Mentorship Rating</span>
+          <!-- Right Action: Rating Badge directly on top of the Payment Button -->
+          <div class="action-right-wrap">
+            <div class="btn-top-rating-badge">
+              <span>⭐ 8.2/10</span>
+            </div>
+            <button class="btn-book-action" onclick="startBooking('Creator Clarity Call', 499)">
+              <s>₹999</s> ₹499 →
+            </button>
           </div>
-          <div class="session-metric-cell">
-            <b>28 Mins</b>
-            <span>Deep 1-on-1 Focus</span>
-          </div>
-          <div class="session-metric-cell">
-            <b>100%</b>
-            <span>Actionable Plan</span>
-          </div>
-        </div>
-
-        <div class="session-card-footer">
-          <div class="session-meta-info">28 mins<span>Google Meet</span></div>
-          <button class="btn-select-session-price" id="btn-select-active-session"><s>₹1999</s> ₹1 →</button>
         </div>
       </div>
-    </div>
+
+      <!-- Takeaways Bullets -->
+      <div class="expectations-card scroll-anim">
+        <h4>You'll leave the call with:</h4>
+        <ul class="swati-bullet-list">
+          <li class="swati-bullet-item">Choosing the right content pillars and video topics</li>
+          <li class="swati-bullet-item">Fixing viewer retention drops in the first 30 seconds</li>
+          <li class="swati-bullet-item">Understanding why your videos aren't performing</li>
+          <li class="swati-bullet-item">Sustainable consistency system that prevents creative burnout</li>
+          <li class="swati-bullet-item">Clear next steps and action plan you can stick with</li>
+        </ul>
+      </div>
+
+      <!-- FAQs Accordion -->
+      <div class="faq-wrap-box scroll-anim">
+        <h4><span>💡</span> Aksar pooche jaane wale sawal</h4>
+
+        <div class="faq-accordion-item" onclick="toggleFaq(this)">
+          <button class="faq-head-btn" type="button">
+            <span>Payment kaise karna hai?</span>
+            <span class="arrow">+</span>
+          </button>
+          <div class="faq-body-text">
+            Aap QR code scan karke ya UPI ID copy karke ₹499 fee pay karke 12-digit UTR enter kar sakte hain.
+          </div>
+        </div>
+
+        <div class="faq-accordion-item" onclick="toggleFaq(this)">
+          <button class="faq-head-btn" type="button">
+            <span>Slot kaise book hoga?</span>
+            <span class="arrow">+</span>
+          </button>
+          <div class="faq-body-text">
+            Payment confirm hote hi direct Cal.com open hoga jahan aap apna manpasand date aur live slot chun sakenge.
+          </div>
+        </div>
+
+        <div class="faq-accordion-item" onclick="toggleFaq(this)">
+          <button class="faq-head-btn" type="button">
+            <span>Google Meet link kab milega?</span>
+            <span class="arrow">+</span>
+          </button>
+          <div class="faq-body-text">
+            Slot select hone ke baad team verification karke meeting link aapke WhatsApp number ya Gmail par bhej degi, jis din ka slot hai usi din morning me.
+          </div>
+        </div>
+
+        <div class="faq-accordion-item" onclick="toggleFaq(this)">
+          <button class="faq-head-btn" type="button">
+            <span>Refund policy kya hai?</span>
+            <span class="arrow">+</span>
+          </button>
+          <div class="faq-body-text">
+            Yeh slot reservation fee hai, isliye payment ke baad refund nahi hoga. Kripya details dhyan se bharein.
+          </div>
+        </div>
+      </div>
+
+      <!-- Dhruv Rathee Inspired "ABOUT VINAY KOKDA" -->
+      <div class="dhruv-about-card scroll-anim">
+        <div class="dhruv-about-subhead">About</div>
+        <h3 class="dhruv-about-title">VINAY<br>KOKDA</h3>
+        <div class="dhruv-about-pill">Content Creator &amp; Strategist</div>
+        
+        <div class="dhruv-about-body">
+          <p>I love making videos and decoding YouTube algorithms. My core focus is helping upcoming creators find their true content direction, fix viewer retention leaks, and build an honest, sustainable posting routine.</p>
+          <p>I strongly believe in <b>practical strategy over hollow viral shortcuts</b>. No fake promises—just honest channel audits, data-backed insights, and clarity on what to execute next so you never feel stuck again.</p>
+        </div>
+      </div>
+
+      <!-- Dhruv Rathee "Find Vinay Kokda on:" Capsule with Exact User Links -->
+      <div class="dhruv-capsule-card scroll-anim">
+        <div class="dhruv-capsule-title">Find Vinay Kokda on:</div>
+        <div class="dhruv-social-icons-row">
+          <a href="https://youtube.com/@vinaykokda?si=Mao2oKpI38NtRd6e" target="_blank" rel="noopener noreferrer" class="dhruv-round-btn" title="YouTube">
+            <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+          </a>
+          <a href="https://www.instagram.com/vinaykokda?stkn=cGUxM2wydWp2aGl5" target="_blank" rel="noopener noreferrer" class="dhruv-round-btn" title="Instagram">
+            <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+          </a>
+          <a href="https://facebook.com/vinaykokda" target="_blank" rel="noopener noreferrer" class="dhruv-round-btn" title="Facebook">
+            <svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <footer class="app-global-footer">
+        © Vinay Kokda • @vinaykokda
+      </footer>
+    </section>
   </div>
 
-  <!-- ==================== SCREEN: STEP 1 CALENDAR & 3 SLOTS ==================== -->
-  <div id="screen-step1" class="screen-panel">
-    <div class="wizard-white-card">
-      <div class="wizard-header-row">
-        <div class="header-actions-left">
-          <button class="btn-home-nav-chip nav-to-home-btn">🏠 Home</button>
-          <button class="back-arrow-link" id="btn-back-sessions">← Change Session</button>
-        </div>
-        <span class="step-counter-pill">Step 1 of 3</span>
-      </div>
-      <h2 class="wizard-title">1. Apna slot chuno</h2>
-      <p class="wizard-subtitle">Agale 3 din ke slots available hain (28 mins per call).</p>
-
-      <div class="date-selector-grid" id="date-buttons-container"></div>
-
-      <div class="slot-choice-grid">
-        <div class="slot-card-opt selected" data-slot="11:30 AM" id="slot-card-1130">
-          <div>
-            <div class="time-title" style="font-size:14.5px; font-weight:800; color:#0f172a;">11:30 AM Slot</div>
-            <div style="font-size:12px; color:#64748b; margin-top:2px;">11:30 AM – 11:58 AM (28 mins)</div>
-          </div>
-          <span class="time-tag" id="tag-1130">Morning</span>
-        </div>
-
-        <div class="slot-card-opt" data-slot="07:15 PM" id="slot-card-0715">
-          <div>
-            <div class="time-title" style="font-size:14.5px; font-weight:800; color:#0f172a;">07:15 PM Slot</div>
-            <div style="font-size:12px; color:#64748b; margin-top:2px;">07:15 PM – 07:43 PM (28 mins)</div>
-          </div>
-          <span class="time-tag" id="tag-0715">Evening</span>
-        </div>
-
-        <div class="slot-card-opt" data-slot="09:00 PM" id="slot-card-0900">
-          <div>
-            <div class="time-title" style="font-size:14.5px; font-weight:800; color:#0f172a;">09:00 PM Slot</div>
-            <div style="font-size:12px; color:#64748b; margin-top:2px;">09:00 PM – 09:28 PM (28 mins)</div>
-          </div>
-          <span class="time-tag" id="tag-0900">Night</span>
+  <div class="scr-view" id="view-details">
+    <div class="top-app-header-bar">
+      <div class="top-app-left-group">
+        <button class="top-back-circle-btn" onclick="showView('view-home', 'backward')">←</button>
+        <div class="top-thumb-avatar">VK</div>
+        <div class="top-header-session-info">
+          <span class="top-header-title">Creator Clarity Call</span>
+          <span class="top-header-subtitle">Vinay Kokda • 28 mins</span>
         </div>
       </div>
-
-      <button class="btn-primary-blue" id="btn-goto-step2">Continue to Details →</button>
+      <div class="top-header-price-tag">₹499</div>
     </div>
+
+    <div class="stepper-header-box">
+      <span class="step-counter-tag">Step 1 of 3</span>
+    </div>
+
+    <div class="stepper-progress-row">
+      <div class="step-bubble-item active">
+        <div class="step-circle">1</div>
+        <span class="step-label">Details</span>
+      </div>
+      <div class="step-bubble-item">
+        <div class="step-circle">2</div>
+        <span class="step-label">Payment</span>
+      </div>
+      <div class="step-bubble-item">
+        <div class="step-circle">3</div>
+        <span class="step-label">Slot</span>
+      </div>
+    </div>
+
+    <div class="form-wrapper-card">
+      <h2 class="form-title-heading">Tumhari Details</h2>
+      <p class="form-sub-heading">Details verify karke slot lock karein.</p>
+
+      <div class="custom-input-group">
+        <label class="custom-input-label" for="inp-name">Full Name *</label>
+        <input type="text" id="inp-name" class="custom-input-field" placeholder="e.g. Rahul Sharma" autocomplete="name">
+        <div class="err-hint-text" id="err-name">Kripya apna poora naam likhein.</div>
+      </div>
+
+      <div class="custom-input-group">
+        <label class="custom-input-label" for="inp-email">Gmail Address *</label>
+        <input type="email" id="inp-email" class="custom-input-field" placeholder="e.g. rahul@gmail.com" autocomplete="email">
+        <div class="err-hint-text" id="err-email">Kripya sahi Gmail address bharein.</div>
+      </div>
+
+      <div class="custom-input-group">
+        <label class="custom-input-label" for="inp-phone">WhatsApp Number * (10 Digits)</label>
+        <input type="tel" id="inp-phone" class="custom-input-field" placeholder="e.g. 9876543210" maxlength="10" inputmode="numeric">
+        <div class="err-hint-text" id="err-phone">Kripya sahi 10-digit WhatsApp number bharein.</div>
+      </div>
+
+      <div class="custom-input-group">
+        <label class="custom-input-label" for="inp-yt">YouTube Channel Link (Optional)</label>
+        <input type="text" id="inp-yt" class="custom-input-field" placeholder="youtube.com/@tumhara-channel">
+      </div>
+
+      <div class="info-callout-pill">
+        <span>⚠</span>
+        <span>Google Meet session link isi Gmail aur WhatsApp number par bheja jayega.</span>
+      </div>
+
+      <button class="primary-submit-btn" onclick="submitDetailsForm()">Proceed to Payment →</button>
+    </div>
+
+    <footer class="app-global-footer">
+      © Vinay Kokda • @vinaykokda
+    </footer>
   </div>
 
-  <!-- ==================== SCREEN: STEP 2 DETAILS ==================== -->
-  <div id="screen-step2" class="screen-panel">
-    <div class="wizard-white-card">
-      <div class="wizard-header-row">
-        <div class="header-actions-left">
-          <button class="btn-home-nav-chip nav-to-home-btn">🏠 Home</button>
-          <button class="back-arrow-link" id="btn-back-step1">← Change Slot</button>
-        </div>
-        <span class="step-counter-pill">Step 2 of 3</span>
-      </div>
-      <h2 class="wizard-title">2. Details bharo</h2>
-      <p class="wizard-subtitle" id="selected-slot-preview-text">Selected Slot...</p>
-
-      <div class="input-group">
-        <label class="input-label">Full Name *</label>
-        <input type="text" id="inp-full-name" class="text-input-field" placeholder="e.g. Rahul Sharma">
-        <div class="field-error-text" id="err-name">Kripya apna poora naam daalein.</div>
-      </div>
-      <div class="input-group">
-        <label class="input-label">Email Address (Gmail) *</label>
-        <input type="email" id="inp-email-addr" class="text-input-field" placeholder="e.g. rahul@gmail.com">
-        <div class="field-error-text" id="err-email">Kripya sahi Gmail address daalein.</div>
-      </div>
-      <div class="input-group">
-        <label class="input-label">WhatsApp Number * (10 Digits)</label>
-        <input type="tel" id="inp-whatsapp-num" class="text-input-field" maxlength="10" placeholder="e.g. 9876543210">
-        <div class="field-error-text" id="err-phone">Kripya 10 digit ka sahi WhatsApp number bharein.</div>
-      </div>
-      <div class="input-group">
-        <label class="input-label">YouTube Channel / Handle (Optional)</label>
-        <input type="text" id="inp-yt-handle" class="text-input-field" placeholder="e.g. @creatorshub">
-      </div>
-
-      <button class="btn-primary-blue" id="btn-open-details-verify">Proceed to Verification →</button>
-    </div>
-  </div>
-
-  <!-- ==================== SCREEN: STEP 3 PAYMENT ==================== -->
-  <div id="screen-step3" class="screen-panel">
-    <div class="wizard-white-card">
-      <div class="wizard-header-row">
-        <div class="header-actions-left">
-          <button class="btn-home-nav-chip nav-to-home-btn">🏠 Home</button>
-          <button class="back-arrow-link" id="btn-back-step2">← Edit Details</button>
-        </div>
-        <span class="step-counter-pill">Step 3 of 3</span>
-      </div>
-      <h2 class="wizard-title">3. UPI se payment karo</h2>
-      <p class="wizard-subtitle">₹1 test fee to verify and lock your 28-min consultation.</p>
-
-      <div class="qr-beige-card">
-        <div class="qr-image-wrapper">
-          <img id="real-qr-img" 
-               src="qr.png" 
-               alt="Vinay Kokda UPI QR Code" 
-               onerror="this.onerror=function(){this.onerror=null; this.src='https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=upi%3A%2F%2Fpay%3Fpa%3Dmeena.inn%40fam%26pn%3DVinay%2520Kokda%26am%3D1%26cu%3DINR';}; this.src='IMG_20261003_212501_967.jpg';">
-        </div>
-        <div class="upi-clipboard-pill">
-          <span class="upi-text-display">meena.inn@fam</span>
-          <button class="btn-copy-upi" id="btn-copy-upi-id">📋 Copy UPI</button>
+  <div class="scr-view" id="view-payment">
+    <div class="top-app-header-bar">
+      <div class="top-app-left-group">
+        <button class="top-back-circle-btn" onclick="showView('view-details', 'backward')">←</button>
+        <div class="top-thumb-avatar">VK</div>
+        <div class="top-header-session-info">
+          <span class="top-header-title">Payment &amp; Verification</span>
+          <span class="top-header-subtitle">Vinay Kokda • Step 2</span>
         </div>
       </div>
+      <div class="top-header-price-tag">₹499</div>
+    </div>
 
-      <div class="input-group">
-        <label class="input-label">Enter 12-Digit UTR / Transaction ID *</label>
-        <input type="number" id="inp-utr-num" class="text-input-field" placeholder="e.g. 428192819281">
-        <div class="field-error-text" id="err-utr">Kripya poora 12-digit ka UTR number daalein.</div>
+    <div class="stepper-header-box">
+      <span class="step-counter-tag">Step 2 of 3</span>
+    </div>
+
+    <div class="stepper-progress-row">
+      <div class="step-bubble-item active">
+        <div class="step-circle">1</div>
+        <span class="step-label">Details</span>
+      </div>
+      <div class="step-bubble-item active">
+        <div class="step-circle">2</div>
+        <span class="step-label">Payment</span>
+      </div>
+      <div class="step-bubble-item">
+        <div class="step-circle">3</div>
+        <span class="step-label">Slot</span>
+      </div>
+    </div>
+
+    <div class="form-wrapper-card">
+      <div class="qr-card-container">
+        <div class="qr-img-box">
+          <img id="payment-qr-img" src="qr.jpg" alt="UPI QR Code" onerror="this.src='https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=upi%3A%2F%2Fpay%3Fpa%3Dmeena.inn%40fam%26pn%3DVinay%2520Kokda%26am%3D499%26cu%3DINR'">
+        </div>
+        <div class="qr-price-pill">Amount: ₹499 <s>₹999</s></div>
       </div>
 
-      <button class="btn-primary-blue" id="btn-open-utr-verify">Submit for Verification →</button>
+      <div class="upi-copy-pill">
+        <span class="upi-val-txt">meena.inn@fam</span>
+        <button class="btn-copy-action" onclick="copyUpiId()">Copy UPI</button>
+      </div>
+
+      <div class="custom-input-group">
+        <label class="custom-input-label" for="inp-utr">12-Digit UTR / Transaction ID *</label>
+        <input type="text" id="inp-utr" class="custom-input-field" placeholder="e.g. 428192819281" maxlength="12" inputmode="numeric">
+        <div class="err-hint-text" id="err-utr">Kripya poora 12-digit UTR number enter karein.</div>
+      </div>
+
+      <div class="info-callout-pill">
+        <span>⚠</span>
+        <span>UTR number sahi bharein, isi se booking lock verify hoti hai.</span>
+      </div>
+
+      <button class="primary-submit-btn" onclick="submitUtrVerification()">Verify &amp; Choose Slot →</button>
     </div>
+
+    <footer class="app-global-footer">
+      © Vinay Kokda • @vinaykokda
+    </footer>
   </div>
 
-  <!-- ==================== SCREEN: STEP 4 SUCCESS & WHATSAPP ==================== -->
-  <div id="screen-step4" class="screen-panel">
-    <div class="wizard-white-card success-card-content">
-      <div style="display: flex; justify-content: flex-start; margin-bottom: 8px;">
-        <button class="btn-home-nav-chip nav-to-home-btn">🏠 Home</button>
+  <div class="scr-view" id="view-success">
+    <div class="top-app-header-bar">
+      <div class="top-app-left-group">
+        <button class="top-back-circle-btn" onclick="showView('view-home', 'backward')">←</button>
+        <div class="top-thumb-avatar">VK</div>
+        <div class="top-header-session-info">
+          <span class="top-header-title">Booking Verified</span>
+          <span class="top-header-subtitle">Vinay Kokda Mentorship</span>
+        </div>
       </div>
-
-      <div class="success-pop-container">
-        <div class="success-glow-ring"></div>
-        <div class="success-pop-icon">✅</div>
-      </div>
-
-      <h2 class="wizard-title" style="margin-bottom: 8px;">Booking Confirmed</h2>
-      <div class="status-pill-amber">⏳ Pending Verification by Vinay Kokda</div>
-
-      <div class="meet-notice-banner">
-        💡 <b>Dhyaan dein:</b> Jaise hi team aapka payment verification karke slot approve karti hai, toh aapko Google Meet link mil jayega aapke Email ya WhatsApp number par, jis din ka slot hai usi din morning me.
-      </div>
-
-      <div class="modal-summary-container" style="text-align: left;">
-        <div class="modal-data-row"><span class="key">Booking ID</span><b class="val" id="res-bid">VK-928192</b></div>
-        <div class="modal-data-row"><span class="key">Name</span><b class="val" id="res-name">-</b></div>
-        <div class="modal-data-row"><span class="key">Email</span><b class="val" id="res-email">-</b></div>
-        <div class="modal-data-row"><span class="key">WhatsApp</span><b class="val" id="res-phone">-</b></div>
-        <div class="modal-data-row"><span class="key">Slot</span><b class="val" id="res-slot">-</b></div>
-        <div class="modal-data-row"><span class="key">12-Digit UTR</span><b class="val" id="res-utr">-</b></div>
-      </div>
-
-      <button class="btn-whatsapp-team" id="btn-send-whatsapp-group">
-        📲 Send Details to Team Vinay
-      </button>
+      <div class="top-header-price-tag">Confirmed</div>
     </div>
+
+    <div class="success-badge-wrap">
+      <!-- Engaging Ripple & Tactile Spring Pop Checkmark -->
+      <div class="celebration-ripple-aura">
+        <div class="ripple-ring"></div>
+        <div class="spring-check-badge-card" id="success-check-badge">
+          <svg class="spring-check-svg" viewBox="0 0 48 48">
+            <path class="spring-check-path" id="svg-check-path" d="M12 25 L21 34 L36 16" />
+          </svg>
+        </div>
+      </div>
+
+      <h2 class="success-main-headline">Booking Verified!</h2>
+      <div class="pending-status-pill">⏳ Confirmation Pending by Team Vinay</div>
+    </div>
+
+    <div class="booking-summary-card">
+      <div class="summary-line-item">
+        <span class="summary-label-txt">Name:</span>
+        <span class="summary-val-txt" id="conf-name">-</span>
+      </div>
+      <div class="summary-line-item">
+        <span class="summary-label-txt">Gmail:</span>
+        <span class="summary-val-txt" id="conf-email">-</span>
+      </div>
+      <div class="summary-line-item">
+        <span class="summary-label-txt">WhatsApp:</span>
+        <span class="summary-val-txt" id="conf-phone">-</span>
+      </div>
+      <div class="summary-line-item">
+        <span class="summary-label-txt">12-Digit UTR:</span>
+        <span class="summary-val-txt" id="conf-utr">-</span>
+      </div>
+    </div>
+
+    <!-- Direct slot booking CTA linked to user's exact Cal.com link -->
+    <button class="btn-choose-slot-cta" id="btn-slot-redirect" onclick="openCalUrl()">
+      Apna Slot Chuno →
+    </button>
+
+    <div class="meet-notice-container">
+      📌 <b>Google Meet Link:</b> 'Apna Slot Chuno' par click karke slot confirm karein. Uske baad team aapke payment ka verification karke call link aapke WhatsApp par ya Gmail par bhej degi, jis din ka slot hoga usi din morning me.
+    </div>
+
+    <footer class="app-global-footer">
+      © Vinay Kokda • @vinaykokda
+    </footer>
   </div>
+</main>
 
-</div>
-
-<!-- Sticky Home Bar -->
-<div class="bottom-sticky-bar" id="sticky-home-bar">
-  <div class="bottom-info-pill">
-    <b>🎯 28-Min Call</b>
-    <span>₹1 Test Fee</span>
-  </div>
-  <button class="btn-book-gold" id="btn-home-book-cta">Book Session →</button>
-</div>
-
-<!-- ==================== MODAL SHEET 1: Details Check ==================== -->
-<div class="modal-overlay-sheet" id="modal-details-sheet">
-  <div class="modal-inner-white-sheet">
-    <div class="modal-icon-header">📋</div>
-    <h3 class="modal-heading">Details check karo</h3>
-    <div class="modal-summary-container">
-      <div class="modal-data-row"><span class="key">Naam</span><b class="val" id="md-name">-</b></div>
-      <div class="modal-data-row"><span class="key">Email (Gmail)</span><b class="val" id="md-email">-</b></div>
-      <div class="modal-data-row"><span class="key">WhatsApp</span><b class="val" id="md-phone">-</b></div>
-      <div class="modal-data-row"><span class="key">YouTube</span><b class="val" id="md-yt">-</b></div>
+<!-- Modal 1: Details Check Modal -->
+<div class="app-modal-backdrop" id="modal-details-check">
+  <div class="app-modal-sheet">
+    <div style="font-size:32px; text-align:center; margin-bottom:6px;">📋</div>
+    <h3 class="modal-head-title">Details Check Karein</h3>
+    <div class="modal-meta-box">
+      <div><b>Session:</b> <span id="m-session">Creator Clarity Call</span></div>
+      <div><b>Naam:</b> <span id="m-name">-</span></div>
+      <div><b>Gmail:</b> <span id="m-email">-</span></div>
+      <div><b>WhatsApp:</b> <span id="m-phone">-</span></div>
+      <div><b>YouTube:</b> <span id="m-yt">None</span></div>
     </div>
-    <div style="font-size: 12.5px; line-height: 1.45; text-align: center; color: #64748b; margin-bottom: 16px;">
-      Meet link isi WhatsApp & Gmail pe aayega.<br><strong>Payment ke baad refund nahi hoga.</strong>
+    <div style="font-size:12px; color:#64748b; text-align:center; margin-bottom:12px;">
+      Google Meet link isi WhatsApp aur Gmail par aayega.<br>
+      <b>Payment ke baad refund nahi hoga.</b>
     </div>
-    <label class="modal-consent-checkbox-row">
-      <input type="checkbox" id="chk-details-consent">
-      <span>Meri details sahi hain, aur maine refund policy samajh li hai.</span>
+    <label class="modal-checkbox-row">
+      <input type="checkbox" id="chk-confirm-details" onchange="toggleModalBtn('chk-confirm-details', 'btn-proceed-details')">
+      <span>Meri details bilkul sahi hain aur policy manzoor hai.</span>
     </label>
-    <button class="btn-primary-blue" id="btn-details-confirm-ok" disabled>Haan, aage badho →</button>
-    <button class="btn-secondary-link" id="btn-close-details-modal">Details badlo</button>
+    <button class="primary-submit-btn" id="btn-proceed-details" disabled onclick="proceedToPaymentFromModal()">Haan, Payment par jao →</button>
   </div>
 </div>
 
-<!-- ==================== MODAL SHEET 2: UTR Confirm ==================== -->
-<div class="modal-overlay-sheet" id="modal-utr-sheet">
-  <div class="modal-inner-white-sheet">
-    <div class="modal-icon-header">⚠️</div>
-    <h3 class="modal-heading">UTR Confirm Karo</h3>
-    <div style="font-size:13px; text-align:center; color:#64748b; margin-bottom:8px;">Aapka enter kiya gaya 12-Digit UTR:</div>
-    <div class="utr-highlight-box" id="md-utr-val">000000000000</div>
-    <div class="utr-warning-text">⚠️ <b>DHYAAN DEIN:</b> Isi UTR se team payment verify karegi. Galat UTR bharne par booking cancel hogi.</div>
-    <label class="modal-consent-checkbox-row">
-      <input type="checkbox" id="chk-utr-consent">
-      <span>Mera 12-Digit UTR number bilkul sahi hai.</span>
+<!-- Modal 2: UTR Verification Confirmation Modal -->
+<div class="app-modal-backdrop" id="modal-utr-check">
+  <div class="app-modal-sheet">
+    <div style="font-size:32px; text-align:center; margin-bottom:6px;">🔍</div>
+    <h3 class="modal-head-title">UTR Verify Karein</h3>
+    <div class="modal-meta-box">
+      <div><b>12-Digit UTR:</b> <span id="m-utr" style="font-weight:900; color:#0b7cff; letter-spacing:0.5px;">-</span></div>
+      <div><b>Amount:</b> <span style="font-weight:800; color:#15803d;">₹499 Paid</span></div>
+    </div>
+    <div style="font-size:12px; line-height:1.5; color:#dc2626; background:#fef2f2; border:1px solid #fecaca; border-radius:12px; padding:10px 12px; margin-bottom:12px;">
+      ⚠ Isi 12-digit UTR number se payment confirmation verify hoga. Galat UTR daalne par aapki khud ki zimmedari hogi, isliye dhyan se check karke confirm karein.
+    </div>
+    <label class="modal-checkbox-row">
+      <input type="checkbox" id="chk-confirm-utr" onchange="toggleModalBtn('chk-confirm-utr', 'btn-proceed-utr')">
+      <span>Maine ₹499 pay kar diye hain aur UTR bilkul sahi hai.</span>
     </label>
-    <button class="btn-primary-blue" id="btn-utr-confirm-ok" disabled>Haan, submit karo →</button>
-    <button class="btn-secondary-link" id="btn-close-utr-modal">Nahi, UTR badlo</button>
-  </div>
-</div>
-
-<!-- ==================== MODAL SHEET: SECRET ADMIN (vny@0786) ==================== -->
-<div class="modal-overlay-sheet" id="modal-admin-sheet">
-  <div class="modal-inner-white-sheet" style="text-align: center;">
-    <div style="font-size: 30px; margin-bottom: 4px;">🔐</div>
-    <h3 class="modal-heading" style="margin-bottom: 14px;">Admin Verification</h3>
-
-    <!-- Login Form -->
-    <div id="admin-login-view">
-      <p style="font-size:13px; color:#64748b;">Enter Master Security Password:</p>
-      <div class="pass-input-wrapper">
-        <input type="password" id="inp-admin-pass" class="admin-password-field" placeholder="••••••••">
-        <span class="pass-toggle-eye" id="toggle-pass-visibility">👁️</span>
-      </div>
-      <button class="btn-primary-blue" id="btn-submit-admin-pass">Authorize Login</button>
-      <button class="btn-secondary-link" id="btn-admin-modal-home" style="margin-top: 10px; font-weight: 800; color: #0b7cff;">🏠 Return to Home</button>
-    </div>
-
-    <!-- Authenticated 2-Tab Dashboard -->
-    <div id="admin-dashboard-view" style="display:none; text-align:left;">
-      <div class="admin-tabs-nav">
-        <button class="admin-tab-btn active" id="tab-btn-pending">⏳ Pending (<span id="cnt-pending">0</span>)</button>
-        <button class="admin-tab-btn" id="tab-btn-approved">✅ Approved (<span id="cnt-approved">0</span>)</button>
-      </div>
-
-      <div style="max-height: 300px; overflow-y: auto;" id="admin-leads-list-container"></div>
-
-      <div style="display: flex; gap: 8px; margin-top: 14px;">
-        <button class="btn-secondary-link" id="btn-admin-panel-home" style="margin-top: 0; background: #eff6ff; color: #0b7cff; border-radius: 12px; padding: 10px; font-weight: 800;">🏠 Return to Home</button>
-        <button class="btn-secondary-link" id="btn-logout-admin" style="margin-top: 0; background: #f1f5f9; border-radius: 12px; padding: 10px;">Logout</button>
-      </div>
-    </div>
+    <button class="primary-submit-btn" id="btn-proceed-utr" disabled onclick="finalizeBookingWithUtr()">Haan, Confirm Karke Slot Chuno →</button>
   </div>
 </div>
 
 <script>
-document.addEventListener('DOMContentLoaded', function() {
+var UPI_ID = "meena.inn@fam";
+// User's exact Cal.com mentorship booking link
+var CAL_BASE_URL = "https://cal.com/vinaykokda/mentorship";
+var currentCalPrefillUrl = CAL_BASE_URL;
 
-  const appState = {
-    selectedSession: 'Creator Clarity & Content Strategy',
-    selectedDate: '',
-    selectedSlot: '11:30 AM',
-    fullName: '',
-    email: '',
-    phone: '',
-    youtube: '',
-    utr: '',
-    bookingId: ''
-  };
+var appData = {
+  sessionTitle: "Creator Clarity Call",
+  name: "",
+  email: "",
+  phone: "",
+  yt: "",
+  utr: ""
+};
 
-  const WHATSAPP_GROUP_URL = "https://chat.whatsapp.com/IP8Ev1wGMNxG9qArrHPlNn";
+function $(id) { return document.getElementById(id); }
 
-  // Native Web Audio API Chime Synthesizer
-  function playSuccessChime() {
-    try {
-      const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-      
-      const osc1 = audioCtx.createOscillator();
-      const gain1 = audioCtx.createGain();
-      osc1.type = 'sine';
-      osc1.frequency.setValueAtTime(587.33, audioCtx.currentTime);
-      osc1.frequency.exponentialRampToValueAtTime(880, audioCtx.currentTime + 0.1);
-      gain1.gain.setValueAtTime(0.2, audioCtx.currentTime);
-      gain1.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.6);
-      osc1.connect(gain1);
-      gain1.connect(audioCtx.destination);
-      osc1.start();
-      osc1.stop(audioCtx.currentTime + 0.6);
+var viewOrder = ["view-home", "view-details", "view-payment", "view-success"];
+var currentViewId = "view-home";
 
-      setTimeout(() => {
-        const osc2 = audioCtx.createOscillator();
-        const gain2 = audioCtx.createGain();
-        osc2.type = 'sine';
-        osc2.frequency.setValueAtTime(1174.66, audioCtx.currentTime);
-        gain2.gain.setValueAtTime(0.25, audioCtx.currentTime);
-        gain2.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.8);
-        osc2.connect(gain2);
-        gain2.connect(audioCtx.destination);
-        osc2.start();
-        osc2.stop(audioCtx.currentTime + 0.8);
-      }, 90);
-    } catch (e) {}
-  }
+// Scroll-Triggered Animated Top Sticky Bar for Home Page
+window.addEventListener('scroll', function() {
+  var homeView = $("view-home");
+  var homeTopBar = $("home-sticky-top-bar");
+  if (!homeView || !homeTopBar) return;
 
-  // Local Storage Data Handling
-  function getSavedBookings() {
-    try {
-      return JSON.parse(localStorage.getItem('vk_bookings') || '[]');
-    } catch (e) {
-      return [];
-    }
-  }
-
-  function saveBooking(item) {
-    const list = getSavedBookings();
-    list.unshift(item);
-    localStorage.setItem('vk_bookings', JSON.stringify(list));
-  }
-
-  function updateBookingStatus(bid, status) {
-    const list = getSavedBookings();
-    const target = list.find(b => b.bid === bid);
-    if (target) {
-      target.status = status;
-      localStorage.setItem('vk_bookings', JSON.stringify(list));
-    }
-  }
-
-  function deleteBooking(bid) {
-    let list = getSavedBookings();
-    list = list.filter(b => b.bid !== bid);
-    localStorage.setItem('vk_bookings', JSON.stringify(list));
-  }
-
-  function isSlotApprovedAndLocked(dateStr, slotTime) {
-    const list = getSavedBookings();
-    return list.some(b => b.dateStr === dateStr && b.slotTime === slotTime && b.status === 'Approved');
-  }
-
-  // Guaranteed Screen Switching Function
-  function switchScreen(screenId) {
-    const panels = document.querySelectorAll('.screen-panel');
-    panels.forEach(s => s.classList.remove('active'));
-
-    const target = document.getElementById(screenId);
-    if (target) {
-      target.style.animation = 'none';
-      target.offsetHeight; /* Trigger reflow */
-      target.style.animation = null;
-      target.classList.add('active');
-    }
-
-    const stickyBar = document.getElementById('sticky-home-bar');
-    if (stickyBar) {
-      stickyBar.style.display = (screenId === 'screen-home') ? 'flex' : 'none';
-    }
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  }
-
-  // Return to Home Buttons
-  document.querySelectorAll('.nav-to-home-btn').forEach(btn => {
-    btn.addEventListener('click', () => switchScreen('screen-home'));
-  });
-
-  // Calendar Initialization (Rolling 3 Days)
-  function initCalendar() {
-    const container = document.getElementById('date-buttons-container');
-    if (!container) return;
-    container.innerHTML = '';
-    const now = new Date();
-    const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-    const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-    let added = 0, offset = 0;
-
-    while (added < 3) {
-      const d = new Date(now);
-      d.setDate(now.getDate() + offset);
-      offset++;
-
-      const dayName = days[d.getDay()];
-      const dateNum = d.getDate();
-      const monName = months[d.getMonth()];
-      const fullDateStr = `${dayName}, ${dateNum} ${monName}`;
-
-      const opt = document.createElement('div');
-      opt.className = `date-pill-opt ${added === 0 ? 'selected' : ''}`;
-      opt.innerHTML = `<div class="d-day">${dayName}</div><div class="d-num">${dateNum}</div><div class="d-mon">${monName}</div>`;
-      opt.dataset.fullDate = fullDateStr;
-
-      opt.addEventListener('click', function() {
-        document.querySelectorAll('.date-pill-opt').forEach(el => el.classList.remove('selected'));
-        opt.classList.add('selected');
-        appState.selectedDate = fullDateStr;
-        refreshSlotStates();
-      });
-
-      if (added === 0) appState.selectedDate = fullDateStr;
-      container.appendChild(opt);
-      added++;
-    }
-    refreshSlotStates();
-  }
-
-  function refreshSlotStates() {
-    const slots = [
-      { id: 'slot-card-1130', time: '11:30 AM', tagId: 'tag-1130', label: 'Morning' },
-      { id: 'slot-card-0715', time: '07:15 PM', tagId: 'tag-0715', label: 'Evening' },
-      { id: 'slot-card-0900', time: '09:00 PM', tagId: 'tag-0900', label: 'Night' }
-    ];
-
-    let firstAvailable = null;
-
-    slots.forEach(s => {
-      const el = document.getElementById(s.id);
-      const tag = document.getElementById(s.tagId);
-      if (!el || !tag) return;
-      const isLocked = isSlotApprovedAndLocked(appState.selectedDate, s.time);
-
-      if (isLocked) {
-        el.classList.add('locked-slot');
-        el.classList.remove('selected');
-        tag.className = 'time-tag-locked';
-        tag.innerText = '🔒 Booked';
-      } else {
-        el.classList.remove('locked-slot');
-        tag.className = 'time-tag';
-        tag.innerText = s.label;
-        if (!firstAvailable) firstAvailable = s.time;
-      }
-    });
-
-    if (isSlotApprovedAndLocked(appState.selectedDate, appState.selectedSlot)) {
-      if (firstAvailable) {
-        appState.selectedSlot = firstAvailable;
-      }
-    }
-
-    slots.forEach(s => {
-      const el = document.getElementById(s.id);
-      if (el && !el.classList.contains('locked-slot')) {
-        if (s.time === appState.selectedSlot) {
-          el.classList.add('selected');
-        } else {
-          el.classList.remove('selected');
-        }
-      }
-    });
-  }
-
-  document.querySelectorAll('.slot-card-opt').forEach(slotEl => {
-    slotEl.addEventListener('click', function() {
-      if (slotEl.classList.contains('locked-slot')) return;
-      document.querySelectorAll('.slot-card-opt').forEach(s => s.classList.remove('selected'));
-      slotEl.classList.add('selected');
-      appState.selectedSlot = slotEl.getAttribute('data-slot');
-    });
-  });
-
-  // Reliable FAQ Accordion Toggle
-  document.querySelectorAll('.faq-item').forEach(item => {
-    item.addEventListener('click', function(e) {
-      const isCurrentlyActive = item.classList.contains('active');
-      document.querySelectorAll('.faq-item').forEach(el => el.classList.remove('active'));
-      if (!isCurrentlyActive) {
-        item.classList.add('active');
-      }
-    });
-  });
-
-  // Home CTA Transition to Sessions
-  const btnBookCta = document.getElementById('btn-home-book-cta');
-  if (btnBookCta) {
-    btnBookCta.addEventListener('click', function(e) {
-      e.preventDefault();
-      switchScreen('screen-sessions');
-    });
-  }
-
-  const btnBackHomeSessions = document.getElementById('btn-back-home-from-sessions');
-  if (btnBackHomeSessions) {
-    btnBackHomeSessions.addEventListener('click', function(e) {
-      e.preventDefault();
-      switchScreen('screen-home');
-    });
-  }
-
-  // Sessions to Step 1
-  const btnSelectSession = document.getElementById('btn-select-active-session');
-  if (btnSelectSession) {
-    btnSelectSession.addEventListener('click', function(e) {
-      e.preventDefault();
-      initCalendar();
-      switchScreen('screen-step1');
-    });
-  }
-
-  const btnBackSessions = document.getElementById('btn-back-sessions');
-  if (btnBackSessions) {
-    btnBackSessions.addEventListener('click', function(e) {
-      e.preventDefault();
-      switchScreen('screen-sessions');
-    });
-  }
-
-  // Step 1 to Step 2
-  const btnGotoStep2 = document.getElementById('btn-goto-step2');
-  if (btnGotoStep2) {
-    btnGotoStep2.addEventListener('click', function() {
-      if (isSlotApprovedAndLocked(appState.selectedDate, appState.selectedSlot)) {
-        alert('Yeh slot pehle se booked aur approved ho chuka hai. Kripya doosra slot chunein.');
-        refreshSlotStates();
-        return;
-      }
-      document.getElementById('selected-slot-preview-text').innerText = `📅 ${appState.selectedDate} • ${appState.selectedSlot} (28-Min)`;
-      switchScreen('screen-step2');
-    });
-  }
-
-  const btnBackStep1 = document.getElementById('btn-back-step1');
-  if (btnBackStep1) {
-    btnBackStep1.addEventListener('click', function() {
-      switchScreen('screen-step1');
-    });
-  }
-
-  // Step 2 Form Validation & Modal 1
-  const btnOpenDetails = document.getElementById('btn-open-details-verify');
-  if (btnOpenDetails) {
-    btnOpenDetails.addEventListener('click', function() {
-      const name = document.getElementById('inp-full-name').value.trim();
-      const email = document.getElementById('inp-email-addr').value.trim();
-      const phone = document.getElementById('inp-whatsapp-num').value.trim();
-      const yt = document.getElementById('inp-yt-handle').value.trim();
-
-      let hasErr = false;
-      if (!name) { document.getElementById('err-name').style.display = 'block'; hasErr = true; } else { document.getElementById('err-name').style.display = 'none'; }
-      if (!email || !email.includes('@')) { document.getElementById('err-email').style.display = 'block'; hasErr = true; } else { document.getElementById('err-email').style.display = 'none'; }
-      if (!phone || phone.length !== 10) { document.getElementById('err-phone').style.display = 'block'; hasErr = true; } else { document.getElementById('err-phone').style.display = 'none'; }
-      if (hasErr) return;
-
-      appState.fullName = name;
-      appState.email = email;
-      appState.phone = phone;
-      appState.youtube = yt || 'None';
-
-      document.getElementById('md-name').innerText = name;
-      document.getElementById('md-email').innerText = email;
-      document.getElementById('md-phone').innerText = `+91 ${phone}`;
-      document.getElementById('md-yt').innerText = appState.youtube;
-      document.getElementById('chk-details-consent').checked = false;
-      document.getElementById('btn-details-confirm-ok').disabled = true;
-
-      document.getElementById('modal-details-sheet').classList.add('active');
-    });
-  }
-
-  document.getElementById('chk-details-consent').addEventListener('change', e => {
-    document.getElementById('btn-details-confirm-ok').disabled = !e.target.checked;
-  });
-  document.getElementById('btn-close-details-modal').addEventListener('click', () => {
-    document.getElementById('modal-details-sheet').classList.remove('active');
-  });
-
-  document.getElementById('btn-details-confirm-ok').addEventListener('click', () => {
-    document.getElementById('modal-details-sheet').classList.remove('active');
-    switchScreen('screen-step3');
-  });
-
-  // Copy UPI Functionality
-  document.getElementById('btn-copy-upi-id').addEventListener('click', function() {
-    const text = 'meena.inn@fam';
-    try {
-      const t = document.createElement('textarea');
-      t.value = text;
-      document.body.appendChild(t);
-      t.select();
-      document.execCommand('copy');
-      document.body.removeChild(t);
-    } catch (err) {
-      if (navigator.clipboard && navigator.clipboard.writeText) {
-        navigator.clipboard.writeText(text).catch(() => {});
-      }
-    }
-    const btn = document.getElementById('btn-copy-upi-id');
-    btn.innerText = '✅ Copied!';
-    setTimeout(() => { btn.innerText = '📋 Copy UPI'; }, 2000);
-  });
-
-  document.getElementById('btn-back-step2').addEventListener('click', () => switchScreen('screen-step2'));
-
-  // Step 3 UTR Validation & Modal 2
-  document.getElementById('btn-open-utr-verify').addEventListener('click', function() {
-    const utr = document.getElementById('inp-utr-num').value.trim();
-    if (!utr || utr.length !== 12) {
-      document.getElementById('err-utr').style.display = 'block';
-      return;
-    }
-    document.getElementById('err-utr').style.display = 'none';
-    appState.utr = utr;
-
-    document.getElementById('md-utr-val').innerText = utr;
-    document.getElementById('chk-utr-consent').checked = false;
-    document.getElementById('btn-utr-confirm-ok').disabled = true;
-
-    document.getElementById('modal-utr-sheet').classList.add('active');
-  });
-
-  document.getElementById('chk-utr-consent').addEventListener('change', e => {
-    document.getElementById('btn-utr-confirm-ok').disabled = !e.target.checked;
-  });
-  document.getElementById('btn-close-utr-modal').addEventListener('click', () => {
-    document.getElementById('modal-utr-sheet').classList.remove('active');
-  });
-
-  // Step 3 -> Step 4 Confirmation
-  document.getElementById('btn-utr-confirm-ok').addEventListener('click', function() {
-    document.getElementById('modal-utr-sheet').classList.remove('active');
-    const bid = `VK-${Math.floor(100000 + Math.random() * 900000)}`;
-    appState.bookingId = bid;
-
-    saveBooking({
-      bid: bid,
-      name: appState.fullName,
-      email: appState.email,
-      phone: appState.phone,
-      youtube: appState.youtube,
-      dateStr: appState.selectedDate,
-      slotTime: appState.selectedSlot,
-      slot: `${appState.selectedDate} • ${appState.selectedSlot}`,
-      utr: appState.utr,
-      status: 'Pending',
-      time: new Date().toLocaleTimeString()
-    });
-
-    document.getElementById('res-bid').innerText = bid;
-    document.getElementById('res-name').innerText = appState.fullName;
-    document.getElementById('res-email').innerText = appState.email;
-    document.getElementById('res-phone').innerText = `+91 ${appState.phone}`;
-    document.getElementById('res-slot').innerText = `${appState.selectedDate} • ${appState.selectedSlot}`;
-    document.getElementById('res-utr').innerText = appState.utr;
-
-    switchScreen('screen-step4');
-    playSuccessChime();
-  });
-
-  // WhatsApp Group Dispatch Action
-  document.getElementById('btn-send-whatsapp-group').addEventListener('click', function() {
-    const dispatchText = 
-`*New 28-Min Mentorship Booking!*
-----------------------------
-*Booking ID:* ${appState.bookingId}
-*Name:* ${appState.fullName}
-*Email:* ${appState.email}
-*WhatsApp:* +91 ${appState.phone}
-*Slot:* ${appState.selectedDate} • ${appState.selectedSlot}
-*12-Digit UTR:* ${appState.utr}
-*Channel/YT:* ${appState.youtube}`;
-
-    try {
-      const tempInput = document.createElement('textarea');
-      tempInput.value = dispatchText;
-      document.body.appendChild(tempInput);
-      tempInput.select();
-      document.execCommand('copy');
-      document.body.removeChild(tempInput);
-    } catch (err) {
-      if (navigator.clipboard && navigator.clipboard.writeText) {
-        navigator.clipboard.writeText(dispatchText).catch(() => {});
-      }
-    }
-
-    const toast = document.getElementById('copy-toast-msg');
-    toast.style.display = 'block';
-    setTimeout(() => { toast.style.display = 'none'; }, 3200);
-
-    setTimeout(() => {
-      window.open(WHATSAPP_GROUP_URL, '_blank');
-    }, 450);
-  });
-
-  // Secret 5-Tap Admin Trigger
-  let tapCount = 0;
-  let tapTimer = null;
-
-  function handleSecretAdminTap() {
-    tapCount++;
-    clearTimeout(tapTimer);
-    tapTimer = setTimeout(() => { tapCount = 0; }, 2200);
-
-    if (tapCount >= 5) {
-      tapCount = 0;
-      document.getElementById('modal-admin-sheet').classList.add('active');
-      document.getElementById('admin-login-view').style.display = 'block';
-      document.getElementById('admin-dashboard-view').style.display = 'none';
-      document.getElementById('inp-admin-pass').value = '';
-    }
-  }
-
-  const triggerAdmin1 = document.getElementById('secret-admin-trigger');
-  if (triggerAdmin1) triggerAdmin1.addEventListener('click', handleSecretAdminTap);
-  const triggerAdmin2 = document.getElementById('avatar-secret-trigger');
-  if (triggerAdmin2) triggerAdmin2.addEventListener('click', handleSecretAdminTap);
-
-  document.getElementById('btn-admin-modal-home').addEventListener('click', function() {
-    document.getElementById('modal-admin-sheet').classList.remove('active');
-    switchScreen('screen-home');
-  });
-  document.getElementById('btn-admin-panel-home').addEventListener('click', function() {
-    document.getElementById('modal-admin-sheet').classList.remove('active');
-    switchScreen('screen-home');
-  });
-
-  document.getElementById('toggle-pass-visibility').addEventListener('click', function() {
-    const inp = document.getElementById('inp-admin-pass');
-    inp.type = (inp.type === 'password') ? 'text' : 'password';
-  });
-
-  // Admin Auth: vny@0786
-  document.getElementById('btn-submit-admin-pass').addEventListener('click', function() {
-    const enteredPass = document.getElementById('inp-admin-pass').value.trim();
-    if (enteredPass === 'vny@0786') {
-      document.getElementById('admin-login-view').style.display = 'none';
-      document.getElementById('admin-dashboard-view').style.display = 'block';
-      activeAdminTab = 'Pending';
-      renderAdminDashboard();
+  if (homeView.classList.contains("on")) {
+    if (window.scrollY > 130) {
+      homeTopBar.classList.add("visible");
     } else {
-      alert('Access Denied: Invalid Security Password!');
+      homeTopBar.classList.remove("visible");
     }
-  });
+  } else {
+    homeTopBar.classList.remove("visible");
+  }
+}, { passive: true });
 
-  let activeAdminTab = 'Pending';
-  document.getElementById('tab-btn-pending').addEventListener('click', () => {
-    activeAdminTab = 'Pending';
-    renderAdminDashboard();
-  });
-  document.getElementById('tab-btn-approved').addEventListener('click', () => {
-    activeAdminTab = 'Approved';
-    renderAdminDashboard();
-  });
-
-  function renderAdminDashboard() {
-    const list = getSavedBookings();
-    const pendingList = list.filter(b => b.status !== 'Approved');
-    const approvedList = list.filter(b => b.status === 'Approved');
-
-    document.getElementById('cnt-pending').innerText = pendingList.length;
-    document.getElementById('cnt-approved').innerText = approvedList.length;
-
-    document.getElementById('tab-btn-pending').className = `admin-tab-btn ${activeAdminTab === 'Pending' ? 'active' : ''}`;
-    document.getElementById('tab-btn-approved').className = `admin-tab-btn ${activeAdminTab === 'Approved' ? 'active' : ''}`;
-
-    const container = document.getElementById('admin-leads-list-container');
-    const targetList = (activeAdminTab === 'Pending') ? pendingList : approvedList;
-
-    if (targetList.length === 0) {
-      container.innerHTML = `<div style="color:#94a3b8; text-align:center; padding:24px;">Koi ${activeAdminTab.toLowerCase()} booking nahi hai.</div>`;
-      return;
-    }
-
-    container.innerHTML = targetList.map(item => `
-      <div class="admin-lead-card">
-        <div style="display:flex; justify-content:space-between; font-weight:800; color:#0f172a; margin-bottom:4px;">
-          <span>${item.name}</span>
-          <span style="color:#0b7cff; font-family:monospace;">${item.bid}</span>
-        </div>
-        <div style="color:#64748b; font-size:12px;">📞 +91 ${item.phone} • 📧 ${item.email}</div>
-        <div style="color:#64748b; font-size:12px; margin-top:2px;">📅 ${item.slot}</div>
-        <div style="color:#b45309; font-weight:700; font-family:monospace; margin-top:4px;">UTR: ${item.utr}</div>
-        ${item.youtube ? `<div style="color:#475569; font-size:11.5px; margin-top:2px;">YT: ${item.youtube}</div>` : ''}
-
-        ${item.status === 'Approved' 
-          ? `<div style="margin-top:6px; font-weight:800; font-size:11px; color:#10b981;">🔒 LOCKED & BOOKED</div>
-             <button class="btn-admin-act-delete" onclick="handleDeleteAndUnlock('${item.bid}')">🗑 Free Slot & Delete</button>`
-          : `<div class="admin-actions-row">
-               <button class="btn-admin-act-approve" onclick="handleApproveBooking('${item.bid}')">✅ Approve & Lock</button>
-               <button class="btn-admin-act-reject" onclick="handleDeleteAndUnlock('${item.bid}')">❌ Cancel / Reject</button>
-             </div>`
-        }
-      </div>
-    `).join('');
+// Scroll Reveal Intersection Observer for Home Page
+function initScrollObserver() {
+  if (!('IntersectionObserver' in window)) {
+    var allAnim = document.querySelectorAll('.scroll-anim');
+    allAnim.forEach(function(el) { el.classList.add('revealed'); });
+    return;
   }
 
-  window.handleApproveBooking = function(bid) {
-    updateBookingStatus(bid, 'Approved');
-    renderAdminDashboard();
-    refreshSlotStates();
-  };
-
-  window.handleDeleteAndUnlock = function(bid) {
-    if (confirm('Kya aap is booking ko delete karke slot free karna chahte hain?')) {
-      deleteBooking(bid);
-      renderAdminDashboard();
-      refreshSlotStates();
-    }
-  };
-
-  document.getElementById('btn-logout-admin').addEventListener('click', () => {
-    document.getElementById('modal-admin-sheet').classList.remove('active');
+  var observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('revealed');
+      }
+    });
+  }, {
+    threshold: 0.1,
+    rootMargin: "0px 0px -30px 0px"
   });
 
-  initCalendar();
+  document.querySelectorAll('.scroll-anim').forEach(function(el) {
+    observer.observe(el);
+  });
+}
+
+// Engaging Audio Chime Synthesizer with crystal clear bell chord
+function playSuccessChime() {
+  try {
+    var AudioContext = window.AudioContext || window.webkitAudioContext;
+    if (!AudioContext) return;
+    var ctx = new AudioContext();
+    if (ctx.state === 'suspended') {
+      ctx.resume();
+    }
+
+    function playTone(freq, startTime, duration, gainLevel, type) {
+      var osc = ctx.createOscillator();
+      var gain = ctx.createGain();
+      osc.type = type || 'sine';
+      osc.frequency.setValueAtTime(freq, startTime);
+      gain.gain.setValueAtTime(0, startTime);
+      gain.gain.linearRampToValueAtTime(gainLevel, startTime + 0.02);
+      gain.gain.exponentialRampToValueAtTime(0.0001, startTime + duration);
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+      osc.start(startTime);
+      osc.stop(startTime + duration);
+    }
+
+    var now = ctx.currentTime;
+    // Pleasant 4-note ascending triumphant shimmer (C5, E5, G5, C6) with warm bell harmonics
+    playTone(523.25, now + 0.01, 0.45, 0.22, 'sine');
+    playTone(659.25, now + 0.10, 0.50, 0.24, 'triangle');
+    playTone(783.99, now + 0.18, 0.60, 0.28, 'sine');
+    playTone(1046.50, now + 0.28, 0.95, 0.35, 'triangle');
+  } catch (err) {}
+}
+
+function showView(viewId, direction) {
+  var prevIdx = viewOrder.indexOf(currentViewId);
+  var nextIdx = viewOrder.indexOf(viewId);
+  if (!direction) {
+    direction = nextIdx >= prevIdx ? "forward" : "backward";
+  }
+
+  viewOrder.forEach(function(v) {
+    var el = $(v);
+    if (el) {
+      el.classList.remove("on", "slide-forward", "slide-backward");
+    }
+  });
+
+  var targetEl = $(viewId);
+  if (targetEl) {
+    targetEl.classList.add("on");
+    targetEl.classList.add(direction === "forward" ? "slide-forward" : "slide-backward");
+  }
+
+  currentViewId = viewId;
+  
+  var homeTopBar = $("home-sticky-top-bar");
+  if (homeTopBar && viewId !== "view-home") {
+    homeTopBar.classList.remove("visible");
+  }
+  
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function startBooking(title, price) {
+  appData.sessionTitle = title;
+  showView("view-details", "forward");
+}
+
+function toggleFaq(item) {
+  item.classList.toggle("active");
+}
+
+function copyUpiId() {
+  var temp = document.createElement("input");
+  temp.value = UPI_ID;
+  document.body.appendChild(temp);
+  temp.select();
+  document.execCommand("copy");
+  document.body.removeChild(temp);
+  
+  var btn = document.querySelector(".btn-copy-action");
+  if (btn) {
+    btn.textContent = "Copied! ✓";
+    setTimeout(function() { btn.textContent = "Copy UPI"; }, 2000);
+  }
+}
+
+function toggleModalBtn(checkboxId, buttonId) {
+  var chk = $(checkboxId);
+  var btn = $(buttonId);
+  if (chk && btn) {
+    btn.disabled = !chk.checked;
+  }
+}
+
+function submitDetailsForm() {
+  var name = $("inp-name").value.trim();
+  var email = $("inp-email").value.trim();
+  var phone = $("inp-phone").value.trim();
+  var yt = $("inp-yt").value.trim();
+
+  var valid = true;
+
+  if (!name) {
+    $("inp-name").classList.add("error");
+    $("err-name").style.display = "block";
+    valid = false;
+  } else {
+    $("inp-name").classList.remove("error");
+    $("err-name").style.display = "none";
+  }
+
+  if (!email || !email.includes("@") || !email.includes(".")) {
+    $("inp-email").classList.add("error");
+    $("err-email").style.display = "block";
+    if (valid) { $("inp-email").focus(); }
+    valid = false;
+  } else {
+    $("inp-email").classList.remove("error");
+    $("err-email").style.display = "none";
+  }
+
+  if (!phone || phone.replace(/\D/g, "").length !== 10) {
+    $("inp-phone").classList.add("error");
+    $("err-phone").style.display = "block";
+    if (valid) { $("inp-phone").focus(); }
+    valid = false;
+  } else {
+    $("inp-phone").classList.remove("error");
+    $("err-phone").style.display = "none";
+  }
+
+  if (!valid) return;
+
+  appData.name = name;
+  appData.email = email;
+  appData.phone = phone.replace(/\D/g, "");
+  appData.yt = yt;
+
+  $("m-session").textContent = appData.sessionTitle;
+  $("m-name").textContent = appData.name;
+  $("m-email").textContent = appData.email;
+  $("m-phone").textContent = "+91 " + appData.phone;
+  $("m-yt").textContent = appData.yt || "None";
+
+  // Reset checkbox to unchecked and disable button
+  var chkDetails = $("chk-confirm-details");
+  var btnDetails = $("btn-proceed-details");
+  if (chkDetails) chkDetails.checked = false;
+  if (btnDetails) btnDetails.disabled = true;
+
+  $("modal-details-check").classList.add("active");
+}
+
+function proceedToPaymentFromModal() {
+  var chk = $("chk-confirm-details");
+  if (!chk || !chk.checked) {
+    return;
+  }
+  $("modal-details-check").classList.remove("active");
+  showView('view-payment', 'forward');
+}
+
+function submitUtrVerification() {
+  var utr = $("inp-utr").value.trim().replace(/\D/g, "");
+  if (utr.length < 12) {
+    $("inp-utr").classList.add("error");
+    $("err-utr").style.display = "block";
+    $("inp-utr").focus();
+    return;
+  }
+  $("inp-utr").classList.remove("error");
+  $("err-utr").style.display = "none";
+
+  appData.utr = utr;
+  $("m-utr").textContent = utr;
+
+  // Reset checkbox to unchecked and disable button
+  var chkUtr = $("chk-confirm-utr");
+  var btnUtr = $("btn-proceed-utr");
+  if (chkUtr) chkUtr.checked = false;
+  if (btnUtr) btnUtr.disabled = true;
+
+  $("modal-utr-check").classList.add("active");
+}
+
+function finalizeBookingWithUtr() {
+  var chk = $("chk-confirm-utr");
+  if (!chk || !chk.checked) {
+    return;
+  }
+  $("modal-utr-check").classList.remove("active");
+
+  // Format prefilled Cal.com link with buyer's information
+  currentCalPrefillUrl = CAL_BASE_URL + 
+    "?name=" + encodeURIComponent(appData.name) + 
+    "&email=" + encodeURIComponent(appData.email) + 
+    "&attendeePhoneNumber=" + encodeURIComponent("+91" + appData.phone) + 
+    "&utr=" + encodeURIComponent(appData.utr) + 
+    (appData.yt ? "&notes=" + encodeURIComponent("YouTube: " + appData.yt) : "");
+
+  $("conf-name").textContent = appData.name;
+  $("conf-email").textContent = appData.email;
+  $("conf-phone").textContent = "+91 " + appData.phone;
+  $("conf-utr").textContent = appData.utr;
+
+  showView("view-success", "forward");
+
+  // Re-trigger spring bounce pop & stroke draw animation
+  var checkBadge = $("success-check-badge");
+  var checkPath = $("svg-check-path");
+  if (checkBadge) {
+    checkBadge.style.animation = 'none';
+    checkBadge.offsetHeight; /* trigger reflow */
+    checkBadge.style.animation = 'springPopEngage 0.75s cubic-bezier(0.34, 1.56, 0.64, 1) both';
+  }
+  if (checkPath) {
+    checkPath.style.animation = 'none';
+    checkPath.offsetHeight; /* trigger reflow */
+    checkPath.style.animation = 'drawCheckPath 0.5s cubic-bezier(0.22, 1, 0.36, 1) 0.22s forwards';
+  }
+
+  // Play engaging triumphant tune immediately upon confirmation
+  playSuccessChime();
+}
+
+function openCalUrl() {
+  if (currentCalPrefillUrl) {
+    var win = window.open(currentCalPrefillUrl, "_blank");
+    // Fallback if popup blocker catches window.open
+    if (!win || win.closed || typeof win.closed === "undefined") {
+      window.location.href = currentCalPrefillUrl;
+    }
+  }
+}
+
+// Initialize on DOM load
+window.addEventListener('DOMContentLoaded', function() {
+  initScrollObserver();
 });
 </script>
+
 </body>
 </html>
