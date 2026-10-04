@@ -59,7 +59,7 @@
       overflow-x: clip;
     }
 
-    /* Strict constraints on all SVGs so they never overflow */
+    /* Strict global constraints so SVGs NEVER blow up */
     svg {
       display: inline-block;
       vertical-align: middle;
@@ -68,6 +68,7 @@
       flex-shrink: 0;
     }
 
+    /* Fixed top floating sticky bar on Home screen */
     .home-top-sticky-header {
       position: fixed;
       top: 0;
@@ -111,7 +112,7 @@
       transform: scale(0.93);
     }
 
-    /* Sticky App Bar on Inner Pages */
+    /* Header Bar on Sub-pages */
     .top-app-header-bar {
       display: flex;
       align-items: center;
@@ -168,11 +169,13 @@
       font-size: 12px;
       color: #ffffff;
       overflow: hidden;
+      flex-shrink: 0;
     }
     .top-thumb-avatar img {
       width: 100%;
       height: 100%;
       object-fit: cover;
+      display: block;
     }
     .top-header-session-info {
       display: flex;
@@ -199,6 +202,7 @@
       border-radius: 99px;
     }
 
+    /* Screen Transitions */
     .scr-view {
       display: none;
       width: 100%;
@@ -215,47 +219,37 @@
       animation: viewSlideInLeft 0.34s cubic-bezier(0.22, 1, 0.36, 1) both;
     }
     @keyframes viewSlideInRight {
-      0% {
-        opacity: 0;
-        transform: translate3d(45px, 0, 0);
-      }
-      100% {
-        opacity: 1;
-        transform: translate3d(0, 0, 0);
-      }
+      0% { opacity: 0; transform: translate3d(45px, 0, 0); }
+      100% { opacity: 1; transform: translate3d(0, 0, 0); }
     }
     @keyframes viewSlideInLeft {
-      0% {
-        opacity: 0;
-        transform: translate3d(-45px, 0, 0);
-      }
-      100% {
-        opacity: 1;
-        transform: translate3d(0, 0, 0);
-      }
+      0% { opacity: 0; transform: translate3d(-45px, 0, 0); }
+      100% { opacity: 1; transform: translate3d(0, 0, 0); }
     }
 
+    /* Continuous Repeat Scroll Animation (Triggers both up and down) */
     .scroll-anim {
       opacity: 0;
-      transform: translateY(22px);
+      transform: translateY(24px) scale(0.98);
       transition: opacity 0.45s cubic-bezier(0.22, 1, 0.36, 1), transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
       will-change: opacity, transform;
     }
     .scroll-anim.revealed {
       opacity: 1;
-      transform: translateY(0);
+      transform: translateY(0) scale(1);
     }
 
+    /* Hero Banner */
     .creator-hero-banner {
       background: var(--bg-banner-grad);
-      padding: 34px 20px 28px;
+      padding: 32px 20px 26px;
       text-align: center;
       color: #ffffff;
       position: relative;
     }
     .avatar-circle-wrap {
-      width: 92px;
-      height: 92px;
+      width: 90px;
+      height: 90px;
       border-radius: 50%;
       margin: 0 auto 12px;
       border: 3.5px solid rgba(255, 255, 255, 0.25);
@@ -277,14 +271,38 @@
       display: block;
     }
     .creator-title-name {
-      font-size: 24px;
+      font-size: 23px;
       font-weight: 800;
       color: #ffffff;
-      margin-bottom: 4px;
+      margin-bottom: 5px;
       letter-spacing: -0.3px;
     }
+
+    /* Authentic Blue Verified Badge (Subtly compact & clean) */
+    .creator-verified-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 3.5px;
+      background: rgba(0, 149, 246, 0.12);
+      border: 1px solid rgba(0, 149, 246, 0.28);
+      padding: 2px 7px 2px 5px;
+      border-radius: 99px;
+      font-size: 9.5px;
+      font-weight: 700;
+      color: #38bdf8;
+      margin-bottom: 8px;
+      letter-spacing: 0.2px;
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
+    .verified-check-icon {
+      width: 11.5px;
+      height: 11.5px;
+      flex-shrink: 0;
+    }
+
     .creator-sub-tagline {
-      font-size: 13.5px;
+      font-size: 13px;
       color: #94a3b8;
       font-weight: 500;
       max-width: 290px;
@@ -292,6 +310,7 @@
       line-height: 1.4;
     }
 
+    /* Rounded Sheet Content Container */
     .sheet-content-container {
       background: #ffffff;
       border-radius: 26px 26px 0 0;
@@ -309,21 +328,19 @@
       letter-spacing: -0.3px;
     }
 
+    /* Primary Session Card with Distinct Black Border */
     .session-swati-card {
       background: #ffffff;
-      border: 1.5px solid var(--border-light);
+      border: 2px solid #0f172a;
       border-radius: 20px;
       padding: 18px 16px;
       position: relative;
-      box-shadow: 0 4px 18px rgba(15, 23, 42, 0.05);
+      box-shadow: 0 4px 18px rgba(15, 23, 42, 0.08);
       margin-bottom: 22px;
       transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
-    .session-swati-card:hover {
-      box-shadow: 0 6px 24px rgba(15, 23, 42, 0.08);
-    }
 
-    /* Top-Right Corner ONLY Active Status */
+    /* Top-Right Corner ONLY Active Status Badge */
     .card-top-active-corner {
       position: absolute;
       top: 16px;
@@ -403,12 +420,12 @@
       flex-shrink: 0;
     }
 
-    /* Rating directly on top of payment button */
+    /* Centered Rating Badge Directly Above Payment Button */
     .action-right-wrap {
       display: flex;
       flex-direction: column;
-      align-items: flex-end;
-      gap: 5px;
+      align-items: center;
+      gap: 6px;
     }
     .btn-top-rating-badge {
       display: inline-flex;
@@ -418,9 +435,13 @@
       color: #b45309;
       background: #fef3c7;
       border: 1px solid #fde68a;
-      padding: 2px 8px;
+      padding: 2px 10px;
       border-radius: 99px;
+      text-align: center;
+      letter-spacing: 0.2px;
     }
+
+    /* Glossy Glowing Shimmer Button */
     .btn-book-action {
       background: var(--accent-blue);
       color: #ffffff;
@@ -435,6 +456,32 @@
       display: inline-flex;
       align-items: center;
       gap: 6px;
+      position: relative;
+      overflow: hidden;
+    }
+    .btn-book-action::after {
+      content: "";
+      position: absolute;
+      top: -60%;
+      left: -130%;
+      width: 55%;
+      height: 220%;
+      background: linear-gradient(
+        115deg,
+        rgba(255, 255, 255, 0) 0%,
+        rgba(255, 255, 255, 0.25) 30%,
+        rgba(255, 255, 255, 0.75) 50%,
+        rgba(255, 255, 255, 0.25) 70%,
+        rgba(255, 255, 255, 0) 100%
+      );
+      transform: rotate(26deg);
+      animation: btnLightSweep 3.2s infinite cubic-bezier(0.4, 0, 0.2, 1);
+      pointer-events: none;
+    }
+    @keyframes btnLightSweep {
+      0% { left: -130%; }
+      22% { left: 210%; }
+      100% { left: 210%; }
     }
     .btn-book-action:active {
       transform: scale(0.95);
@@ -446,44 +493,98 @@
       font-size: 12px;
     }
 
+    /* Expectations Card */
     .expectations-card {
       background: #f8fafc;
       border: 1px solid var(--border-light);
       border-radius: 18px;
-      padding: 18px 16px;
+      padding: 16px 16px 18px;
       margin-bottom: 22px;
     }
     .expectations-card h4 {
-      font-size: 14.5px;
+      font-size: 15px;
       font-weight: 800;
       color: #0f172a;
       margin-bottom: 12px;
     }
     .swati-bullet-list {
       list-style: none;
-      display: grid;
+      display: flex;
+      flex-direction: column;
       gap: 10px;
     }
     .swati-bullet-item {
-      display: flex;
-      align-items: flex-start;
-      gap: 10px;
       font-size: 13px;
       color: #334155;
       line-height: 1.45;
+      position: relative;
+      padding-left: 18px;
     }
     .swati-bullet-item::before {
       content: "•";
       color: var(--accent-blue);
       font-size: 20px;
-      line-height: 14px;
-      font-weight: 900;
-      flex-shrink: 0;
+      position: absolute;
+      left: 2px;
+      top: -3px;
     }
 
-    /* FAQs */
+    /* Authentic Navy About Card Matching Photo Reference */
+    .dhruv-about-card {
+      background: #09233f;
+      background: linear-gradient(145deg, #0c2b4a 0%, #071a2d 100%);
+      color: #ffffff;
+      border-radius: 22px;
+      padding: 24px 20px;
+      margin-bottom: 22px;
+      box-shadow: 0 10px 28px rgba(7, 25, 43, 0.3);
+      border: 1px solid rgba(56, 189, 248, 0.16);
+    }
+    .dhruv-about-subhead {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 1.8px;
+      color: #38bdf8;
+      font-weight: 900;
+      margin-bottom: 6px;
+    }
+    .dhruv-about-title {
+      font-size: 26px;
+      font-weight: 900;
+      line-height: 1.08;
+      letter-spacing: -0.6px;
+      color: #ffffff;
+      margin-bottom: 12px;
+    }
+    .dhruv-about-pill {
+      display: inline-block;
+      background: rgba(6, 182, 212, 0.12);
+      border: 1.5px solid #06b6d4;
+      padding: 5px 13px;
+      border-radius: 99px;
+      font-size: 11px;
+      font-weight: 700;
+      color: #22d3ee;
+      margin-bottom: 16px;
+      letter-spacing: 0.2px;
+    }
+    .dhruv-about-body p {
+      font-size: 12.8px;
+      color: #cbd5e1;
+      line-height: 1.58;
+      margin-bottom: 12px;
+    }
+    .dhruv-about-body p:last-child {
+      margin-bottom: 0;
+    }
+    .dhruv-about-body b {
+      color: #ffffff;
+      font-weight: 800;
+    }
+
+    /* FAQ Box Accordions */
     .faq-wrap-box {
-      margin-bottom: 24px;
+      margin-bottom: 22px;
     }
     .faq-wrap-box h4 {
       font-size: 15px;
@@ -496,7 +597,7 @@
     }
     .faq-accordion-item {
       background: #ffffff;
-      border: 1px solid var(--border-light);
+      border: 1.5px solid var(--border-light);
       border-radius: 14px;
       margin-bottom: 8px;
       overflow: hidden;
@@ -504,16 +605,16 @@
     }
     .faq-head-btn {
       width: 100%;
-      background: transparent;
+      background: none;
       border: none;
-      padding: 14px 16px;
-      text-align: left;
-      font-size: 13.5px;
-      font-weight: 700;
-      color: #0f172a;
+      padding: 14px;
       display: flex;
       justify-content: space-between;
       align-items: center;
+      font-size: 13px;
+      font-weight: 700;
+      color: #0f172a;
+      text-align: left;
       cursor: pointer;
     }
     .faq-head-btn .arrow {
@@ -521,87 +622,34 @@
       color: #64748b;
       transition: transform 0.25s ease;
     }
+    .faq-accordion-item.active .arrow {
+      transform: rotate(45deg);
+    }
     .faq-body-text {
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height 0.3s cubic-bezier(0.22, 1, 0.36, 1), padding 0.3s ease;
-      font-size: 13px;
+      display: none;
+      padding: 0 14px 14px;
+      font-size: 12.5px;
       color: #475569;
       line-height: 1.5;
-      padding: 0 16px;
     }
     .faq-accordion-item.active .faq-body-text {
-      max-height: 160px;
-      padding: 0 16px 14px;
-    }
-    .faq-accordion-item.active .faq-head-btn .arrow {
-      transform: rotate(45deg);
-      color: var(--accent-blue);
+      display: block;
     }
 
-    /* Dhruv Rathee Inspired "ABOUT VINAY KOKDA" */
-    .dhruv-about-card {
-      background: linear-gradient(145deg, #091e34 0%, #061524 100%);
-      color: #ffffff;
-      border-radius: 20px;
-      padding: 24px 20px;
-      margin-bottom: 20px;
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
-    }
-    .dhruv-about-subhead {
-      font-size: 12px;
-      font-weight: 800;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      color: #38bdf8;
-      margin-bottom: 4px;
-    }
-    .dhruv-about-title {
-      font-size: 28px;
-      font-weight: 900;
-      line-height: 1.1;
-      letter-spacing: -0.5px;
-      margin-bottom: 8px;
-      color: #ffffff;
-    }
-    .dhruv-about-pill {
-      display: inline-block;
-      background: rgba(56, 189, 248, 0.15);
-      color: #38bdf8;
-      border: 1px solid rgba(56, 189, 248, 0.3);
-      padding: 4px 12px;
-      border-radius: 99px;
-      font-size: 11.5px;
-      font-weight: 700;
-      margin-bottom: 14px;
-    }
-    .dhruv-about-body {
-      display: grid;
-      gap: 10px;
-      font-size: 13px;
-      line-height: 1.6;
-      color: #cbd5e1;
-    }
-    .dhruv-about-body b {
-      color: #ffffff;
-    }
-
-    /* Social Capsule Card - Constrained SVG icons */
+    /* Social Capsule Card (Strictly 44px Buttons) */
     .dhruv-capsule-card {
       background: #f8fafc;
-      border: 1px solid var(--border-light);
-      border-radius: 18px;
+      border: 1.5px solid var(--border-light);
+      border-radius: 20px;
       padding: 16px;
       text-align: center;
-      margin-bottom: 14px;
+      margin-bottom: 16px;
     }
     .dhruv-capsule-title {
-      font-size: 12.5px;
+      font-size: 13px;
       font-weight: 800;
-      color: #475569;
+      color: #334155;
       margin-bottom: 12px;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
     }
     .dhruv-social-icons-row {
       display: flex;
@@ -610,56 +658,68 @@
       gap: 14px;
     }
     .dhruv-round-btn {
-      width: 44px;
-      height: 44px;
-      border-radius: 50%;
-      background: #0f172a;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      color: #ffffff;
-      text-decoration: none;
-      transition: transform 0.15s ease, background 0.15s ease;
-      box-shadow: 0 4px 12px rgba(15, 23, 42, 0.15);
-      flex-shrink: 0;
+      width: 44px !important;
+      height: 44px !important;
+      max-width: 44px !important;
+      max-height: 44px !important;
+      border-radius: 50% !important;
+      background: #0f172a !important;
+      display: inline-flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      color: #ffffff !important;
+      text-decoration: none !important;
+      box-shadow: 0 4px 12px rgba(15, 23, 42, 0.15) !important;
+      transition: transform 0.15s ease, background 0.15s ease !important;
+      flex-shrink: 0 !important;
     }
     .dhruv-round-btn:active {
       transform: scale(0.92);
-      background: var(--accent-blue);
+      background: #0b7cff !important;
     }
     .dhruv-round-btn svg {
-      width: 20px;
-      height: 20px;
-      fill: #ffffff;
+      width: 20px !important;
+      height: 20px !important;
+      max-width: 20px !important;
+      max-height: 20px !important;
+      fill: #ffffff !important;
+      display: block !important;
     }
 
+    /* Stepper Styling */
     .stepper-header-box {
       text-align: center;
-      padding: 16px 16px 4px;
+      padding: 14px 16px 6px;
     }
     .step-counter-tag {
       font-size: 12px;
       font-weight: 800;
-      color: var(--accent-blue);
-      background: #eff6ff;
-      border: 1px solid #bfdbfe;
-      padding: 4px 12px;
-      border-radius: 99px;
-      display: inline-block;
+      color: #64748b;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
     }
     .stepper-progress-row {
       display: flex;
-      justify-content: center;
+      justify-content: space-between;
       align-items: center;
-      gap: 24px;
-      padding: 10px 16px 16px;
+      padding: 10px 32px 18px;
       position: relative;
+    }
+    .stepper-progress-row::before {
+      content: "";
+      position: absolute;
+      top: 25px;
+      left: 50px;
+      right: 50px;
+      height: 2px;
+      background: #e2e8f0;
+      z-index: 1;
     }
     .step-bubble-item {
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 4px;
+      gap: 6px;
       position: relative;
       z-index: 2;
     }
@@ -690,6 +750,7 @@
       color: #0f172a;
     }
 
+    /* Form Wrapper */
     .form-wrapper-card {
       background: #ffffff;
       border: 1.5px solid var(--border-light);
@@ -709,7 +770,6 @@
       color: #64748b;
       margin-bottom: 18px;
     }
-
     .custom-input-group {
       margin-bottom: 14px;
     }
@@ -746,7 +806,6 @@
       margin-top: 4px;
       display: none;
     }
-
     .info-callout-pill {
       background: #eff6ff;
       border: 1px solid #bfdbfe;
@@ -760,7 +819,6 @@
       align-items: flex-start;
       gap: 8px;
     }
-
     .primary-submit-btn {
       width: 100%;
       background: var(--accent-blue);
@@ -820,7 +878,6 @@
       font-size: 13px;
       margin-left: 4px;
     }
-
     .upi-copy-pill {
       display: flex;
       justify-content: space-between;
@@ -848,12 +905,12 @@
       cursor: pointer;
     }
 
+    /* Success Screen & Tactile Spring Pop Badge */
     .success-badge-wrap {
       text-align: center;
       padding: 30px 18px 12px;
       position: relative;
     }
-
     .celebration-ripple-aura {
       position: relative;
       display: inline-flex;
@@ -861,7 +918,6 @@
       justify-content: center;
       margin-bottom: 18px;
     }
-
     .ripple-ring {
       position: absolute;
       inset: -14px;
@@ -872,21 +928,10 @@
       z-index: 1;
     }
     @keyframes ripplePulse {
-      0% {
-        transform: scale(0.85);
-        opacity: 0.8;
-      }
-      50% {
-        transform: scale(1.35);
-        opacity: 0.2;
-      }
-      100% {
-        transform: scale(1.55);
-        opacity: 0;
-      }
+      0% { transform: scale(0.85); opacity: 0.8; }
+      50% { transform: scale(1.35); opacity: 0.2; }
+      100% { transform: scale(1.55); opacity: 0; }
     }
-
-    /* Spring Pop Checkmark Circle matching User's Exact Image */
     .spring-check-badge-card {
       position: relative;
       z-index: 2;
@@ -902,32 +947,17 @@
       will-change: transform;
       animation: springPopEngage 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) both;
     }
-
     @keyframes springPopEngage {
-      0% {
-        opacity: 0;
-        transform: scale(0.2) rotate(-20deg);
-      }
-      45% {
-        transform: scale(1.24) rotate(4deg);
-      }
-      65% {
-        transform: scale(0.92) rotate(-2deg);
-      }
-      82% {
-        transform: scale(1.08) rotate(1deg);
-      }
-      100% {
-        opacity: 1;
-        transform: scale(1) rotate(0deg);
-      }
+      0% { opacity: 0; transform: scale(0.2) rotate(-20deg); }
+      45% { transform: scale(1.24) rotate(4deg); }
+      65% { transform: scale(0.92) rotate(-2deg); }
+      82% { transform: scale(1.08) rotate(1deg); }
+      100% { opacity: 1; transform: scale(1) rotate(0deg); }
     }
-
     .spring-check-svg {
       width: 44px;
       height: 44px;
     }
-
     .spring-check-path {
       stroke: #059669;
       stroke-width: 4.8;
@@ -938,13 +968,9 @@
       stroke-dashoffset: 60;
       animation: drawCheckPath 0.5s cubic-bezier(0.22, 1, 0.36, 1) 0.25s forwards;
     }
-
     @keyframes drawCheckPath {
-      to {
-        stroke-dashoffset: 0;
-      }
+      to { stroke-dashoffset: 0; }
     }
-
     .success-main-headline {
       font-size: 24px;
       font-weight: 900;
@@ -962,7 +988,6 @@
       margin-bottom: 20px;
       border: 1px solid #fde68a;
     }
-
     .booking-summary-card {
       background: #ffffff;
       border: 1.5px solid var(--border-light);
@@ -986,7 +1011,6 @@
       font-weight: 800;
       color: #0f172a;
     }
-
     .btn-choose-slot-cta {
       display: flex;
       align-items: center;
@@ -1008,7 +1032,6 @@
     .btn-choose-slot-cta:active {
       transform: scale(0.97);
     }
-
     .meet-notice-container {
       background: #eff6ff;
       border: 1px solid #bfdbfe;
@@ -1020,6 +1043,7 @@
       color: #1e3a8a;
     }
 
+    /* Modal Styling */
     .app-modal-backdrop {
       position: fixed;
       inset: 0;
@@ -1097,6 +1121,7 @@
 <body>
 
 <main>
+  <!-- Home Top Floating Sticky Bar -->
   <header class="home-top-sticky-header" id="home-sticky-top-bar">
     <div class="top-app-left-group">
       <div class="top-thumb-avatar">
@@ -1110,25 +1135,35 @@
     <button class="top-header-book-btn" onclick="startBooking('Creator Clarity Call', 499)">₹499 →</button>
   </header>
 
+  <!-- View 1: Home Landing Page -->
   <div class="scr-view on" id="view-home">
     
-    <!-- Dark Hero Top Banner -->
+    <!-- Hero Dark Banner -->
     <section class="creator-hero-banner">
       <div class="avatar-circle-wrap">
         <img id="creator-avatar-img" src="profile.png" alt="Vinay Kokda" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
         <span style="display:none;">VK</span>
       </div>
       <h1 class="creator-title-name">Vinay Kokda</h1>
+
+      <!-- Authentic Blue Verified Badge (Subtly compact) -->
+      <div class="creator-verified-badge">
+        <svg class="verified-check-icon" viewBox="0 0 24 24">
+          <path fill="#0095f6" d="M22.5 12.5c0-1.58-.88-2.95-2.15-3.6.15-.44.24-.91.24-1.4 0-2.21-1.79-4-4-4-.49 0-.96.08-1.4.24C14.55 2.48 13.18 1.6 11.6 1.6c-1.58 0-2.95.88-3.6 2.15-.44-.15-.91-.24-1.4-.24-2.21 0-4 1.79-4 4 0 .49.08.96.24 1.4C1.58 10.45.7 11.82.7 13.4c0 1.58.88 2.95 2.15 3.6-.15.44-.24.91-.24 1.4 0 2.21 1.79 4 4 4 .49 0 .96-.08 1.4-.24 1.05 1.27 2.42 2.15 4 2.15 1.58 0 2.95-.88 3.6-2.15.44.15.91.24 1.4.24 2.21 0 4-1.79 4-4 0-.49-.08-.96-.24-1.4 1.27-1.05 2.15-2.42 2.15-4zM10.2 16.6l-3.8-3.8 1.4-1.4 2.4 2.4 6.4-6.4 1.4 1.4-7.8 7.8z"/>
+        </svg>
+        <span>Verified Creator</span>
+      </div>
+
       <p class="creator-sub-tagline">Let's fix your content &amp; channel direction, together!</p>
     </section>
 
-    <!-- White Sheet Body -->
+    <!-- White Sheet Container -->
     <section class="sheet-content-container">
       <h2 class="section-label-headline">1-on-1 session</h2>
 
-      <!-- Single Primary Card: Creator Clarity Call -->
+      <!-- Card 1: Primary 1-on-1 Swati-styled Card -->
       <div class="session-swati-card scroll-anim">
-        <!-- Top-Right Corner: ONLY Active Status -->
+        <!-- Top-Right Corner ONLY Active Status -->
         <div class="card-top-active-corner">
           <span class="green-live-pulse-dot"></span>
           <span>Active</span>
@@ -1153,7 +1188,7 @@
             </span>
           </div>
 
-          <!-- Right Action: Rating Badge directly on top of the Payment Button -->
+          <!-- Centered Rating Badge Directly Above Shimmering Action Button -->
           <div class="action-right-wrap">
             <div class="btn-top-rating-badge">
               <span>⭐ 8.2/10</span>
@@ -1165,7 +1200,7 @@
         </div>
       </div>
 
-      <!-- Takeaways Bullets -->
+      <!-- Card 2: Takeaways Bullets -->
       <div class="expectations-card scroll-anim">
         <h4>You'll leave the call with:</h4>
         <ul class="swati-bullet-list">
@@ -1177,54 +1212,9 @@
         </ul>
       </div>
 
-      <!-- FAQs Accordion -->
-      <div class="faq-wrap-box scroll-anim">
-        <h4><span>💡</span> Aksar pooche jaane wale sawal</h4>
-
-        <div class="faq-accordion-item" onclick="toggleFaq(this)">
-          <button class="faq-head-btn" type="button">
-            <span>Payment kaise karna hai?</span>
-            <span class="arrow">+</span>
-          </button>
-          <div class="faq-body-text">
-            Aap QR code scan karke ya UPI ID copy karke ₹499 fee pay karke 12-digit UTR enter kar sakte hain.
-          </div>
-        </div>
-
-        <div class="faq-accordion-item" onclick="toggleFaq(this)">
-          <button class="faq-head-btn" type="button">
-            <span>Slot kaise book hoga?</span>
-            <span class="arrow">+</span>
-          </button>
-          <div class="faq-body-text">
-            Payment confirm hote hi direct Cal.com open hoga jahan aap apna manpasand date aur live slot chun sakenge.
-          </div>
-        </div>
-
-        <div class="faq-accordion-item" onclick="toggleFaq(this)">
-          <button class="faq-head-btn" type="button">
-            <span>Google Meet link kab milega?</span>
-            <span class="arrow">+</span>
-          </button>
-          <div class="faq-body-text">
-            Slot select hone ke baad team verification karke meeting link aapke WhatsApp number ya Gmail par bhej degi, jis din ka slot hai usi din morning me.
-          </div>
-        </div>
-
-        <div class="faq-accordion-item" onclick="toggleFaq(this)">
-          <button class="faq-head-btn" type="button">
-            <span>Refund policy kya hai?</span>
-            <span class="arrow">+</span>
-          </button>
-          <div class="faq-body-text">
-            Yeh slot reservation fee hai, isliye payment ke baad refund nahi hoga. Kripya details dhyan se bharein.
-          </div>
-        </div>
-      </div>
-
-      <!-- Dhruv Rathee Inspired "ABOUT VINAY KOKDA" -->
+      <!-- Card 3: Authentic Navy About Card Matching Photo Reference -->
       <div class="dhruv-about-card scroll-anim">
-        <div class="dhruv-about-subhead">About</div>
+        <div class="dhruv-about-subhead">ABOUT</div>
         <h3 class="dhruv-about-title">VINAY<br>KOKDA</h3>
         <div class="dhruv-about-pill">Content Creator &amp; Strategist</div>
         
@@ -1234,7 +1224,52 @@
         </div>
       </div>
 
-      <!-- Dhruv Rathee "Find Vinay Kokda on:" Capsule with Exact User Links -->
+      <!-- Card 4: FAQs Accordion with User's Exact Answers -->
+      <div class="faq-wrap-box scroll-anim">
+        <h4><span>💡</span> Aksar pooche jaane wale sawal</h4>
+
+        <div class="faq-accordion-item" onclick="toggleFaq(this)">
+          <button class="faq-head-btn" type="button">
+            <span>Payment kaise karna hai?</span>
+            <span class="arrow">+</span>
+          </button>
+          <div class="faq-body-text">
+            Aap QR code scan karke ya UPI ID copy karke ₹499 fee pay karein, fir uske baad apna 12-digit UTR number enter kar dein.
+          </div>
+        </div>
+
+        <div class="faq-accordion-item" onclick="toggleFaq(this)">
+          <button class="faq-head-btn" type="button">
+            <span>Slot kaise book hoga?</span>
+            <span class="arrow">+</span>
+          </button>
+          <div class="faq-body-text">
+            UTR number confirmation karte hi direct 'Apna Slot Chuno' open hoga jahan aap apna manpasand date aur time chun sakte hain.
+          </div>
+        </div>
+
+        <div class="faq-accordion-item" onclick="toggleFaq(this)">
+          <button class="faq-head-btn" type="button">
+            <span>Google Meet link kab milega?</span>
+            <span class="arrow">+</span>
+          </button>
+          <div class="faq-body-text">
+            Slot select hone ke baad team verification karke call link aapke WhatsApp ya Gmail par bhej degi, jis din ka slot hoga usi din morning me.
+          </div>
+        </div>
+
+        <div class="faq-accordion-item" onclick="toggleFaq(this)">
+          <button class="faq-head-btn" type="button">
+            <span>Refund policy kya hai?</span>
+            <span class="arrow">+</span>
+          </button>
+          <div class="faq-body-text">
+            Yeh 1-on-1 slot reservation fee hai, isliye payment ke baad refund nahi hoga. Kripya apni details aur slot timing dhyan se check karke hi confirm karein.
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 5: Social Capsule (Strictly 44px Buttons) -->
       <div class="dhruv-capsule-card scroll-anim">
         <div class="dhruv-capsule-title">Find Vinay Kokda on:</div>
         <div class="dhruv-social-icons-row">
@@ -1256,11 +1291,14 @@
     </section>
   </div>
 
+  <!-- View 2: Step 1 (Details Form) -->
   <div class="scr-view" id="view-details">
     <div class="top-app-header-bar">
       <div class="top-app-left-group">
         <button class="top-back-circle-btn" onclick="showView('view-home', 'backward')">←</button>
-        <div class="top-thumb-avatar">VK</div>
+        <div class="top-thumb-avatar">
+          <img src="profile.png" alt="Vinay Kokda" onerror="this.style.display='none'; this.parentNode.textContent='VK';">
+        </div>
         <div class="top-header-session-info">
           <span class="top-header-title">Creator Clarity Call</span>
           <span class="top-header-subtitle">Vinay Kokda • 28 mins</span>
@@ -1328,11 +1366,14 @@
     </footer>
   </div>
 
+  <!-- View 3: Step 2 (Payment & Verification) -->
   <div class="scr-view" id="view-payment">
     <div class="top-app-header-bar">
       <div class="top-app-left-group">
         <button class="top-back-circle-btn" onclick="showView('view-details', 'backward')">←</button>
-        <div class="top-thumb-avatar">VK</div>
+        <div class="top-thumb-avatar">
+          <img src="profile.png" alt="Vinay Kokda" onerror="this.style.display='none'; this.parentNode.textContent='VK';">
+        </div>
         <div class="top-header-session-info">
           <span class="top-header-title">Payment &amp; Verification</span>
           <span class="top-header-subtitle">Vinay Kokda • Step 2</span>
@@ -1392,11 +1433,14 @@
     </footer>
   </div>
 
+  <!-- View 4: Step 3 (Success Screen) -->
   <div class="scr-view" id="view-success">
     <div class="top-app-header-bar">
       <div class="top-app-left-group">
         <button class="top-back-circle-btn" onclick="showView('view-home', 'backward')">←</button>
-        <div class="top-thumb-avatar">VK</div>
+        <div class="top-thumb-avatar">
+          <img src="profile.png" alt="Vinay Kokda" onerror="this.style.display='none'; this.parentNode.textContent='VK';">
+        </div>
         <div class="top-header-session-info">
           <span class="top-header-title">Booking Verified</span>
           <span class="top-header-subtitle">Vinay Kokda Mentorship</span>
@@ -1535,7 +1579,7 @@ window.addEventListener('scroll', function() {
   }
 }, { passive: true });
 
-// Scroll Reveal Intersection Observer for Home Page
+// Continuous Scroll Reveal: Re-triggers every time you scroll up or down!
 function initScrollObserver() {
   if (!('IntersectionObserver' in window)) {
     var allAnim = document.querySelectorAll('.scroll-anim');
@@ -1547,11 +1591,14 @@ function initScrollObserver() {
     entries.forEach(function(entry) {
       if (entry.isIntersecting) {
         entry.target.classList.add('revealed');
+      } else {
+        // Remove class when out of view so animation triggers again on next scroll!
+        entry.target.classList.remove('revealed');
       }
     });
   }, {
-    threshold: 0.1,
-    rootMargin: "0px 0px -30px 0px"
+    threshold: 0.12,
+    rootMargin: "0px 0px -25px 0px"
   });
 
   document.querySelectorAll('.scroll-anim').forEach(function(el) {
@@ -1584,7 +1631,6 @@ function playSuccessChime() {
     }
 
     var now = ctx.currentTime;
-    // Pleasant 4-note ascending triumphant shimmer (C5, E5, G5, C6) with warm bell harmonics
     playTone(523.25, now + 0.01, 0.45, 0.22, 'sine');
     playTone(659.25, now + 0.10, 0.50, 0.24, 'triangle');
     playTone(783.99, now + 0.18, 0.60, 0.28, 'sine');
@@ -1704,7 +1750,6 @@ function submitDetailsForm() {
   $("m-phone").textContent = "+91 " + appData.phone;
   $("m-yt").textContent = appData.yt || "None";
 
-  // Reset checkbox to unchecked and disable button
   var chkDetails = $("chk-confirm-details");
   var btnDetails = $("btn-proceed-details");
   if (chkDetails) chkDetails.checked = false;
@@ -1736,7 +1781,6 @@ function submitUtrVerification() {
   appData.utr = utr;
   $("m-utr").textContent = utr;
 
-  // Reset checkbox to unchecked and disable button
   var chkUtr = $("chk-confirm-utr");
   var btnUtr = $("btn-proceed-utr");
   if (chkUtr) chkUtr.checked = false;
@@ -1752,7 +1796,6 @@ function finalizeBookingWithUtr() {
   }
   $("modal-utr-check").classList.remove("active");
 
-  // Format prefilled Cal.com link with buyer's information
   currentCalPrefillUrl = CAL_BASE_URL + 
     "?name=" + encodeURIComponent(appData.name) + 
     "&email=" + encodeURIComponent(appData.email) + 
@@ -1767,35 +1810,31 @@ function finalizeBookingWithUtr() {
 
   showView("view-success", "forward");
 
-  // Re-trigger spring bounce pop & stroke draw animation
   var checkBadge = $("success-check-badge");
   var checkPath = $("svg-check-path");
   if (checkBadge) {
     checkBadge.style.animation = 'none';
-    checkBadge.offsetHeight; /* trigger reflow */
+    checkBadge.offsetHeight;
     checkBadge.style.animation = 'springPopEngage 0.75s cubic-bezier(0.34, 1.56, 0.64, 1) both';
   }
   if (checkPath) {
     checkPath.style.animation = 'none';
-    checkPath.offsetHeight; /* trigger reflow */
+    checkPath.offsetHeight;
     checkPath.style.animation = 'drawCheckPath 0.5s cubic-bezier(0.22, 1, 0.36, 1) 0.22s forwards';
   }
 
-  // Play engaging triumphant tune immediately upon confirmation
   playSuccessChime();
 }
 
 function openCalUrl() {
   if (currentCalPrefillUrl) {
     var win = window.open(currentCalPrefillUrl, "_blank");
-    // Fallback if popup blocker catches window.open
     if (!win || win.closed || typeof win.closed === "undefined") {
       window.location.href = currentCalPrefillUrl;
     }
   }
 }
 
-// Initialize on DOM load
 window.addEventListener('DOMContentLoaded', function() {
   initScrollObserver();
 });
