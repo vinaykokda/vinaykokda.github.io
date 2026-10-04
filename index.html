@@ -48,12 +48,33 @@
       position: relative;
     }
 
+    /* 1. Smooth Fade-In-Up Page Transitions */
+    .screen-panel {
+      display: none;
+      opacity: 0;
+      transform: translateY(12px);
+      transition: opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1), transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .screen-panel.active {
+      display: block;
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* 2. Micro-interactions: Tap Bounce Feedback */
+    button, .slot-card-opt, .date-pill-opt, .faq-q, .pay-app-tile {
+      transition: transform 0.14s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+    }
+    button:active, .slot-card-opt:not(.locked-slot):active, .date-pill-opt:active {
+      transform: scale(0.965);
+    }
+
     /* Top Header */
     .home-top-header {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 12px;
+      margin-bottom: 14px;
       padding: 0 4px;
     }
     .header-secret-trigger {
@@ -64,22 +85,43 @@
       user-select: none;
       display: inline-flex;
       align-items: center;
-      gap: 6px;
-      transition: opacity 0.2s;
+      gap: 7px;
     }
     .header-secret-trigger:active {
-      opacity: 0.7;
+      opacity: 0.6;
+    }
+
+    /* Radar Pulse Animation on Online Indicator */
+    .pulse-wrapper {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 10px;
+      height: 10px;
+    }
+    .radar-pulse-ring {
+      position: absolute;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: rgba(16, 185, 129, 0.4);
+      animation: radarPing 2.2s cubic-bezier(0, 0, 0.2, 1) infinite;
+    }
+    @keyframes radarPing {
+      0% { transform: scale(0.6); opacity: 0.9; }
+      80%, 100% { transform: scale(2.4); opacity: 0; }
     }
     .online-dot-mini {
-      width: 7px;
-      height: 7px;
+      width: 7.5px;
+      height: 7.5px;
       border-radius: 50%;
       background: #10b981;
       box-shadow: 0 0 8px #10b981;
-      display: inline-block;
+      z-index: 2;
     }
 
-    /* Dark Cards & Common Containers */
+    /* Cards & Containers */
     .dark-card {
       background: var(--card-dark);
       border: 1px solid var(--border-dark);
@@ -87,6 +129,7 @@
       padding: 24px 20px;
       margin-bottom: 14px;
       box-shadow: 0 10px 30px -10px rgba(0,0,0,0.6);
+      position: relative;
     }
     .hero {
       text-align: center;
@@ -98,14 +141,14 @@
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      padding: 6px 14px;
+      padding: 6.5px 15px;
       border-radius: 99px;
       background: rgba(245, 158, 11, 0.1);
       border: 1px solid rgba(245, 158, 11, 0.35);
       color: var(--gold-primary);
       font-size: 12px;
       font-weight: 800;
-      margin-bottom: 16px;
+      margin-bottom: 18px;
     }
     .slot-dot {
       width: 8px;
@@ -113,13 +156,18 @@
       border-radius: 50%;
       background: #10b981;
       box-shadow: 0 0 10px #10b981;
+      animation: blinkDot 2s ease-in-out infinite;
+    }
+    @keyframes blinkDot {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.4; }
     }
 
-    /* Glowing Rotating Avatar */
+    /* Avatar with Breathing Aura + Conic Spin Ring */
     .avatar-ring-container {
       position: relative;
-      width: 134px;
-      height: 134px;
+      width: 136px;
+      height: 136px;
       margin: 0 auto 16px;
       display: flex;
       align-items: center;
@@ -127,21 +175,34 @@
       cursor: pointer;
       user-select: none;
     }
+    .avatar-breathing-aura {
+      position: absolute;
+      inset: -6px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(245, 158, 11, 0.45) 0%, rgba(245, 158, 11, 0) 70%);
+      animation: auraPulse 3.5s ease-in-out infinite;
+      z-index: 1;
+    }
+    @keyframes auraPulse {
+      0%, 100% { transform: scale(0.94); opacity: 0.45; }
+      50% { transform: scale(1.12); opacity: 0.85; }
+    }
     .ring-spin {
       position: absolute;
       inset: 0;
       border-radius: 50%;
       background: conic-gradient(#f59e0b, #fde047, #38bdf8, #f59e0b);
-      animation: spin 7s linear infinite;
+      animation: spin 7.5s linear infinite;
+      z-index: 2;
     }
     @keyframes spin {
       to { transform: rotate(360deg); }
     }
     .avatar-inner {
       position: relative;
-      z-index: 2;
-      width: 122px;
-      height: 122px;
+      z-index: 3;
+      width: 124px;
+      height: 124px;
       border-radius: 50%;
       background: #000000;
       border: 3.5px solid var(--card-dark);
@@ -149,7 +210,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+      box-shadow: 0 6px 18px rgba(0,0,0,0.5);
     }
     .avatar-inner img {
       width: 100%;
@@ -167,8 +228,8 @@
       border-radius: 50%;
       background: #10b981;
       border: 3.5px solid var(--card-dark);
-      box-shadow: 0 0 8px #10b981;
-      z-index: 3;
+      box-shadow: 0 0 10px #10b981;
+      z-index: 4;
     }
 
     .creator-handle-tag {
@@ -187,8 +248,8 @@
     }
 
     .hero-title {
-      font-size: 24px;
-      line-height: 1.34;
+      font-size: 24.5px;
+      line-height: 1.35;
       font-weight: 900;
       color: #ffffff;
       margin-bottom: 12px;
@@ -200,7 +261,7 @@
       -webkit-text-fill-color: transparent;
     }
     .call-duration-sub {
-      font-size: 13px;
+      font-size: 13.2px;
       font-weight: 600;
       color: #cbd5e1;
       line-height: 1.5;
@@ -216,7 +277,7 @@
     .chip-pill {
       font-size: 11.5px;
       font-weight: 700;
-      padding: 6px 12px;
+      padding: 6.5px 12.5px;
       border-radius: 99px;
       background: rgba(255, 255, 255, 0.05);
       border: 1px solid rgba(255, 255, 255, 0.1);
@@ -250,8 +311,8 @@
       display: flex;
       align-items: flex-start;
       gap: 10px;
-      font-size: 12.8px;
-      line-height: 1.45;
+      font-size: 13px;
+      line-height: 1.48;
       color: #e2e8f0;
       font-weight: 600;
     }
@@ -307,7 +368,7 @@
       color: #ffffff;
     }
 
-    /* FAQ */
+    /* FAQ with Smooth CSS Transition */
     .faq-section {
       background: var(--card-dark);
       border: 1px solid var(--border-dark);
@@ -316,12 +377,13 @@
     }
     .faq-item {
       border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-      padding-bottom: 12px;
-      margin-bottom: 12px;
+      padding: 12px 0;
+    }
+    .faq-item:first-child {
+      padding-top: 0;
     }
     .faq-item:last-child {
       border-bottom: none;
-      margin-bottom: 0;
       padding-bottom: 0;
     }
     .faq-q {
@@ -337,23 +399,30 @@
       color: var(--gold-primary);
       font-size: 16px;
       font-weight: 800;
-      transition: transform 0.2s;
+      transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1);
     }
-    .faq-a {
-      font-size: 12.5px;
+    .faq-a-wrapper {
+      display: grid;
+      grid-template-rows: 0fr;
+      transition: grid-template-rows 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .faq-a-inner {
+      overflow: hidden;
+      font-size: 12.8px;
       line-height: 1.55;
       color: var(--text-muted);
-      margin-top: 8px;
-      display: none;
     }
-    .faq-item.active .faq-a {
-      display: block;
+    .faq-item.active .faq-a-wrapper {
+      grid-template-rows: 1fr;
+    }
+    .faq-item.active .faq-a-inner {
+      padding-top: 8px;
     }
     .faq-item.active .faq-icon {
       transform: rotate(45deg);
     }
 
-    /* Bottom Sticky Bar */
+    /* 3. Sticky Bottom Bar with Periodic Shimmer/Shine Wave */
     .bottom-sticky-bar {
       position: fixed;
       bottom: 14px;
@@ -383,7 +452,9 @@
       color: var(--gold-primary);
       font-weight: 700;
     }
+
     .btn-book-gold {
+      position: relative;
       background: linear-gradient(90deg, #f59e0b, #fbbf24);
       color: #090e1a;
       border: none;
@@ -393,23 +464,28 @@
       font-weight: 800;
       cursor: pointer;
       box-shadow: 0 4px 15px rgba(245, 158, 11, 0.35);
-      transition: transform 0.15s;
+      overflow: hidden;
     }
-    .btn-book-gold:active {
-      transform: scale(0.97);
+    /* Periodic Shimmer Light Sweep */
+    .btn-book-gold::after {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -120%;
+      width: 70%;
+      height: 200%;
+      background: linear-gradient(
+        60deg,
+        rgba(255, 255, 255, 0) 20%,
+        rgba(255, 255, 255, 0.55) 50%,
+        rgba(255, 255, 255, 0) 80%
+      );
+      transform: rotate(25deg);
+      animation: shimmerWave 4s cubic-bezier(0.4, 0, 0.2, 1) infinite;
     }
-
-    /* Screen Panels */
-    .screen-panel {
-      display: none;
-      animation: fadeIn 0.25s ease-out;
-    }
-    .screen-panel.active {
-      display: block;
-    }
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(6px); }
-      to { opacity: 1; transform: translateY(0); }
+    @keyframes shimmerWave {
+      0%, 65% { left: -120%; }
+      100% { left: 160%; }
     }
 
     /* Wizard White Cards */
@@ -524,7 +600,7 @@
       font-weight: 800;
     }
 
-    /* Relocated Metrics Strip on Session Page */
+    /* Relocated High-Converting Rating & Metrics Strip on Session Page */
     .session-metrics-box {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -601,7 +677,7 @@
       padding: 12px 6px;
       text-align: center;
       cursor: pointer;
-      transition: all 0.15s ease;
+      background: #ffffff;
     }
     .date-pill-opt.selected {
       border-color: #0b7cff;
@@ -640,14 +716,14 @@
       border: 1.5px solid #e2e8f0;
       border-radius: 16px;
       cursor: pointer;
-      transition: all 0.15s ease;
+      background: #ffffff;
     }
     .slot-card-opt.selected {
       border-color: #0b7cff;
       background: #eff6ff;
     }
     .slot-card-opt.locked-slot {
-      opacity: 0.55;
+      opacity: 0.5;
       background: #f8fafc;
       border-color: #cbd5e1;
       cursor: not-allowed;
@@ -910,10 +986,22 @@
       text-align: left;
     }
 
-    /* Success Step */
+    /* 4. Celebratory Checkmark Pop & Micro-Bounce Animation */
     .success-card-content {
       text-align: center;
     }
+    .celebration-pop-icon {
+      font-size: 50px;
+      margin-bottom: 8px;
+      display: inline-block;
+      animation: checkmarkPop 0.65s cubic-bezier(0.175, 0.885, 0.32, 1.275) both;
+    }
+    @keyframes checkmarkPop {
+      0% { transform: scale(0) rotate(-45deg); opacity: 0; }
+      70% { transform: scale(1.22) rotate(6deg); }
+      100% { transform: scale(1) rotate(0deg); opacity: 1; }
+    }
+
     .status-pill-amber {
       display: inline-flex;
       align-items: center;
@@ -953,9 +1041,7 @@
       justify-content: center;
       gap: 8px;
       margin-top: 10px;
-    }
-    .btn-whatsapp-team:active {
-      transform: scale(0.98);
+      box-shadow: 0 4px 14px rgba(22, 163, 74, 0.3);
     }
 
     .copy-toast {
@@ -1084,18 +1170,22 @@
     <div class="home-top-header">
       <div class="header-secret-trigger" id="secret-admin-trigger">
         <span>@vinaykokda</span>
-        <span class="online-dot-mini"></span>
+        <div class="pulse-wrapper">
+          <div class="radar-pulse-ring"></div>
+          <div class="online-dot-mini"></div>
+        </div>
       </div>
       <div style="font-size: 12px; color: #64748b; font-weight: 700;">1-on-1 Mentorship</div>
     </div>
 
-    <!-- Hero Card with Profile Avatar -->
+    <!-- Hero Card with Avatar Breathing Aura -->
     <div class="dark-card hero">
       <div class="slot-badge-top">
         <span class="slot-dot"></span> Sirf 3 slots roz • Mon–Fri
       </div>
 
       <div class="avatar-ring-container" id="avatar-secret-trigger" title="Vinay Kokda Profile">
+        <div class="avatar-breathing-aura"></div>
         <div class="ring-spin"></div>
         <div class="avatar-inner">
           <img src="profile.png" 
@@ -1174,22 +1264,46 @@
       </div>
     </div>
 
-    <!-- FAQ -->
+    <!-- FAQ Accordion -->
     <div class="faq-section">
-      <h3 class="faq-title" style="margin-bottom:14px;">
+      <h3 class="faq-title" style="margin-bottom:14px; font-size:15.5px; font-weight:800; color:#fff;">
         <span>💡</span> Aksar pooche jaane wale sawal
       </h3>
+      
       <div class="faq-item">
-        <div class="faq-q">Payment kaise karna hai? <span class="faq-icon">+</span></div>
-        <div class="faq-a">Aap official QR code scan karke UPI ID (meena.inn@fam) par kisi bhi UPI app se ₹1 fee pay karke 12-digit UTR enter kar sakte hain.</div>
+        <div class="faq-q">
+          <span>Payment kaise karna hai?</span>
+          <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-a-wrapper">
+          <div class="faq-a-inner">
+            Aap official QR code scan karke UPI ID (meena.inn@fam) par kisi bhi UPI app se ₹1 fee pay karke 12-digit UTR enter kar sakte hain.
+          </div>
+        </div>
       </div>
+
       <div class="faq-item">
-        <div class="faq-q">Meet link kab milega? <span class="faq-icon">+</span></div>
-        <div class="faq-a">Payment verify hone ke baad session wale din morning me aapke WhatsApp number aur Gmail par direct Google Meet link bhej diya jayega.</div>
+        <div class="faq-q">
+          <span>Meet link kab milega?</span>
+          <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-a-wrapper">
+          <div class="faq-a-inner">
+            Payment verify hone ke baad session wale din morning me aapke WhatsApp number aur Gmail par direct Google Meet link bhej diya jayega.
+          </div>
+        </div>
       </div>
+
       <div class="faq-item">
-        <div class="faq-q">Refund policy kya hai? <span class="faq-icon">+</span></div>
-        <div class="faq-a">Yeh slot locking consultation fee hai, isliye payment ke baad refund nahi hoga. Kripya details dhyan se bharein.</div>
+        <div class="faq-q">
+          <span>Refund policy kya hai?</span>
+          <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-a-wrapper">
+          <div class="faq-a-inner">
+            Yeh slot locking consultation fee hai, isliye payment ke baad refund nahi hoga. Kripya details dhyan se bharein.
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -1219,7 +1333,7 @@
         <div class="session-point-item"><span class="chk">✓</span><div>Hook analysis & fixing viewer retention drop-offs</div></div>
         <div class="session-point-item"><span class="chk">✓</span><div>Sustainable posting system that avoids creative burnout</div></div>
 
-        <!-- RELOCATED RATINGS & METRICS STRIP ABOVE CTA -->
+        <!-- RELOCATED RATINGS & METRICS STRIP ABOVE PRICING -->
         <div class="session-metrics-box">
           <div class="session-metric-cell">
             <b>⭐ 4.4/5</b>
@@ -1261,7 +1375,7 @@
       <div class="slot-choice-grid">
         <div class="slot-card-opt selected" data-slot="11:30 AM" id="slot-card-1130">
           <div>
-            <div class="time-title">11:30 AM Slot</div>
+            <div class="time-title" style="font-size:14.5px; font-weight:800; color:#0f172a;">11:30 AM Slot</div>
             <div style="font-size:12px; color:#64748b; margin-top:2px;">11:30 AM – 11:58 AM (28 mins)</div>
           </div>
           <span class="time-tag" id="tag-1130">Morning</span>
@@ -1269,7 +1383,7 @@
 
         <div class="slot-card-opt" data-slot="07:15 PM" id="slot-card-0715">
           <div>
-            <div class="time-title">07:15 PM Slot</div>
+            <div class="time-title" style="font-size:14.5px; font-weight:800; color:#0f172a;">07:15 PM Slot</div>
             <div style="font-size:12px; color:#64748b; margin-top:2px;">07:15 PM – 07:43 PM (28 mins)</div>
           </div>
           <span class="time-tag" id="tag-0715">Evening</span>
@@ -1277,7 +1391,7 @@
 
         <div class="slot-card-opt" data-slot="09:00 PM" id="slot-card-0900">
           <div>
-            <div class="time-title">09:00 PM Slot</div>
+            <div class="time-title" style="font-size:14.5px; font-weight:800; color:#0f172a;">09:00 PM Slot</div>
             <div style="font-size:12px; color:#64748b; margin-top:2px;">09:00 PM – 09:28 PM (28 mins)</div>
           </div>
           <span class="time-tag" id="tag-0900">Night</span>
@@ -1368,7 +1482,7 @@
         <button class="btn-home-nav-chip nav-to-home-btn">🏠 Home</button>
       </div>
 
-      <div style="font-size: 44px; margin-bottom: 8px;">✅</div>
+      <div class="celebration-pop-icon">✅</div>
       <h2 class="wizard-title" style="margin-bottom: 8px;">Booking Confirmed</h2>
       <div class="status-pill-amber">⏳ Pending Verification by Vinay Kokda</div>
 
@@ -1528,10 +1642,15 @@ function isSlotApprovedAndLocked(dateStr, slotTime) {
   return list.some(b => b.dateStr === dateStr && b.slotTime === slotTime && b.status === 'Approved');
 }
 
+// Animated Screen Switcher
 function switchScreen(screenId) {
-  document.querySelectorAll('.screen-panel').forEach(s => s.classList.remove('active'));
+  const panels = document.querySelectorAll('.screen-panel');
+  panels.forEach(s => s.classList.remove('active'));
+
   const target = document.getElementById(screenId);
-  if (target) target.classList.add('active');
+  if (target) {
+    target.classList.add('active');
+  }
   
   const stickyBar = document.getElementById('sticky-home-bar');
   if (stickyBar) {
@@ -1545,6 +1664,7 @@ document.querySelectorAll('.nav-to-home-btn').forEach(btn => {
   btn.addEventListener('click', () => switchScreen('screen-home'));
 });
 
+// Calendar Rolling 3 Days Setup
 function initCalendar() {
   const container = document.getElementById('date-buttons-container');
   container.innerHTML = '';
@@ -1636,8 +1756,16 @@ document.querySelectorAll('.slot-card-opt').forEach(slotEl => {
   });
 });
 
+// FAQ Accordion Toggle
 document.querySelectorAll('.faq-q').forEach(q => {
-  q.addEventListener('click', () => q.closest('.faq-item').classList.toggle('active'));
+  q.addEventListener('click', () => {
+    const parent = q.closest('.faq-item');
+    const wasActive = parent.classList.contains('active');
+    document.querySelectorAll('.faq-item').forEach(item => item.classList.remove('active'));
+    if (!wasActive) {
+      parent.classList.add('active');
+    }
+  });
 });
 
 // Navigation Flow
@@ -1766,6 +1894,7 @@ document.getElementById('btn-utr-confirm-ok').addEventListener('click', function
   switchScreen('screen-step4');
 });
 
+// Single WhatsApp Group Dispatch with Clipboard Copy
 document.getElementById('btn-send-whatsapp-group').addEventListener('click', function() {
   const dispatchText = 
 `*New 28-Min Mentorship Booking!*
