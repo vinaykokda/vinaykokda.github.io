@@ -2,105 +2,136 @@
 <html lang="hi">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Vinay Kokda | 28-Min 1-on-1 Mentorship</title>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800;900&display=swap" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>Vinay Kokda | 28-Min 1-on-1 Creator Mentorship</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
   <style>
     :root {
       --bg-dark: #060913;
       --card-dark: #0e1626;
-      --gold-primary: #f59e0b;
+      --card-dark-subtle: #131c31;
       --text-white: #f8fafc;
+      --text-muted: #94a3b8;
+      --gold-primary: #f59e0b;
+      --gold-glow: #fbbf24;
+      --border-dark: rgba(255, 255, 255, 0.08);
       --accent-blue: #0b7cff;
       --whatsapp-green: #16a34a;
     }
-    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Plus Jakarta Sans', sans-serif; }
-    body { background: var(--bg-dark); color: var(--text-white); padding: 14px 14px 100px; min-height: 100vh; display: flex; justify-content: center; }
-    .app-wrapper { width: 100%; max-width: 440px; }
-    .screen-panel { display: none; }
-    .screen-panel.active { display: block; }
-    .dark-card { background: var(--card-dark); border: 1px solid rgba(255,255,255,0.08); border-radius: 26px; padding: 24px 20px; margin-bottom: 14px; text-align: center; }
-    .hero-title { font-size: 22px; font-weight: 900; margin-bottom: 12px; }
-    .hero-title span { color: var(--gold-primary); }
-    .mini-social-row { display: flex; justify-content: center; gap: 8px; margin-bottom: 14px; }
-    .mini-social-badge { display: inline-flex; align-items: center; gap: 5px; text-decoration: none; padding: 6px 14px; border-radius: 99px; font-size: 11.5px; font-weight: 700; color: #cbd5e1; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); }
-    .btn-book-gold { background: linear-gradient(90deg, #f59e0b, #fbbf24); color: #090e1a; border: none; padding: 12px 24px; border-radius: 99px; font-size: 14px; font-weight: 800; cursor: pointer; width: 100%; margin-top: 20px; }
-    .wizard-white-card { background: #ffffff; color: #0f172a; border-radius: 28px; padding: 24px 20px; }
-    .input-group { margin-bottom: 14px; text-align: left; }
-    .input-label { display: block; font-size: 13px; font-weight: 700; color: #334155; margin-bottom: 6px; }
-    .text-input-field { width: 100%; padding: 13px 14px; border-radius: 14px; border: 1.5px solid #cbd5e1; font-size: 14px; color: #0f172a; outline: none; }
-    .btn-primary-blue { width: 100%; padding: 15px; border: none; border-radius: 16px; background: var(--accent-blue); color: #ffffff; font-size: 14.5px; font-weight: 800; cursor: pointer; margin-top: 10px; }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Plus Jakarta Sans', sans-serif; -webkit-tap-highlight-color: transparent; }
+
+    body {
+      background: var(--bg-dark);
+      color: var(--text-white);
+      padding: 14px 14px 120px;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      overflow-x: hidden;
+    }
+
+    .app-wrapper { width: 100%; max-width: 440px; position: relative; }
+    .screen-panel { display: none; opacity: 0; transform: translateY(18px); }
+    .screen-panel.active { display: block; animation: slideUpFadeIn 0.32s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+    @keyframes slideUpFadeIn { 0% { opacity: 0; transform: translateY(18px); } 100% { opacity: 1; transform: translateY(0); } }
+
+    .home-top-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; padding: 0 4px; }
+    .header-secret-trigger { font-size: 13.5px; font-weight: 700; color: #94a3b8; display: inline-flex; align-items: center; gap: 7px; }
+    
+    .pulse-wrapper { position: relative; display: inline-flex; align-items: center; justify-content: center; width: 10px; height: 10px; }
+    .radar-pulse-ring { position: absolute; width: 18px; height: 18px; border-radius: 50%; background: rgba(16, 185, 129, 0.45); animation: radarPing 2.2s infinite; }
+    @keyframes radarPing { 0% { transform: scale(0.6); opacity: 0.95; } 80%, 100% { transform: scale(2.4); opacity: 0; } }
+    .online-dot-mini { width: 7.5px; height: 7.5px; border-radius: 50%; background: #10b981; box-shadow: 0 0 8px #10b981; z-index: 2; }
+
+    .dark-card { background: var(--card-dark); border: 1px solid var(--border-dark); border-radius: 26px; padding: 24px 20px; margin-bottom: 14px; box-shadow: 0 10px 30px -10px rgba(0,0,0,0.6); position: relative; }
+    .hero { text-align: center; }
+
+    .slot-badge-top { display: inline-flex; align-items: center; gap: 8px; padding: 6.5px 15px; border-radius: 99px; background: rgba(245, 158, 11, 0.1); border: 1px solid rgba(245, 158, 11, 0.35); color: var(--gold-primary); font-size: 12px; font-weight: 800; margin-bottom: 18px; }
+    .slot-dot { width: 8px; height: 8px; border-radius: 50%; background: #10b981; box-shadow: 0 0 10px #10b981; }
+
+    .avatar-ring-container { position: relative; width: 138px; height: 138px; margin: 0 auto 16px; display: flex; align-items: center; justify-content: center; }
+    .avatar-breathing-aura { position: absolute; inset: -8px; border-radius: 50%; background: radial-gradient(circle, rgba(245, 158, 11, 0.45) 0%, rgba(245, 158, 11, 0) 70%); animation: auraPulse 3.5s ease-in-out infinite; z-index: 1; }
+    @keyframes auraPulse { 0%, 100% { transform: scale(0.93); opacity: 0.45; } 50% { transform: scale(1.15); opacity: 0.9; } }
+    .ring-spin { position: absolute; inset: 0; border-radius: 50%; background: conic-gradient(#f59e0b, #fde047, #38bdf8, #f59e0b); animation: spin 7.5s linear infinite; z-index: 2; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .avatar-inner { position: relative; z-index: 3; width: 124px; height: 124px; border-radius: 50%; background: #000; border: 3.5px solid var(--card-dark); overflow: hidden; display: flex; align-items: center; justify-content: center; }
+    .avatar-inner img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; }
+    .avatar-status-dot { position: absolute; bottom: 8px; right: 10px; width: 22px; height: 22px; border-radius: 50%; background: #10b981; border: 3.5px solid var(--card-dark); z-index: 4; }
+
+    .creator-handle-tag { font-size: 13.5px; font-weight: 700; color: #cbd5e1; margin-bottom: 8px; display: flex; align-items: center; justify-content: center; gap: 5px; }
+    .verified-tick { color: #38bdf8; font-size: 14px; }
+
+    .mini-social-row { display: flex; justify-content: center; align-items: center; gap: 8px; margin-bottom: 14px; }
+    .mini-social-badge { display: inline-flex; align-items: center; gap: 5px; text-decoration: none; padding: 4px 10px; border-radius: 99px; font-size: 11px; font-weight: 700; color: #cbd5e1; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); }
+
+    .hero-title { font-size: 24.5px; line-height: 1.35; font-weight: 900; color: #ffffff; margin-bottom: 12px; }
+    .hero-title .gold-accent { background: linear-gradient(90deg, #f59e0b, #fbbf24); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .call-duration-sub { font-size: 13.2px; font-weight: 600; color: #cbd5e1; line-height: 1.5; margin-bottom: 18px; }
+
+    .feature-chips { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; }
+    .chip-pill { font-size: 11.5px; font-weight: 700; padding: 6.5px 12.5px; border-radius: 99px; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); color: #e2e8f0; }
+
+    .bottom-sticky-bar { position: fixed; bottom: 14px; left: 14px; right: 14px; max-width: 440px; margin: 0 auto; background: rgba(9, 14, 26, 0.95); border: 1.5px solid rgba(255, 255, 255, 0.12); border-radius: 99px; padding: 9px 9px 9px 20px; display: flex; justify-content: space-between; align-items: center; z-index: 50; backdrop-filter: blur(10px); }
+    .bottom-info-pill b { font-size: 13.5px; font-weight: 800; color: #ffffff; display: block; }
+    .bottom-info-pill span { font-size: 11.5px; color: var(--gold-primary); font-weight: 700; }
+    .btn-book-gold { background: linear-gradient(90deg, #f59e0b, #fbbf24); color: #090e1a; border: none; padding: 12px 24px; border-radius: 99px; font-size: 14px; font-weight: 800; cursor: pointer; }
   </style>
 </head>
 <body>
 
 <div class="app-wrapper">
-  <!-- Home Screen -->
   <div id="screen-home" class="screen-panel active">
-    <div class="dark-card">
+    <div class="home-top-header">
+      <div class="header-secret-trigger">
+        <span>@vinaykokda</span>
+        <div class="pulse-wrapper"><div class="radar-pulse-ring"></div><div class="online-dot-mini"></div></div>
+      </div>
+      <div style="font-size: 12px; color: #64748b; font-weight: 700;">1-on-1 Mentorship</div>
+    </div>
+
+    <div class="dark-card hero">
+      <div class="slot-badge-top"><span class="slot-dot"></span> Sirf 3 slots roz • Mon–Fri</div>
+      
+      <div class="avatar-ring-container">
+        <div class="avatar-breathing-aura"></div>
+        <div class="ring-spin"></div>
+        <div class="avatar-inner">
+          <img src="profile.png" alt="Vinay Kokda" onerror="this.style.display='none';">
+        </div>
+        <div class="avatar-status-dot"></div>
+      </div>
+
+      <div class="creator-handle-tag">
+        <span>Vinay Kokda</span><span class="verified-tick">✓</span><span style="color:#64748b;">• @vinaykokda</span>
+      </div>
+
       <div class="mini-social-row">
         <a href="https://instagram.com" target="_blank" class="mini-social-badge">📸 Instagram</a>
         <a href="https://youtube.com" target="_blank" class="mini-social-badge">▶️ YouTube</a>
       </div>
-      <h1 class="hero-title">Views ruk gaye hain aur <span>direction nahi mil rahi?</span></h1>
-      <p style="color: #94a3b8; font-size: 13px; margin-bottom: 20px;">28-Minute 1-on-1 Call with Vinay Kokda</p>
-      <button class="btn-book-gold" id="btn-goto-sessions">Book Session Now →</button>
-    </div>
-  </div>
 
-  <!-- Sessions Screen -->
-  <div id="screen-sessions" class="screen-panel">
-    <div class="wizard-white-card">
-      <h2 style="font-size: 18px; font-weight: 800; margin-bottom: 8px; color:#0f172a;">Creator Clarity & Strategy</h2>
-      <p style="font-size: 13px; color: #64748b; margin-bottom: 16px;">28-minute focused video call.</p>
-      <button class="btn-primary-blue" id="btn-goto-step2">Select Slot & Details →</button>
-      <button style="background:none; border:none; color:#64748b; font-weight:700; margin-top:12px; cursor:pointer;" id="btn-back-home">← Back</button>
-    </div>
-  </div>
+      <h1 class="hero-title">Views ruk gaye hain aur <span class="gold-accent">direction nahi mil rahi?</span></h1>
+      <p class="call-duration-sub">28-Minute 1-on-1 Call: Honest Channel Audit, Retention Fixes & Clear Growth Plan.</p>
 
-  <!-- Details Screen -->
-  <div id="screen-step2" class="screen-panel">
-    <div class="wizard-white-card">
-      <h2 style="font-size: 18px; font-weight: 800; margin-bottom: 16px; color:#0f172a;">Apni Details Bharein</h2>
-      <div class="input-group">
-        <label class="input-label">Full Name *</label>
-        <input type="text" id="inp-name" class="text-input-field" placeholder="Rahul Sharma">
+      <div class="feature-chips">
+        <span class="chip-pill">🎯 1-on-1 Call</span>
+        <span class="chip-pill">🎥 Google Meet</span>
+        <span class="chip-pill">⚡ No BS, Pure Action</span>
       </div>
-      <div class="input-group">
-        <label class="input-label">WhatsApp Number *</label>
-        <input type="tel" id="inp-phone" class="text-input-field" maxlength="10" placeholder="9876543210">
-      </div>
-      <button class="btn-primary-blue" id="btn-submit-booking">Submit Booking →</button>
-      <button style="background:none; border:none; color:#64748b; font-weight:700; margin-top:12px; cursor:pointer;" id="btn-back-sessions">← Back</button>
     </div>
   </div>
 </div>
 
-<script>
-  document.getElementById('btn-goto-sessions').addEventListener('click', () => {
-    document.getElementById('screen-home').classList.remove('active');
-    document.getElementById('screen-sessions').classList.add('active');
-  });
-  document.getElementById('btn-back-home').addEventListener('click', () => {
-    document.getElementById('screen-sessions').classList.remove('active');
-    document.getElementById('screen-home').classList.add('active');
-  });
-  document.getElementById('btn-goto-step2').addEventListener('click', () => {
-    document.getElementById('screen-sessions').classList.remove('active');
-    document.getElementById('screen-step2').classList.add('active');
-  });
-  document.getElementById('btn-back-sessions').addEventListener('click', () => {
-    document.getElementById('screen-step2').classList.remove('active');
-    document.getElementById('screen-sessions').classList.add('active');
-  });
-  document.getElementById('btn-submit-booking').addEventListener('click', () => {
-    const name = document.getElementById('inp-name').value;
-    const phone = document.getElementById('inp-phone').value;
-    if(!name || !phone) { alert('Kripya details bharein'); return; }
-    alert('Booking submitted successfully!');
-  });
-</script>
+<div class="bottom-sticky-bar" id="sticky-home-bar">
+  <div class="bottom-info-pill"><b>🎯 28-Min Call</b><span>₹1 Test Fee</span></div>
+  <button class="btn-book-gold" id="btn-home-book-cta" onclick="alert('Working!')">Book Session →</button>
+</div>
 
 </body>
-  </html>
-  
+                                                                      </html>
+                                                                      
