@@ -12,12 +12,9 @@
     :root {
       --bg-dark: #060913;
       --card-dark: #0e1626;
-      --card-dark-subtle: #131c31;
       --text-white: #f8fafc;
       --text-muted: #94a3b8;
       --gold-primary: #f59e0b;
-      --gold-glow: #fbbf24;
-      --border-dark: rgba(255, 255, 255, 0.08);
       --accent-blue: #0b7cff;
       --whatsapp-green: #16a34a;
     }
@@ -48,7 +45,7 @@
     @keyframes radarPing { 0% { transform: scale(0.6); opacity: 0.95; } 80%, 100% { transform: scale(2.4); opacity: 0; } }
     .online-dot-mini { width: 7.5px; height: 7.5px; border-radius: 50%; background: #10b981; box-shadow: 0 0 8px #10b981; z-index: 2; }
 
-    .dark-card { background: var(--card-dark); border: 1px solid var(--border-dark); border-radius: 26px; padding: 24px 20px; margin-bottom: 14px; box-shadow: 0 10px 30px -10px rgba(0,0,0,0.6); position: relative; }
+    .dark-card { background: var(--card-dark); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 26px; padding: 24px 20px; margin-bottom: 14px; box-shadow: 0 10px 30px -10px rgba(0,0,0,0.6); position: relative; }
     .hero { text-align: center; }
 
     .slot-badge-top { display: inline-flex; align-items: center; gap: 8px; padding: 6.5px 15px; border-radius: 99px; background: rgba(245, 158, 11, 0.1); border: 1px solid rgba(245, 158, 11, 0.35); color: var(--gold-primary); font-size: 12px; font-weight: 800; margin-bottom: 18px; }
@@ -66,8 +63,9 @@
     .creator-handle-tag { font-size: 13.5px; font-weight: 700; color: #cbd5e1; margin-bottom: 8px; display: flex; align-items: center; justify-content: center; gap: 5px; }
     .verified-tick { color: #38bdf8; font-size: 14px; }
 
-    .mini-social-row { display: flex; justify-content: center; align-items: center; gap: 8px; margin-bottom: 14px; }
-    .mini-social-badge { display: inline-flex; align-items: center; gap: 5px; text-decoration: none; padding: 4px 10px; border-radius: 99px; font-size: 11px; font-weight: 700; color: #cbd5e1; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); }
+    .mini-social-row { display: flex; justify-content: center; align-items: center; gap: 10px; margin-bottom: 14px; }
+    .mini-social-icon-btn { display: inline-flex; align-items: center; justify-content: center; width: 38px; height: 38px; border-radius: 50%; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); color: #cbd5e1; text-decoration: none; }
+    .mini-social-icon-btn svg { width: 18px; height: 18px; fill: currentColor; }
 
     .hero-title { font-size: 24.5px; line-height: 1.35; font-weight: 900; color: #ffffff; margin-bottom: 12px; }
     .hero-title .gold-accent { background: linear-gradient(90deg, #f59e0b, #fbbf24); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
@@ -76,10 +74,55 @@
     .feature-chips { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; }
     .chip-pill { font-size: 11.5px; font-weight: 700; padding: 6.5px 12.5px; border-radius: 99px; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); color: #e2e8f0; }
 
+    .wizard-white-card { background: #ffffff; color: #0f172a; border-radius: 28px; padding: 24px 20px; box-shadow: 0 16px 40px rgba(0,0,0,0.5); }
+    .wizard-header-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
+    .btn-home-nav-chip { background: #f1f5f9; border: 1px solid #cbd5e1; color: #334155; padding: 5px 12px; border-radius: 99px; font-size: 12px; font-weight: 700; cursor: pointer; }
+    .step-counter-pill { background: #fef3c7; color: #b45309; padding: 4px 12px; border-radius: 99px; font-size: 11.5px; font-weight: 800; }
+    .wizard-title { font-size: 20px; font-weight: 800; color: #0f172a; margin-bottom: 4px; }
+    .wizard-subtitle { font-size: 13px; color: #64748b; margin-bottom: 18px; }
+
+    .session-active-card { border: 1.5px solid #e2e8f0; border-radius: 22px; padding: 20px; background: #ffffff; }
+    .session-card-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; }
+    .session-active-badge { background: #ecfdf5; color: #059669; border: 1px solid #a7f3d0; padding: 4px 12px; border-radius: 99px; font-size: 11.5px; font-weight: 800; }
+    .session-heading-title { font-size: 18px; font-weight: 800; color: #0f172a; margin-bottom: 8px; }
+    .session-desc-text { font-size: 13px; color: #475569; line-height: 1.55; margin-bottom: 16px; }
+    .session-card-footer { display: flex; justify-content: space-between; align-items: center; padding-top: 14px; border-top: 1px solid #f1f5f9; }
+    .btn-select-session-price { background: #0b7cff; color: #ffffff; border: none; padding: 10px 18px; border-radius: 99px; font-size: 13.5px; font-weight: 800; cursor: pointer; }
+
+    .date-selector-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 16px; }
+    .date-pill-opt { border: 1.5px solid #e2e8f0; border-radius: 16px; padding: 12px 6px; text-align: center; cursor: pointer; background: #ffffff; }
+    .date-pill-opt.selected { border-color: #0b7cff; background: #eff6ff; }
+    .date-pill-opt .d-day { font-size: 11px; font-weight: 700; color: #64748b; text-transform: uppercase; }
+    .date-pill-opt .d-num { font-size: 18px; font-weight: 800; color: #0f172a; margin: 3px 0; }
+    .date-pill-opt .d-mon { font-size: 11px; font-weight: 700; color: #64748b; }
+
+    .slot-choice-grid { display: flex; flex-direction: column; gap: 10px; margin-bottom: 20px; }
+    .slot-card-opt { display: flex; justify-content: space-between; align-items: center; padding: 14px 16px; border: 1.5px solid #e2e8f0; border-radius: 16px; cursor: pointer; background: #ffffff; }
+    .slot-card-opt.selected { border-color: #0b7cff; background: #eff6ff; }
+    .time-tag { font-size: 11px; font-weight: 700; color: #0b7cff; background: #dbeafe; padding: 4px 8px; border-radius: 99px; }
+
+    .input-group { margin-bottom: 14px; text-align: left; }
+    .input-label { display: block; font-size: 13px; font-weight: 700; color: #334155; margin-bottom: 6px; }
+    .text-input-field { width: 100%; padding: 13px 14px; border-radius: 14px; border: 1.5px solid #cbd5e1; font-size: 14px; color: #0f172a; outline: none; background: #fff; }
+    
+    .btn-primary-blue { width: 100%; padding: 15px; border: none; border-radius: 16px; background: var(--accent-blue); color: #ffffff; font-size: 14.5px; font-weight: 800; cursor: pointer; }
+    
+    .qr-beige-card { background: #fdf5d7; border: 1px solid #f6e4a2; border-radius: 22px; padding: 16px; text-align: center; margin-bottom: 16px; }
+    .qr-image-wrapper { width: 200px; height: 200px; margin: 0 auto 14px; background: #ffffff; border-radius: 16px; padding: 8px; display: flex; align-items: center; justify-content: center; }
+    .qr-image-wrapper img { width: 100%; height: 100%; object-fit: contain; border-radius: 12px; }
+    .upi-clipboard-pill { background: #ffffff; border: 1px solid #f1e29c; border-radius: 14px; padding: 8px 12px; display: flex; justify-content: space-between; align-items: center; }
+    .upi-text-display { font-family: monospace; font-size: 14px; font-weight: 700; color: #0f172a; }
+    .btn-copy-upi { background: #1e293b; color: #ffffff; border: none; padding: 6px 14px; border-radius: 10px; font-size: 12px; font-weight: 700; cursor: pointer; }
+
     .bottom-sticky-bar { position: fixed; bottom: 14px; left: 14px; right: 14px; max-width: 440px; margin: 0 auto; background: rgba(9, 14, 26, 0.95); border: 1.5px solid rgba(255, 255, 255, 0.12); border-radius: 99px; padding: 9px 9px 9px 20px; display: flex; justify-content: space-between; align-items: center; z-index: 50; backdrop-filter: blur(10px); }
     .bottom-info-pill b { font-size: 13.5px; font-weight: 800; color: #ffffff; display: block; }
     .bottom-info-pill span { font-size: 11.5px; color: var(--gold-primary); font-weight: 700; }
     .btn-book-gold { background: linear-gradient(90deg, #f59e0b, #fbbf24); color: #090e1a; border: none; padding: 12px 24px; border-radius: 99px; font-size: 14px; font-weight: 800; cursor: pointer; }
+
+    .modal-summary-container { border: 1px solid #e2e8f0; background: #f8fafc; border-radius: 18px; padding: 12px 16px; margin-bottom: 14px; text-align: left; }
+    .modal-data-row { display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid #edf2f7; font-size: 13px; }
+    .modal-data-row span.key { color: #64748b; font-weight: 600; }
+    .modal-data-row b.val { color: #0f172a; font-weight: 700; text-align: right; }
   </style>
 </head>
 <body>
@@ -111,8 +154,12 @@
       </div>
 
       <div class="mini-social-row">
-        <a href="https://instagram.com" target="_blank" class="mini-social-badge">📸 Instagram</a>
-        <a href="https://youtube.com" target="_blank" class="mini-social-badge">▶️ YouTube</a>
+        <a href="https://instagram.com" target="_blank" class="mini-social-icon-btn">
+          <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+        </a>
+        <a href="https://youtube.com" target="_blank" class="mini-social-icon-btn">
+          <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+        </a>
       </div>
 
       <h1 class="hero-title">Views ruk gaye hain aur <span class="gold-accent">direction nahi mil rahi?</span></h1>
@@ -129,9 +176,9 @@
 
 <div class="bottom-sticky-bar" id="sticky-home-bar">
   <div class="bottom-info-pill"><b>🎯 28-Min Call</b><span>₹1 Test Fee</span></div>
-  <button class="btn-book-gold" id="btn-home-book-cta" onclick="alert('Working!')">Book Session →</button>
+  <button class="btn-book-gold" id="btn-home-book" onclick="alert('Part 1 saved! Aage ka code bhej raha hoon.')">Book Session →</button>
 </div>
 
 </body>
-                                                                      </html>
-                                                                      
+  </html>
+  
