@@ -181,4 +181,208 @@
 
 </body>
   </html>
-  
+    <!-- Sessions Screen -->
+  <div id="screen-sessions" class="screen-panel">
+    <div class="wizard-white-card">
+      <div class="wizard-header-row">
+        <button class="btn-home-nav-chip" onclick="showScreen('screen-home')">🏠 Home</button>
+        <span class="step-counter-pill">Sessions</span>
+      </div>
+      <h2 class="wizard-title">Mentorship Session</h2>
+      <p class="wizard-subtitle">Select below to choose date & slot.</p>
+
+      <div class="session-active-card">
+        <div class="session-card-top">
+          <div style="font-size: 24px;">🎯</div>
+          <div class="session-active-badge">✓ Active</div>
+        </div>
+        <h3 class="session-heading-title">Creator Clarity & Strategy</h3>
+        <p class="session-desc-text">28-minute focused video call for channel audit and roadmap.</p>
+        <div class="session-card-footer">
+          <div style="font-size: 13px; font-weight: 800;">28 mins</div>
+          <button class="btn-select-session-price" onclick="initCalendar(); showScreen('screen-step1');"><s>₹1999</s> ₹1 →</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Step 1: Slot Picker -->
+  <div id="screen-step1" class="screen-panel">
+    <div class="wizard-white-card">
+      <div class="wizard-header-row">
+        <button class="btn-home-nav-chip" onclick="showScreen('screen-home')">🏠 Home</button>
+        <span class="step-counter-pill">Step 1 of 3</span>
+      </div>
+      <h2 class="wizard-title">1. Apna slot chuno</h2>
+      <p class="wizard-subtitle">Agale 3 din ke slots available hain.</p>
+      
+      <div class="date-selector-grid" id="date-buttons-container"></div>
+
+      <div class="slot-choice-grid">
+        <div class="slot-card-opt selected" data-slot="11:30 AM">
+          <div><b>11:30 AM Slot</b><div style="font-size:11px; color:#64748b;">Morning</div></div>
+          <span class="time-tag">Available</span>
+        </div>
+        <div class="slot-card-opt" data-slot="07:15 PM">
+          <div><b>07:15 PM Slot</b><div style="font-size:11px; color:#64748b;">Evening</div></div>
+          <span class="time-tag">Available</span>
+        </div>
+        <div class="slot-card-opt" data-slot="09:00 PM">
+          <div><b>09:00 PM Slot</b><div style="font-size:11px; color:#64748b;">Night</div></div>
+          <span class="time-tag">Available</span>
+        </div>
+      </div>
+      <button class="btn-primary-blue" onclick="gotoStep2()">Continue to Details →</button>
+    </div>
+  </div>
+
+  <!-- Step 2: Details -->
+  <div id="screen-step2" class="screen-panel">
+    <div class="wizard-white-card">
+      <div class="wizard-header-row">
+        <button class="btn-home-nav-chip" onclick="showScreen('screen-home')">🏠 Home</button>
+        <span class="step-counter-pill">Step 2 of 3</span>
+      </div>
+      <h2 class="wizard-title">2. Details bharo</h2>
+      <p class="wizard-subtitle" id="slot-preview-txt">Selected Slot...</p>
+
+      <div class="input-group">
+        <label class="input-label">Full Name *</label>
+        <input type="text" id="inp-name" class="text-input-field" placeholder="Rahul Sharma">
+      </div>
+      <div class="input-group">
+        <label class="input-label">Email Address (Gmail) *</label>
+        <input type="email" id="inp-email" class="text-input-field" placeholder="rahul@gmail.com">
+      </div>
+      <div class="input-group">
+        <label class="input-label">WhatsApp Number * (10 Digits)</label>
+        <input type="tel" id="inp-phone" class="text-input-field" maxlength="10" placeholder="9876543210">
+      </div>
+      <button class="btn-primary-blue" onclick="gotoStep3()">Proceed to Payment →</button>
+    </div>
+  </div>
+
+  <!-- Step 3: Payment & UTR -->
+  <div id="screen-step3" class="screen-panel">
+    <div class="wizard-white-card">
+      <div class="wizard-header-row">
+        <button class="btn-home-nav-chip" onclick="showScreen('screen-home')">🏠 Home</button>
+        <span class="step-counter-pill">Step 3 of 3</span>
+      </div>
+      <h2 class="wizard-title">3. UPI Payment</h2>
+      <p class="wizard-subtitle">₹1 test fee pay karke UTR daalein.</p>
+
+      <div class="qr-beige-card">
+        <div class="qr-image-wrapper">
+          <img src="qr.png" alt="QR" onerror="this.src='https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=upi%3A%2F%2Fpay%3Fpa%3Dmeena.inn%40fam%26pn%3DVinay%26am%3D1%26cu%3DINR';">
+        </div>
+        <div class="upi-clipboard-pill">
+          <span class="upi-text-display">meena.inn@fam</span>
+          <button class="btn-copy-upi" onclick="navigator.clipboard.writeText('meena.inn@fam'); alert('UPI Copied!');">Copy</button>
+        </div>
+      </div>
+
+      <div class="input-group">
+        <label class="input-label">12-Digit UTR Number *</label>
+        <input type="number" id="inp-utr" class="text-input-field" placeholder="428192819281">
+      </div>
+      <button class="btn-primary-blue" onclick="submitBooking()">Submit Booking →</button>
+    </div>
+  </div>
+
+  <!-- Step 4: Success -->
+  <div id="screen-step4" class="screen-panel">
+    <div class="wizard-white-card" style="text-align:center;">
+      <div style="font-size:50px; margin-bottom:10px;">✅</div>
+      <h2 class="wizard-title">Booking Confirmed!</h2>
+      <p style="font-size:13px; color:#b45309; background:#fef3c7; padding:6px; border-radius:99px; margin-bottom:14px; font-weight:800;">Pending Verification by Vinay</p>
+      
+      <div class="modal-summary-container">
+        <div class="modal-data-row"><span class="key">Name</span><b class="val" id="res-name">-</b></div>
+        <div class="modal-data-row"><span class="key">Slot</span><b class="val" id="res-slot">-</b></div>
+        <div class="modal-data-row"><span class="key">UTR</span><b class="val" id="res-utr">-</b></div>
+      </div>
+      <button class="btn-primary-blue" style="background:#16a34a;" onclick="window.open('https://chat.whatsapp.com/IP8Ev1wGMNxG9qArrHPlNn', '_blank')">📲 Join WhatsApp Group</button>
+    </div>
+  </div>
+
+</div>
+
+<div class="bottom-sticky-bar" id="sticky-home-bar">
+  <div class="bottom-info-pill"><b>🎯 28-Min Call</b><span>₹1 Test Fee</span></div>
+  <button class="btn-book-gold" onclick="showScreen('screen-sessions')">Book Session →</button>
+</div>
+
+<script>
+  const state = { date: '', slot: '11:30 AM', name: '', email: '', phone: '', utr: '' };
+
+  function showScreen(id) {
+    document.querySelectorAll('.screen-panel').forEach(s => s.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    document.getElementById('sticky-home-bar').style.display = (id === 'screen-home') ? 'flex' : 'none';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function initCalendar() {
+    const c = document.getElementById('date-buttons-container');
+    c.innerHTML = '';
+    const now = new Date();
+    const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+    const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    for(let i=0; i<3; i++) {
+      const d = new Date(now); d.setDate(now.getDate() + i);
+      const str = `${days[d.getDay()]}, ${d.getDate()} ${months[d.getMonth()]}`;
+      const div = document.createElement('div');
+      div.className = `date-pill-opt ${i===0?'selected':''}`;
+      div.innerHTML = `<div class="d-day">${days[d.getDay()]}</div><div class="d-num">${d.getDate()}</div><div class="d-mon">${months[d.getMonth()]}</div>`;
+      div.onclick = () => {
+        document.querySelectorAll('.date-pill-opt').forEach(el => el.classList.remove('selected'));
+        div.classList.add('selected'); state.date = str;
+      };
+      if(i===0) state.date = str;
+      c.appendChild(div);
+    }
+  }
+
+  document.querySelectorAll('.slot-card-opt').forEach(el => {
+    el.onclick = () => {
+      document.querySelectorAll('.slot-card-opt').forEach(s => s.classList.remove('selected'));
+      el.classList.add('selected'); state.slot = el.getAttribute('data-slot');
+    };
+  });
+
+  function gotoStep2() {
+    document.getElementById('slot-preview-txt').innerText = `📅 ${state.date} • ${state.slot}`;
+    showScreen('screen-step2');
+  }
+
+  function gotoStep3() {
+    state.name = document.getElementById('inp-name').value.trim();
+    state.email = document.getElementById('inp-email').value.trim();
+    state.phone = document.getElementById('inp-phone').value.trim();
+    if(!state.name || !state.email || !state.phone || state.phone.length !== 10) { alert('Kripya sabhi details sahi bharein.'); return; }
+    showScreen('screen-step3');
+  }
+
+  function submitBooking() {
+    state.utr = document.getElementById('inp-utr').value.trim();
+    if(!state.utr || state.utr.length !== 12) { alert('12-digit ka valid UTR dalein.'); return; }
+    
+    const fUrl = "https://docs.google.com/forms/d/e/1FAIpQLSe_u-4N769UKKSxDOJD3dbojiQoL_vpQHYmJ2vXd0xMD2UEbQ/formResponse";
+    const fd = new FormData();
+    fd.append("entry.1530590438", state.date);
+    fd.append("entry.2053530837", state.slot);
+    fd.append("entry.1966640528", `${state.name} (${state.phone} / ${state.email})`);
+    fd.append("entry.105273313", state.utr);
+    fetch(fUrl, { method: "POST", mode: "no-cors", body: fd }).catch(e=>{});
+
+    document.getElementById('res-name').innerText = state.name;
+    document.getElementById('res-slot').innerText = `${state.date} • ${state.slot}`;
+    document.getElementById('res-utr').innerText = state.utr;
+    showScreen('screen-step4');
+  }
+</script>
+
+</body>
+    </html>
+    
