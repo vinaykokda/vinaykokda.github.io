@@ -4,13 +4,58 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Vinay Kokda | Mentorship</title>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800;900&display=swap" rel="stylesheet">
   <style>
-    body { background: #060913; color: #fff; font-family: sans-serif; text-align: center; padding: 50px; }
-    h1 { color: #f59e0b; }
+    :root {
+      --bg-dark: #060913;
+      --card-dark: #0e1626;
+      --gold-primary: #f59e0b;
+      --text-white: #f8fafc;
+      --accent-blue: #0b7cff;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Plus Jakarta Sans', sans-serif; }
+    body { background: var(--bg-dark); color: var(--text-white); padding: 14px; min-height: 100vh; display: flex; justify-content: center; }
+    .app-wrapper { width: 100%; max-width: 440px; }
+    .screen-panel { display: none; }
+    .screen-panel.active { display: block; }
+    .dark-card { background: var(--card-dark); border: 1px solid rgba(255,255,255,0.08); border-radius: 26px; padding: 24px 20px; margin-bottom: 14px; text-align: center; }
+    .hero-title { font-size: 22px; font-weight: 900; margin-bottom: 12px; }
+    .hero-title span { color: var(--gold-primary); }
+    .btn-book-gold { background: linear-gradient(90deg, #f59e0b, #fbbf24); color: #090e1a; border: none; padding: 12px 24px; border-radius: 99px; font-size: 14px; font-weight: 800; cursor: pointer; width: 100%; margin-top: 20px; }
   </style>
 </head>
 <body>
-  <h1>Vinay Kokda Mentorship System Live!</h1>
-  <p>System successfully connected to Google Apps Script.</p>
+
+<div class="app-wrapper">
+  <!-- Home Screen -->
+  <div id="screen-home" class="screen-panel active">
+    <div class="dark-card">
+      <h1 class="hero-title">Views ruk gaye hain aur <span>direction nahi mil rahi?</span></h1>
+      <p style="color: #94a3b8; font-size: 13px; margin-bottom: 20px;">28-Minute 1-on-1 Call with Vinay Kokda</p>
+      <button class="btn-book-gold" id="btn-goto-sessions">Book Session Now →</button>
+    </div>
+  </div>
+
+  <!-- Sessions Screen -->
+  <div id="screen-sessions" class="screen-panel">
+    <div class="dark-card" style="background: #fff; color: #0f172a; text-align: left;">
+      <h2 style="font-size: 18px; font-weight: 800; margin-bottom: 8px;">Creator Clarity & Strategy</h2>
+      <p style="font-size: 12.5px; color: #64748b; margin-bottom: 16px;">28-minute focused video call.</p>
+      <button class="btn-book-gold" id="btn-back-home" style="width:auto; padding: 8px 16px;">← Back</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  document.getElementById('btn-goto-sessions').addEventListener('click', () => {
+    document.getElementById('screen-home').classList.remove('active');
+    document.getElementById('screen-sessions').classList.add('active');
+  });
+  document.getElementById('btn-back-home').addEventListener('click', () => {
+    document.getElementById('screen-sessions').classList.remove('active');
+    document.getElementById('screen-home').classList.add('active');
+  });
+</script>
+
 </body>
 </html>
