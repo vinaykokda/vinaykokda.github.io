@@ -27,14 +27,14 @@
       box-sizing: border-box;
       margin: 0;
       padding: 0;
-      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
       -webkit-tap-highlight-color: transparent;
     }
 
     body {
       background: var(--bg-dark);
       color: var(--text-white);
-      padding: 14px 14px 115px;
+      padding: 14px 14px 120px;
       min-height: 100vh;
       display: flex;
       justify-content: center;
@@ -48,32 +48,36 @@
       position: relative;
     }
 
-    /* */
+    /* Screen Transitions */
     .screen-panel {
       display: none;
+      opacity: 0;
+      transform: translateY(18px);
     }
     .screen-panel.active {
       display: block;
-      animation: pageSlideUp 0.36s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      animation: slideUpFadeIn 0.32s cubic-bezier(0.16, 1, 0.3, 1) forwards;
     }
-    @keyframes pageSlideUp {
-      0% { opacity: 0; transform: translateY(20px) scale(0.985); }
-      100% { opacity: 1; transform: translateY(0) scale(1); }
+    @keyframes slideUpFadeIn {
+      0% { opacity: 0; transform: translateY(18px); }
+      100% { opacity: 1; transform: translateY(0); }
     }
 
+    /* Touch tactile bounce */
     button, .slot-card-opt, .date-pill-opt, .mini-social-badge, .footer-soc-btn {
-      transition: transform 0.15s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+      transition: transform 0.15s ease, filter 0.15s ease;
+      cursor: pointer;
     }
     button:active, .slot-card-opt:not(.locked-slot):active, .date-pill-opt:active, .mini-social-badge:active, .footer-soc-btn:active {
-      transform: scale(0.96);
+      transform: scale(0.965);
     }
 
-    /* Top Header */
+    /* Header & Radar Dot */
     .home-top-header {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 14px;
+      margin-bottom: 12px;
       padding: 0 4px;
     }
     .header-secret-trigger {
@@ -86,7 +90,6 @@
       align-items: center;
       gap: 7px;
     }
-
     .pulse-wrapper {
       position: relative;
       display: inline-flex;
@@ -116,7 +119,7 @@
       z-index: 2;
     }
 
-    /* */
+    /* Hero Card & Avatar */
     .dark-card {
       background: var(--card-dark);
       border: 1px solid var(--border-dark);
@@ -128,8 +131,6 @@
     }
     .hero {
       text-align: center;
-      position: relative;
-      overflow: hidden;
     }
 
     .slot-badge-top {
@@ -390,7 +391,7 @@
       color: #ffffff;
     }
 
-    /* */
+    /* FAQ Section */
     .faq-section {
       background: var(--card-dark);
       border: 1px solid var(--border-dark);
@@ -417,34 +418,31 @@
       font-weight: 700;
       color: #e2e8f0;
       cursor: pointer;
+      user-select: none;
     }
     .faq-icon {
       color: var(--gold-primary);
-      font-size: 16px;
+      font-size: 18px;
       font-weight: 800;
-      transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+      line-height: 1;
+      transition: transform 0.25s ease, color 0.2s ease;
     }
-    .faq-a-wrapper {
-      display: grid;
-      grid-template-rows: 0fr;
-      transition: grid-template-rows 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-    .faq-a-inner {
-      overflow: hidden;
+    .faq-a {
+      display: none;
       font-size: 12.8px;
       line-height: 1.55;
       color: var(--text-muted);
-    }
-    .faq-item.active .faq-a-wrapper {
-      grid-template-rows: 1fr;
-    }
-    .faq-item.active .faq-a-inner {
       padding-top: 8px;
+    }
+    .faq-item.active .faq-a {
+      display: block;
     }
     .faq-item.active .faq-icon {
       transform: rotate(45deg);
+      color: #ef4444;
     }
 
+    /* Footer Social Card */
     .footer-social-card {
       background: rgba(255, 255, 255, 0.02);
       border: 1px solid var(--border-dark);
@@ -486,7 +484,7 @@
       flex-shrink: 0;
     }
 
-    /* Sticky Bottom Bar with Shimmer Wave */
+    /* Sticky Bottom CTA with Shimmer Wave */
     .bottom-sticky-bar {
       position: fixed;
       bottom: 14px;
@@ -516,7 +514,6 @@
       color: var(--gold-primary);
       font-weight: 700;
     }
-
     .btn-book-gold {
       position: relative;
       background: linear-gradient(90deg, #f59e0b, #fbbf24);
@@ -551,7 +548,7 @@
       100% { left: 160%; }
     }
 
-    /* */
+    /* Wizard Card */
     .wizard-white-card {
       background: #ffffff;
       color: #0f172a;
@@ -599,7 +596,6 @@
       font-size: 11.5px;
       font-weight: 800;
     }
-
     .wizard-title {
       font-size: 20px;
       font-weight: 800;
@@ -612,6 +608,7 @@
       margin-bottom: 18px;
     }
 
+    /* Course Page & Rating Strip */
     .session-active-card {
       border: 1.5px solid #e2e8f0;
       border-radius: 22px;
@@ -662,7 +659,6 @@
       font-weight: 800;
     }
 
-    /* Relocated Rating & Metrics Strip */
     .session-metrics-box {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -726,7 +722,7 @@
       cursor: pointer;
     }
 
-    /* Calendar Grid */
+    /* Date & Slot Selector */
     .date-selector-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -763,7 +759,6 @@
       color: #64748b;
     }
 
-    /* 3 Specific Slots */
     .slot-choice-grid {
       display: flex;
       flex-direction: column;
@@ -930,7 +925,7 @@
       cursor: pointer;
     }
 
-    /* */
+    /* Modal Sheets */
     .modal-overlay-sheet {
       position: fixed;
       inset: 0;
@@ -1047,7 +1042,7 @@
       text-align: left;
     }
 
-    /* Spring Pop & Glow Checkmark on Step 4 */
+    /* Spring Pop on Success Step 4 */
     .success-card-content {
       text-align: center;
     }
@@ -1241,13 +1236,11 @@
 </head>
 <body>
 
-<!-- Copy Toast Notification -->
 <div id="copy-toast-msg" class="copy-toast">Details copied! Group me paste karein 📋</div>
 
 <div class="app-wrapper">
 
-  <!-- -->
-  <!-- SCREEN: HOME -->
+  <!-- ==================== SCREEN: HOME ==================== -->
   <div id="screen-home" class="screen-panel active">
     <div class="home-top-header">
       <div class="header-secret-trigger" id="secret-admin-trigger">
@@ -1260,7 +1253,7 @@
       <div style="font-size: 12px; color: #64748b; font-weight: 700;">1-on-1 Mentorship</div>
     </div>
 
-    <!-- Hero Card with Avatar Breathing Aura & Real Small Vector Badges -->
+    <!-- Hero Card with Profile Ring & Social Micro Badges -->
     <div class="dark-card hero">
       <div class="slot-badge-top">
         <span class="slot-dot"></span> Sirf 3 slots roz • Mon–Fri
@@ -1286,7 +1279,7 @@
         <span style="color:#64748b;">• @vinaykokda</span>
       </div>
 
-      <!-- Real Small Official Vector Badges Under Handle -->
+      <!-- Real Small Vector Badges -->
       <div class="mini-social-row">
         <a href="https://www.instagram.com/vinaykokda?stkn=cGUxM2wydWp2aGl5" target="_blank" rel="noopener noreferrer" class="mini-social-badge" title="Instagram">
           <svg viewBox="0 0 24 24" fill="none">
@@ -1386,10 +1379,8 @@
           <span>Payment kaise karna hai?</span>
           <span class="faq-icon">+</span>
         </div>
-        <div class="faq-a-wrapper">
-          <div class="faq-a-inner">
-            Aap official QR code scan karke UPI ID (meena.inn@fam) par kisi bhi UPI app se ₹1 fee pay karke 12-digit UTR enter kar sakte hain.
-          </div>
+        <div class="faq-a">
+          Aap official QR code scan karke UPI ID (meena.inn@fam) par kisi bhi UPI app se ₹1 fee pay karke 12-digit UTR enter kar sakte hain.
         </div>
       </div>
 
@@ -1398,10 +1389,8 @@
           <span>Meet link kab milega?</span>
           <span class="faq-icon">+</span>
         </div>
-        <div class="faq-a-wrapper">
-          <div class="faq-a-inner">
-            Payment verify hone ke baad session wale din morning me aapke WhatsApp number aur Gmail par direct Google Meet link bhej diya jayega.
-          </div>
+        <div class="faq-a">
+          Payment verify hone ke baad session wale din morning me aapke WhatsApp number aur Gmail par direct Google Meet link bhej diya jayega.
         </div>
       </div>
 
@@ -1410,10 +1399,8 @@
           <span>Refund policy kya hai?</span>
           <span class="faq-icon">+</span>
         </div>
-        <div class="faq-a-wrapper">
-          <div class="faq-a-inner">
-            Yeh slot locking consultation fee hai, isliye payment ke baad refund nahi hoga. Kripya details dhyan se bharein.
-          </div>
+        <div class="faq-a">
+          Yeh slot locking consultation fee hai, isliye payment ke baad refund nahi hoga. Kripya details dhyan se bharein.
         </div>
       </div>
     </div>
@@ -1450,8 +1437,7 @@
     </div>
   </div>
 
-  <!-- -->
-  <!-- SCREEN: SESSIONS CATALOG -->
+  <!-- ==================== SCREEN: SESSIONS CATALOG ==================== -->
   <div id="screen-sessions" class="screen-panel">
     <div class="wizard-white-card">
       <div class="wizard-header-row">
@@ -1500,8 +1486,7 @@
     </div>
   </div>
 
-  <!-- -->
-  <!-- SCREEN: STEP 1 CALENDAR & 3 SLOTS -->
+  <!-- ==================== SCREEN: STEP 1 CALENDAR & 3 SLOTS ==================== -->
   <div id="screen-step1" class="screen-panel">
     <div class="wizard-white-card">
       <div class="wizard-header-row">
@@ -1546,8 +1531,7 @@
     </div>
   </div>
 
-  <!-- -->
-  <!-- SCREEN: STEP 2 DETAILS -->
+  <!-- ==================== SCREEN: STEP 2 DETAILS ==================== -->
   <div id="screen-step2" class="screen-panel">
     <div class="wizard-white-card">
       <div class="wizard-header-row">
@@ -1584,8 +1568,7 @@
     </div>
   </div>
 
-  <!-- -->
-  <!-- SCREEN: STEP 3 PAYMENT -->
+  <!-- ==================== SCREEN: STEP 3 PAYMENT ==================== -->
   <div id="screen-step3" class="screen-panel">
     <div class="wizard-white-card">
       <div class="wizard-header-row">
@@ -1621,8 +1604,7 @@
     </div>
   </div>
 
-  <!-- -->
-  <!-- SCREEN: STEP 4 SUCCESS & WHATSAPP DISPATCH -->
+  <!-- ==================== SCREEN: STEP 4 SUCCESS & WHATSAPP ==================== -->
   <div id="screen-step4" class="screen-panel">
     <div class="wizard-white-card success-card-content">
       <div style="display: flex; justify-content: flex-start; margin-bottom: 8px;">
@@ -1667,8 +1649,7 @@
   <button class="btn-book-gold" id="btn-home-book-cta">Book Session →</button>
 </div>
 
-<!-- -->
-<!-- MODAL SHEET 1: Details Check Consent -->
+<!-- ==================== MODAL SHEET 1: Details Check ==================== -->
 <div class="modal-overlay-sheet" id="modal-details-sheet">
   <div class="modal-inner-white-sheet">
     <div class="modal-icon-header">📋</div>
@@ -1691,7 +1672,7 @@
   </div>
 </div>
 
-<!-- MODAL SHEET 2: UTR Confirm Consent -->
+<!-- ==================== MODAL SHEET 2: UTR Confirm ==================== -->
 <div class="modal-overlay-sheet" id="modal-utr-sheet">
   <div class="modal-inner-white-sheet">
     <div class="modal-icon-header">⚠️</div>
@@ -1708,7 +1689,7 @@
   </div>
 </div>
 
-<!-- MODAL SHEET: SECRET ADMIN PORTAL (PASSWORD: vny@0786) -->
+<!-- ==================== MODAL SHEET: SECRET ADMIN (vny@0786) ==================== -->
 <div class="modal-overlay-sheet" id="modal-admin-sheet">
   <div class="modal-inner-white-sheet" style="text-align: center;">
     <div style="font-size: 30px; margin-bottom: 4px;">🔐</div>
@@ -1742,361 +1723,400 @@
   </div>
 </div>
 
-<!-- -->
+<!-- ==================== JAVASCRIPT LOGIC ==================== -->
 <script>
-const appState = {
-  selectedSession: 'Creator Clarity & Content Strategy',
-  selectedDate: '',
-  selectedSlot: '11:30 AM',
-  fullName: '',
-  email: '',
-  phone: '',
-  youtube: '',
-  utr: '',
-  bookingId: ''
-};
+document.addEventListener('DOMContentLoaded', function() {
 
-const WHATSAPP_GROUP_URL = "https://chat.whatsapp.com/IP8Ev1wGMNxG9qArrHPlNn";
+  const appState = {
+    selectedSession: 'Creator Clarity & Content Strategy',
+    selectedDate: '',
+    selectedSlot: '11:30 AM',
+    fullName: '',
+    email: '',
+    phone: '',
+    youtube: '',
+    utr: '',
+    bookingId: ''
+  };
 
-// Crystal Chime Sound Synthesizer via Web Audio API
-function playSuccessChime() {
-  try {
-    const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-    
-    // Note 1: High crisp ding (D5 -> A5)
-    const osc1 = audioCtx.createOscillator();
-    const gain1 = audioCtx.createGain();
-    osc1.type = 'sine';
-    osc1.frequency.setValueAtTime(587.33, audioCtx.currentTime);
-    osc1.frequency.exponentialRampToValueAtTime(880, audioCtx.currentTime + 0.1);
-    gain1.gain.setValueAtTime(0.2, audioCtx.currentTime);
-    gain1.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.6);
-    osc1.connect(gain1);
-    gain1.connect(audioCtx.destination);
-    osc1.start();
-    osc1.stop(audioCtx.currentTime + 0.6);
+  const WHATSAPP_GROUP_URL = "https://chat.whatsapp.com/IP8Ev1wGMNxG9qArrHPlNn";
 
-    // Note 2: Harmonic shimmer (D6)
-    setTimeout(() => {
-      const osc2 = audioCtx.createOscillator();
-      const gain2 = audioCtx.createGain();
-      osc2.type = 'sine';
-      osc2.frequency.setValueAtTime(1174.66, audioCtx.currentTime);
-      gain2.gain.setValueAtTime(0.25, audioCtx.currentTime);
-      gain2.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.8);
-      osc2.connect(gain2);
-      gain2.connect(audioCtx.destination);
-      osc2.start();
-      osc2.stop(audioCtx.currentTime + 0.8);
-    }, 90);
-  } catch (e) {
-    // Graceful fallback if audio is disabled
+  // Native Web Audio API Chime Synthesizer
+  function playSuccessChime() {
+    try {
+      const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      
+      const osc1 = audioCtx.createOscillator();
+      const gain1 = audioCtx.createGain();
+      osc1.type = 'sine';
+      osc1.frequency.setValueAtTime(587.33, audioCtx.currentTime);
+      osc1.frequency.exponentialRampToValueAtTime(880, audioCtx.currentTime + 0.1);
+      gain1.gain.setValueAtTime(0.2, audioCtx.currentTime);
+      gain1.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.6);
+      osc1.connect(gain1);
+      gain1.connect(audioCtx.destination);
+      osc1.start();
+      osc1.stop(audioCtx.currentTime + 0.6);
+
+      setTimeout(() => {
+        const osc2 = audioCtx.createOscillator();
+        const gain2 = audioCtx.createGain();
+        osc2.type = 'sine';
+        osc2.frequency.setValueAtTime(1174.66, audioCtx.currentTime);
+        gain2.gain.setValueAtTime(0.25, audioCtx.currentTime);
+        gain2.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.8);
+        osc2.connect(gain2);
+        gain2.connect(audioCtx.destination);
+        osc2.start();
+        osc2.stop(audioCtx.currentTime + 0.8);
+      }, 90);
+    } catch (e) {}
   }
-}
 
-// LocalStorage Persistence
-function getSavedBookings() {
-  try {
-    return JSON.parse(localStorage.getItem('vk_bookings') || '[]');
-  } catch (e) {
-    return [];
+  // Local Storage Data Handling
+  function getSavedBookings() {
+    try {
+      return JSON.parse(localStorage.getItem('vk_bookings') || '[]');
+    } catch (e) {
+      return [];
+    }
   }
-}
 
-function saveBooking(item) {
-  const list = getSavedBookings();
-  list.unshift(item);
-  localStorage.setItem('vk_bookings', JSON.stringify(list));
-}
-
-function updateBookingStatus(bid, status) {
-  const list = getSavedBookings();
-  const target = list.find(b => b.bid === bid);
-  if (target) {
-    target.status = status;
+  function saveBooking(item) {
+    const list = getSavedBookings();
+    list.unshift(item);
     localStorage.setItem('vk_bookings', JSON.stringify(list));
   }
-}
 
-function deleteBooking(bid) {
-  let list = getSavedBookings();
-  list = list.filter(b => b.bid !== bid);
-  localStorage.setItem('vk_bookings', JSON.stringify(list));
-}
-
-function isSlotApprovedAndLocked(dateStr, slotTime) {
-  const list = getSavedBookings();
-  return list.some(b => b.dateStr === dateStr && b.slotTime === slotTime && b.status === 'Approved');
-}
-
-//function switchScreen(screenId) {
-  const panels = document.querySelectorAll('.screen-panel');
-  panels.forEach(s => s.classList.remove('active'));
-
-  const target = document.getElementById(screenId);
-  if (target) {
-    target.style.animation = 'none';
-    target.offsetHeight; /* Trigger reflow for slide animation */
-    target.style.animation = null;
-    target.classList.add('active');
+  function updateBookingStatus(bid, status) {
+    const list = getSavedBookings();
+    const target = list.find(b => b.bid === bid);
+    if (target) {
+      target.status = status;
+      localStorage.setItem('vk_bookings', JSON.stringify(list));
+    }
   }
-  
-  const stickyBar = document.getElementById('sticky-home-bar');
-  if (stickyBar) {
-    stickyBar.style.display = (screenId === 'screen-home') ? 'flex' : 'none';
+
+  function deleteBooking(bid) {
+    let list = getSavedBookings();
+    list = list.filter(b => b.bid !== bid);
+    localStorage.setItem('vk_bookings', JSON.stringify(list));
   }
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-}
 
-document.querySelectorAll('.nav-to-home-btn').forEach(btn => {
-  btn.addEventListener('click', () => switchScreen('screen-home'));
-});
+  function isSlotApprovedAndLocked(dateStr, slotTime) {
+    const list = getSavedBookings();
+    return list.some(b => b.dateStr === dateStr && b.slotTime === slotTime && b.status === 'Approved');
+  }
 
-// Calendar Rolling 3 Days Setup
-function initCalendar() {
-  const container = document.getElementById('date-buttons-container');
-  container.innerHTML = '';
-  const now = new Date();
-  const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-  const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-  let added = 0, offset = 0;
+  // Guaranteed Screen Switching Function
+  function switchScreen(screenId) {
+    const panels = document.querySelectorAll('.screen-panel');
+    panels.forEach(s => s.classList.remove('active'));
 
-  while (added < 3) {
-    const d = new Date(now);
-    d.setDate(now.getDate() + offset);
-    offset++;
+    const target = document.getElementById(screenId);
+    if (target) {
+      target.style.animation = 'none';
+      target.offsetHeight; /* Trigger reflow */
+      target.style.animation = null;
+      target.classList.add('active');
+    }
 
-    const dayName = days[d.getDay()];
-    const dateNum = d.getDate();
-    const monName = months[d.getMonth()];
-    const fullDateStr = `${dayName}, ${dateNum} ${monName}`;
+    const stickyBar = document.getElementById('sticky-home-bar');
+    if (stickyBar) {
+      stickyBar.style.display = (screenId === 'screen-home') ? 'flex' : 'none';
+    }
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
 
-    const opt = document.createElement('div');
-    opt.className = `date-pill-opt ${added === 0 ? 'selected' : ''}`;
-    opt.innerHTML = `<div class="d-day">${dayName}</div><div class="d-num">${dateNum}</div><div class="d-mon">${monName}</div>`;
-    opt.dataset.fullDate = fullDateStr;
+  // Return to Home Buttons
+  document.querySelectorAll('.nav-to-home-btn').forEach(btn => {
+    btn.addEventListener('click', () => switchScreen('screen-home'));
+  });
 
-    opt.addEventListener('click', function() {
-      document.querySelectorAll('.date-pill-opt').forEach(el => el.classList.remove('selected'));
-      opt.classList.add('selected');
-      appState.selectedDate = fullDateStr;
-      refreshSlotStates();
+  // Calendar Initialization (Rolling 3 Days)
+  function initCalendar() {
+    const container = document.getElementById('date-buttons-container');
+    if (!container) return;
+    container.innerHTML = '';
+    const now = new Date();
+    const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+    const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    let added = 0, offset = 0;
+
+    while (added < 3) {
+      const d = new Date(now);
+      d.setDate(now.getDate() + offset);
+      offset++;
+
+      const dayName = days[d.getDay()];
+      const dateNum = d.getDate();
+      const monName = months[d.getMonth()];
+      const fullDateStr = `${dayName}, ${dateNum} ${monName}`;
+
+      const opt = document.createElement('div');
+      opt.className = `date-pill-opt ${added === 0 ? 'selected' : ''}`;
+      opt.innerHTML = `<div class="d-day">${dayName}</div><div class="d-num">${dateNum}</div><div class="d-mon">${monName}</div>`;
+      opt.dataset.fullDate = fullDateStr;
+
+      opt.addEventListener('click', function() {
+        document.querySelectorAll('.date-pill-opt').forEach(el => el.classList.remove('selected'));
+        opt.classList.add('selected');
+        appState.selectedDate = fullDateStr;
+        refreshSlotStates();
+      });
+
+      if (added === 0) appState.selectedDate = fullDateStr;
+      container.appendChild(opt);
+      added++;
+    }
+    refreshSlotStates();
+  }
+
+  function refreshSlotStates() {
+    const slots = [
+      { id: 'slot-card-1130', time: '11:30 AM', tagId: 'tag-1130', label: 'Morning' },
+      { id: 'slot-card-0715', time: '07:15 PM', tagId: 'tag-0715', label: 'Evening' },
+      { id: 'slot-card-0900', time: '09:00 PM', tagId: 'tag-0900', label: 'Night' }
+    ];
+
+    let firstAvailable = null;
+
+    slots.forEach(s => {
+      const el = document.getElementById(s.id);
+      const tag = document.getElementById(s.tagId);
+      if (!el || !tag) return;
+      const isLocked = isSlotApprovedAndLocked(appState.selectedDate, s.time);
+
+      if (isLocked) {
+        el.classList.add('locked-slot');
+        el.classList.remove('selected');
+        tag.className = 'time-tag-locked';
+        tag.innerText = '🔒 Booked';
+      } else {
+        el.classList.remove('locked-slot');
+        tag.className = 'time-tag';
+        tag.innerText = s.label;
+        if (!firstAvailable) firstAvailable = s.time;
+      }
     });
 
-    if (added === 0) appState.selectedDate = fullDateStr;
-    container.appendChild(opt);
-    added++;
-  }
-  refreshSlotStates();
-}
-
-function refreshSlotStates() {
-  const slots = [
-    { id: 'slot-card-1130', time: '11:30 AM', tagId: 'tag-1130', label: 'Morning' },
-    { id: 'slot-card-0715', time: '07:15 PM', tagId: 'tag-0715', label: 'Evening' },
-    { id: 'slot-card-0900', time: '09:00 PM', tagId: 'tag-0900', label: 'Night' }
-  ];
-
-  let firstAvailable = null;
-
-  slots.forEach(s => {
-    const el = document.getElementById(s.id);
-    const tag = document.getElementById(s.tagId);
-    const isLocked = isSlotApprovedAndLocked(appState.selectedDate, s.time);
-
-    if (isLocked) {
-      el.classList.add('locked-slot');
-      el.classList.remove('selected');
-      tag.className = 'time-tag-locked';
-      tag.innerText = '🔒 Booked';
-    } else {
-      el.classList.remove('locked-slot');
-      tag.className = 'time-tag';
-      tag.innerText = s.label;
-      if (!firstAvailable) firstAvailable = s.time;
-    }
-  });
-
-  if (isSlotApprovedAndLocked(appState.selectedDate, appState.selectedSlot)) {
-    if (firstAvailable) {
-      appState.selectedSlot = firstAvailable;
-    }
-  }
-
-  slots.forEach(s => {
-    const el = document.getElementById(s.id);
-    if (!el.classList.contains('locked-slot')) {
-      if (s.time === appState.selectedSlot) {
-        el.classList.add('selected');
-      } else {
-        el.classList.remove('selected');
+    if (isSlotApprovedAndLocked(appState.selectedDate, appState.selectedSlot)) {
+      if (firstAvailable) {
+        appState.selectedSlot = firstAvailable;
       }
     }
-  });
-}
 
-document.querySelectorAll('.slot-card-opt').forEach(slotEl => {
-  slotEl.addEventListener('click', function() {
-    if (slotEl.classList.contains('locked-slot')) return;
-    document.querySelectorAll('.slot-card-opt').forEach(s => s.classList.remove('selected'));
-    slotEl.classList.add('selected');
-    appState.selectedSlot = slotEl.getAttribute('data-slot');
-  });
-});
+    slots.forEach(s => {
+      const el = document.getElementById(s.id);
+      if (el && !el.classList.contains('locked-slot')) {
+        if (s.time === appState.selectedSlot) {
+          el.classList.add('selected');
+        } else {
+          el.classList.remove('selected');
+        }
+      }
+    });
+  }
 
-// FAQ Accordion Toggle
-document.querySelectorAll('.faq-q').forEach(q => {
-  q.addEventListener('click', () => {
-    const parent = q.closest('.faq-item');
-    const wasActive = parent.classList.contains('active');
-    document.querySelectorAll('.faq-item').forEach(item => item.classList.remove('active'));
-    if (!wasActive) {
-      parent.classList.add('active');
+  document.querySelectorAll('.slot-card-opt').forEach(slotEl => {
+    slotEl.addEventListener('click', function() {
+      if (slotEl.classList.contains('locked-slot')) return;
+      document.querySelectorAll('.slot-card-opt').forEach(s => s.classList.remove('selected'));
+      slotEl.classList.add('selected');
+      appState.selectedSlot = slotEl.getAttribute('data-slot');
+    });
+  });
+
+  // Reliable FAQ Accordion Toggle
+  document.querySelectorAll('.faq-item').forEach(item => {
+    item.addEventListener('click', function(e) {
+      const isCurrentlyActive = item.classList.contains('active');
+      document.querySelectorAll('.faq-item').forEach(el => el.classList.remove('active'));
+      if (!isCurrentlyActive) {
+        item.classList.add('active');
+      }
+    });
+  });
+
+  // Home CTA Transition to Sessions
+  const btnBookCta = document.getElementById('btn-home-book-cta');
+  if (btnBookCta) {
+    btnBookCta.addEventListener('click', function(e) {
+      e.preventDefault();
+      switchScreen('screen-sessions');
+    });
+  }
+
+  const btnBackHomeSessions = document.getElementById('btn-back-home-from-sessions');
+  if (btnBackHomeSessions) {
+    btnBackHomeSessions.addEventListener('click', function(e) {
+      e.preventDefault();
+      switchScreen('screen-home');
+    });
+  }
+
+  // Sessions to Step 1
+  const btnSelectSession = document.getElementById('btn-select-active-session');
+  if (btnSelectSession) {
+    btnSelectSession.addEventListener('click', function(e) {
+      e.preventDefault();
+      initCalendar();
+      switchScreen('screen-step1');
+    });
+  }
+
+  const btnBackSessions = document.getElementById('btn-back-sessions');
+  if (btnBackSessions) {
+    btnBackSessions.addEventListener('click', function(e) {
+      e.preventDefault();
+      switchScreen('screen-sessions');
+    });
+  }
+
+  // Step 1 to Step 2
+  const btnGotoStep2 = document.getElementById('btn-goto-step2');
+  if (btnGotoStep2) {
+    btnGotoStep2.addEventListener('click', function() {
+      if (isSlotApprovedAndLocked(appState.selectedDate, appState.selectedSlot)) {
+        alert('Yeh slot pehle se booked aur approved ho chuka hai. Kripya doosra slot chunein.');
+        refreshSlotStates();
+        return;
+      }
+      document.getElementById('selected-slot-preview-text').innerText = `📅 ${appState.selectedDate} • ${appState.selectedSlot} (28-Min)`;
+      switchScreen('screen-step2');
+    });
+  }
+
+  const btnBackStep1 = document.getElementById('btn-back-step1');
+  if (btnBackStep1) {
+    btnBackStep1.addEventListener('click', function() {
+      switchScreen('screen-step1');
+    });
+  }
+
+  // Step 2 Form Validation & Modal 1
+  const btnOpenDetails = document.getElementById('btn-open-details-verify');
+  if (btnOpenDetails) {
+    btnOpenDetails.addEventListener('click', function() {
+      const name = document.getElementById('inp-full-name').value.trim();
+      const email = document.getElementById('inp-email-addr').value.trim();
+      const phone = document.getElementById('inp-whatsapp-num').value.trim();
+      const yt = document.getElementById('inp-yt-handle').value.trim();
+
+      let hasErr = false;
+      if (!name) { document.getElementById('err-name').style.display = 'block'; hasErr = true; } else { document.getElementById('err-name').style.display = 'none'; }
+      if (!email || !email.includes('@')) { document.getElementById('err-email').style.display = 'block'; hasErr = true; } else { document.getElementById('err-email').style.display = 'none'; }
+      if (!phone || phone.length !== 10) { document.getElementById('err-phone').style.display = 'block'; hasErr = true; } else { document.getElementById('err-phone').style.display = 'none'; }
+      if (hasErr) return;
+
+      appState.fullName = name;
+      appState.email = email;
+      appState.phone = phone;
+      appState.youtube = yt || 'None';
+
+      document.getElementById('md-name').innerText = name;
+      document.getElementById('md-email').innerText = email;
+      document.getElementById('md-phone').innerText = `+91 ${phone}`;
+      document.getElementById('md-yt').innerText = appState.youtube;
+      document.getElementById('chk-details-consent').checked = false;
+      document.getElementById('btn-details-confirm-ok').disabled = true;
+
+      document.getElementById('modal-details-sheet').classList.add('active');
+    });
+  }
+
+  document.getElementById('chk-details-consent').addEventListener('change', e => {
+    document.getElementById('btn-details-confirm-ok').disabled = !e.target.checked;
+  });
+  document.getElementById('btn-close-details-modal').addEventListener('click', () => {
+    document.getElementById('modal-details-sheet').classList.remove('active');
+  });
+
+  document.getElementById('btn-details-confirm-ok').addEventListener('click', () => {
+    document.getElementById('modal-details-sheet').classList.remove('active');
+    switchScreen('screen-step3');
+  });
+
+  // Copy UPI Functionality
+  document.getElementById('btn-copy-upi-id').addEventListener('click', function() {
+    const text = 'meena.inn@fam';
+    try {
+      const t = document.createElement('textarea');
+      t.value = text;
+      document.body.appendChild(t);
+      t.select();
+      document.execCommand('copy');
+      document.body.removeChild(t);
+    } catch (err) {
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).catch(() => {});
+      }
     }
+    const btn = document.getElementById('btn-copy-upi-id');
+    btn.innerText = '✅ Copied!';
+    setTimeout(() => { btn.innerText = '📋 Copy UPI'; }, 2000);
   });
-});
 
-// Navigation Flow
-document.getElementById('btn-home-book-cta').addEventListener('click', () => switchScreen('screen-sessions'));
-document.getElementById('btn-back-home-from-sessions').addEventListener('click', () => switchScreen('screen-home'));
+  document.getElementById('btn-back-step2').addEventListener('click', () => switchScreen('screen-step2'));
 
-document.getElementById('btn-select-active-session').addEventListener('click', () => {
-  initCalendar();
-  switchScreen('screen-step1');
-});
-document.getElementById('btn-back-sessions').addEventListener('click', () => switchScreen('screen-sessions'));
-
-document.getElementById('btn-goto-step2').addEventListener('click', function() {
-  if (isSlotApprovedAndLocked(appState.selectedDate, appState.selectedSlot)) {
-    alert('Yeh slot pehle se booked aur approved ho chuka hai. Kripya doosra slot chunein.');
-    refreshSlotStates();
-    return;
-  }
-  document.getElementById('selected-slot-preview-text').innerText = `📅 ${appState.selectedDate} • ${appState.selectedSlot} (28-Min)`;
-  switchScreen('screen-step2');
-});
-
-document.getElementById('btn-back-step1').addEventListener('click', () => switchScreen('screen-step1'));
-
-//document.getElementById('btn-open-details-verify').addEventListener('click', function() {
-  const name = document.getElementById('inp-full-name').value.trim();
-  const email = document.getElementById('inp-email-addr').value.trim();
-  const phone = document.getElementById('inp-whatsapp-num').value.trim();
-  const yt = document.getElementById('inp-yt-handle').value.trim();
-
-  let hasErr = false;
-  if (!name) { document.getElementById('err-name').style.display = 'block'; hasErr = true; } else { document.getElementById('err-name').style.display = 'none'; }
-  if (!email || !email.includes('@')) { document.getElementById('err-email').style.display = 'block'; hasErr = true; } else { document.getElementById('err-email').style.display = 'none'; }
-  if (!phone || phone.length !== 10) { document.getElementById('err-phone').style.display = 'block'; hasErr = true; } else { document.getElementById('err-phone').style.display = 'none'; }
-  if (hasErr) return;
-
-  appState.fullName = name;
-  appState.email = email;
-  appState.phone = phone;
-  appState.youtube = yt || 'None';
-
-  document.getElementById('md-name').innerText = name;
-  document.getElementById('md-email').innerText = email;
-  document.getElementById('md-phone').innerText = `+91 ${phone}`;
-  document.getElementById('md-yt').innerText = appState.youtube;
-  document.getElementById('chk-details-consent').checked = false;
-  document.getElementById('btn-details-confirm-ok').disabled = true;
-
-  document.getElementById('modal-details-sheet').classList.add('active');
-});
-
-document.getElementById('chk-details-consent').addEventListener('change', e => {
-  document.getElementById('btn-details-confirm-ok').disabled = !e.target.checked;
-});
-document.getElementById('btn-close-details-modal').addEventListener('click', () => {
-  document.getElementById('modal-details-sheet').classList.remove('active');
-});
-
-document.getElementById('btn-details-confirm-ok').addEventListener('click', () => {
-  document.getElementById('modal-details-sheet').classList.remove('active');
-  switchScreen('screen-step3');
-});
-
-// Copy UPI ID Button with execCommand fallback
-document.getElementById('btn-copy-upi-id').addEventListener('click', function() {
-  const text = 'meena.inn@fam';
-  try {
-    const t = document.createElement('textarea');
-    t.value = text;
-    document.body.appendChild(t);
-    t.select();
-    document.execCommand('copy');
-    document.body.removeChild(t);
-  } catch (err) {
-    if (navigator.clipboard && navigator.clipboard.writeText) {
-      navigator.clipboard.writeText(text).catch(() => {});
+  // Step 3 UTR Validation & Modal 2
+  document.getElementById('btn-open-utr-verify').addEventListener('click', function() {
+    const utr = document.getElementById('inp-utr-num').value.trim();
+    if (!utr || utr.length !== 12) {
+      document.getElementById('err-utr').style.display = 'block';
+      return;
     }
-  }
-  const btn = document.getElementById('btn-copy-upi-id');
-  btn.innerText = '✅ Copied!';
-  setTimeout(() => { btn.innerText = '📋 Copy UPI'; }, 2000);
-});
+    document.getElementById('err-utr').style.display = 'none';
+    appState.utr = utr;
 
-document.getElementById('btn-back-step2').addEventListener('click', () => switchScreen('screen-step2'));
+    document.getElementById('md-utr-val').innerText = utr;
+    document.getElementById('chk-utr-consent').checked = false;
+    document.getElementById('btn-utr-confirm-ok').disabled = true;
 
-// Step 3 UTR Validation
-document.getElementById('btn-open-utr-verify').addEventListener('click', function() {
-  const utr = document.getElementById('inp-utr-num').value.trim();
-  if (!utr || utr.length !== 12) {
-    document.getElementById('err-utr').style.display = 'block';
-    return;
-  }
-  document.getElementById('err-utr').style.display = 'none';
-  appState.utr = utr;
-
-  document.getElementById('md-utr-val').innerText = utr;
-  document.getElementById('chk-utr-consent').checked = false;
-  document.getElementById('btn-utr-confirm-ok').disabled = true;
-
-  document.getElementById('modal-utr-sheet').classList.add('active');
-});
-
-document.getElementById('chk-utr-consent').addEventListener('change', e => {
-  document.getElementById('btn-utr-confirm-ok').disabled = !e.target.checked;
-});
-document.getElementById('btn-close-utr-modal').addEventListener('click', () => {
-  document.getElementById('modal-utr-sheet').classList.remove('active');
-});
-
-// Modal 2 Confirm -> Step 4
-document.getElementById('btn-utr-confirm-ok').addEventListener('click', function() {
-  document.getElementById('modal-utr-sheet').classList.remove('active');
-  const bid = `VK-${Math.floor(100000 + Math.random() * 900000)}`;
-  appState.bookingId = bid;
-
-  saveBooking({
-    bid: bid,
-    name: appState.fullName,
-    email: appState.email,
-    phone: appState.phone,
-    youtube: appState.youtube,
-    dateStr: appState.selectedDate,
-    slotTime: appState.selectedSlot,
-    slot: `${appState.selectedDate} • ${appState.selectedSlot}`,
-    utr: appState.utr,
-    status: 'Pending',
-    time: new Date().toLocaleTimeString()
+    document.getElementById('modal-utr-sheet').classList.add('active');
   });
 
-  document.getElementById('res-bid').innerText = bid;
-  document.getElementById('res-name').innerText = appState.fullName;
-  document.getElementById('res-email').innerText = appState.email;
-  document.getElementById('res-phone').innerText = `+91 ${appState.phone}`;
-  document.getElementById('res-slot').innerText = `${appState.selectedDate} • ${appState.selectedSlot}`;
-  document.getElementById('res-utr').innerText = appState.utr;
+  document.getElementById('chk-utr-consent').addEventListener('change', e => {
+    document.getElementById('btn-utr-confirm-ok').disabled = !e.target.checked;
+  });
+  document.getElementById('btn-close-utr-modal').addEventListener('click', () => {
+    document.getElementById('modal-utr-sheet').classList.remove('active');
+  });
 
-  switchScreen('screen-step4');
-  playSuccessChime();
-});
+  // Step 3 -> Step 4 Confirmation
+  document.getElementById('btn-utr-confirm-ok').addEventListener('click', function() {
+    document.getElementById('modal-utr-sheet').classList.remove('active');
+    const bid = `VK-${Math.floor(100000 + Math.random() * 900000)}`;
+    appState.bookingId = bid;
 
-// Single WhatsApp Group Dispatch with Clipboard Copy
-document.getElementById('btn-send-whatsapp-group').addEventListener('click', function() {
-  const dispatchText = 
+    saveBooking({
+      bid: bid,
+      name: appState.fullName,
+      email: appState.email,
+      phone: appState.phone,
+      youtube: appState.youtube,
+      dateStr: appState.selectedDate,
+      slotTime: appState.selectedSlot,
+      slot: `${appState.selectedDate} • ${appState.selectedSlot}`,
+      utr: appState.utr,
+      status: 'Pending',
+      time: new Date().toLocaleTimeString()
+    });
+
+    document.getElementById('res-bid').innerText = bid;
+    document.getElementById('res-name').innerText = appState.fullName;
+    document.getElementById('res-email').innerText = appState.email;
+    document.getElementById('res-phone').innerText = `+91 ${appState.phone}`;
+    document.getElementById('res-slot').innerText = `${appState.selectedDate} • ${appState.selectedSlot}`;
+    document.getElementById('res-utr').innerText = appState.utr;
+
+    switchScreen('screen-step4');
+    playSuccessChime();
+  });
+
+  // WhatsApp Group Dispatch Action
+  document.getElementById('btn-send-whatsapp-group').addEventListener('click', function() {
+    const dispatchText = 
 `*New 28-Min Mentorship Booking!*
 ----------------------------
 *Booking ID:* ${appState.bookingId}
@@ -2107,146 +2127,150 @@ document.getElementById('btn-send-whatsapp-group').addEventListener('click', fun
 *12-Digit UTR:* ${appState.utr}
 *Channel/YT:* ${appState.youtube}`;
 
-  try {
-    const tempInput = document.createElement('textarea');
-    tempInput.value = dispatchText;
-    document.body.appendChild(tempInput);
-    tempInput.select();
-    document.execCommand('copy');
-    document.body.removeChild(tempInput);
-  } catch (err) {
-    if (navigator.clipboard && navigator.clipboard.writeText) {
-      navigator.clipboard.writeText(dispatchText).catch(() => {});
+    try {
+      const tempInput = document.createElement('textarea');
+      tempInput.value = dispatchText;
+      document.body.appendChild(tempInput);
+      tempInput.select();
+      document.execCommand('copy');
+      document.body.removeChild(tempInput);
+    } catch (err) {
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(dispatchText).catch(() => {});
+      }
+    }
+
+    const toast = document.getElementById('copy-toast-msg');
+    toast.style.display = 'block';
+    setTimeout(() => { toast.style.display = 'none'; }, 3200);
+
+    setTimeout(() => {
+      window.open(WHATSAPP_GROUP_URL, '_blank');
+    }, 450);
+  });
+
+  // Secret 5-Tap Admin Trigger
+  let tapCount = 0;
+  let tapTimer = null;
+
+  function handleSecretAdminTap() {
+    tapCount++;
+    clearTimeout(tapTimer);
+    tapTimer = setTimeout(() => { tapCount = 0; }, 2200);
+
+    if (tapCount >= 5) {
+      tapCount = 0;
+      document.getElementById('modal-admin-sheet').classList.add('active');
+      document.getElementById('admin-login-view').style.display = 'block';
+      document.getElementById('admin-dashboard-view').style.display = 'none';
+      document.getElementById('inp-admin-pass').value = '';
     }
   }
 
-  const toast = document.getElementById('copy-toast-msg');
-  toast.style.display = 'block';
-  setTimeout(() => { toast.style.display = 'none'; }, 3200);
+  const triggerAdmin1 = document.getElementById('secret-admin-trigger');
+  if (triggerAdmin1) triggerAdmin1.addEventListener('click', handleSecretAdminTap);
+  const triggerAdmin2 = document.getElementById('avatar-secret-trigger');
+  if (triggerAdmin2) triggerAdmin2.addEventListener('click', handleSecretAdminTap);
 
-  setTimeout(() => {
-    window.open(WHATSAPP_GROUP_URL, '_blank');
-  }, 450);
-});
+  document.getElementById('btn-admin-modal-home').addEventListener('click', function() {
+    document.getElementById('modal-admin-sheet').classList.remove('active');
+    switchScreen('screen-home');
+  });
+  document.getElementById('btn-admin-panel-home').addEventListener('click', function() {
+    document.getElementById('modal-admin-sheet').classList.remove('active');
+    switchScreen('screen-home');
+  });
 
-//let tapCount = 0;
-let tapTimer = null;
+  document.getElementById('toggle-pass-visibility').addEventListener('click', function() {
+    const inp = document.getElementById('inp-admin-pass');
+    inp.type = (inp.type === 'password') ? 'text' : 'password';
+  });
 
-function handleSecretAdminTap() {
-  tapCount++;
-  clearTimeout(tapTimer);
-  tapTimer = setTimeout(() => { tapCount = 0; }, 2200);
+  // Admin Auth: vny@0786
+  document.getElementById('btn-submit-admin-pass').addEventListener('click', function() {
+    const enteredPass = document.getElementById('inp-admin-pass').value.trim();
+    if (enteredPass === 'vny@0786') {
+      document.getElementById('admin-login-view').style.display = 'none';
+      document.getElementById('admin-dashboard-view').style.display = 'block';
+      activeAdminTab = 'Pending';
+      renderAdminDashboard();
+    } else {
+      alert('Access Denied: Invalid Security Password!');
+    }
+  });
 
-  if (tapCount >= 5) {
-    tapCount = 0;
-    document.getElementById('modal-admin-sheet').classList.add('active');
-    document.getElementById('admin-login-view').style.display = 'block';
-    document.getElementById('admin-dashboard-view').style.display = 'none';
-    document.getElementById('inp-admin-pass').value = '';
-  }
-}
-
-document.getElementById('secret-admin-trigger').addEventListener('click', handleSecretAdminTap);
-document.getElementById('avatar-secret-trigger').addEventListener('click', handleSecretAdminTap);
-
-document.getElementById('btn-admin-modal-home').addEventListener('click', function() {
-  document.getElementById('modal-admin-sheet').classList.remove('active');
-  switchScreen('screen-home');
-});
-document.getElementById('btn-admin-panel-home').addEventListener('click', function() {
-  document.getElementById('modal-admin-sheet').classList.remove('active');
-  switchScreen('screen-home');
-});
-
-document.getElementById('toggle-pass-visibility').addEventListener('click', function() {
-  const inp = document.getElementById('inp-admin-pass');
-  inp.type = (inp.type === 'password') ? 'text' : 'password';
-});
-
-// Admin Auth (Password: vny@0786)
-document.getElementById('btn-submit-admin-pass').addEventListener('click', function() {
-  const enteredPass = document.getElementById('inp-admin-pass').value.trim();
-  if (enteredPass === 'vny@0786') {
-    document.getElementById('admin-login-view').style.display = 'none';
-    document.getElementById('admin-dashboard-view').style.display = 'block';
+  let activeAdminTab = 'Pending';
+  document.getElementById('tab-btn-pending').addEventListener('click', () => {
     activeAdminTab = 'Pending';
     renderAdminDashboard();
-  } else {
-    alert('Access Denied: Invalid Security Password!');
-  }
-});
+  });
+  document.getElementById('tab-btn-approved').addEventListener('click', () => {
+    activeAdminTab = 'Approved';
+    renderAdminDashboard();
+  });
 
-let activeAdminTab = 'Pending';
-document.getElementById('tab-btn-pending').addEventListener('click', () => {
-  activeAdminTab = 'Pending';
-  renderAdminDashboard();
-});
-document.getElementById('tab-btn-approved').addEventListener('click', () => {
-  activeAdminTab = 'Approved';
-  renderAdminDashboard();
-});
+  function renderAdminDashboard() {
+    const list = getSavedBookings();
+    const pendingList = list.filter(b => b.status !== 'Approved');
+    const approvedList = list.filter(b => b.status === 'Approved');
 
-function renderAdminDashboard() {
-  const list = getSavedBookings();
-  const pendingList = list.filter(b => b.status !== 'Approved');
-  const approvedList = list.filter(b => b.status === 'Approved');
+    document.getElementById('cnt-pending').innerText = pendingList.length;
+    document.getElementById('cnt-approved').innerText = approvedList.length;
 
-  document.getElementById('cnt-pending').innerText = pendingList.length;
-  document.getElementById('cnt-approved').innerText = approvedList.length;
+    document.getElementById('tab-btn-pending').className = `admin-tab-btn ${activeAdminTab === 'Pending' ? 'active' : ''}`;
+    document.getElementById('tab-btn-approved').className = `admin-tab-btn ${activeAdminTab === 'Approved' ? 'active' : ''}`;
 
-  document.getElementById('tab-btn-pending').className = `admin-tab-btn ${activeAdminTab === 'Pending' ? 'active' : ''}`;
-  document.getElementById('tab-btn-approved').className = `admin-tab-btn ${activeAdminTab === 'Approved' ? 'active' : ''}`;
+    const container = document.getElementById('admin-leads-list-container');
+    const targetList = (activeAdminTab === 'Pending') ? pendingList : approvedList;
 
-  const container = document.getElementById('admin-leads-list-container');
-  const targetList = (activeAdminTab === 'Pending') ? pendingList : approvedList;
+    if (targetList.length === 0) {
+      container.innerHTML = `<div style="color:#94a3b8; text-align:center; padding:24px;">Koi ${activeAdminTab.toLowerCase()} booking nahi hai.</div>`;
+      return;
+    }
 
-  if (targetList.length === 0) {
-    container.innerHTML = `<div style="color:#94a3b8; text-align:center; padding:24px;">Koi ${activeAdminTab.toLowerCase()} booking nahi hai.</div>`;
-    return;
-  }
+    container.innerHTML = targetList.map(item => `
+      <div class="admin-lead-card">
+        <div style="display:flex; justify-content:space-between; font-weight:800; color:#0f172a; margin-bottom:4px;">
+          <span>${item.name}</span>
+          <span style="color:#0b7cff; font-family:monospace;">${item.bid}</span>
+        </div>
+        <div style="color:#64748b; font-size:12px;">📞 +91 ${item.phone} • 📧 ${item.email}</div>
+        <div style="color:#64748b; font-size:12px; margin-top:2px;">📅 ${item.slot}</div>
+        <div style="color:#b45309; font-weight:700; font-family:monospace; margin-top:4px;">UTR: ${item.utr}</div>
+        ${item.youtube ? `<div style="color:#475569; font-size:11.5px; margin-top:2px;">YT: ${item.youtube}</div>` : ''}
 
-  container.innerHTML = targetList.map(item => `
-    <div class="admin-lead-card">
-      <div style="display:flex; justify-content:space-between; font-weight:800; color:#0f172a; margin-bottom:4px;">
-        <span>${item.name}</span>
-        <span style="color:#0b7cff; font-family:monospace;">${item.bid}</span>
+        ${item.status === 'Approved' 
+          ? `<div style="margin-top:6px; font-weight:800; font-size:11px; color:#10b981;">🔒 LOCKED & BOOKED</div>
+             <button class="btn-admin-act-delete" onclick="handleDeleteAndUnlock('${item.bid}')">🗑 Free Slot & Delete</button>`
+          : `<div class="admin-actions-row">
+               <button class="btn-admin-act-approve" onclick="handleApproveBooking('${item.bid}')">✅ Approve & Lock</button>
+               <button class="btn-admin-act-reject" onclick="handleDeleteAndUnlock('${item.bid}')">❌ Cancel / Reject</button>
+             </div>`
+        }
       </div>
-      <div style="color:#64748b; font-size:12px;">📞 +91 ${item.phone} • 📧 ${item.email}</div>
-      <div style="color:#64748b; font-size:12px; margin-top:2px;">📅 ${item.slot}</div>
-      <div style="color:#b45309; font-weight:700; font-family:monospace; margin-top:4px;">UTR: ${item.utr}</div>
-      ${item.youtube ? `<div style="color:#475569; font-size:11.5px; margin-top:2px;">YT: ${item.youtube}</div>` : ''}
+    `).join('');
+  }
 
-      ${item.status === 'Approved' 
-        ? `<div style="margin-top:6px; font-weight:800; font-size:11px; color:#10b981;">🔒 LOCKED & BOOKED</div>
-           <button class="btn-admin-act-delete" onclick="handleDeleteAndUnlock('${item.bid}')">🗑 Free Slot & Delete</button>`
-        : `<div class="admin-actions-row">
-             <button class="btn-admin-act-approve" onclick="handleApproveBooking('${item.bid}')">✅ Approve & Lock</button>
-             <button class="btn-admin-act-reject" onclick="handleDeleteAndUnlock('${item.bid}')">❌ Cancel / Reject</button>
-           </div>`
-      }
-    </div>
-  `).join('');
-}
-
-window.handleApproveBooking = function(bid) {
-  updateBookingStatus(bid, 'Approved');
-  renderAdminDashboard();
-  refreshSlotStates();
-};
-
-window.handleDeleteAndUnlock = function(bid) {
-  if (confirm('Kya aap is booking ko delete karke slot free karna chahte hain?')) {
-    deleteBooking(bid);
+  window.handleApproveBooking = function(bid) {
+    updateBookingStatus(bid, 'Approved');
     renderAdminDashboard();
     refreshSlotStates();
-  }
-};
+  };
 
-document.getElementById('btn-logout-admin').addEventListener('click', () => {
-  document.getElementById('modal-admin-sheet').classList.remove('active');
+  window.handleDeleteAndUnlock = function(bid) {
+    if (confirm('Kya aap is booking ko delete karke slot free karna chahte hain?')) {
+      deleteBooking(bid);
+      renderAdminDashboard();
+      refreshSlotStates();
+    }
+  };
+
+  document.getElementById('btn-logout-admin').addEventListener('click', () => {
+    document.getElementById('modal-admin-sheet').classList.remove('active');
+  });
+
+  initCalendar();
 });
-
-initCalendar();
 </script>
 </body>
 </html>
