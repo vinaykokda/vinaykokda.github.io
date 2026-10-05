@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>Vinay Kokda | 1-on-1 Creator Mentorship</title>
+  <title>Vinay Kokda | 1-on-1 Creator Mentorship & Live Slot Portal</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.gstatic.com">
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 
   <style>
@@ -20,6 +20,9 @@
       --border-light: #e2e8f0;
       --emerald: #059669;
       --emerald-glow: rgba(16, 185, 129, 0.35);
+      --red-lock: #ef4444;
+      --red-lock-bg: #fef2f2;
+      --cyan-glow: #38bdf8;
     }
 
     * {
@@ -59,7 +62,6 @@
       overflow-x: clip;
     }
 
-    /* Strict global constraints so SVGs NEVER blow up */
     svg {
       display: inline-block;
       vertical-align: middle;
@@ -68,7 +70,6 @@
       flex-shrink: 0;
     }
 
-    /* Fixed top floating sticky bar on Home screen */
     .home-top-sticky-header {
       position: fixed;
       top: 0;
@@ -112,7 +113,6 @@
       transform: scale(0.93);
     }
 
-    /* Header Bar on Sub-pages */
     .top-app-header-bar {
       display: flex;
       align-items: center;
@@ -193,7 +193,7 @@
       font-weight: 600;
     }
     .top-header-price-tag {
-      font-size: 14px;
+      font-size: 13.5px;
       font-weight: 900;
       color: #38bdf8;
       background: rgba(56, 189, 248, 0.12);
@@ -202,7 +202,6 @@
       border-radius: 99px;
     }
 
-    /* Screen Transitions */
     .scr-view {
       display: none;
       width: 100%;
@@ -213,45 +212,76 @@
       opacity: 1;
     }
     .scr-view.slide-forward {
-      animation: viewSlideInRight 0.34s cubic-bezier(0.22, 1, 0.36, 1) both;
+      animation: viewSlideInRight 0.28s cubic-bezier(0.22, 1, 0.36, 1) both;
     }
     .scr-view.slide-backward {
-      animation: viewSlideInLeft 0.34s cubic-bezier(0.22, 1, 0.36, 1) both;
+      animation: viewSlideInLeft 0.28s cubic-bezier(0.22, 1, 0.36, 1) both;
     }
     @keyframes viewSlideInRight {
-      0% { opacity: 0; transform: translate3d(45px, 0, 0); }
+      0% { opacity: 0; transform: translate3d(30px, 0, 0); }
       100% { opacity: 1; transform: translate3d(0, 0, 0); }
     }
     @keyframes viewSlideInLeft {
-      0% { opacity: 0; transform: translate3d(-45px, 0, 0); }
+      0% { opacity: 0; transform: translate3d(-30px, 0, 0); }
       100% { opacity: 1; transform: translate3d(0, 0, 0); }
     }
 
-    /* Continuous Repeat Scroll Animation (Triggers both up and down) */
-    .scroll-anim {
-      opacity: 0;
-      transform: translateY(24px) scale(0.98);
-      transition: opacity 0.45s cubic-bezier(0.22, 1, 0.36, 1), transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
-      will-change: opacity, transform;
-    }
-    .scroll-anim.revealed {
-      opacity: 1;
-      transform: translateY(0) scale(1);
-    }
-
-    /* Hero Banner */
     .creator-hero-banner {
       background: var(--bg-banner-grad);
-      padding: 32px 20px 26px;
+      padding: 24px 20px 24px;
       text-align: center;
       color: #ffffff;
       position: relative;
+    }
+    .my-session-btn-pill {
+      position: absolute;
+      top: 14px;
+      left: 14px;
+      background: rgba(56, 189, 248, 0.12);
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      color: #38bdf8;
+      font-size: 11.5px;
+      font-weight: 800;
+      padding: 6px 14px;
+      border-radius: 99px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      text-decoration: none;
+      transition: all 0.15s ease;
+    }
+    .my-session-btn-pill:active {
+      transform: scale(0.93);
+      background: rgba(56, 189, 248, 0.25);
+    }
+    .admin-secret-pill {
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      color: #cbd5e1;
+      font-size: 11.5px;
+      font-weight: 800;
+      padding: 6px 14px;
+      border-radius: 99px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      text-decoration: none;
+      transition: all 0.15s ease;
+    }
+    .admin-secret-pill:active {
+      transform: scale(0.93);
+      background: rgba(255, 255, 255, 0.2);
     }
     .avatar-circle-wrap {
       width: 90px;
       height: 90px;
       border-radius: 50%;
-      margin: 0 auto 12px;
+      margin: 20px auto 12px;
       border: 3.5px solid rgba(255, 255, 255, 0.25);
       box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
       background: #0f172a;
@@ -261,7 +291,6 @@
       font-size: 32px;
       font-weight: 900;
       color: #ffffff;
-      letter-spacing: -0.5px;
       overflow: hidden;
     }
     .avatar-circle-wrap img {
@@ -277,8 +306,6 @@
       margin-bottom: 5px;
       letter-spacing: -0.3px;
     }
-
-    /* Authentic Blue Verified Badge (Subtly compact & clean) */
     .creator-verified-badge {
       display: inline-flex;
       align-items: center;
@@ -291,16 +318,12 @@
       font-weight: 700;
       color: #38bdf8;
       margin-bottom: 8px;
-      letter-spacing: 0.2px;
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
     }
     .verified-check-icon {
       width: 11.5px;
       height: 11.5px;
       flex-shrink: 0;
     }
-
     .creator-sub-tagline {
       font-size: 13px;
       color: #94a3b8;
@@ -310,7 +333,6 @@
       line-height: 1.4;
     }
 
-    /* Rounded Sheet Content Container */
     .sheet-content-container {
       background: #ffffff;
       border-radius: 26px 26px 0 0;
@@ -328,7 +350,6 @@
       letter-spacing: -0.3px;
     }
 
-    /* Primary Session Card with Distinct Black Border */
     .session-swati-card {
       background: #ffffff;
       border: 2px solid #0f172a;
@@ -337,10 +358,7 @@
       position: relative;
       box-shadow: 0 4px 18px rgba(15, 23, 42, 0.08);
       margin-bottom: 22px;
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
-
-    /* Top-Right Corner ONLY Active Status Badge */
     .card-top-active-corner {
       position: absolute;
       top: 16px;
@@ -369,7 +387,6 @@
       70% { box-shadow: 0 0 0 6px rgba(16, 185, 129, 0); }
       100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
     }
-
     .session-emoji-icon {
       font-size: 28px;
       margin-bottom: 8px;
@@ -388,7 +405,6 @@
       margin-bottom: 16px;
       max-width: 90%;
     }
-
     .session-card-bottom {
       display: flex;
       justify-content: space-between;
@@ -419,8 +435,6 @@
       height: 14px;
       flex-shrink: 0;
     }
-
-    /* Centered Rating Badge Directly Above Payment Button */
     .action-right-wrap {
       display: flex;
       flex-direction: column;
@@ -437,11 +451,7 @@
       border: 1px solid #fde68a;
       padding: 2px 10px;
       border-radius: 99px;
-      text-align: center;
-      letter-spacing: 0.2px;
     }
-
-    /* Glossy Glowing Shimmer Button */
     .btn-book-action {
       background: var(--accent-blue);
       color: #ffffff;
@@ -452,7 +462,7 @@
       font-weight: 800;
       cursor: pointer;
       box-shadow: 0 4px 14px rgba(11, 124, 255, 0.35);
-      transition: transform 0.12s ease, background 0.15s ease;
+      transition: transform 0.12s ease;
       display: inline-flex;
       align-items: center;
       gap: 6px;
@@ -466,16 +476,9 @@
       left: -130%;
       width: 55%;
       height: 220%;
-      background: linear-gradient(
-        115deg,
-        rgba(255, 255, 255, 0) 0%,
-        rgba(255, 255, 255, 0.25) 30%,
-        rgba(255, 255, 255, 0.75) 50%,
-        rgba(255, 255, 255, 0.25) 70%,
-        rgba(255, 255, 255, 0) 100%
-      );
+      background: linear-gradient(115deg, transparent 0%, rgba(255,255,255,0.25) 30%, rgba(255,255,255,0.75) 50%, transparent 100%);
       transform: rotate(26deg);
-      animation: btnLightSweep 3.2s infinite cubic-bezier(0.4, 0, 0.2, 1);
+      animation: btnLightSweep 3.2s infinite;
       pointer-events: none;
     }
     @keyframes btnLightSweep {
@@ -485,7 +488,6 @@
     }
     .btn-book-action:active {
       transform: scale(0.95);
-      background: var(--accent-blue-hover);
     }
     .btn-book-action s {
       color: rgba(255, 255, 255, 0.65);
@@ -493,7 +495,6 @@
       font-size: 12px;
     }
 
-    /* Expectations Card */
     .expectations-card {
       background: #f8fafc;
       border: 1px solid var(--border-light);
@@ -529,9 +530,7 @@
       top: -3px;
     }
 
-    /* Authentic Navy About Card Matching Photo Reference */
     .dhruv-about-card {
-      background: #09233f;
       background: linear-gradient(145deg, #0c2b4a 0%, #071a2d 100%);
       color: #ffffff;
       border-radius: 22px;
@@ -566,7 +565,6 @@
       font-weight: 700;
       color: #22d3ee;
       margin-bottom: 16px;
-      letter-spacing: 0.2px;
     }
     .dhruv-about-body p {
       font-size: 12.8px;
@@ -574,15 +572,11 @@
       line-height: 1.58;
       margin-bottom: 12px;
     }
-    .dhruv-about-body p:last-child {
-      margin-bottom: 0;
-    }
     .dhruv-about-body b {
       color: #ffffff;
       font-weight: 800;
     }
 
-    /* FAQ Box Accordions */
     .faq-wrap-box {
       margin-bottom: 22px;
     }
@@ -601,7 +595,6 @@
       border-radius: 14px;
       margin-bottom: 8px;
       overflow: hidden;
-      transition: border-color 0.2s ease;
     }
     .faq-head-btn {
       width: 100%;
@@ -636,7 +629,6 @@
       display: block;
     }
 
-    /* Social Capsule Card (Strictly 44px Buttons) */
     .dhruv-capsule-card {
       background: #f8fafc;
       border: 1.5px solid var(--border-light);
@@ -658,35 +650,277 @@
       gap: 14px;
     }
     .dhruv-round-btn {
-      width: 44px !important;
-      height: 44px !important;
-      max-width: 44px !important;
-      max-height: 44px !important;
-      border-radius: 50% !important;
-      background: #0f172a !important;
-      display: inline-flex !important;
-      align-items: center !important;
-      justify-content: center !important;
-      color: #ffffff !important;
-      text-decoration: none !important;
-      box-shadow: 0 4px 12px rgba(15, 23, 42, 0.15) !important;
-      transition: transform 0.15s ease, background 0.15s ease !important;
-      flex-shrink: 0 !important;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: #0f172a;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: #ffffff;
+      text-decoration: none;
+      box-shadow: 0 4px 12px rgba(15, 23, 42, 0.15);
+      transition: transform 0.15s ease;
+      flex-shrink: 0;
     }
     .dhruv-round-btn:active {
       transform: scale(0.92);
-      background: #0b7cff !important;
+      background: #0b7cff;
     }
     .dhruv-round-btn svg {
-      width: 20px !important;
-      height: 20px !important;
-      max-width: 20px !important;
-      max-height: 20px !important;
-      fill: #ffffff !important;
-      display: block !important;
+      width: 20px;
+      height: 20px;
+      fill: #ffffff;
+      display: block;
     }
 
-    /* Stepper Styling */
+    .slot-picker-wrap {
+      padding: 16px 16px 110px;
+      background: #ffffff;
+      min-height: calc(100vh - 65px);
+    }
+    .slot-picker-header {
+      margin-bottom: 16px;
+    }
+    .slot-picker-title {
+      font-size: 21px;
+      font-weight: 900;
+      color: #0f172a;
+      letter-spacing: -0.4px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 4px;
+    }
+    .slot-picker-sub {
+      font-size: 13px;
+      color: #64748b;
+      font-weight: 500;
+    }
+    .selected-date-label-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin: 16px 0 10px;
+    }
+    .selected-date-txt {
+      font-size: 13.5px;
+      font-weight: 800;
+      color: #0b7cff;
+    }
+    .date-pills-scroll-row {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      padding-bottom: 6px;
+      scrollbar-width: none;
+      -webkit-overflow-scrolling: touch;
+    }
+    .date-pills-scroll-row::-webkit-scrollbar {
+      display: none;
+    }
+    .date-pill-btn {
+      flex: 0 0 78px;
+      background: #ffffff;
+      border: 1.5px solid var(--border-light);
+      border-radius: 16px;
+      padding: 10px 4px;
+      text-align: center;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2px;
+      transition: all 0.2s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .date-pill-btn.active {
+      border-color: #0b7cff;
+      box-shadow: 0 0 0 2px rgba(11, 124, 255, 0.2);
+      background: #f0f7ff;
+    }
+    .dp-day-txt {
+      font-size: 10.5px;
+      font-weight: 800;
+      text-transform: uppercase;
+      color: #64748b;
+    }
+    .dp-date-num {
+      font-size: 14px;
+      font-weight: 900;
+      color: #0f172a;
+    }
+    .dp-slots-count {
+      font-size: 10px;
+      font-weight: 700;
+      color: #059669;
+    }
+    .date-pill-btn.active .dp-slots-count {
+      color: #0b7cff;
+    }
+
+    .filter-tabs-container {
+      margin: 18px 0 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .filter-tabs-label {
+      font-size: 13px;
+      font-weight: 700;
+      color: #334155;
+    }
+    .filter-pills-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .filter-pill-btn {
+      background: #ffffff;
+      border: 1.5px solid var(--border-light);
+      border-radius: 99px;
+      padding: 8px 14px;
+      font-size: 12px;
+      font-weight: 700;
+      color: #475569;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+    .filter-pill-btn.active {
+      background: #0b7cff;
+      color: #ffffff;
+      border-color: #0b7cff;
+      box-shadow: 0 4px 12px rgba(11, 124, 255, 0.25);
+    }
+
+    .slots-grid-layout {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 10px;
+      margin-top: 14px;
+    }
+    .slot-interactive-card {
+      background: #ffffff;
+      border: 1.5px solid var(--border-light);
+      border-radius: 16px;
+      padding: 14px 14px;
+      cursor: pointer;
+      position: relative;
+      transition: all 0.2s cubic-bezier(0.22, 1, 0.36, 1);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: 84px;
+    }
+    .slot-interactive-card.selected {
+      border-color: #0b7cff;
+      border-width: 2px;
+      box-shadow: 0 0 0 3px rgba(11, 124, 255, 0.22);
+      background: #f0f7ff;
+    }
+    .slot-time-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .slot-bold-time {
+      font-size: 16px;
+      font-weight: 900;
+      color: #0f172a;
+    }
+    .slot-duration-range {
+      font-size: 12px;
+      color: #64748b;
+      font-weight: 600;
+      margin-top: 4px;
+    }
+    .slot-interactive-card.is-locked {
+      background: #fff8f8;
+      border-color: #fee2e2;
+      cursor: not-allowed;
+      opacity: 0.95;
+      user-select: none;
+    }
+    .slot-interactive-card.is-locked .slot-bold-time {
+      color: #94a3b8;
+      text-decoration: line-through;
+    }
+    .locked-badge-pill {
+      background: #fee2e2;
+      color: #dc2626;
+      border-radius: 99px;
+      padding: 3px 8px;
+      font-size: 10px;
+      font-weight: 800;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .locked-card-bottom-msg {
+      font-size: 10px;
+      font-weight: 800;
+      color: #dc2626;
+      margin-top: 4px;
+    }
+    .slot-interactive-card.is-past {
+      background: #f1f5f9;
+      border-color: #e2e8f0;
+      cursor: not-allowed;
+      opacity: 0.6;
+      user-select: none;
+    }
+    .slot-interactive-card.is-past .slot-bold-time {
+      color: #94a3b8;
+    }
+
+    .slot-bottom-sticky-bar {
+      position: fixed;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100%;
+      max-width: 440px;
+      background: rgba(255, 255, 255, 0.98);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-top: 1.5px solid var(--border-light);
+      padding: 12px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      z-index: 105;
+      box-shadow: 0 -6px 20px rgba(0, 0, 0, 0.08);
+    }
+    .sticky-bar-slot-info {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      font-weight: 800;
+      color: #0f172a;
+    }
+    .sticky-bar-confirm-btn {
+      background: #0b7cff;
+      color: #ffffff;
+      border: none;
+      padding: 12px 20px;
+      border-radius: 99px;
+      font-size: 14px;
+      font-weight: 800;
+      cursor: pointer;
+      box-shadow: 0 4px 14px rgba(11, 124, 255, 0.35);
+      transition: transform 0.12s ease;
+      white-space: nowrap;
+    }
+    .sticky-bar-confirm-btn:active {
+      transform: scale(0.95);
+    }
+    .sticky-bar-confirm-btn:disabled {
+      background: #cbd5e1;
+      cursor: not-allowed;
+      box-shadow: none;
+    }
+
     .stepper-header-box {
       text-align: center;
       padding: 14px 16px 6px;
@@ -734,7 +968,6 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      transition: all 0.2s ease;
     }
     .step-bubble-item.active .step-circle {
       background: var(--accent-blue);
@@ -750,7 +983,6 @@
       color: #0f172a;
     }
 
-    /* Form Wrapper */
     .form-wrapper-card {
       background: #ffffff;
       border: 1.5px solid var(--border-light);
@@ -789,7 +1021,6 @@
       font-size: 14px;
       color: #0f172a;
       outline: none;
-      transition: border-color 0.2s ease, background 0.2s ease;
     }
     .custom-input-field:focus {
       border-color: var(--accent-blue);
@@ -830,7 +1061,7 @@
       font-weight: 800;
       cursor: pointer;
       box-shadow: 0 4px 14px rgba(11, 124, 255, 0.35);
-      transition: transform 0.12s ease, background 0.15s ease, opacity 0.2s ease;
+      transition: transform 0.12s ease;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -841,13 +1072,11 @@
     }
     .primary-submit-btn:disabled {
       background: #94a3b8;
-      opacity: 0.55;
+      opacity: 0.65;
       cursor: not-allowed;
       box-shadow: none;
-      pointer-events: none;
     }
 
-    /* QR Container */
     .qr-card-container {
       text-align: center;
       margin-bottom: 16px;
@@ -878,176 +1107,690 @@
       font-size: 13px;
       margin-left: 4px;
     }
-    .upi-copy-pill {
+
+    .learner-portal-container {
+      padding: 20px 16px 30px;
+      background: #f8fafc;
+    }
+    .portal-profile-card {
+      background: #ffffff;
+      border: 1.5px solid var(--border-light);
+      border-radius: 24px;
+      padding: 22px 18px;
+      text-align: center;
+      margin-bottom: 18px;
+      box-shadow: 0 4px 20px rgba(15, 23, 42, 0.04);
+      position: relative;
+    }
+    .portal-avatar-gradient {
+      width: 76px;
+      height: 76px;
+      border-radius: 50%;
+      margin: 0 auto 12px;
+      background: linear-gradient(135deg, #ec4899 0%, #8b5cf6 100%);
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 32px;
+      font-weight: 900;
+      box-shadow: 0 8px 20px rgba(236, 72, 153, 0.3);
+    }
+    .portal-user-name {
+      font-size: 22px;
+      font-weight: 900;
+      color: #0f172a;
+      margin-bottom: 4px;
+    }
+    .vip-tag-row {
+      display: flex;
+      justify-content: center;
+      gap: 6px;
+      margin-bottom: 10px;
+    }
+    .vip-tag-pill {
+      background: #fdf2f8;
+      border: 1px solid #fbcfe8;
+      color: #db2777;
+      font-size: 11px;
+      font-weight: 800;
+      padding: 3px 10px;
+      border-radius: 99px;
+    }
+    .passes-tag-pill {
+      background: #eff6ff;
+      border: 1px solid #bfdbfe;
+      color: #2563eb;
+      font-size: 11px;
+      font-weight: 800;
+      padding: 3px 10px;
+      border-radius: 99px;
+    }
+    .portal-meta-line {
+      font-size: 12px;
+      color: #64748b;
+      font-weight: 600;
+      margin-bottom: 3px;
+    }
+    .portal-pin-badge-row {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: #f1f5f9;
+      border: 1px solid #e2e8f0;
+      padding: 4px 12px;
+      border-radius: 99px;
+      margin: 8px auto 4px;
+    }
+    .portal-pin-badge-row b {
+      font-size: 12px;
+      color: #0f172a;
+      letter-spacing: 2px;
+    }
+    .btn-edit-learner-pin {
+      background: none;
+      border: none;
+      color: #0b7cff;
+      font-size: 11px;
+      font-weight: 800;
+      cursor: pointer;
+      text-decoration: underline;
+      display: inline-flex;
+      align-items: center;
+      gap: 3px;
+    }
+    .portal-stats-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 8px;
+      margin: 14px 0 6px;
+    }
+    .portal-stat-box {
+      background: #f8fafc;
+      border: 1px solid var(--border-light);
+      border-radius: 16px;
+      padding: 10px 4px;
+      text-align: center;
+    }
+    .ps-title {
+      font-size: 10px;
+      font-weight: 800;
+      color: #64748b;
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+    }
+    .ps-num {
+      font-size: 18px;
+      font-weight: 900;
+      color: #0f172a;
+      margin-top: 2px;
+    }
+    .ps-verified-badge {
+      color: #b45309;
+      font-size: 11.5px;
+      font-weight: 900;
+      margin-top: 2px;
+    }
+
+    .vip-ticket-card {
+      background: #ffffff;
+      border: 1.5px solid var(--border-light);
+      border-radius: 22px;
+      padding: 18px 16px;
+      margin-bottom: 16px;
+      box-shadow: 0 4px 18px rgba(0, 0, 0, 0.04);
+    }
+    .ticket-header-row {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      background: #ffffff;
-      border: 1.5px solid var(--border-light);
-      border-radius: 14px;
-      padding: 10px 14px;
-      margin-bottom: 18px;
+      margin-bottom: 12px;
     }
-    .upi-val-txt {
+    .ticket-type-pill {
+      background: #ffe4e6;
+      color: #e11d48;
+      border: 1px solid #fecdd3;
+      padding: 3px 8px;
+      border-radius: 6px;
+      font-size: 11px;
       font-weight: 800;
-      font-size: 14px;
-      color: #0f172a;
-      letter-spacing: 0.3px;
     }
-    .btn-copy-action {
-      background: #0f172a;
-      color: #ffffff;
-      border: 0;
-      padding: 7px 14px;
-      border-radius: 99px;
+    .ticket-id-txt {
       font-size: 12px;
       font-weight: 800;
-      cursor: pointer;
+      color: #64748b;
+    }
+    .ticket-status-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      background: #fef3c7;
+      border: 1px solid #fde68a;
+      color: #b45309;
+      padding: 3px 10px;
+      border-radius: 99px;
+      font-size: 11px;
+      font-weight: 800;
+      margin-bottom: 8px;
+    }
+    .ticket-status-pill.approved {
+      background: #ecfdf5;
+      border-color: #a7f3d0;
+      color: #047857;
+    }
+    .ticket-session-title {
+      font-size: 17px;
+      font-weight: 900;
+      color: #0f172a;
+      margin-bottom: 4px;
+    }
+    .ticket-attendee-name {
+      font-size: 12.5px;
+      color: #64748b;
+      margin-bottom: 14px;
+    }
+    .ticket-meta-box {
+      background: #f8fafc;
+      border: 1px solid var(--border-light);
+      border-radius: 14px;
+      padding: 12px 14px;
+      margin-bottom: 14px;
+    }
+    .tmb-item {
+      font-size: 12px;
+      color: #334155;
+      line-height: 1.5;
+      margin-bottom: 8px;
+    }
+    .tmb-item:last-child {
+      margin-bottom: 0;
+    }
+    .tmb-label {
+      font-size: 10px;
+      font-weight: 800;
+      text-transform: uppercase;
+      color: #94a3b8;
+      display: block;
+      letter-spacing: 0.5px;
+    }
+    .tmb-val-strong {
+      font-weight: 800;
+      color: #0f172a;
     }
 
-    /* Success Screen & Tactile Spring Pop Badge */
-    .success-badge-wrap {
-      text-align: center;
-      padding: 30px 18px 12px;
-      position: relative;
+    .meet-unlock-box {
+      background: #fffbeb;
+      border: 1px solid #fef3c7;
+      border-radius: 12px;
+      padding: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      color: #92400e;
+      font-weight: 700;
+      margin-bottom: 14px;
     }
-    .celebration-ripple-aura {
-      position: relative;
+    .meet-unlock-box.approved {
+      background: #ecfdf5;
+      border-color: #a7f3d0;
+      color: #065f46;
+    }
+    .btn-join-meet {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      margin-bottom: 18px;
-    }
-    .ripple-ring {
-      position: absolute;
-      inset: -14px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(16, 185, 129, 0.22) 0%, rgba(16, 185, 129, 0) 70%);
-      animation: ripplePulse 2s cubic-bezier(0.22, 1, 0.36, 1) infinite;
-      pointer-events: none;
-      z-index: 1;
-    }
-    @keyframes ripplePulse {
-      0% { transform: scale(0.85); opacity: 0.8; }
-      50% { transform: scale(1.35); opacity: 0.2; }
-      100% { transform: scale(1.55); opacity: 0; }
-    }
-    .spring-check-badge-card {
-      position: relative;
-      z-index: 2;
-      width: 86px;
-      height: 86px;
-      border-radius: 50%;
-      background: #e6f9f0;
-      border: 3.5px solid #059669;
-      box-shadow: 0 0 0 6px rgba(16, 185, 129, 0.12), 0 10px 28px rgba(16, 185, 129, 0.3);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      will-change: transform;
-      animation: springPopEngage 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) both;
-    }
-    @keyframes springPopEngage {
-      0% { opacity: 0; transform: scale(0.2) rotate(-20deg); }
-      45% { transform: scale(1.24) rotate(4deg); }
-      65% { transform: scale(0.92) rotate(-2deg); }
-      82% { transform: scale(1.08) rotate(1deg); }
-      100% { opacity: 1; transform: scale(1) rotate(0deg); }
-    }
-    .spring-check-svg {
-      width: 44px;
-      height: 44px;
-    }
-    .spring-check-path {
-      stroke: #059669;
-      stroke-width: 4.8;
-      stroke-linecap: round;
-      stroke-linejoin: round;
-      fill: none;
-      stroke-dasharray: 60;
-      stroke-dashoffset: 60;
-      animation: drawCheckPath 0.5s cubic-bezier(0.22, 1, 0.36, 1) 0.25s forwards;
-    }
-    @keyframes drawCheckPath {
-      to { stroke-dashoffset: 0; }
-    }
-    .success-main-headline {
-      font-size: 24px;
-      font-weight: 900;
-      color: #0f172a;
-      margin-bottom: 6px;
-    }
-    .pending-status-pill {
-      display: inline-block;
-      background: #fef3c7;
-      color: #b45309;
-      font-size: 12.5px;
+      gap: 8px;
+      width: 100%;
+      background: #059669;
+      color: #ffffff;
+      padding: 12px;
+      border-radius: 14px;
+      font-size: 14px;
       font-weight: 800;
-      padding: 6px 14px;
-      border-radius: 99px;
-      margin-bottom: 20px;
-      border: 1px solid #fde68a;
+      text-decoration: none;
+      margin-bottom: 10px;
+      box-shadow: 0 4px 14px rgba(5, 150, 105, 0.3);
     }
-    .booking-summary-card {
-      background: #ffffff;
-      border: 1.5px solid var(--border-light);
-      border-radius: 18px;
-      padding: 16px;
-      margin: 0 18px 18px;
-      display: grid;
-      gap: 10px;
-    }
-    .summary-line-item {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+    .btn-pdf-receipt {
+      width: 100%;
+      background: #0f172a;
+      color: #ffffff;
+      border: none;
+      padding: 12px;
+      border-radius: 14px;
       font-size: 13.5px;
-    }
-    .summary-label-txt {
-      color: #64748b;
-      font-weight: 600;
-    }
-    .summary-val-txt {
       font-weight: 800;
-      color: #0f172a;
-    }
-    .btn-choose-slot-cta {
+      cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
       gap: 6px;
-      background: linear-gradient(90deg, #f59e0b, #d97706);
-      color: #ffffff;
-      text-decoration: none;
-      font-size: 16px;
+      margin-bottom: 8px;
+      transition: transform 0.12s ease;
+    }
+    .btn-pdf-receipt:active {
+      transform: scale(0.97);
+    }
+    .btn-portal-help-action {
+      width: 100%;
+      background: #eff6ff;
+      border: 1.5px solid #bfdbfe;
+      color: #1d4ed8;
+      padding: 11px 14px;
+      border-radius: 12px;
+      font-size: 12.5px;
       font-weight: 800;
-      padding: 14px 20px;
-      border-radius: 16px;
-      margin: 0 18px 16px;
-      box-shadow: 0 6px 20px rgba(245, 158, 11, 0.35);
-      border: none;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
       cursor: pointer;
       transition: transform 0.12s ease;
     }
-    .btn-choose-slot-cta:active {
+    .btn-portal-help-action:active {
       transform: scale(0.97);
-    }
-    .meet-notice-container {
-      background: #eff6ff;
-      border: 1px solid #bfdbfe;
-      border-radius: 16px;
-      padding: 14px;
-      margin: 0 18px 24px;
-      font-size: 12.5px;
-      line-height: 1.55;
-      color: #1e3a8a;
+      background: #dbeafe;
     }
 
-    /* Modal Styling */
+    .studio-header-card {
+      background: linear-gradient(135deg, #0c2b4a 0%, #07192b 100%);
+      border-radius: 20px;
+      padding: 18px;
+      color: #ffffff;
+      margin-bottom: 16px;
+      border: 1px solid rgba(56, 189, 248, 0.2);
+    }
+    .studio-head-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+    .studio-chip {
+      background: rgba(56, 189, 248, 0.15);
+      border: 1px solid rgba(56, 189, 248, 0.35);
+      color: #38bdf8;
+      font-size: 11px;
+      font-weight: 800;
+      padding: 4px 10px;
+      border-radius: 99px;
+    }
+    .studio-stat-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 8px;
+      margin-top: 10px;
+    }
+    .studio-stat-box {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 12px;
+      padding: 10px 6px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      user-select: none;
+    }
+    .studio-stat-box:active {
+      transform: scale(0.94);
+      background: rgba(56, 189, 248, 0.15);
+      border-color: rgba(56, 189, 248, 0.4);
+    }
+    .studio-stat-box b {
+      display: block;
+      font-size: 18px;
+      font-weight: 900;
+      color: #38bdf8;
+    }
+    .studio-stat-box span {
+      font-size: 10px;
+      font-weight: 700;
+      color: #94a3b8;
+      text-transform: uppercase;
+    }
+    .studio-booking-item {
+      background: #ffffff;
+      border: 1.5px solid var(--border-light);
+      border-radius: 18px;
+      padding: 14px;
+      margin-bottom: 12px;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.03);
+    }
+    .studio-item-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+      border-bottom: 1px solid #f1f5f9;
+      padding-bottom: 6px;
+    }
+    .studio-user-cred-box {
+      background: #f8fafc;
+      border: 1.5px solid #e2e8f0;
+      border-radius: 12px;
+      padding: 10px 12px;
+      margin: 8px 0;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .studio-user-cred-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 12px;
+    }
+    .studio-pin-badge {
+      background: #fef3c7;
+      border: 1.5px solid #fde68a;
+      color: #b45309;
+      font-family: monospace;
+      font-weight: 900;
+      padding: 2px 8px;
+      border-radius: 6px;
+      font-size: 13px;
+      letter-spacing: 1px;
+    }
+    .studio-item-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 10px;
+    }
+    .btn-approve-action {
+      background: #059669;
+      color: #ffffff;
+      border: none;
+      padding: 8px 12px;
+      border-radius: 10px;
+      font-size: 12px;
+      font-weight: 800;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .btn-wa-action {
+      background: #25d366;
+      color: #ffffff;
+      border: none;
+      padding: 8px 12px;
+      border-radius: 10px;
+      font-size: 12px;
+      font-weight: 800;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      cursor: pointer;
+    }
+    .btn-cancel-call {
+      background: #fffbeb;
+      border: 1.5px solid #fde68a;
+      color: #b45309;
+      padding: 8px 12px;
+      border-radius: 10px;
+      font-size: 12px;
+      font-weight: 800;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      transition: all 0.15s ease;
+    }
+    .btn-cancel-call:active {
+      transform: scale(0.95);
+      background: #fef3c7;
+    }
+    .btn-unlock-slot {
+      background: #fef2f2;
+      border: 1px solid #fecaca;
+      color: #dc2626;
+      padding: 8px 12px;
+      border-radius: 10px;
+      font-size: 12px;
+      font-weight: 800;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .pro-invoice-card {
+      background: #ffffff;
+      border: 1.5px solid #cbd5e1;
+      border-radius: 18px;
+      padding: 16px 14px;
+      box-shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
+      position: relative;
+      color: #0f172a;
+      font-size: 12px;
+    }
+    .invoice-top-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      border-bottom: 2px solid #0f172a;
+      padding-bottom: 12px;
+      margin-bottom: 12px;
+    }
+    .inv-brand-name {
+      font-size: 20px;
+      font-weight: 900;
+      letter-spacing: -0.5px;
+      color: #07192b;
+      line-height: 1.1;
+    }
+    .inv-brand-sub {
+      font-size: 11px;
+      color: #64748b;
+      font-weight: 600;
+      margin-top: 3px;
+    }
+    .inv-top-right-meta {
+      text-align: right;
+    }
+    .inv-badge-success {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      background: #ecfdf5;
+      color: #047857;
+      border: 1.5px solid #a7f3d0;
+      padding: 4px 10px;
+      border-radius: 99px;
+      font-size: 11px;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .inv-meta-line {
+      font-size: 11px;
+      color: #64748b;
+      font-weight: 600;
+      margin-top: 4px;
+    }
+
+    .inv-grid-two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 12px;
+      padding: 10px 12px;
+      margin-bottom: 12px;
+    }
+    .inv-col-block {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+    .inv-col-title {
+      font-size: 10px;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      color: #64748b;
+      margin-bottom: 2px;
+    }
+    .inv-col-val {
+      font-size: 12px;
+      color: #0f172a;
+      line-height: 1.4;
+    }
+
+    .inv-table-wrap {
+      width: 100%;
+      border: 1px solid #e2e8f0;
+      border-radius: 12px;
+      overflow: hidden;
+      margin-bottom: 12px;
+    }
+    .inv-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 11.5px;
+      text-align: left;
+    }
+    .inv-table th {
+      background: #0f172a;
+      color: #ffffff;
+      padding: 8px 10px;
+      font-weight: 800;
+      font-size: 10.5px;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+    .inv-table td {
+      padding: 9px 10px;
+      border-bottom: 1px solid #f1f5f9;
+      color: #334155;
+    }
+    .inv-table tr:last-child td {
+      border-bottom: none;
+    }
+    .inv-table .col-right {
+      text-align: right;
+      font-weight: 700;
+    }
+
+    .inv-amount-words-box {
+      background: #f1f5f9;
+      border-left: 3.5px solid #0b7cff;
+      padding: 8px 12px;
+      border-radius: 4px 8px 8px 4px;
+      font-size: 11px;
+      color: #1e293b;
+      margin-bottom: 12px;
+    }
+    .inv-amount-words-box b {
+      color: #0f172a;
+      font-weight: 800;
+    }
+
+    .inv-total-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #f0fdf4;
+      border: 1.5px solid #bbf7d0;
+      padding: 10px 14px;
+      border-radius: 12px;
+      margin-bottom: 14px;
+    }
+    .inv-total-label {
+      font-size: 13px;
+      font-weight: 800;
+      color: #166534;
+    }
+    .inv-total-val {
+      font-size: 18px;
+      font-weight: 900;
+      color: #15803d;
+      letter-spacing: -0.3px;
+    }
+
+    .inv-auth-footer-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      align-items: flex-end;
+      padding-top: 10px;
+      border-top: 1px dashed #cbd5e1;
+      margin-bottom: 10px;
+    }
+    .inv-seal-col {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .inv-seal-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: #eff6ff;
+      border: 1px solid #bfdbfe;
+      color: #1d4ed8;
+      padding: 4px 8px;
+      border-radius: 8px;
+      font-size: 10.5px;
+      font-weight: 800;
+    }
+    .inv-sign-col {
+      text-align: right;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+    }
+    .inv-sign-header {
+      font-size: 10px;
+      font-weight: 800;
+      color: #64748b;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 4px;
+    }
+    .inv-signature-vector-box {
+      width: 110px;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      margin-bottom: 2px;
+    }
+    .inv-sign-line {
+      font-size: 11px;
+      font-weight: 900;
+      color: #0f172a;
+      border-top: 1px solid #94a3b8;
+      padding-top: 2px;
+      display: inline-block;
+      min-width: 120px;
+      text-align: center;
+    }
+    .inv-sign-title {
+      font-size: 9.5px;
+      color: #64748b;
+      font-weight: 700;
+    }
+
+    .inv-legal-notice {
+      font-size: 9.5px;
+      color: #64748b;
+      line-height: 1.45;
+      text-align: center;
+      border-top: 1px solid #f1f5f9;
+      padding-top: 8px;
+      margin-top: 4px;
+    }
+
     .app-modal-backdrop {
       position: fixed;
       inset: 0;
-      background: rgba(0, 0, 0, 0.6);
+      background: rgba(0, 0, 0, 0.65);
       backdrop-filter: blur(4px);
       -webkit-backdrop-filter: blur(4px);
       z-index: 200;
@@ -1064,7 +1807,9 @@
       background: #ffffff;
       border-radius: 28px 28px 0 0;
       padding: 24px 20px 28px;
-      animation: modalSlideUp 0.3s cubic-bezier(0.22, 1, 0.36, 1) both;
+      animation: modalSlideUp 0.25s cubic-bezier(0.22, 1, 0.36, 1) both;
+      max-height: 90vh;
+      overflow-y: auto;
     }
     @keyframes modalSlideUp {
       from { transform: translateY(100%); }
@@ -1075,7 +1820,61 @@
       font-weight: 800;
       color: #0f172a;
       text-align: center;
-      margin-bottom: 16px;
+      margin-bottom: 6px;
+    }
+    .modal-top-nav-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 10px;
+    }
+    .modal-top-back-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      background: #f1f5f9;
+      border: 1px solid #e2e8f0;
+      color: #334155;
+      font-size: 12px;
+      font-weight: 800;
+      padding: 6px 12px;
+      border-radius: 99px;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+    .modal-top-back-btn:active {
+      transform: scale(0.92);
+      background: #e2e8f0;
+    }
+    .input-with-eye-wrap {
+      position: relative;
+      display: flex;
+      align-items: center;
+      width: 100%;
+    }
+    .input-with-eye-wrap .custom-input-field {
+      padding-right: 44px;
+    }
+    .eye-toggle-btn {
+      position: absolute;
+      right: 12px;
+      background: none;
+      border: none;
+      color: #64748b;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 4px;
+      transition: color 0.15s ease;
+    }
+    .eye-toggle-btn:active {
+      color: #0b7cff;
+    }
+    .eye-toggle-btn svg {
+      width: 20px;
+      height: 20px;
+      stroke: currentColor;
     }
     .modal-meta-box {
       background: #f8fafc;
@@ -1107,7 +1906,39 @@
       cursor: pointer;
     }
 
-    /* Universal Global Footer */
+    .app-toast-box {
+      position: fixed;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%) translateY(-50px);
+      background: #0f172a;
+      color: #ffffff;
+      padding: 10px 18px;
+      border-radius: 99px;
+      font-size: 13px;
+      font-weight: 700;
+      z-index: 300;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      pointer-events: none;
+      opacity: 0;
+      transition: all 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .app-toast-box.show {
+      transform: translateX(-50%) translateY(0);
+      opacity: 1;
+    }
+    .app-toast-box.success {
+      background: #064e3b;
+      color: #a7f3d0;
+      border-color: #10b981;
+    }
+    .app-toast-box.error {
+      background: #7f1d1d;
+      color: #fecaca;
+      border-color: #ef4444;
+    }
+
     .app-global-footer {
       text-align: center;
       color: #94a3b8;
@@ -1120,8 +1951,9 @@
 </head>
 <body>
 
+<div class="app-toast-box" id="app-toast">Notification</div>
+
 <main>
-  <!-- Home Top Floating Sticky Bar -->
   <header class="home-top-sticky-header" id="home-sticky-top-bar">
     <div class="top-app-left-group">
       <div class="top-thumb-avatar">
@@ -1132,21 +1964,25 @@
         <span class="top-header-subtitle">Vinay Kokda • 28 mins</span>
       </div>
     </div>
-    <button class="top-header-book-btn" onclick="startBooking('Creator Clarity Call', 499)">₹499 →</button>
+    <button class="top-header-book-btn" onclick="openSlotPicker()">₹499 →</button>
   </header>
 
-  <!-- View 1: Home Landing Page -->
+  <!-- VIEW 1: HOME SCREEN -->
   <div class="scr-view on" id="view-home">
-    
-    <!-- Hero Dark Banner -->
     <section class="creator-hero-banner">
+      <a href="javascript:void(0)" class="my-session-btn-pill" onclick="openLearnerPassLoginModal()">
+        <span>🎫</span> My Pass
+      </a>
+      <a href="javascript:void(0)" class="admin-secret-pill" onclick="openAdminAuthModal()">
+        <span>🔒</span> Admin
+      </a>
+
       <div class="avatar-circle-wrap">
-        <img id="creator-avatar-img" src="profile.png" alt="Vinay Kokda" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+        <img src="profile.png" alt="Vinay Kokda" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
         <span style="display:none;">VK</span>
       </div>
       <h1 class="creator-title-name">Vinay Kokda</h1>
 
-      <!-- Authentic Blue Verified Badge (Subtly compact) -->
       <div class="creator-verified-badge">
         <svg class="verified-check-icon" viewBox="0 0 24 24">
           <path fill="#0095f6" d="M22.5 12.5c0-1.58-.88-2.95-2.15-3.6.15-.44.24-.91.24-1.4 0-2.21-1.79-4-4-4-.49 0-.96.08-1.4.24C14.55 2.48 13.18 1.6 11.6 1.6c-1.58 0-2.95.88-3.6 2.15-.44-.15-.91-.24-1.4-.24-2.21 0-4 1.79-4 4 0 .49.08.96.24 1.4C1.58 10.45.7 11.82.7 13.4c0 1.58.88 2.95 2.15 3.6-.15.44-.24.91-.24 1.4 0 2.21 1.79 4 4 4 .49 0 .96-.08 1.4-.24 1.05 1.27 2.42 2.15 4 2.15 1.58 0 2.95-.88 3.6-2.15.44.15.91.24 1.4.24 2.21 0 4-1.79 4-4 0-.49-.08-.96-.24-1.4 1.27-1.05 2.15-2.42 2.15-4zM10.2 16.6l-3.8-3.8 1.4-1.4 2.4 2.4 6.4-6.4 1.4 1.4-7.8 7.8z"/>
@@ -1157,13 +1993,11 @@
       <p class="creator-sub-tagline">Let's fix your content &amp; channel direction, together!</p>
     </section>
 
-    <!-- White Sheet Container -->
     <section class="sheet-content-container">
       <h2 class="section-label-headline">1-on-1 session</h2>
 
-      <!-- Card 1: Primary 1-on-1 Swati-styled Card -->
-      <div class="session-swati-card scroll-anim">
-        <!-- Top-Right Corner ONLY Active Status -->
+      <!-- Session Card -->
+      <div class="session-swati-card">
         <div class="card-top-active-corner">
           <span class="green-live-pulse-dot"></span>
           <span>Active</span>
@@ -1188,20 +2022,18 @@
             </span>
           </div>
 
-          <!-- Centered Rating Badge Directly Above Shimmering Action Button -->
           <div class="action-right-wrap">
             <div class="btn-top-rating-badge">
               <span>⭐ 8.2/10</span>
             </div>
-            <button class="btn-book-action" onclick="startBooking('Creator Clarity Call', 499)">
+            <button class="btn-book-action" onclick="openSlotPicker()">
               <s>₹999</s> ₹499 →
             </button>
           </div>
         </div>
       </div>
 
-      <!-- Card 2: Takeaways Bullets -->
-      <div class="expectations-card scroll-anim">
+      <div class="expectations-card">
         <h4>You'll leave the call with:</h4>
         <ul class="swati-bullet-list">
           <li class="swati-bullet-item">Choosing the right content pillars and video topics</li>
@@ -1212,8 +2044,7 @@
         </ul>
       </div>
 
-      <!-- Card 3: Authentic Navy About Card Matching Photo Reference -->
-      <div class="dhruv-about-card scroll-anim">
+      <div class="dhruv-about-card">
         <div class="dhruv-about-subhead">ABOUT</div>
         <h3 class="dhruv-about-title">VINAY<br>KOKDA</h3>
         <div class="dhruv-about-pill">Content Creator &amp; Strategist</div>
@@ -1224,8 +2055,7 @@
         </div>
       </div>
 
-      <!-- Card 4: FAQs Accordion with User's Exact Answers -->
-      <div class="faq-wrap-box scroll-anim">
+      <div class="faq-wrap-box">
         <h4><span>💡</span> Aksar pooche jaane wale sawal</h4>
 
         <div class="faq-accordion-item" onclick="toggleFaq(this)">
@@ -1234,17 +2064,17 @@
             <span class="arrow">+</span>
           </button>
           <div class="faq-body-text">
-            Aap QR code scan karke ya UPI ID copy karke ₹499 fee pay karein, fir uske baad apna 12-digit UTR number enter kar dein.
+            Aap QR code scan karke ₹499 pay karein, fir uske baad apna 12-digit UTR number enter kar dein.
           </div>
         </div>
 
         <div class="faq-accordion-item" onclick="toggleFaq(this)">
           <button class="faq-head-btn" type="button">
-            <span>Slot kaise book hoga?</span>
+            <span>Slot kaise lock hota hai?</span>
             <span class="arrow">+</span>
           </button>
           <div class="faq-body-text">
-            UTR number confirmation karte hi direct 'Apna Slot Chuno' open hoga jahan aap apna manpasand date aur time chun sakte hain.
+            Aap site ke andar hi apna convenient date aur time slot choose kar sakte hain. Payment details submit hote hi slot instantly Google Sheet me lock ho jata hai!
           </div>
         </div>
 
@@ -1254,7 +2084,7 @@
             <span class="arrow">+</span>
           </button>
           <div class="faq-body-text">
-            Slot select hone ke baad team verification karke call link aapke WhatsApp ya Gmail par bhej degi, jis din ka slot hoga usi din morning me.
+            Booking karte hi VIP Pass mil jata hai. Jaise hi Vinay call approve karenge, aapko turant Gmail par link milega aur portal par Join button active ho jayega.
           </div>
         </div>
 
@@ -1264,13 +2094,12 @@
             <span class="arrow">+</span>
           </button>
           <div class="faq-body-text">
-            Yeh 1-on-1 slot reservation fee hai, isliye payment ke baad refund nahi hoga. Kripya apni details aur slot timing dhyan se check karke hi confirm karein.
+            Yeh 1-on-1 slot reservation fee hai, isliye payment ke baad refund nahi hoga. Kripya apni details dhyan se check karke hi confirm karein.
           </div>
         </div>
       </div>
 
-      <!-- Card 5: Social Capsule (Strictly 44px Buttons) -->
-      <div class="dhruv-capsule-card scroll-anim">
+      <div class="dhruv-capsule-card">
         <div class="dhruv-capsule-title">Find Vinay Kokda on:</div>
         <div class="dhruv-social-icons-row">
           <a href="https://youtube.com/@vinaykokda?si=Mao2oKpI38NtRd6e" target="_blank" rel="noopener noreferrer" class="dhruv-round-btn" title="YouTube">
@@ -1279,8 +2108,8 @@
           <a href="https://www.instagram.com/vinaykokda?stkn=cGUxM2wydWp2aGl5" target="_blank" rel="noopener noreferrer" class="dhruv-round-btn" title="Instagram">
             <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
           </a>
-          <a href="https://facebook.com/vinaykokda" target="_blank" rel="noopener noreferrer" class="dhruv-round-btn" title="Facebook">
-            <svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+          <a href="javascript:void(0)" onclick="openTelegramDirect()" class="dhruv-round-btn" title="Telegram">
+            <svg viewBox="0 0 24 24"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221l-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.446 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.121l-6.871 4.326-2.962-.924c-.643-.204-.657-.643.136-.953l11.57-4.458c.538-.196 1.006.128.832.943z"/></svg>
           </a>
         </div>
       </div>
@@ -1291,8 +2120,7 @@
     </section>
   </div>
 
-  <!-- View 2: Step 1 (Details Form) -->
-  <div class="scr-view" id="view-details">
+  <div class="scr-view" id="view-slot-picker">
     <div class="top-app-header-bar">
       <div class="top-app-left-group">
         <button class="top-back-circle-btn" onclick="showView('view-home', 'backward')">←</button>
@@ -1301,14 +2129,77 @@
         </div>
         <div class="top-header-session-info">
           <span class="top-header-title">Creator Clarity Call</span>
-          <span class="top-header-subtitle">Vinay Kokda • 28 mins</span>
+          <span class="top-header-subtitle">Select date &amp; live slot</span>
+        </div>
+      </div>
+      <div class="top-header-price-tag">₹499</div>
+    </div>
+
+    <div class="slot-picker-wrap">
+      <div class="slot-picker-header">
+        <h2 class="slot-picker-title">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0b7cff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="4" width="18" height="18" rx="4" ry="4"></rect>
+            <line x1="16" y1="2" x2="16" y2="6"></line>
+            <line x1="8" y1="2" x2="8" y2="6"></line>
+            <line x1="3" y1="10" x2="21" y2="10"></line>
+          </svg>
+          <span>When should we connect?</span>
+        </h2>
+        <p class="slot-picker-sub">Select a convenient date &amp; available time slot.</p>
+      </div>
+
+      <div class="selected-date-label-row">
+        <span style="font-size:12px; font-weight:700; color:#64748b;">Selected Date:</span>
+        <span class="selected-date-txt" id="display-selected-date">Today</span>
+      </div>
+
+      <div class="date-pills-scroll-row" id="date-pills-row"></div>
+
+      <div class="filter-tabs-container">
+        <span class="filter-tabs-label">Select your preferred time slot:</span>
+        <div class="filter-pills-row">
+          <button class="filter-pill-btn active" onclick="setSlotFilter('all', this)">All Slots</button>
+          <button class="filter-pill-btn" onclick="setSlotFilter('morning', this)">Morning (11:30 AM)</button>
+          <button class="filter-pill-btn" onclick="setSlotFilter('afternoon', this)">Afternoon (03:00 PM)</button>
+          <button class="filter-pill-btn" onclick="setSlotFilter('night', this)">Night (09:00 PM)</button>
+        </div>
+      </div>
+
+      <div class="slots-grid-layout" id="slots-grid-container"></div>
+    </div>
+
+    <div class="slot-bottom-sticky-bar">
+      <div class="sticky-bar-slot-info">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#0b7cff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10"></circle>
+          <polyline points="12 6 12 12 16 14"></polyline>
+        </svg>
+        <span id="sticky-bar-summary">Choose an open slot</span>
+      </div>
+      <button class="sticky-bar-confirm-btn" id="btn-slot-confirm" disabled onclick="confirmSlotAndProceed()">
+        Confirm details →
+      </button>
+    </div>
+  </div>
+
+  <div class="scr-view" id="view-details">
+    <div class="top-app-header-bar">
+      <div class="top-app-left-group">
+        <button class="top-back-circle-btn" onclick="showView('view-slot-picker', 'backward')">←</button>
+        <div class="top-thumb-avatar">
+          <img src="profile.png" alt="Vinay Kokda" onerror="this.style.display='none'; this.parentNode.textContent='VK';">
+        </div>
+        <div class="top-header-session-info">
+          <span class="top-header-title">Tumhari Details</span>
+          <span class="top-header-subtitle">Step 1 of 2</span>
         </div>
       </div>
       <div class="top-header-price-tag">₹499</div>
     </div>
 
     <div class="stepper-header-box">
-      <span class="step-counter-tag">Step 1 of 3</span>
+      <span class="step-counter-tag">Step 1 of 2</span>
     </div>
 
     <div class="stepper-progress-row">
@@ -1322,13 +2213,13 @@
       </div>
       <div class="step-bubble-item">
         <div class="step-circle">3</div>
-        <span class="step-label">Slot</span>
+        <span class="step-label">Pass</span>
       </div>
     </div>
 
     <div class="form-wrapper-card">
-      <h2 class="form-title-heading">Tumhari Details</h2>
-      <p class="form-sub-heading">Details verify karke slot lock karein.</p>
+      <h2 class="form-title-heading">Attendee Information</h2>
+      <p class="form-sub-heading">Details aur apna confidential Pass PIN set karein.</p>
 
       <div class="custom-input-group">
         <label class="custom-input-label" for="inp-name">Full Name *</label>
@@ -1349,16 +2240,30 @@
       </div>
 
       <div class="custom-input-group">
+        <label class="custom-input-label" for="inp-pin">Set Your 4-Digit Pass PIN * (Secret)</label>
+        <div class="input-with-eye-wrap">
+          <input type="password" id="inp-pin" class="custom-input-field" placeholder="e.g. 2489" maxlength="4" inputmode="numeric">
+          <button type="button" class="eye-toggle-btn" onclick="togglePassVisibility('inp-pin', this)" title="Show/Hide PIN" aria-label="Toggle PIN visibility">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8z"></path>
+              <circle cx="12" cy="12" r="3"></circle>
+            </svg>
+          </button>
+        </div>
+        <div class="err-hint-text" id="err-pin">Apna 4-digit secret PIN banayein (My Pass login ke liye zaroori).</div>
+      </div>
+
+      <div class="custom-input-group">
         <label class="custom-input-label" for="inp-yt">YouTube Channel Link (Optional)</label>
         <input type="text" id="inp-yt" class="custom-input-field" placeholder="youtube.com/@tumhara-channel">
       </div>
 
       <div class="info-callout-pill">
         <span>⚠</span>
-        <span>Google Meet session link isi Gmail aur WhatsApp number par bheja jayega.</span>
+        <span>Slot: <b id="detail-card-slot-time">-</b>. Meet link isi WhatsApp number aur Gmail par deliver hoga.</span>
       </div>
 
-      <button class="primary-submit-btn" onclick="submitDetailsForm()">Proceed to Payment →</button>
+      <button class="primary-submit-btn" onclick="submitDetailsForm()">Proceed to Payment (₹499) →</button>
     </div>
 
     <footer class="app-global-footer">
@@ -1366,7 +2271,6 @@
     </footer>
   </div>
 
-  <!-- View 3: Step 2 (Payment & Verification) -->
   <div class="scr-view" id="view-payment">
     <div class="top-app-header-bar">
       <div class="top-app-left-group">
@@ -1375,15 +2279,15 @@
           <img src="profile.png" alt="Vinay Kokda" onerror="this.style.display='none'; this.parentNode.textContent='VK';">
         </div>
         <div class="top-header-session-info">
-          <span class="top-header-title">Payment &amp; Verification</span>
-          <span class="top-header-subtitle">Vinay Kokda • Step 2</span>
+          <span class="top-header-title">Payment &amp; UTR</span>
+          <span class="top-header-subtitle">Step 2 of 2</span>
         </div>
       </div>
       <div class="top-header-price-tag">₹499</div>
     </div>
 
     <div class="stepper-header-box">
-      <span class="step-counter-tag">Step 2 of 3</span>
+      <span class="step-counter-tag">Step 2 of 2</span>
     </div>
 
     <div class="stepper-progress-row">
@@ -1397,21 +2301,16 @@
       </div>
       <div class="step-bubble-item">
         <div class="step-circle">3</div>
-        <span class="step-label">Slot</span>
+        <span class="step-label">Pass</span>
       </div>
     </div>
 
     <div class="form-wrapper-card">
       <div class="qr-card-container">
         <div class="qr-img-box">
-          <img id="payment-qr-img" src="qr.png" alt="UPI QR Code" onerror="this.src='https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=upi%3A%2F%2Fpay%3Fpa%3Dmeena.inn%40fam%26pn%3DVinay%2520Kokda%26am%3D499%26cu%3DINR'">
+          <img id="payment-qr-img" src="qr.png" alt="UPI QR Code" onerror="renderQrFallback(this)">
         </div>
         <div class="qr-price-pill">Amount: ₹499 <s>₹999</s></div>
-      </div>
-
-      <div class="upi-copy-pill">
-        <span class="upi-val-txt">meena.inn@fam</span>
-        <button class="btn-copy-action" onclick="copyUpiId()">Copy UPI</button>
       </div>
 
       <div class="custom-input-group">
@@ -1421,11 +2320,11 @@
       </div>
 
       <div class="info-callout-pill">
-        <span>⚠</span>
-        <span>UTR number sahi bharein, isi se booking lock verify hoti hai.</span>
+        <span>🔒</span>
+        <span>Payment submit hote hi slot Google Sheet me lock hoga aur VIP Pass issue ho jayega.</span>
       </div>
 
-      <button class="primary-submit-btn" onclick="submitUtrVerification()">Verify &amp; Choose Slot →</button>
+      <button class="primary-submit-btn" id="btn-submit-utr" onclick="submitUtrVerification()">Verify &amp; Issue VIP Pass →</button>
     </div>
 
     <footer class="app-global-footer">
@@ -1433,8 +2332,7 @@
     </footer>
   </div>
 
-  <!-- View 4: Step 3 (Success Screen) -->
-  <div class="scr-view" id="view-success">
+  <div class="scr-view" id="view-portal">
     <div class="top-app-header-bar">
       <div class="top-app-left-group">
         <button class="top-back-circle-btn" onclick="showView('view-home', 'backward')">←</button>
@@ -1442,72 +2340,422 @@
           <img src="profile.png" alt="Vinay Kokda" onerror="this.style.display='none'; this.parentNode.textContent='VK';">
         </div>
         <div class="top-header-session-info">
-          <span class="top-header-title">Booking Verified</span>
-          <span class="top-header-subtitle">Vinay Kokda Mentorship</span>
+          <span class="top-header-title">Vinay Kokda Portal</span>
+          <span class="top-header-subtitle">VIP Learner Dashboard</span>
         </div>
       </div>
-      <div class="top-header-price-tag">Confirmed</div>
+      <button onclick="learnerLogout()" style="background:rgba(255,255,255,0.12); color:#fff; border:1px solid rgba(255,255,255,0.25); padding:5px 12px; border-radius:99px; font-size:11px; font-weight:700; cursor:pointer;">Exit Pass</button>
     </div>
 
-    <div class="success-badge-wrap">
-      <!-- Engaging Ripple & Tactile Spring Pop Checkmark -->
-      <div class="celebration-ripple-aura">
-        <div class="ripple-ring"></div>
-        <div class="spring-check-badge-card" id="success-check-badge">
-          <svg class="spring-check-svg" viewBox="0 0 48 48">
-            <path class="spring-check-path" id="svg-check-path" d="M12 25 L21 34 L36 16" />
-          </svg>
+    <div class="learner-portal-container">
+      <div class="portal-profile-card">
+        <div class="portal-avatar-gradient" id="portal-avatar-char">V</div>
+        <h2 class="portal-user-name" id="portal-user-name">Learner</h2>
+        
+        <div class="vip-tag-row">
+          <span class="vip-tag-pill">VIP LEARNER</span>
+          <span class="passes-tag-pill">1 PASS</span>
+        </div>
+
+        <div class="portal-meta-line" id="portal-user-email">email@gmail.com</div>
+        <div class="portal-meta-line" id="portal-user-phone">+91 ••••••••••</div>
+        <div class="portal-meta-line" id="portal-user-yt" style="color:#0b7cff; font-weight:700;">▶ Channel Link</div>
+
+        <div class="portal-pin-badge-row">
+          <span style="font-size:11px; color:#64748b; font-weight:700;">Pass PIN:</span>
+          <b id="portal-user-pin-display">••••</b>
+          <button type="button" class="btn-edit-learner-pin" onclick="openLearnerChangePinModal()">
+            <span>✏️</span> Change PIN
+          </button>
+        </div>
+
+        <div class="portal-stats-row">
+          <div class="portal-stat-box">
+            <div class="ps-title">ACTIVE CALLS</div>
+            <div class="ps-num">1</div>
+          </div>
+          <div class="portal-stat-box">
+            <div class="ps-title">COMPLETED</div>
+            <div class="ps-num">0</div>
+          </div>
+          <div class="portal-stat-box">
+            <div class="ps-title">STATUS</div>
+            <div class="ps-verified-badge" id="stat-status-badge">Pending</div>
+          </div>
         </div>
       </div>
 
-      <h2 class="success-main-headline">Booking Verified!</h2>
-      <div class="pending-status-pill">⏳ Confirmation Pending by Team Vinay</div>
-    </div>
+      <div id="portal-content-sessions">
+        <div class="vip-ticket-card">
+          <div class="ticket-header-row">
+            <span class="ticket-type-pill">1:1 MENTORSHIP</span>
+            <span class="ticket-id-txt" id="ticket-pass-id">VK-PASS-001</span>
+          </div>
 
-    <div class="booking-summary-card">
-      <div class="summary-line-item">
-        <span class="summary-label-txt">Name:</span>
-        <span class="summary-val-txt" id="conf-name">-</span>
-      </div>
-      <div class="summary-line-item">
-        <span class="summary-label-txt">Gmail:</span>
-        <span class="summary-val-txt" id="conf-email">-</span>
-      </div>
-      <div class="summary-line-item">
-        <span class="summary-label-txt">WhatsApp:</span>
-        <span class="summary-val-txt" id="conf-phone">-</span>
-      </div>
-      <div class="summary-line-item">
-        <span class="summary-label-txt">12-Digit UTR:</span>
-        <span class="summary-val-txt" id="conf-utr">-</span>
-      </div>
-    </div>
+          <div class="ticket-status-pill" id="ticket-approval-pill">
+            <span>⏳</span> Verification Pending
+          </div>
 
-    <!-- Direct slot booking CTA linked to user's exact Cal.com link -->
-    <button class="btn-choose-slot-cta" id="btn-slot-redirect" onclick="openCalUrl()">
-      Apna Slot Chuno →
-    </button>
+          <h3 class="ticket-session-title">Creator Clarity &amp; Retention Strategy</h3>
+          <div class="ticket-attendee-name">Attendee: <b id="ticket-attendee-val">-</b></div>
 
-    <div class="meet-notice-container">
-      📌 <b>Google Meet Link:</b> 'Apna Slot Chuno' par click karke slot confirm karein. Uske baad team aapke payment ka verification karke call link aapke WhatsApp par ya Gmail par bhej degi, jis din ka slot hoga usi din morning me.
+          <div class="ticket-meta-box">
+            <div class="tmb-item">
+              <span class="tmb-label">Scheduled Location</span>
+              <span class="tmb-val-strong" id="ticket-loc-val" style="color:#0b7cff;">Google Meet (Room Link Unlocks Upon Creator Approval)</span>
+            </div>
+            <div class="tmb-item">
+              <span class="tmb-label">Date &amp; Time</span>
+              <span class="tmb-val-strong" id="ticket-slot-val">-</span>
+            </div>
+            <div class="tmb-item">
+              <span class="tmb-label">Payment &amp; 12-Digit UTR</span>
+              <span class="tmb-val-strong" style="color:#059669;">₹499 Paid</span> • <span id="ticket-utr-val">-</span>
+            </div>
+          </div>
+
+          <a href="#" target="_blank" rel="noopener noreferrer" class="btn-join-meet" id="btn-join-meet" style="display:none;">
+            <span>📹</span> Join Live Google Meet Room
+          </a>
+
+          <div class="meet-unlock-box" id="meet-unlock-box">
+            <span>🕒</span>
+            <span id="meet-unlock-msg">Booking safely logged. Vinay payment verify karke Google Meet link, Official Receipt aur Support activate karenge.</span>
+          </div>
+
+          <!-- Official Verified Receipt: Unlocked Only Upon Admin Approval -->
+          <button class="btn-pdf-receipt" id="btn-pdf-receipt-action" onclick="openPrintableReceipt()" style="display:none;">
+            <span>🧾</span> View &amp; Download Verified Receipt
+          </button>
+
+          <!-- Telegram Support Button: Direct Redirection Only Upon Admin Approval -->
+          <button type="button" class="btn-portal-help-action" id="btn-learner-support-tele" onclick="openTelegramDirect()" style="display:none;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="#1d4ed8"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221l-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.446 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.121l-6.871 4.326-2.962-.924c-.643-.204-.657-.643.136-.953l11.57-4.458c.538-.196 1.006.128.832.943z"/></svg>
+            <span>Reschedule / Help via Telegram (@teamvinaykokda)</span>
+          </button>
+        </div>
+      </div>
     </div>
 
     <footer class="app-global-footer">
-      © Vinay Kokda • @vinaykokda
+      © Vinay Kokda • VIP Portal
+    </footer>
+  </div>
+
+  <div class="scr-view" id="view-creator-studio">
+    <div class="top-app-header-bar">
+      <div class="top-app-left-group">
+        <button class="top-back-circle-btn" onclick="showView('view-home', 'backward')">←</button>
+        <div class="top-thumb-avatar">
+          <img src="profile.png" alt="Vinay Kokda" onerror="this.style.display='none'; this.parentNode.textContent='VK';">
+        </div>
+        <div class="top-header-session-info">
+          <span class="top-header-title">Admin Panel</span>
+          <span class="top-header-subtitle">Vinay Kokda Management</span>
+        </div>
+      </div>
+      <button onclick="adminLogout()" style="background:rgba(239,68,68,0.2); color:#fca5a5; border:1px solid rgba(239,68,68,0.4); padding:5px 12px; border-radius:99px; font-size:11px; font-weight:700; cursor:pointer;">Log Out</button>
+    </div>
+
+    <div style="padding: 16px;">
+      <div class="studio-header-card">
+        <div class="studio-head-top">
+          <span class="studio-chip">⚡ CLOUD ADMIN ACTIVE</span>
+          <div style="display:flex; gap:8px;">
+            <button onclick="promptSetGoogleSheetUrl()" style="background:none; border:none; color:#38bdf8; font-size:11px; font-weight:800; cursor:pointer; text-decoration:underline;">Set Sheet Link</button>
+            <button onclick="openChangeAdminPassModal()" style="background:none; border:none; color:#94a3b8; font-size:11px; font-weight:800; cursor:pointer; text-decoration:underline;">Change Password</button>
+          </div>
+        </div>
+        <h3 style="font-size: 19px; font-weight: 900; margin-bottom: 4px;">Welcome, Vinay</h3>
+        <p style="font-size: 12px; color: #cbd5e1; line-height: 1.4;">Live synced with your private Google Sheet database.</p>
+
+        <div class="studio-stat-grid">
+          <div class="studio-stat-box" onclick="adminScrollToBookings()" title="Click to view Bookings list">
+            <b id="studio-stat-total">0</b>
+            <span>Bookings ↗</span>
+          </div>
+          <div class="studio-stat-box" onclick="adminOpenLiveSlotsModal()" title="Click to view all locked slots">
+            <b id="studio-stat-locked">0</b>
+            <span>Live Slots ↗</span>
+          </div>
+          <div class="studio-stat-box" onclick="showToast('Per session fee is ₹499', 'success')">
+            <b style="color: #4ade80;">₹499</b>
+            <span>Slot Fee</span>
+          </div>
+        </div>
+      </div>
+
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+        <h4 style="font-size:15px; font-weight:800; color:#0f172a;" id="studio-bookings-anchor">Live Bookings &amp; Attendee Directory</h4>
+        <a href="javascript:void(0)" onclick="adminOpenDirectGoogleSheet()" style="font-size:12px; color:#0b7cff; font-weight:800; text-decoration:none;">Open Google Sheet ↗</a>
+      </div>
+
+      <div id="studio-bookings-list"></div>
+    </div>
+
+    <footer class="app-global-footer">
+      © Vinay Kokda • Admin
     </footer>
   </div>
 </main>
 
-<!-- Modal 1: Details Check Modal -->
+<div class="app-modal-backdrop" id="modal-learner-change-pin">
+  <div class="app-modal-sheet">
+    <div class="modal-top-nav-bar">
+      <button type="button" class="modal-top-back-btn" onclick="closeModal('modal-learner-change-pin')">
+        ← Back
+      </button>
+      <span style="font-size:11px; font-weight:700; color:#94a3b8;">Security PIN</span>
+    </div>
+
+    <div style="font-size:32px; text-align:center; margin-bottom:6px;">🔑</div>
+    <h3 class="modal-head-title">Change Your Pass PIN</h3>
+    <p style="font-size:12px; color:#64748b; text-align:center; margin-bottom:16px;">
+      Naya 4-digit PIN set karein taaki aapka portal access safe rahe.
+    </p>
+
+    <div class="custom-input-group">
+      <label class="custom-input-label" for="inp-learner-curr-pin">Current 4-Digit PIN *</label>
+      <div class="input-with-eye-wrap">
+        <input type="password" id="inp-learner-curr-pin" class="custom-input-field" placeholder="Enter current PIN" maxlength="4" inputmode="numeric">
+        <button type="button" class="eye-toggle-btn" onclick="togglePassVisibility('inp-learner-curr-pin', this)" title="Show/Hide PIN" aria-label="Toggle PIN visibility">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8z"></path>
+            <circle cx="12" cy="12" r="3"></circle>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <div class="custom-input-group">
+      <label class="custom-input-label" for="inp-learner-new-pin">New 4-Digit PIN *</label>
+      <div class="input-with-eye-wrap">
+        <input type="password" id="inp-learner-new-pin" class="custom-input-field" placeholder="e.g. 5824" maxlength="4" inputmode="numeric">
+        <button type="button" class="eye-toggle-btn" onclick="togglePassVisibility('inp-learner-new-pin', this)" title="Show/Hide PIN" aria-label="Toggle PIN visibility">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8z"></path>
+            <circle cx="12" cy="12" r="3"></circle>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <button class="primary-submit-btn" id="btn-save-learner-pin" onclick="submitChangeLearnerPin()">Save New PIN →</button>
+    <button style="width:100%; background:none; border:none; color:#64748b; font-size:13px; font-weight:700; padding:12px; cursor:pointer;" onclick="closeModal('modal-learner-change-pin')">Cancel</button>
+  </div>
+</div>
+
+<!-- Modal: Admin Approve Call -->
+<div class="app-modal-backdrop" id="modal-admin-approve">
+  <div class="app-modal-sheet">
+    <div style="font-size:32px; text-align:center; margin-bottom:6px;">✅</div>
+    <h3 class="modal-head-title">Approve Call &amp; Send Meet Link</h3>
+    <p style="font-size:12.5px; color:#64748b; text-align:center; margin-bottom:16px;">
+      Approve karte hi student ko email mil jayegi, Verified Receipt aur Telegram unlock ho jayenge.
+    </p>
+
+    <div class="modal-meta-box">
+      <div><b>Attendee:</b> <span id="appr-attendee-name" style="font-weight:800;">-</span></div>
+      <div><b>Slot:</b> <span id="appr-slot-label">-</span></div>
+      <div><b>Gmail:</b> <span id="appr-attendee-email" style="color:#0b7cff; font-weight:800;">-</span></div>
+    </div>
+
+    <div class="custom-input-group">
+      <label class="custom-input-label" for="inp-meet-url">Google Meet Room Link *</label>
+      <input type="url" id="inp-meet-url" class="custom-input-field" placeholder="https://meet.google.com/abc-defg-hij" value="https://meet.google.com/vk-clarity-call">
+    </div>
+
+    <button class="primary-submit-btn" id="btn-submit-approval" onclick="executeStudioApprove()" style="background:#059669;">
+      Approve &amp; Send Email Now ✉️ →
+    </button>
+    <button style="width:100%; background:none; border:none; color:#64748b; font-size:13px; font-weight:700; padding:12px; cursor:pointer;" onclick="closeModal('modal-admin-approve')">Cancel</button>
+  </div>
+</div>
+
+<!-- Modal: Admin Cancel Call Confirmation -->
+<div class="app-modal-backdrop" id="modal-admin-cancel-call">
+  <div class="app-modal-sheet">
+    <div style="font-size:32px; text-align:center; margin-bottom:6px;">❌</div>
+    <h3 class="modal-head-title">Cancel Mentorship Call?</h3>
+    <p style="font-size:12.5px; color:#64748b; text-align:center; margin-bottom:16px;">
+      Kya aap <b id="disp-cancel-user-name" style="color:#0f172a;">-</b> ka session cancel karna chahte hain? Call cancel hote hi yeh time slot website par dubara open ho jayega.
+    </p>
+
+    <div class="modal-meta-box">
+      <div><b>Attendee:</b> <span id="disp-cancel-name-val" style="font-weight:800;">-</span></div>
+      <div><b>Slot:</b> <span id="disp-cancel-slot-val" style="color:#0b7cff; font-weight:800;">-</span></div>
+      <div><b>Pass ID:</b> <span id="disp-cancel-pass-val" style="font-weight:800; color:#dc2626;">-</span></div>
+    </div>
+
+    <button class="primary-submit-btn" id="btn-submit-cancel-call" onclick="executeStudioCancelCall()" style="background:#d97706; margin-bottom:8px;">
+      Haan, Call Cancel Karein &amp; Slot Free Karein →
+    </button>
+    <button style="width:100%; background:none; border:none; color:#64748b; font-size:13px; font-weight:700; padding:12px; cursor:pointer;" onclick="closeModal('modal-admin-cancel-call')">Wapas Jayein</button>
+  </div>
+</div>
+
+<div class="app-modal-backdrop" id="modal-confirm-free">
+  <div class="app-modal-sheet">
+    <div style="font-size:32px; text-align:center; margin-bottom:6px;">🗑️</div>
+    <h3 class="modal-head-title">Delete User &amp; Revoke Access?</h3>
+    <p style="font-size:12.5px; color:#64748b; text-align:center; margin-bottom:16px;">
+      Kya aap <b id="disp-free-user-name" style="color:#0f172a;">-</b> (<span id="disp-free-user-phone" style="font-weight:800;">-</span>) ko permanently system se delete karna chahte hain? Inka confidential Pass PIN aur session turant khatam ho jayega.
+    </p>
+
+    <div class="modal-meta-box">
+      <div><b>Slot to Reopen:</b> <span id="disp-free-slot-key" style="font-weight:800; color:#0b7cff;">-</span></div>
+      <div><b>Pass ID:</b> <span id="disp-free-pass-id" style="font-weight:800; color:#dc2626;">-</span></div>
+    </div>
+
+    <button class="primary-submit-btn" id="btn-confirm-free-action" onclick="executeStudioUnlock()" style="background:#dc2626;">
+      Haan, Permanently Delete &amp; Revoke Karein →
+    </button>
+    <button style="width:100%; background:none; border:none; color:#64748b; font-size:13px; font-weight:700; padding:12px; cursor:pointer;" onclick="closeModal('modal-confirm-free')">Cancel</button>
+  </div>
+</div>
+
+<!-- Modal: Admin Live Slots Overview -->
+<div class="app-modal-backdrop" id="modal-admin-live-slots">
+  <div class="app-modal-sheet">
+    <div style="font-size:32px; text-align:center; margin-bottom:6px;">📅</div>
+    <h3 class="modal-head-title">Currently Locked Slots</h3>
+    <p style="font-size:12px; color:#64748b; text-align:center; margin-bottom:14px;">
+      Ye slots abhi Google Sheet / app me booked aur locked hain.
+    </p>
+
+    <div id="admin-locked-slots-list" style="display:flex; flex-direction:column; gap:8px; max-height:55vh; overflow-y:auto; margin-bottom:16px;"></div>
+
+    <button style="width:100%; background:#0f172a; color:#fff; border:none; padding:12px; border-radius:12px; font-weight:800; cursor:pointer;" onclick="closeModal('modal-admin-live-slots')">Close</button>
+  </div>
+</div>
+
+<!-- Modal: Set Google Sheet URL -->
+<div class="app-modal-backdrop" id="modal-set-sheet-url">
+  <div class="app-modal-sheet">
+    <div style="font-size:32px; text-align:center; margin-bottom:6px;">📊</div>
+    <h3 class="modal-head-title">Google Sheet Direct Link</h3>
+    <p style="font-size:12px; color:#64748b; text-align:center; margin-bottom:14px;">
+      Apni Google Sheet ka URL paste karein taaki 'Open Google Sheet' dabate hi direct sheet open ho.
+    </p>
+
+    <div class="custom-input-group">
+      <label class="custom-input-label" for="inp-direct-sheet-url">Google Sheet URL *</label>
+      <input type="url" id="inp-direct-sheet-url" class="custom-input-field" placeholder="https://docs.google.com/spreadsheets/d/...">
+    </div>
+
+    <button class="primary-submit-btn" onclick="saveCustomSheetUrl()">Save Sheet Link →</button>
+    <button style="width:100%; background:none; border:none; color:#64748b; font-size:13px; font-weight:700; padding:12px; cursor:pointer;" onclick="closeModal('modal-set-sheet-url')">Cancel</button>
+  </div>
+</div>
+
+<!-- Modal: Learner Pass Login -->
+<div class="app-modal-backdrop" id="modal-learner-login">
+  <div class="app-modal-sheet">
+    <div class="modal-top-nav-bar">
+      <button type="button" class="modal-top-back-btn" onclick="closeModal('modal-learner-login')">
+        ← Back
+      </button>
+      <span style="font-size:11px; font-weight:700; color:#94a3b8;">Learner Pass</span>
+    </div>
+
+    <div style="font-size:32px; text-align:center; margin-bottom:6px;">🎫</div>
+    <h3 class="modal-head-title">My VIP Learner Pass</h3>
+    <p style="font-size:12px; color:#64748b; text-align:center; margin-bottom:16px;">
+      Apna booked WhatsApp number aur secret 4-digit PIN enter karein.
+    </p>
+
+    <div class="custom-input-group">
+      <label class="custom-input-label" for="login-user-phone">Registered WhatsApp Number *</label>
+      <input type="tel" id="login-user-phone" class="custom-input-field" placeholder="e.g. 9876543210" maxlength="10" inputmode="numeric">
+    </div>
+
+    <div class="custom-input-group">
+      <label class="custom-input-label" for="login-user-pin">4-Digit Security PIN *</label>
+      <div class="input-with-eye-wrap">
+        <input type="password" id="login-user-pin" class="custom-input-field" placeholder="Enter 4-digit PIN" maxlength="4" inputmode="numeric">
+        <button type="button" class="eye-toggle-btn" onclick="togglePassVisibility('login-user-pin', this)" title="Show/Hide PIN" aria-label="Toggle PIN visibility">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8z"></path>
+            <circle cx="12" cy="12" r="3"></circle>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <button class="primary-submit-btn" id="btn-learner-auth" onclick="authenticateLearnerPass()">Unlock &amp; View Pass →</button>
+    <button style="width:100%; background:none; border:none; color:#64748b; font-size:13px; font-weight:700; padding:12px; cursor:pointer;" onclick="closeModal('modal-learner-login')">Cancel</button>
+  </div>
+</div>
+
+<div class="app-modal-backdrop" id="modal-admin-login">
+  <div class="app-modal-sheet">
+    <div class="modal-top-nav-bar">
+      <button type="button" class="modal-top-back-btn" onclick="closeModal('modal-admin-login')">
+        ← Back
+      </button>
+      <span style="font-size:11px; font-weight:700; color:#94a3b8;">Admin Portal</span>
+    </div>
+
+    <div style="font-size:32px; text-align:center; margin-bottom:6px;">🔒</div>
+    <h3 class="modal-head-title">Admin Login</h3>
+    <p style="font-size:12px; color:#64748b; text-align:center; margin-bottom:16px;">
+      Enter your confidential master password to manage bookings.
+    </p>
+
+    <div class="custom-input-group">
+      <label class="custom-input-label" for="admin-login-pass">Enter Admin Password *</label>
+      <div class="input-with-eye-wrap">
+        <input type="password" id="admin-login-pass" class="custom-input-field" placeholder="••••••••">
+        <button type="button" class="eye-toggle-btn" onclick="togglePassVisibility('admin-login-pass', this)" title="Show/Hide Password" aria-label="Toggle password visibility">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8z"></path>
+            <circle cx="12" cy="12" r="3"></circle>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <button class="primary-submit-btn" id="btn-admin-auth-submit" onclick="authenticateAdminCloud()">Log In to Admin →</button>
+    <button style="width:100%; background:none; border:none; color:#64748b; font-size:13px; font-weight:700; padding:12px; cursor:pointer;" onclick="closeModal('modal-admin-login')">Close</button>
+  </div>
+</div>
+
+<!-- Modal: Change Admin Password -->
+<div class="app-modal-backdrop" id="modal-change-admin-pass">
+  <div class="app-modal-sheet">
+    <div style="font-size:32px; text-align:center; margin-bottom:6px;">🔑</div>
+    <h3 class="modal-head-title">Change Admin Password</h3>
+    <p style="font-size:12px; color:#64748b; text-align:center; margin-bottom:16px;">
+      Naya password Google Cloud me save hoga aur har phone par update ho jayega.
+    </p>
+
+    <div class="custom-input-group">
+      <label class="custom-input-label" for="inp-old-pass">Current Password *</label>
+      <input type="password" id="inp-old-pass" class="custom-input-field" placeholder="Enter current password">
+    </div>
+
+    <div class="custom-input-group">
+      <label class="custom-input-label" for="inp-new-pass">New Strong Password *</label>
+      <input type="password" id="inp-new-pass" class="custom-input-field" placeholder="At least 4 characters">
+    </div>
+
+    <button class="primary-submit-btn" id="btn-save-new-pass" onclick="submitChangeAdminPass()">Update Password Across All Devices →</button>
+    <button style="width:100%; background:none; border:none; color:#64748b; font-size:13px; font-weight:700; padding:12px; cursor:pointer;" onclick="closeModal('modal-change-admin-pass')">Cancel</button>
+  </div>
+</div>
+
+<!-- Modal: Pre-payment Details Confirmation -->
 <div class="app-modal-backdrop" id="modal-details-check">
   <div class="app-modal-sheet">
     <div style="font-size:32px; text-align:center; margin-bottom:6px;">📋</div>
     <h3 class="modal-head-title">Details Check Karein</h3>
     <div class="modal-meta-box">
-      <div><b>Session:</b> <span id="m-session">Creator Clarity Call</span></div>
+      <div><b>Session:</b> Creator Clarity Call</div>
+      <div><b>Slot Time:</b> <span id="m-slot-time" style="color:#0b7cff; font-weight:800;">-</span></div>
       <div><b>Naam:</b> <span id="m-name">-</span></div>
       <div><b>Gmail:</b> <span id="m-email">-</span></div>
       <div><b>WhatsApp:</b> <span id="m-phone">-</span></div>
+      <div><b>Pass PIN:</b> <span id="m-pin" style="font-weight:800; color:#0b7cff;">****</span></div>
       <div><b>YouTube:</b> <span id="m-yt">None</span></div>
     </div>
     <div style="font-size:12px; color:#64748b; text-align:center; margin-bottom:12px;">
@@ -1522,7 +2770,7 @@
   </div>
 </div>
 
-<!-- Modal 2: UTR Verification Confirmation Modal -->
+<!-- Modal: UTR Confirmation & Google Sheet Lock Trigger -->
 <div class="app-modal-backdrop" id="modal-utr-check">
   <div class="app-modal-sheet">
     <div style="font-size:32px; text-align:center; margin-bottom:6px;">🔍</div>
@@ -1530,112 +2778,425 @@
     <div class="modal-meta-box">
       <div><b>12-Digit UTR:</b> <span id="m-utr" style="font-weight:900; color:#0b7cff; letter-spacing:0.5px;">-</span></div>
       <div><b>Amount:</b> <span style="font-weight:800; color:#15803d;">₹499 Paid</span></div>
+      <div><b>Locking Slot:</b> <span id="m-lock-slot" style="font-weight:800; color:#0f172a;">-</span></div>
     </div>
     <div style="font-size:12px; line-height:1.5; color:#dc2626; background:#fef2f2; border:1px solid #fecaca; border-radius:12px; padding:10px 12px; margin-bottom:12px;">
-      ⚠ Isi 12-digit UTR number se payment confirmation verify hoga. Galat UTR daalne par aapki khud ki zimmedari hogi, isliye dhyan se check karke confirm karein.
+      ⚠ Isi 12-digit UTR number se payment confirmation verify hoga. Slot turant reserve ho jayega.
     </div>
     <label class="modal-checkbox-row">
       <input type="checkbox" id="chk-confirm-utr" onchange="toggleModalBtn('chk-confirm-utr', 'btn-proceed-utr')">
       <span>Maine ₹499 pay kar diye hain aur UTR bilkul sahi hai.</span>
     </label>
-    <button class="primary-submit-btn" id="btn-proceed-utr" disabled onclick="finalizeBookingWithUtr()">Haan, Confirm Karke Slot Chuno →</button>
+    <button class="primary-submit-btn" id="btn-proceed-utr" disabled onclick="finalizeBookingWithGoogleSheet()">Haan, Slot Lock Karke VIP Pass Lo →</button>
+  </div>
+</div>
+
+<div class="app-modal-backdrop" id="modal-receipt-view">
+  <div class="app-modal-sheet" id="printable-receipt-modal" style="max-height:92vh; padding:16px;">
+    
+    <div class="pro-invoice-card" id="receipt-dom-card">
+      <div class="invoice-top-bar">
+        <div>
+          <div class="inv-brand-name">VINAY KOKDA</div>
+          <div class="inv-brand-sub">Creator Mentorship &amp; Channel Strategy</div>
+        </div>
+        <div class="inv-top-right-meta">
+          <span class="inv-badge-success">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#047857" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="20 6 9 17 4 12"></polyline>
+            </svg>
+            SUCCESS
+          </span>
+          <div class="inv-meta-line" id="receipt-date-today">Date: 05 Oct 2026</div>
+          <div class="inv-meta-line" style="font-family:monospace; font-weight:800; color:#0b7cff;" id="rcpt-pass-id-top">VK-PASS-001</div>
+        </div>
+      </div>
+
+      <!-- Two-Column Meta Grid -->
+      <div class="inv-grid-two-col">
+        <div class="inv-col-block">
+          <span class="inv-col-title">BILLED TO (ATTENDEE)</span>
+          <b class="inv-col-val" id="rcpt-name" style="font-size:13px; font-weight:800;">-</b>
+          <span class="inv-col-val" id="rcpt-email" style="color:#475569;">-</span>
+          <span class="inv-col-val" id="rcpt-phone" style="font-weight:700;">-</span>
+        </div>
+        <div class="inv-col-block">
+          <span class="inv-col-title">SESSION &amp; TRANSACTION</span>
+          <span class="inv-col-val"><b>Payment Mode:</b> UPI Online</span>
+          <span class="inv-col-val"><b>Scheduled:</b> <span id="rcpt-slot" style="font-weight:700; color:#0f172a;">-</span></span>
+          <span class="inv-col-val"><b>12-Digit UTR:</b> <span id="rcpt-utr" style="font-family:monospace; font-weight:800; color:#0b7cff;">-</span></span>
+        </div>
+      </div>
+
+      <!-- Itemized Table -->
+      <div class="inv-table-wrap">
+        <table class="inv-table">
+          <thead>
+            <tr>
+              <th style="width:58%;">Description</th>
+              <th style="width:14%; text-align:center;">Qty</th>
+              <th style="width:28%; text-align:right;">Amount (INR)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                <b style="color:#0f172a; display:block;">Creator Clarity Call (1-on-1 Mentorship)</b>
+                <span style="font-size:10px; color:#64748b;">28-Min Dedicated Session • 30-Sec Hook &amp; Retention Strategy</span>
+              </td>
+              <td style="text-align:center; font-weight:700;">1</td>
+              <td class="col-right">₹499.00</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Amount in Words -->
+      <div class="inv-amount-words-box">
+        <b>Amount in Words:</b> <span>Four Hundred Ninety-Nine Rupees Only</span>
+      </div>
+
+      <!-- Grand Total Row -->
+      <div class="inv-total-row">
+        <span class="inv-total-label">Total Amount Paid</span>
+        <span class="inv-total-val">₹499.00</span>
+      </div>
+
+      <!-- Authorized Signature & Seal Footer -->
+      <div class="inv-auth-footer-row">
+        <div class="inv-seal-col">
+          <span class="inv-seal-pill">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#1d4ed8" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+            </svg>
+            100% Verified Digital Invoice
+          </span>
+          <span style="font-size:9.5px; color:#64748b; font-weight:600;">Valid for live Google Meet admission</span>
+        </div>
+
+        <div class="inv-sign-col">
+          <span class="inv-sign-header">For Vinay Kokda Mentorship:</span>
+          <!-- Exact Hand-drawn Vector Signature from Paper -->
+          <div class="inv-signature-vector-box">
+            <svg viewBox="0 0 160 120" style="width:100px; height:58px; overflow:visible;" fill="none" stroke="#1e3a8a" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M 68 18 C 115 10, 150 28, 142 56 C 134 80, 96 86, 62 82 C 30 78, 14 54, 30 28 C 46 8, 92 12, 118 32"></path>
+              <path d="M 64 42 Q 78 40, 90 50 L 68 64 L 88 68"></path>
+              <path d="M 88 68 C 91 67, 93 70, 89 72 C 85 74, 82 71, 85 69"></path>
+              <path d="M 87 72 Q 89 86, 86 98 Q 84 108, 82 114"></path>
+            </svg>
+          </div>
+          <span class="inv-sign-line">Authorized Signatory</span>
+          <span class="inv-sign-title">Vinay Kokda (Strategist)</span>
+        </div>
+      </div>
+
+      <div class="inv-legal-notice">
+        This is a computer-generated tax invoice &amp; confirmed mentorship pass. Strictly 100% Non-Refundable calendar reservation.
+      </div>
+    </div>
+
+    <!-- Direct Gallery Download and Print Actions -->
+    <div style="display:flex; flex-direction:column; gap:8px; margin-top:12px;">
+      <button class="primary-submit-btn" id="btn-download-gallery" style="background:#059669; padding:12px; font-size:14px;" onclick="downloadReceiptAsImage()">
+        <span>📥</span> Download to Gallery (Photo)
+      </button>
+
+      <div style="display:flex; gap:8px;">
+        <button class="btn-cal-action" style="flex:1; padding:10px; font-weight:800; background:#f1f5f9; border:1px solid #cbd5e1; border-radius:12px; cursor:pointer;" onclick="window.print()">
+          <span>🖨</span> Print / PDF
+        </button>
+        <button style="flex:1; background:#0f172a; color:#fff; border:none; padding:10px; border-radius:12px; font-weight:800; cursor:pointer;" onclick="closeModal('modal-receipt-view')">
+          Close
+        </button>
+      </div>
+    </div>
   </div>
 </div>
 
 <script>
+var GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyQuIO4Wn0n8Fj_0Dw71QpL0gzLM4LzmAD_YMFnbtAKV-wf9SJA88J93YFLHiqCeA0Q8g/exec";
 var UPI_ID = "meena.inn@fam";
-// User's exact Cal.com mentorship booking link
-var CAL_BASE_URL = "https://cal.com/vinaykokda/mentorship";
-var currentCalPrefillUrl = CAL_BASE_URL;
+var TELEGRAM_SUPPORT = "https://t.me/teamvinaykokda";
+var KNOWN_ADMIN_PASSES = ["/King@0786", "6367566043"];
 
-var appData = {
-  sessionTitle: "Creator Clarity Call",
-  name: "",
-  email: "",
-  phone: "",
-  yt: "",
-  utr: ""
+// 3 Exclusive slots per day (28 mins each)
+var TIME_SLOTS_DEF = [
+  { id: "1130", time: "11:30 AM", range: "11:30 AM – 11:58 AM", category: "morning", hour24: 11, min24: 30 },
+  { id: "1500", time: "03:00 PM", range: "03:00 PM – 03:28 PM", category: "afternoon", hour24: 15, min24: 0 },
+  { id: "2100", time: "09:00 PM", range: "09:00 PM – 09:28 PM", category: "night", hour24: 21, min24: 0 }
+];
+
+var appState = {
+  selectedDateObj: null,
+  selectedSlotObj: null,
+  currentFilter: "all",
+  bookedSlots: [],
+  userBookingsList: [],
+  activeUserBooking: null,
+  pendingFreeSlot: null,
+  pendingApproveBooking: null,
+  pendingCancelBooking: null,
+  currentAdminToken: null
 };
 
 function $(id) { return document.getElementById(id); }
 
-var viewOrder = ["view-home", "view-details", "view-payment", "view-success"];
+var viewOrder = ["view-home", "view-slot-picker", "view-details", "view-payment", "view-portal", "view-creator-studio"];
 var currentViewId = "view-home";
 
-// Scroll-Triggered Animated Top Sticky Bar for Home Page
-window.addEventListener('scroll', function() {
-  var homeView = $("view-home");
-  var homeTopBar = $("home-sticky-top-bar");
-  if (!homeView || !homeTopBar) return;
-
-  if (homeView.classList.contains("on")) {
-    if (window.scrollY > 130) {
-      homeTopBar.classList.add("visible");
-    } else {
-      homeTopBar.classList.remove("visible");
-    }
-  } else {
-    homeTopBar.classList.remove("visible");
-  }
-}, { passive: true });
-
-// Continuous Scroll Reveal: Re-triggers every time you scroll up or down!
-function initScrollObserver() {
-  if (!('IntersectionObserver' in window)) {
-    var allAnim = document.querySelectorAll('.scroll-anim');
-    allAnim.forEach(function(el) { el.classList.add('revealed'); });
-    return;
-  }
-
-  var observer = new IntersectionObserver(function(entries) {
-    entries.forEach(function(entry) {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('revealed');
-      } else {
-        // Remove class when out of view so animation triggers again on next scroll!
-        entry.target.classList.remove('revealed');
-      }
-    });
-  }, {
-    threshold: 0.12,
-    rootMargin: "0px 0px -25px 0px"
-  });
-
-  document.querySelectorAll('.scroll-anim').forEach(function(el) {
-    observer.observe(el);
-  });
+function showToast(message, type) {
+  var toast = $("app-toast");
+  if (!toast) return;
+  toast.textContent = message;
+  toast.className = "app-toast-box show " + (type || "success");
+  setTimeout(function() {
+    toast.classList.remove("show");
+  }, 2800);
 }
 
-// Engaging Audio Chime Synthesizer with crystal clear bell chord
-function playSuccessChime() {
+function openModal(id) {
+  var el = $(id);
+  if (el) el.classList.add("active");
+}
+
+function closeModal(id) {
+  var el = $(id);
+  if (el) el.classList.remove("active");
+}
+
+function sanitizeText(str) {
+  var div = document.createElement("div");
+  div.textContent = str || "";
+  return div.innerHTML;
+}
+
+// Direct Telegram Redirection
+function openTelegramDirect() {
   try {
-    var AudioContext = window.AudioContext || window.webkitAudioContext;
-    if (!AudioContext) return;
-    var ctx = new AudioContext();
-    if (ctx.state === 'suspended') {
-      ctx.resume();
+    window.location.href = "https://t.me/teamvinaykokda";
+  } catch(e) {
+    window.open("https://t.me/teamvinaykokda", "_blank");
+  }
+}
+
+async function fetchLiveBookedSlots() {
+  try {
+    var res = await fetch(GOOGLE_SCRIPT_URL);
+    var data = await res.json();
+    if (data && data.ok && Array.isArray(data.booked)) {
+      appState.bookedSlots = data.booked;
+      renderSlotsGrid();
+      generateDateOptions();
+      if ($("studio-stat-locked")) {
+        $("studio-stat-locked").textContent = data.booked.length;
+      }
+    }
+  } catch (err) {
+    console.warn("Sheet fetch notice:", err);
+  }
+}
+
+function initLocalCache() {
+  try {
+    var stored = localStorage.getItem("vk_user_booking");
+    if (stored) {
+      appState.activeUserBooking = JSON.parse(stored);
+    }
+    var adminToken = localStorage.getItem("vk_admin_token");
+    if (adminToken) {
+      appState.currentAdminToken = adminToken;
+    }
+  } catch (e) {}
+}
+
+function generateDateOptions() {
+  var pillsRow = $("date-pills-row");
+  if (!pillsRow) return;
+  pillsRow.innerHTML = "";
+  var daysArr = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
+  var monthsArr = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+
+  var today = new Date();
+
+  for (var i = 0; i < 10; i++) {
+    var d = new Date();
+    d.setDate(today.getDate() + i);
+
+    var dayName = daysArr[d.getDay()];
+    var dateNum = d.getDate();
+    var monthName = monthsArr[d.getMonth()];
+    var dateKey = formatDateKey(d);
+    var isToday = (i === 0);
+
+    var openCount = 0;
+    TIME_SLOTS_DEF.forEach(function(s) {
+      var isBooked = (appState.bookedSlots.indexOf(dateKey + "_" + s.id) !== -1);
+      var isPast = false;
+      if (isToday) {
+        var slotDateObj = new Date(d);
+        slotDateObj.setHours(s.hour24, s.min24, 0, 0);
+        if (slotDateObj.getTime() <= today.getTime()) {
+          isPast = true;
+        }
+      }
+      if (!isBooked && !isPast) {
+        openCount++;
+      }
+    });
+
+    var pill = document.createElement("button");
+    var isSelected = appState.selectedDateObj && (formatDateKey(appState.selectedDateObj) === dateKey);
+    pill.className = "date-pill-btn" + ((!appState.selectedDateObj && i === 0) || isSelected ? " active" : "");
+    pill.setAttribute("data-datekey", dateKey);
+    pill.innerHTML = `
+      <span class="dp-day-txt">${i === 0 ? "TODAY" : dayName}</span>
+      <span class="dp-date-num">${dateNum} ${monthName}</span>
+      <span class="dp-slots-count" style="${openCount === 0 ? 'color:#ef4444;' : ''}">${openCount} ${openCount === 1 ? 'slot' : 'slots'}</span>
+    `;
+
+    (function(dateObj, el, labelStr) {
+      el.onclick = function() {
+        document.querySelectorAll(".date-pill-btn").forEach(function(b) { b.classList.remove("active"); });
+        el.classList.add("active");
+        appState.selectedDateObj = dateObj;
+        $("display-selected-date").textContent = labelStr;
+        renderSlotsGrid();
+      };
+    })(d, pill, (i === 0 ? "Today, " : dayName + ", ") + dateNum + " " + monthName + " " + d.getFullYear());
+
+    pillsRow.appendChild(pill);
+  }
+
+  if (!appState.selectedDateObj) {
+    appState.selectedDateObj = today;
+    $("display-selected-date").textContent = "Today, " + today.getDate() + " " + monthsArr[today.getMonth()] + " " + today.getFullYear();
+  }
+}
+
+function formatDateKey(dateObj) {
+  var y = dateObj.getFullYear();
+  var m = String(dateObj.getMonth() + 1).padStart(2, "0");
+  var d = String(dateObj.getDate()).padStart(2, "0");
+  return y + "-" + m + "-" + d;
+}
+
+function renderSlotsGrid() {
+  var grid = $("slots-grid-container");
+  if (!grid || !appState.selectedDateObj) return;
+  grid.innerHTML = "";
+
+  var dateKey = formatDateKey(appState.selectedDateObj);
+  var now = new Date();
+  var isToday = (formatDateKey(now) === dateKey);
+
+  var visibleSlots = TIME_SLOTS_DEF.filter(function(s) {
+    if (appState.currentFilter === "all") return true;
+    return s.category === appState.currentFilter;
+  });
+
+  visibleSlots.forEach(function(slot) {
+    var slotKey = dateKey + "_" + slot.id;
+    var isLocked = appState.bookedSlots.indexOf(slotKey) !== -1;
+    var isSelected = (appState.selectedSlotObj && appState.selectedSlotObj.key === slotKey);
+
+    var isPast = false;
+    if (isToday) {
+      var slotDateObj = new Date(appState.selectedDateObj);
+      slotDateObj.setHours(slot.hour24, slot.min24, 0, 0);
+      if (slotDateObj.getTime() <= now.getTime()) {
+        isPast = true;
+      }
     }
 
-    function playTone(freq, startTime, duration, gainLevel, type) {
-      var osc = ctx.createOscillator();
-      var gain = ctx.createGain();
-      osc.type = type || 'sine';
-      osc.frequency.setValueAtTime(freq, startTime);
-      gain.gain.setValueAtTime(0, startTime);
-      gain.gain.linearRampToValueAtTime(gainLevel, startTime + 0.02);
-      gain.gain.exponentialRampToValueAtTime(0.0001, startTime + duration);
-      osc.connect(gain);
-      gain.connect(ctx.destination);
-      osc.start(startTime);
-      osc.stop(startTime + duration);
+    var card = document.createElement("div");
+    card.className = "slot-interactive-card" + 
+      (isLocked ? " is-locked" : "") + 
+      (isPast && !isLocked ? " is-past" : "") + 
+      (isSelected ? " selected" : "");
+
+    if (isLocked) {
+      card.innerHTML = `
+        <div class="slot-time-row">
+          <span class="slot-bold-time">${slot.time}</span>
+          <span class="locked-badge-pill">🔒 Locked</span>
+        </div>
+        <div class="slot-duration-range">${slot.range}</div>
+        <div class="locked-card-bottom-msg">Confirmed &amp; Locked</div>
+      `;
+    } else if (isPast) {
+      card.innerHTML = `
+        <div class="slot-time-row">
+          <span class="slot-bold-time">${slot.time}</span>
+          <span style="font-size:10px; font-weight:700; color:#94a3b8;">Passed</span>
+        </div>
+        <div class="slot-duration-range">${slot.range}</div>
+        <div style="font-size:10px; font-weight:600; color:#94a3b8; margin-top:4px;">Time over for today</div>
+      `;
+    } else {
+      card.innerHTML = `
+        <div class="slot-time-row">
+          <span class="slot-bold-time">${slot.time}</span>
+          <span class="green-live-pulse-dot"></span>
+        </div>
+        <div class="slot-duration-range">${slot.range}</div>
+        <div style="font-size:11px; font-weight:700; color:#059669; margin-top:4px;">Available (28 mins)</div>
+      `;
+
+      card.onclick = function() {
+        document.querySelectorAll(".slot-interactive-card").forEach(function(c) { c.classList.remove("selected"); });
+        card.classList.add("selected");
+        appState.selectedSlotObj = {
+          key: slotKey,
+          id: slot.id,
+          time: slot.time,
+          range: slot.range,
+          hour24: slot.hour24,
+          min24: slot.min24,
+          dateObj: new Date(appState.selectedDateObj),
+          dateLabel: $("display-selected-date").textContent
+        };
+        updateStickyBar();
+      };
     }
 
-    var now = ctx.currentTime;
-    playTone(523.25, now + 0.01, 0.45, 0.22, 'sine');
-    playTone(659.25, now + 0.10, 0.50, 0.24, 'triangle');
-    playTone(783.99, now + 0.18, 0.60, 0.28, 'sine');
-    playTone(1046.50, now + 0.28, 0.95, 0.35, 'triangle');
-  } catch (err) {}
+    grid.appendChild(card);
+  });
+
+  updateStickyBar();
+}
+
+function updateStickyBar() {
+  var summary = $("sticky-bar-summary");
+  var confirmBtn = $("btn-slot-confirm");
+  if (!summary || !confirmBtn) return;
+
+  if (appState.selectedSlotObj) {
+    summary.textContent = appState.selectedSlotObj.dateLabel.split(",")[0] + " • " + appState.selectedSlotObj.time;
+    confirmBtn.disabled = false;
+  } else {
+    summary.textContent = "Choose an open slot";
+    confirmBtn.disabled = true;
+  }
+}
+
+function setSlotFilter(filterType, btnEl) {
+  appState.currentFilter = filterType;
+  document.querySelectorAll(".filter-pill-btn").forEach(function(b) { b.classList.remove("active"); });
+  btnEl.classList.add("active");
+  renderSlotsGrid();
+}
+
+function openSlotPicker() {
+  generateDateOptions();
+  renderSlotsGrid();
+  fetchLiveBookedSlots();
+  showView("view-slot-picker", "forward");
+}
+
+function confirmSlotAndProceed() {
+  if (!appState.selectedSlotObj) return;
+  $("detail-card-slot-time").textContent = appState.selectedSlotObj.dateLabel + " (" + appState.selectedSlotObj.time + ")";
+  showView("view-details", "forward");
 }
 
 function showView(viewId, direction) {
@@ -1647,9 +3208,7 @@ function showView(viewId, direction) {
 
   viewOrder.forEach(function(v) {
     var el = $(v);
-    if (el) {
-      el.classList.remove("on", "slide-forward", "slide-backward");
-    }
+    if (el) el.classList.remove("on", "slide-forward", "slide-backward");
   });
 
   var targetEl = $(viewId);
@@ -1659,112 +3218,94 @@ function showView(viewId, direction) {
   }
 
   currentViewId = viewId;
-  
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+window.addEventListener('scroll', function() {
+  var homeView = $("view-home");
   var homeTopBar = $("home-sticky-top-bar");
-  if (homeTopBar && viewId !== "view-home") {
-    homeTopBar.classList.remove("visible");
+  if (homeView && homeTopBar && homeView.classList.contains("on")) {
+    if (window.scrollY > 130) {
+      homeTopBar.classList.add("visible");
+    } else {
+      homeTopBar.classList.remove("visible");
+    }
   }
-  
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-}
+}, { passive: true });
 
-function startBooking(title, price) {
-  appData.sessionTitle = title;
-  showView("view-details", "forward");
-}
+function toggleFaq(item) { item.classList.toggle("active"); }
 
-function toggleFaq(item) {
-  item.classList.toggle("active");
-}
+function togglePassVisibility(inputId, btnEl) {
+  var input = $(inputId);
+  if (!input) return;
+  var isPass = (input.type === "password");
+  input.type = isPass ? "text" : "password";
 
-function copyUpiId() {
-  var temp = document.createElement("input");
-  temp.value = UPI_ID;
-  document.body.appendChild(temp);
-  temp.select();
-  document.execCommand("copy");
-  document.body.removeChild(temp);
-  
-  var btn = document.querySelector(".btn-copy-action");
-  if (btn) {
-    btn.textContent = "Copied! ✓";
-    setTimeout(function() { btn.textContent = "Copy UPI"; }, 2000);
+  if (isPass) {
+    btnEl.innerHTML = `
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path>
+        <line x1="1" y1="1" x2="23" y2="23"></line>
+      </svg>
+    `;
+    btnEl.style.color = "#0b7cff";
+  } else {
+    btnEl.innerHTML = `
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8z"></path>
+        <circle cx="12" cy="12" r="3"></circle>
+      </svg>
+    `;
+    btnEl.style.color = "#64748b";
   }
 }
 
 function toggleModalBtn(checkboxId, buttonId) {
   var chk = $(checkboxId);
   var btn = $(buttonId);
-  if (chk && btn) {
-    btn.disabled = !chk.checked;
-  }
+  if (chk && btn) btn.disabled = !chk.checked;
 }
 
 function submitDetailsForm() {
   var name = $("inp-name").value.trim();
   var email = $("inp-email").value.trim();
-  var phone = $("inp-phone").value.trim();
+  var phone = $("inp-phone").value.trim().replace(/\D/g, "");
+  var pin = $("inp-pin").value.trim();
   var yt = $("inp-yt").value.trim();
 
   var valid = true;
-
-  if (!name) {
-    $("inp-name").classList.add("error");
-    $("err-name").style.display = "block";
-    valid = false;
-  } else {
-    $("inp-name").classList.remove("error");
-    $("err-name").style.display = "none";
-  }
+  if (!name) { $("inp-name").classList.add("error"); $("err-name").style.display = "block"; valid = false; }
+  else { $("inp-name").classList.remove("error"); $("err-name").style.display = "none"; }
 
   if (!email || !email.includes("@") || !email.includes(".")) {
-    $("inp-email").classList.add("error");
-    $("err-email").style.display = "block";
-    if (valid) { $("inp-email").focus(); }
-    valid = false;
-  } else {
-    $("inp-email").classList.remove("error");
-    $("err-email").style.display = "none";
-  }
+    $("inp-email").classList.add("error"); $("err-email").style.display = "block"; valid = false;
+  } else { $("inp-email").classList.remove("error"); $("err-email").style.display = "none"; }
 
-  if (!phone || phone.replace(/\D/g, "").length !== 10) {
-    $("inp-phone").classList.add("error");
-    $("err-phone").style.display = "block";
-    if (valid) { $("inp-phone").focus(); }
-    valid = false;
-  } else {
-    $("inp-phone").classList.remove("error");
-    $("err-phone").style.display = "none";
-  }
+  if (!phone || phone.length !== 10) {
+    $("inp-phone").classList.add("error"); $("err-phone").style.display = "block"; valid = false;
+  } else { $("inp-phone").classList.remove("error"); $("err-phone").style.display = "none"; }
+
+  if (!pin || pin.length !== 4) {
+    $("inp-pin").classList.add("error"); $("err-pin").style.display = "block"; valid = false;
+  } else { $("inp-pin").classList.remove("error"); $("err-pin").style.display = "none"; }
 
   if (!valid) return;
 
-  appData.name = name;
-  appData.email = email;
-  appData.phone = phone.replace(/\D/g, "");
-  appData.yt = yt;
+  $("m-slot-time").textContent = appState.selectedSlotObj ? appState.selectedSlotObj.dateLabel + " (" + appState.selectedSlotObj.time + ")" : "-";
+  $("m-name").textContent = name;
+  $("m-email").textContent = email;
+  $("m-phone").textContent = "+91 " + phone;
+  $("m-pin").textContent = "****";
+  $("m-yt").textContent = yt || "None";
 
-  $("m-session").textContent = appData.sessionTitle;
-  $("m-name").textContent = appData.name;
-  $("m-email").textContent = appData.email;
-  $("m-phone").textContent = "+91 " + appData.phone;
-  $("m-yt").textContent = appData.yt || "None";
-
-  var chkDetails = $("chk-confirm-details");
-  var btnDetails = $("btn-proceed-details");
-  if (chkDetails) chkDetails.checked = false;
-  if (btnDetails) btnDetails.disabled = true;
-
-  $("modal-details-check").classList.add("active");
+  $("chk-confirm-details").checked = false;
+  $("btn-proceed-details").disabled = true;
+  openModal("modal-details-check");
 }
 
 function proceedToPaymentFromModal() {
-  var chk = $("chk-confirm-details");
-  if (!chk || !chk.checked) {
-    return;
-  }
-  $("modal-details-check").classList.remove("active");
-  showView('view-payment', 'forward');
+  closeModal("modal-details-check");
+  showView("view-payment", "forward");
 }
 
 function submitUtrVerification() {
@@ -1778,65 +3319,1182 @@ function submitUtrVerification() {
   $("inp-utr").classList.remove("error");
   $("err-utr").style.display = "none";
 
-  appData.utr = utr;
   $("m-utr").textContent = utr;
+  $("m-lock-slot").textContent = appState.selectedSlotObj ? appState.selectedSlotObj.dateLabel + " • " + appState.selectedSlotObj.time : "-";
 
-  var chkUtr = $("chk-confirm-utr");
-  var btnUtr = $("btn-proceed-utr");
-  if (chkUtr) chkUtr.checked = false;
-  if (btnUtr) btnUtr.disabled = true;
-
-  $("modal-utr-check").classList.add("active");
+  $("chk-confirm-utr").checked = false;
+  $("btn-proceed-utr").disabled = true;
+  openModal("modal-utr-check");
 }
 
-function finalizeBookingWithUtr() {
-  var chk = $("chk-confirm-utr");
-  if (!chk || !chk.checked) {
+async function finalizeBookingWithGoogleSheet() {
+  var submitBtn = $("btn-submit-utr");
+  if (submitBtn) {
+    submitBtn.disabled = true;
+    submitBtn.textContent = "Reserving your VIP slot...";
+  }
+
+  closeModal("modal-utr-check");
+
+  var name = $("inp-name").value.trim();
+  var email = $("inp-email").value.trim();
+  var phone = $("inp-phone").value.trim().replace(/\D/g, "");
+  var pin = $("inp-pin").value.trim();
+  var yt = $("inp-yt").value.trim();
+  var utr = $("inp-utr").value.trim().replace(/\D/g, "");
+  var slotKey = appState.selectedSlotObj.key;
+
+  var payload = {
+    name: name,
+    email: email,
+    phone: phone,
+    pin: pin,
+    yt: yt || "None",
+    dateLabel: appState.selectedSlotObj.dateLabel,
+    slotTime: appState.selectedSlotObj.time,
+    slotKey: slotKey,
+    utr: utr
+  };
+
+  var passId = "VK-" + Math.floor(100000 + Math.random() * 900000);
+
+  try {
+    var response = await fetch(GOOGLE_SCRIPT_URL, {
+      method: "POST",
+      headers: { "Content-Type": "text/plain;charset=utf-8" },
+      body: JSON.stringify(payload)
+    });
+
+    var result = await response.json();
+    if (result && result.ok && result.id) {
+      passId = result.id;
+    } else if (result && result.error === 'slot_taken') {
+      showToast("Yeh slot abhi book ho gaya! Dusra slot chunein.", "error");
+      fetchLiveBookedSlots();
+      showView("view-slot-picker", "backward");
+      return;
+    }
+  } catch (err) {
+    console.warn("Sheet write notice:", err);
+  }
+
+  var bookingData = {
+    name: name,
+    email: email,
+    phone: phone,
+    pin: pin,
+    yt: yt,
+    utr: utr,
+    passId: passId,
+    slotKey: slotKey,
+    slotTime: appState.selectedSlotObj.time,
+    dateLabel: appState.selectedSlotObj.dateLabel,
+    slotDateObj: appState.selectedSlotObj.dateObj,
+    hour24: appState.selectedSlotObj.hour24,
+    min24: appState.selectedSlotObj.min24,
+    bookedAt: new Date().toISOString(),
+    status: "PENDING",
+    meetLink: ""
+  };
+
+  appState.activeUserBooking = bookingData;
+  if (appState.bookedSlots.indexOf(slotKey) === -1) {
+    appState.bookedSlots.push(slotKey);
+  }
+
+  try {
+    localStorage.setItem("vk_user_booking", JSON.stringify(bookingData));
+  } catch(e) {}
+
+  showToast("Booking Successful! VIP Pass Issued.", "success");
+  populateVIPPortal(bookingData);
+  showView("view-portal", "forward");
+
+  if (submitBtn) {
+    submitBtn.disabled = false;
+    submitBtn.textContent = "Verify & Issue VIP Pass →";
+  }
+}
+
+function cleanSlotTimeDisplay(str) {
+  if (!str) return "";
+  if (str.indexOf("GMT") !== -1) {
+    var m = str.match(/(\d{1,2}:\d{2})/);
+    return m ? m[1] : str.slice(0, 15);
+  }
+  return str;
+}
+
+function populateVIPPortal(data) {
+  $("portal-avatar-char").textContent = (data.name || "V").charAt(0).toUpperCase();
+  $("portal-user-name").textContent = data.name;
+  $("portal-user-email").textContent = data.email;
+  $("portal-user-phone").textContent = "+91 " + data.phone;
+  $("portal-user-yt").textContent = data.yt && data.yt !== "None" ? "▶ " + data.yt : "No channel attached";
+  $("portal-user-pin-display").textContent = data.pin ? "••••" : "Not Set";
+
+  $("ticket-pass-id").textContent = data.passId;
+  $("ticket-attendee-val").textContent = data.name;
+  $("ticket-slot-val").textContent = data.dateLabel + " • " + cleanSlotTimeDisplay(data.slotTime) + " (28 mins)";
+  $("ticket-utr-val").textContent = "UTR: " + data.utr;
+
+  var isApproved = (data.status === "APPROVED");
+  var statusBadge = $("stat-status-badge");
+  var pill = $("ticket-approval-pill");
+  var joinBtn = $("btn-join-meet");
+  var unlockBox = $("meet-unlock-box");
+  var unlockMsg = $("meet-unlock-msg");
+  var locVal = $("ticket-loc-val");
+  var teleSupportBtn = $("btn-learner-support-tele");
+  var receiptBtn = $("btn-pdf-receipt-action");
+
+  if (isApproved) {
+    if (statusBadge) { statusBadge.textContent = "Approved ✓"; statusBadge.style.color = "#059669"; }
+    if (pill) { pill.className = "ticket-status-pill approved"; pill.innerHTML = "<span>✅</span> Call Approved"; }
+    if (locVal) { locVal.textContent = "Google Meet (Call Confirmed)"; locVal.style.color = "#059669"; }
+    if (joinBtn) {
+      joinBtn.style.display = "inline-flex";
+      joinBtn.href = data.meetLink || "https://meet.google.com";
+    }
+    if (unlockBox) {
+      unlockBox.className = "meet-unlock-box approved";
+      unlockMsg.textContent = "Aapka session confirm ho chuka hai! Upar 'Join Live Google Meet Room' dabakar slot time par call join karein.";
+    }
+    if (receiptBtn) {
+      receiptBtn.style.display = "flex";
+    }
+    if (teleSupportBtn) {
+      teleSupportBtn.style.display = "inline-flex";
+    }
+  } else {
+    if (statusBadge) { statusBadge.textContent = "Pending"; statusBadge.style.color = "#b45309"; }
+    if (pill) { pill.className = "ticket-status-pill"; pill.innerHTML = "<span>⏳</span> Verification Pending"; }
+    if (locVal) { locVal.textContent = "Google Meet (Room Link Unlocks Upon Creator Approval)"; locVal.style.color = "#0b7cff"; }
+    if (joinBtn) { joinBtn.style.display = "none"; }
+    if (unlockBox) {
+      unlockBox.className = "meet-unlock-box";
+      unlockMsg.textContent = "Booking safely logged. Vinay payment verify karke Google Meet link, Official Receipt aur Support activate karenge.";
+    }
+    if (receiptBtn) {
+      receiptBtn.style.display = "none";
+    }
+    if (teleSupportBtn) {
+      teleSupportBtn.style.display = "none";
+    }
+  }
+
+  // Populate Professional Tax Invoice
+  $("rcpt-name").textContent = data.name;
+  $("rcpt-email").textContent = data.email;
+  $("rcpt-phone").textContent = "+91 " + data.phone;
+  $("rcpt-pass-id-top").textContent = data.passId;
+  $("rcpt-slot").textContent = data.dateLabel + " • " + cleanSlotTimeDisplay(data.slotTime);
+  $("rcpt-utr").textContent = data.utr;
+  $("receipt-date-today").textContent = "Date: " + new Date().toLocaleDateString("en-IN", { day: '2-digit', month: 'short', year: 'numeric' });
+}
+
+function openLearnerPassLoginModal() {
+  var cached = appState.activeUserBooking;
+  if (!cached) {
+    try {
+      cached = JSON.parse(localStorage.getItem("vk_user_booking") || "null");
+    } catch(e) {}
+  }
+
+  if (cached && cached.phone) {
+    appState.activeUserBooking = cached;
+    populateVIPPortal(cached);
+    showView("view-portal", "forward");
+    showToast("VIP Pass Loaded ⚡", "success");
     return;
   }
-  $("modal-utr-check").classList.remove("active");
 
-  currentCalPrefillUrl = CAL_BASE_URL + 
-    "?name=" + encodeURIComponent(appData.name) + 
-    "&email=" + encodeURIComponent(appData.email) + 
-    "&attendeePhoneNumber=" + encodeURIComponent("+91" + appData.phone) + 
-    "&utr=" + encodeURIComponent(appData.utr) + 
-    (appData.yt ? "&notes=" + encodeURIComponent("YouTube: " + appData.yt) : "");
-
-  $("conf-name").textContent = appData.name;
-  $("conf-email").textContent = appData.email;
-  $("conf-phone").textContent = "+91 " + appData.phone;
-  $("conf-utr").textContent = appData.utr;
-
-  showView("view-success", "forward");
-
-  var checkBadge = $("success-check-badge");
-  var checkPath = $("svg-check-path");
-  if (checkBadge) {
-    checkBadge.style.animation = 'none';
-    checkBadge.offsetHeight;
-    checkBadge.style.animation = 'springPopEngage 0.75s cubic-bezier(0.34, 1.56, 0.64, 1) both';
-  }
-  if (checkPath) {
-    checkPath.style.animation = 'none';
-    checkPath.offsetHeight;
-    checkPath.style.animation = 'drawCheckPath 0.5s cubic-bezier(0.22, 1, 0.36, 1) 0.22s forwards';
-  }
-
-  playSuccessChime();
+  $("login-user-phone").value = (cached && cached.phone) ? cached.phone : "";
+  $("login-user-pin").value = "";
+  openModal("modal-learner-login");
 }
 
-function openCalUrl() {
-  if (currentCalPrefillUrl) {
-    var win = window.open(currentCalPrefillUrl, "_blank");
-    if (!win || win.closed || typeof win.closed === "undefined") {
-      window.location.href = currentCalPrefillUrl;
+async function authenticateLearnerPass() {
+  var phone = $("login-user-phone").value.trim().replace(/\D/g, "");
+  var pin = $("login-user-pin").value.trim();
+
+  if (!phone || phone.length !== 10) {
+    showToast("Kripya 10-digit WhatsApp number dalein!", "error");
+    $("login-user-phone").focus();
+    return;
+  }
+  if (!pin || pin.length !== 4) {
+    showToast("Kripya apna 4-digit PIN enter karein!", "error");
+    $("login-user-pin").focus();
+    return;
+  }
+
+  var btn = $("btn-learner-auth");
+  if (btn) { btn.disabled = true; btn.textContent = "Unlocking..."; }
+
+  var cached = appState.activeUserBooking;
+  if (!cached) {
+    try { cached = JSON.parse(localStorage.getItem("vk_user_booking") || "null"); } catch(e) {}
+  }
+  if (cached && cached.phone === phone && (!cached.pin || cached.pin === pin)) {
+    closeModal("modal-learner-login");
+    appState.activeUserBooking = cached;
+    populateVIPPortal(cached);
+    showToast("Welcome back, " + cached.name + "! ⚡", "success");
+    showView("view-portal", "forward");
+    if (btn) { btn.disabled = false; btn.textContent = "Unlock & View Pass →"; }
+    return;
+  }
+
+  var controller = new AbortController();
+  var timeoutId = setTimeout(function() { controller.abort(); }, 4500);
+
+  try {
+    var res = await fetch(GOOGLE_SCRIPT_URL, {
+      method: "POST",
+      headers: { "Content-Type": "text/plain;charset=utf-8" },
+      body: JSON.stringify({ action: "learner_login", phone: phone, pin: pin }),
+      signal: controller.signal
+    });
+    clearTimeout(timeoutId);
+    var data = await res.json();
+
+    if (data && data.ok && data.booking) {
+      closeModal("modal-learner-login");
+      appState.activeUserBooking = data.booking;
+      try { localStorage.setItem("vk_user_booking", JSON.stringify(data.booking)); } catch(e) {}
+      populateVIPPortal(data.booking);
+      showToast("Welcome back, " + data.booking.name + "!", "success");
+      showView("view-portal", "forward");
+      if (btn) { btn.disabled = false; btn.textContent = "Unlock & View Pass →"; }
+      return;
+    } else if (data && data.error === 'invalid_pin') {
+      showToast("Galat PIN! Apna sahi 4-digit PIN enter karein.", "error");
+      if (btn) { btn.disabled = false; btn.textContent = "Unlock & View Pass →"; }
+      return;
+    } else if (data && data.error === 'not_found') {
+      showToast("Is number se koi active pass nahi mila!", "error");
+      if (btn) { btn.disabled = false; btn.textContent = "Unlock & View Pass →"; }
+      return;
+    }
+  } catch (err) {
+    clearTimeout(timeoutId);
+    console.warn("Learner cloud auth fallback:", err);
+  }
+
+  showToast("Pass verify nahi ho paya. PIN aur number check karein.", "error");
+  if (btn) { btn.disabled = false; btn.textContent = "Unlock & View Pass →"; }
+}
+
+function openLearnerChangePinModal() {
+  if (!appState.activeUserBooking) {
+    showToast("Pehle apna pass open karein!", "error");
+    return;
+  }
+  $("inp-learner-curr-pin").value = "";
+  $("inp-learner-new-pin").value = "";
+  openModal("modal-learner-change-pin");
+}
+
+async function submitChangeLearnerPin() {
+  var b = appState.activeUserBooking;
+  if (!b) return;
+
+  var currPin = $("inp-learner-curr-pin").value.trim();
+  var newPin = $("inp-learner-new-pin").value.trim();
+
+  if (!currPin || currPin.length !== 4) {
+    showToast("Kripya apna current 4-digit PIN dalein!", "error");
+    return;
+  }
+  if (!newPin || newPin.length !== 4) {
+    showToast("Kripya naya 4-digit PIN dalein!", "error");
+    return;
+  }
+  if (currPin === newPin) {
+    showToast("Naya PIN purane se alag hona chahiye!", "error");
+    return;
+  }
+
+  var btn = $("btn-save-learner-pin");
+  if (btn) {
+    btn.disabled = true;
+    btn.textContent = "Updating PIN...";
+  }
+
+  try {
+    var res = await fetch(GOOGLE_SCRIPT_URL, {
+      method: "POST",
+      headers: { "Content-Type": "text/plain;charset=utf-8" },
+      body: JSON.stringify({
+        action: "change_learner_pin",
+        phone: b.phone,
+        currPin: currPin,
+        newPin: newPin,
+        passId: b.passId
+      })
+    });
+    var data = await res.json();
+
+    if (data && data.ok) {
+      b.pin = newPin;
+      appState.activeUserBooking.pin = newPin;
+      try { localStorage.setItem("vk_user_booking", JSON.stringify(appState.activeUserBooking)); } catch(e) {}
+      closeModal("modal-learner-change-pin");
+      showToast("Security PIN successfully updated! 🔑", "success");
+      populateVIPPortal(b);
+    } else if (data && data.error === 'invalid_curr_pin') {
+      showToast("Current PIN galat hai!", "error");
+    } else {
+      showToast("Error updating PIN. Dobara koshish karein.", "error");
+    }
+  } catch(err) {
+    console.error("PIN update error:", err);
+    showToast("Network error. Internet check karein.", "error");
+  }
+
+  if (btn) {
+    btn.disabled = false;
+    btn.textContent = "Save New PIN →";
+  }
+}
+
+function learnerLogout() {
+  appState.activeUserBooking = null;
+  try { localStorage.removeItem("vk_user_booking"); } catch(e) {}
+  showToast("Pass session logged out.", "success");
+  showView("view-home", "backward");
+}
+
+function openAdminAuthModal() {
+  var savedToken = appState.currentAdminToken || localStorage.getItem("vk_admin_token");
+  if (savedToken && (KNOWN_ADMIN_PASSES.indexOf(savedToken) !== -1 || savedToken.length >= 4)) {
+    closeModal("modal-admin-login");
+    renderCreatorStudioData();
+    showView("view-creator-studio", "forward");
+    showToast("Admin Panel Ready ⚡", "success");
+    syncAdminCloudBackground(savedToken);
+    return;
+  }
+  $("admin-login-pass").value = "";
+  openModal("modal-admin-login");
+}
+
+async function authenticateAdminCloud() {
+  var entered = $("admin-login-pass").value.trim();
+  if (!entered) {
+    showToast("Kripya password enter karein!", "error");
+    return;
+  }
+
+  var isPreApproved = (KNOWN_ADMIN_PASSES.indexOf(entered) !== -1);
+
+  if (isPreApproved) {
+    appState.currentAdminToken = entered;
+    try { localStorage.setItem("vk_admin_token", entered); } catch(e) {}
+    closeModal("modal-admin-login");
+    showToast("Admin Logged In ⚡", "success");
+    renderCreatorStudioData();
+    showView("view-creator-studio", "forward");
+    syncAdminCloudBackground(entered);
+    return;
+  }
+
+  var btn = $("btn-admin-auth-submit");
+  if (btn) { btn.disabled = true; btn.textContent = "Verifying..."; }
+
+  var controller = new AbortController();
+  var timeoutId = setTimeout(function() { controller.abort(); }, 4000);
+
+  try {
+    var res = await fetch(GOOGLE_SCRIPT_URL, {
+      method: "POST",
+      headers: { "Content-Type": "text/plain;charset=utf-8" },
+      body: JSON.stringify({ action: "admin_login", password: entered }),
+      signal: controller.signal
+    });
+    clearTimeout(timeoutId);
+    var data = await res.json();
+
+    if (data && data.ok && data.admin) {
+      appState.currentAdminToken = entered;
+      appState.userBookingsList = data.bookings || [];
+      try { localStorage.setItem("vk_admin_token", entered); } catch(e) {}
+      closeModal("modal-admin-login");
+      showToast("Admin Verified via Google Sheet ✓", "success");
+      renderCreatorStudioData();
+      showView("view-creator-studio", "forward");
+      if (btn) { btn.disabled = false; btn.textContent = "Log In to Admin →"; }
+      return;
+    } else if (data && data.error === 'invalid_pass') {
+      showToast("Galat password! Dobara check karein.", "error");
+      if (btn) { btn.disabled = false; btn.textContent = "Log In to Admin →"; }
+      return;
+    }
+  } catch (err) {
+    clearTimeout(timeoutId);
+  }
+
+  showToast("Galat password ya network slow hai.", "error");
+  if (btn) { btn.disabled = false; btn.textContent = "Log In to Admin →"; }
+}
+
+async function syncAdminCloudBackground(token) {
+  try {
+    var res = await fetch(GOOGLE_SCRIPT_URL, {
+      method: "POST",
+      headers: { "Content-Type": "text/plain;charset=utf-8" },
+      body: JSON.stringify({ action: "admin_login", password: token })
+    });
+    var data = await res.json();
+    if (data && data.ok && data.bookings) {
+      appState.userBookingsList = data.bookings;
+      renderCreatorStudioData();
+    }
+  } catch(e) {}
+}
+
+function openChangeAdminPassModal() {
+  $("inp-old-pass").value = appState.currentAdminToken || "";
+  $("inp-new-pass").value = "";
+  openModal("modal-change-admin-pass");
+}
+
+async function submitChangeAdminPass() {
+  var oldPass = $("inp-old-pass").value.trim();
+  var newPass = $("inp-new-pass").value.trim();
+
+  if (!oldPass) { showToast("Current password dalein!", "error"); return; }
+  if (!newPass || newPass.length < 4) { showToast("Naya password kam se kam 4 characters ka banayein!", "error"); return; }
+
+  var btn = $("btn-save-new-pass");
+  if (btn) { btn.disabled = true; btn.textContent = "Updating on Cloud..."; }
+
+  try {
+    var res = await fetch(GOOGLE_SCRIPT_URL, {
+      method: "POST",
+      headers: { "Content-Type": "text/plain;charset=utf-8" },
+      body: JSON.stringify({ action: "change_admin_pass", oldPass: oldPass, newPass: newPass })
+    });
+    var data = await res.json();
+    if (data && data.ok) {
+      appState.currentAdminToken = newPass;
+      try { localStorage.setItem("vk_admin_token", newPass); } catch(e) {}
+      closeModal("modal-change-admin-pass");
+      showToast("Password updated across all devices! ✅", "success");
+    } else if (data && data.error === 'invalid_old_pass') {
+      showToast("Current password galat hai!", "error");
+    } else {
+      showToast("Error updating password.", "error");
+    }
+  } catch (err) {
+    showToast("Network error. Try again.", "error");
+  }
+
+  if (btn) { btn.disabled = false; btn.textContent = "Update Password Across All Devices →"; }
+}
+
+function promptSetGoogleSheetUrl() {
+  var currentUrl = localStorage.getItem("vk_direct_sheet_url") || "";
+  $("inp-direct-sheet-url").value = currentUrl;
+  openModal("modal-set-sheet-url");
+}
+
+function saveCustomSheetUrl() {
+  var url = $("inp-direct-sheet-url").value.trim();
+  if (url && !url.startsWith("http")) {
+    showToast("Valid URL enter karein (https://...)", "error");
+    return;
+  }
+  localStorage.setItem("vk_direct_sheet_url", url);
+  closeModal("modal-set-sheet-url");
+  showToast("Google Sheet link saved!", "success");
+}
+
+function adminOpenDirectGoogleSheet() {
+  var savedUrl = localStorage.getItem("vk_direct_sheet_url");
+  if (!savedUrl) {
+    promptSetGoogleSheetUrl();
+    return;
+  }
+  window.open(savedUrl, "_blank");
+}
+
+function adminScrollToBookings() {
+  var target = $("studio-bookings-anchor");
+  if (target) {
+    target.scrollIntoView({ behavior: "smooth", block: "start" });
+    target.style.transition = "color 0.3s ease";
+    target.style.color = "#0b7cff";
+    setTimeout(function() {
+      target.style.color = "#0f172a";
+    }, 1500);
+  }
+}
+
+function adminOpenLiveSlotsModal() {
+  var list = $("admin-locked-slots-list");
+  if (!list) return;
+  list.innerHTML = "";
+
+  if (!appState.bookedSlots || appState.bookedSlots.length === 0) {
+    list.innerHTML = `
+      <div style="background:#f8fafc; border:1px dashed #cbd5e1; border-radius:12px; padding:18px; text-align:center; color:#64748b; font-size:12.5px;">
+        Koi bhi live slot locked nahi hai. Saare slots khule hue hain!
+      </div>
+    `;
+  } else {
+    appState.bookedSlots.forEach(function(slotKey) {
+      var matchingBooking = appState.userBookingsList.find(function(b) { return b.slotKey === slotKey; });
+      var item = document.createElement("div");
+      item.style.cssText = "background:#ffffff; border:1.5px solid #e2e8f0; border-radius:12px; padding:10px 12px; display:flex; justify-content:space-between; align-items:center;";
+
+      var label = slotKey;
+      var sub = matchingBooking ? (matchingBooking.name + " (" + matchingBooking.phone + ")") : "Sheet Locked";
+
+      item.innerHTML = `
+        <div>
+          <b style="font-size:13px; color:#0f172a; display:block;">🔒 ${label}</b>
+          <span style="font-size:11px; color:#64748b;">${sub}</span>
+        </div>
+        <button onclick="studioUnlockSlot('${slotKey}', '${matchingBooking ? matchingBooking.passId : ''}')" style="background:#fef2f2; border:1px solid #fecaca; color:#dc2626; padding:6px 10px; border-radius:8px; font-size:11px; font-weight:800; cursor:pointer;">
+          Free Slot
+        </button>
+      `;
+      list.appendChild(item);
+    });
+  }
+
+  openModal("modal-admin-live-slots");
+}
+
+function renderCreatorStudioData() {
+  $("studio-stat-total").textContent = appState.userBookingsList.length;
+  $("studio-stat-locked").textContent = appState.bookedSlots.length;
+
+  var listContainer = $("studio-bookings-list");
+  if (!listContainer) return;
+  listContainer.innerHTML = "";
+
+  if (appState.userBookingsList.length === 0) {
+    listContainer.innerHTML = `
+      <div style="background:#ffffff; border:1px dashed #cbd5e1; border-radius:16px; padding:24px 16px; text-align:center; color:#64748b;">
+        <span style="font-size:28px; display:block; margin-bottom:6px;">📭</span>
+        <b>Google Sheet me abhi koi active booking nahi hai</b>
+        <p style="font-size:12px; margin-top:4px;">Jab koi naya slot book hoga, wo yahan live show hoga.</p>
+      </div>
+    `;
+    return;
+  }
+
+  appState.userBookingsList.slice().reverse().forEach(function(b) {
+    var isApproved = (b.status === "APPROVED");
+    var isCancelled = (b.status === "CANCELLED");
+    var item = document.createElement("div");
+    item.className = "studio-booking-item";
+
+    var statusBadge = '';
+    if (isApproved) {
+      statusBadge = '<span style="font-size:11px; font-weight:800; color:#059669; background:#ecfdf5; border:1px solid #a7f3d0; padding:2px 8px; border-radius:99px;">APPROVED ✓</span>';
+    } else if (isCancelled) {
+      statusBadge = '<span style="font-size:11px; font-weight:800; color:#dc2626; background:#fef2f2; border:1px solid #fecaca; padding:2px 8px; border-radius:99px;">CANCELLED ✕</span>';
+    } else {
+      statusBadge = '<span style="font-size:11px; font-weight:800; color:#b45309; background:#fef3c7; border:1px solid #fde68a; padding:2px 8px; border-radius:99px;">PENDING</span>';
+    }
+
+    item.innerHTML = `
+      <div class="studio-item-head">
+        <div>
+          <b style="font-size:14px; color:#0f172a;">${sanitizeText(b.name)}</b>
+          <div style="font-size:11px; color:#64748b;">${b.passId}</div>
+        </div>
+        <div style="display:flex; align-items:center; gap:6px;">
+          ${statusBadge}
+          <span style="font-size:11px; font-weight:800; color:#059669; background:#ecfdf5; border:1px solid #a7f3d0; padding:2px 8px; border-radius:99px;">
+            ₹499 PAID
+          </span>
+        </div>
+      </div>
+
+      <div class="studio-user-cred-box">
+        <div class="studio-user-cred-row">
+          <span style="color:#64748b; font-weight:700;">📱 Registered Phone:</span>
+          <b style="color:#0f172a; font-size:12.5px;">+91 ${b.phone}</b>
+        </div>
+        <div class="studio-user-cred-row">
+          <span style="color:#64748b; font-weight:700;">🔑 Secret Pass PIN:</span>
+          <span class="studio-pin-badge">${b.pin || "None"}</span>
+        </div>
+      </div>
+
+      <div style="font-size:12px; color:#334155; line-height:1.45; margin-bottom:8px;">
+        <div><b>Slot:</b> ${sanitizeText(b.dateLabel)} • ${cleanSlotTimeDisplay(b.slotTime)}</div>
+        <div><b>Gmail:</b> ${sanitizeText(b.email)}</div>
+        <div><b>UTR:</b> <span style="font-family:monospace; font-weight:800; color:#0b7cff;">${b.utr}</span></div>
+        ${b.meetLink ? `<div style="margin-top:2px;"><b>Meet Link:</b> <a href="${b.meetLink}" target="_blank" style="color:#0b7cff; font-weight:700;">${b.meetLink}</a></div>` : ''}
+      </div>
+      <div class="studio-item-actions">
+        ${!isCancelled ? (isApproved ? 
+          `<button class="btn-approve-action" style="background:#0284c7;" onclick="promptStudioApprove('${b.slotKey}', '${b.passId}')">
+            <span>✏️</span> Edit Link
+          </button>` : 
+          `<button class="btn-approve-action" onclick="promptStudioApprove('${b.slotKey}', '${b.passId}')">
+            <span>✅</span> Approve Call
+          </button>`) : ''
+        }
+        <button type="button" class="btn-wa-action" onclick="launchDirectWhatsApp('${b.phone}', '${sanitizeText(b.name)}', '${sanitizeText(b.dateLabel)}', '${cleanSlotTimeDisplay(b.slotTime)}', '${b.meetLink || ''}')">
+          <span>💬</span> WhatsApp
+        </button>
+        ${!isCancelled ? 
+          `<button class="btn-cancel-call" onclick="promptStudioCancelCall('${b.slotKey}', '${b.passId}', '${sanitizeText(b.name)}', '${sanitizeText(b.dateLabel)}', '${cleanSlotTimeDisplay(b.slotTime)}')">
+            <span>❌</span> Cancel Call
+          </button>` : ''
+        }
+        <button class="btn-unlock-slot" onclick="promptStudioUnlockSlot('${b.slotKey}', '${b.passId}', '${sanitizeText(b.name)}', '${b.phone}')">
+          <span>🗑️</span> Delete User &amp; PIN
+        </button>
+      </div>
+    `;
+    listContainer.appendChild(item);
+  });
+}
+
+function launchDirectWhatsApp(phone, name, dateLabel, slotTime, meetLink) {
+  var cleanPhone = String(phone || '').replace(/\D/g, '');
+  if (cleanPhone.length > 10) {
+    cleanPhone = cleanPhone.slice(-10);
+  }
+  var msg = 'Hi ' + (name || 'there') + '! Main Vinay Kokda.\nAapka ' + (dateLabel || '') + ' (' + slotTime + ') ka 1-on-1 mentorship session ke baare me: ' + (meetLink ? ('\nGoogle Meet Link: ' + meetLink) : '\nMain aapka session update share kar raha hoon.');
+  var waUrl = 'https://api.whatsapp.com/send?phone=91' + cleanPhone + '&text=' + encodeURIComponent(msg);
+  window.location.href = waUrl;
+}
+
+function promptStudioCancelCall(slotKey, passId, name, dateLabel, slotTime) {
+  appState.pendingCancelBooking = { slotKey: slotKey, passId: passId, name: name, dateLabel: dateLabel, slotTime: slotTime };
+  $("disp-cancel-user-name").textContent = name;
+  $("disp-cancel-name-val").textContent = name;
+  $("disp-cancel-slot-val").textContent = dateLabel + " • " + slotTime;
+  $("disp-cancel-pass-val").textContent = passId;
+  openModal("modal-admin-cancel-call");
+}
+
+async function executeStudioCancelCall() {
+  if (!appState.pendingCancelBooking) return;
+  var b = appState.pendingCancelBooking;
+
+  var submitBtn = $("btn-submit-cancel-call");
+  if (submitBtn) {
+    submitBtn.disabled = true;
+    submitBtn.textContent = "Cancelling Call on Sheet...";
+  }
+
+  try {
+    var res = await fetch(GOOGLE_SCRIPT_URL, {
+      method: "POST",
+      headers: { "Content-Type": "text/plain;charset=utf-8" },
+      body: JSON.stringify({
+        action: "cancel_call",
+        password: appState.currentAdminToken,
+        slotKey: b.slotKey,
+        passId: b.passId
+      })
+    });
+    var data = await res.json();
+    if (data && data.error === 'unauthorized') {
+      showToast("Session expired. Please log in again.", "error");
+      adminLogout();
+      return;
+    }
+  } catch (err) {
+    console.warn("Sheet cancel call notice:", err);
+  }
+
+  var idx = appState.bookedSlots.indexOf(b.slotKey);
+  if (idx !== -1) {
+    appState.bookedSlots.splice(idx, 1);
+  }
+
+  var found = appState.userBookingsList.find(function(item) {
+    return item.slotKey === b.slotKey || item.passId === b.passId;
+  });
+  if (found) {
+    found.status = "CANCELLED";
+  }
+
+  closeModal("modal-admin-cancel-call");
+  showToast("Call Cancelled! Slot reopened on site.", "success");
+
+  renderSlotsGrid();
+  generateDateOptions();
+  renderCreatorStudioData();
+
+  if (submitBtn) {
+    submitBtn.disabled = false;
+    submitBtn.textContent = "Haan, Call Cancel Karein & Slot Free Karein →";
+  }
+}
+
+function promptStudioApprove(slotKey, passId) {
+  var b = appState.userBookingsList.find(function(item) {
+    return item.slotKey === slotKey || item.passId === passId;
+  });
+  if (!b) return;
+
+  appState.pendingApproveBooking = b;
+  $("appr-attendee-name").textContent = b.name;
+  $("appr-slot-label").textContent = b.dateLabel + " • " + cleanSlotTimeDisplay(b.slotTime);
+  $("appr-attendee-email").textContent = b.email;
+  $("inp-meet-url").value = b.meetLink || "https://meet.google.com/vk-clarity-call";
+
+  openModal("modal-admin-approve");
+}
+
+async function executeStudioApprove() {
+  if (!appState.pendingApproveBooking) return;
+  var b = appState.pendingApproveBooking;
+  var meetUrl = $("inp-meet-url").value.trim() || "https://meet.google.com/vk-clarity-call";
+
+  var submitBtn = $("btn-submit-approval");
+  if (submitBtn) {
+    submitBtn.disabled = true;
+    submitBtn.textContent = "Approving on Google Sheet...";
+  }
+
+  try {
+    var res = await fetch(GOOGLE_SCRIPT_URL, {
+      method: "POST",
+      headers: { "Content-Type": "text/plain;charset=utf-8" },
+      body: JSON.stringify({
+        action: "approve",
+        password: appState.currentAdminToken,
+        slotKey: b.slotKey,
+        passId: b.passId,
+        meetLink: meetUrl,
+        email: b.email,
+        name: b.name
+      })
+    });
+    var data = await res.json();
+    if (data && data.error === 'unauthorized') {
+      showToast("Session expired. Please log in again.", "error");
+      adminLogout();
+      return;
+    }
+  } catch(err) {
+    console.warn("Sheet approval notice:", err);
+  }
+
+  b.status = "APPROVED";
+  b.meetLink = meetUrl;
+
+  if (appState.activeUserBooking && appState.activeUserBooking.passId === b.passId) {
+    appState.activeUserBooking.status = "APPROVED";
+    appState.activeUserBooking.meetLink = meetUrl;
+    populateVIPPortal(appState.activeUserBooking);
+  }
+
+  closeModal("modal-admin-approve");
+  showToast("Call Approved! Email sent to " + b.name + " ✅", "success");
+  renderCreatorStudioData();
+
+  if (submitBtn) {
+    submitBtn.disabled = false;
+    submitBtn.textContent = "Approve & Send Email Now ✉ →";
+  }
+}
+
+function promptStudioUnlockSlot(slotKey, passId, name, phone) {
+  appState.pendingFreeSlot = { slotKey: slotKey, passId: passId, name: name, phone: phone };
+  $("disp-free-slot-key").textContent = slotKey || "None";
+  $("disp-free-pass-id").textContent = passId || "All Access";
+  $("disp-free-user-name").textContent = name || "Attendee";
+  $("disp-free-user-phone").textContent = phone ? "+91 " + phone : "-";
+  openModal("modal-confirm-free");
+}
+
+async function executeStudioUnlock() {
+  if (!appState.pendingFreeSlot) return;
+  var slotKey = appState.pendingFreeSlot.slotKey;
+  var passId = appState.pendingFreeSlot.passId;
+  var phone = appState.pendingFreeSlot.phone;
+
+  var actionBtn = $("btn-confirm-free-action");
+  if (actionBtn) {
+    actionBtn.disabled = true;
+    actionBtn.textContent = "Deleting from Google Sheet...";
+  }
+
+  try {
+    var res = await fetch(GOOGLE_SCRIPT_URL, {
+      method: "POST",
+      headers: { "Content-Type": "text/plain;charset=utf-8" },
+      body: JSON.stringify({
+        action: "unlock",
+        password: appState.currentAdminToken,
+        slotKey: slotKey,
+        passId: passId,
+        phone: phone
+      })
+    });
+    var data = await res.json();
+    if (data && data.error === 'unauthorized') {
+      showToast("Session expired. Please log in again.", "error");
+      adminLogout();
+      return;
+    }
+  } catch (err) {
+    console.warn("Sheet unlock notice:", err);
+  }
+
+  var idx = appState.bookedSlots.indexOf(slotKey);
+  if (idx !== -1) {
+    appState.bookedSlots.splice(idx, 1);
+  }
+
+  appState.userBookingsList = appState.userBookingsList.filter(function(b) {
+    return b.slotKey !== slotKey && (!passId || b.passId !== passId) && (!phone || b.phone !== phone);
+  });
+
+  if (appState.activeUserBooking && (appState.activeUserBooking.phone === phone || appState.activeUserBooking.passId === passId)) {
+    appState.activeUserBooking = null;
+    try { localStorage.removeItem("vk_user_booking"); } catch(e) {}
+  }
+
+  if (actionBtn) {
+    actionBtn.disabled = false;
+    actionBtn.textContent = "Haan, Permanently Delete & Revoke Karein →";
+  }
+
+  closeModal("modal-confirm-free");
+  closeModal("modal-admin-live-slots");
+  showToast("Account & PIN permanently deleted from Google Sheet! Access revoked.", "success");
+
+  renderSlotsGrid();
+  generateDateOptions();
+  renderCreatorStudioData();
+}
+
+function studioUnlockSlot(slotKey, passId) {
+  var b = appState.userBookingsList.find(function(item) {
+    return item.slotKey === slotKey || item.passId === passId;
+  });
+  promptStudioUnlockSlot(slotKey, passId, b ? b.name : "Attendee", b ? b.phone : "");
+}
+
+function adminLogout() {
+  appState.currentAdminToken = null;
+  appState.userBookingsList = [];
+  try { localStorage.removeItem("vk_admin_token"); } catch(e) {}
+  showToast("Admin logged out.", "success");
+  showView("view-home", "backward");
+}
+
+function openPrintableReceipt() {
+  if (appState.activeUserBooking && appState.activeUserBooking.status !== "APPROVED") {
+    showToast("Receipt call approve hone ke baad unlock hogi!", "error");
+    return;
+  }
+  openModal("modal-receipt-view");
+}
+
+function downloadReceiptAsImage() {
+  var b = appState.activeUserBooking;
+  if (!b) {
+    try {
+      b = JSON.parse(localStorage.getItem("vk_user_booking"));
+      appState.activeUserBooking = b;
+    } catch(e) {}
+  }
+
+  if (!b) {
+    showToast("Booking data not loaded", "error");
+    return;
+  }
+
+  var dlBtn = $("btn-download-gallery");
+  if (dlBtn) {
+    dlBtn.disabled = true;
+    dlBtn.innerHTML = "<span>⏳</span> Preparing Receipt...";
+  }
+
+  try {
+    var canvas = document.createElement("canvas");
+    canvas.width = 820;
+    canvas.height = 1180;
+    var ctx = canvas.getContext("2d");
+
+    ctx.fillStyle = "#ffffff";
+    ctx.fillRect(0, 0, 820, 1180);
+
+    ctx.strokeStyle = "#cbd5e1";
+    ctx.lineWidth = 3;
+    ctx.strokeRect(20, 20, 780, 1140);
+
+    ctx.fillStyle = "#07192b";
+    ctx.fillRect(20, 20, 780, 130);
+
+    ctx.fillStyle = "#ffffff";
+    ctx.font = "900 32px 'Plus Jakarta Sans', sans-serif";
+    ctx.fillText("VINAY KOKDA", 45, 75);
+
+    ctx.fillStyle = "#94a3b8";
+    ctx.font = "600 15px 'Plus Jakarta Sans', sans-serif";
+    ctx.fillText("Creator Mentorship & Channel Strategy", 45, 105);
+
+    // SUCCESS Pill
+    ctx.fillStyle = "#ecfdf5";
+    roundRect(ctx, 580, 50, 195, 38, 19, true, false);
+    ctx.strokeStyle = "#a7f3d0";
+    ctx.lineWidth = 1.5;
+    roundRect(ctx, 580, 50, 195, 38, 19, false, true);
+
+    ctx.fillStyle = "#047857";
+    ctx.font = "900 14px 'Plus Jakarta Sans', sans-serif";
+    ctx.fillText("✓ SUCCESS PAID", 615, 74);
+
+    ctx.fillStyle = "#cbd5e1";
+    ctx.font = "600 13px 'Plus Jakarta Sans', sans-serif";
+    ctx.fillText("Date: " + new Date().toLocaleDateString("en-IN", { day: '2-digit', month: 'short', year: 'numeric' }), 585, 114);
+
+    // Two-Column Details Container
+    ctx.fillStyle = "#f8fafc";
+    roundRect(ctx, 45, 175, 730, 170, 14, true, false);
+    ctx.strokeStyle = "#e2e8f0";
+    ctx.lineWidth = 1.5;
+    roundRect(ctx, 45, 175, 730, 170, 14, false, true);
+
+    // Left Col: Attendee
+    ctx.fillStyle = "#64748b";
+    ctx.font = "900 12px 'Plus Jakarta Sans', sans-serif";
+    ctx.fillText("BILLED TO (ATTENDEE)", 65, 205);
+
+    ctx.fillStyle = "#0f172a";
+    ctx.font = "800 18px 'Plus Jakarta Sans', sans-serif";
+    ctx.fillText(b.name || "-", 65, 235);
+
+    ctx.fillStyle = "#475569";
+    ctx.font = "600 14px 'Plus Jakarta Sans', sans-serif";
+    ctx.fillText(b.email || "-", 65, 265);
+    ctx.fillText("+91 " + (b.phone || "-"), 65, 292);
+
+    ctx.fillStyle = "#0b7cff";
+    ctx.font = "900 14px monospace";
+    ctx.fillText("Pass ID: " + (b.passId || "-"), 65, 320);
+
+    // Right Col: Session info
+    ctx.fillStyle = "#64748b";
+    ctx.font = "900 12px 'Plus Jakarta Sans', sans-serif";
+    ctx.fillText("SESSION & PAYMENT DETAILS", 440, 205);
+
+    ctx.fillStyle = "#0f172a";
+    ctx.font = "600 14px 'Plus Jakarta Sans', sans-serif";
+    ctx.fillText("Program: 1:1 Creator Clarity Call", 440, 235);
+    ctx.fillText("Slot: " + (b.dateLabel || "") + " • " + cleanSlotTimeDisplay(b.slotTime), 440, 265);
+    ctx.fillText("Payment Mode: UPI Online", 440, 292);
+
+    ctx.fillStyle = "#0b7cff";
+    ctx.font = "800 14px monospace";
+    ctx.fillText("UTR: " + (b.utr || "-"), 440, 320);
+
+    // Item Table
+    ctx.fillStyle = "#0f172a";
+    roundRect(ctx, 45, 370, 730, 42, 8, true, false);
+    ctx.fillStyle = "#ffffff";
+    ctx.font = "800 13px 'Plus Jakarta Sans', sans-serif";
+    ctx.fillText("DESCRIPTION", 65, 396);
+    ctx.fillText("QTY", 510, 396);
+    ctx.fillText("AMOUNT (INR)", 635, 396);
+
+    ctx.fillStyle = "#ffffff";
+    roundRect(ctx, 45, 412, 730, 80, 8, true, false);
+    ctx.strokeStyle = "#e2e8f0";
+    ctx.lineWidth = 1.5;
+    roundRect(ctx, 45, 412, 730, 80, 8, false, true);
+
+    ctx.fillStyle = "#0f172a";
+    ctx.font = "800 15px 'Plus Jakarta Sans', sans-serif";
+    ctx.fillText("Creator Clarity Call (1-on-1 Mentorship)", 65, 445);
+    ctx.fillStyle = "#64748b";
+    ctx.font = "500 12px 'Plus Jakarta Sans', sans-serif";
+    ctx.fillText("28-Min Dedicated Session • Hook, Retention & Strategy Audit", 65, 470);
+
+    ctx.fillStyle = "#0f172a";
+    ctx.font = "800 15px 'Plus Jakarta Sans', sans-serif";
+    ctx.fillText("1", 520, 455);
+    ctx.fillText("₹499.00", 665, 455);
+
+    // Amount in words
+    ctx.fillStyle = "#f1f5f9";
+    roundRect(ctx, 45, 515, 730, 45, 6, true, false);
+    ctx.fillStyle = "#0b7cff";
+    ctx.fillRect(45, 515, 5, 45);
+
+    ctx.fillStyle = "#0f172a";
+    ctx.font = "800 13px 'Plus Jakarta Sans', sans-serif";
+    ctx.fillText("Amount in Words: ", 65, 542);
+    ctx.fillStyle = "#334155";
+    ctx.font = "600 13px 'Plus Jakarta Sans', sans-serif";
+    ctx.fillText("Four Hundred Ninety-Nine Rupees Only", 200, 542);
+
+    // Total Row
+    ctx.fillStyle = "#f0fdf4";
+    roundRect(ctx, 45, 580, 730, 60, 10, true, false);
+    ctx.strokeStyle = "#bbf7d0";
+    ctx.lineWidth = 1.5;
+    roundRect(ctx, 45, 580, 730, 60, 10, false, true);
+
+    ctx.fillStyle = "#166534";
+    ctx.font = "800 18px 'Plus Jakarta Sans', sans-serif";
+    ctx.fillText("Total Amount Paid", 70, 617);
+    ctx.fillStyle = "#15803d";
+    ctx.font = "900 24px 'Plus Jakarta Sans', sans-serif";
+    ctx.fillText("₹499.00", 665, 618);
+
+    // Seal & Stamp
+    ctx.fillStyle = "#eff6ff";
+    roundRect(ctx, 45, 665, 340, 65, 10, true, false);
+    ctx.strokeStyle = "#bfdbfe";
+    ctx.lineWidth = 1.5;
+    roundRect(ctx, 45, 665, 340, 65, 10, false, true);
+
+    ctx.fillStyle = "#1d4ed8";
+    ctx.font = "800 14px 'Plus Jakarta Sans', sans-serif";
+    ctx.fillText("★ 100% VERIFIED DIGITAL INVOICE ★", 65, 695);
+    ctx.fillStyle = "#475569";
+    ctx.font = "600 12px 'Plus Jakarta Sans', sans-serif";
+    ctx.fillText("Valid admission for Google Meet room", 65, 716);
+
+    ctx.fillStyle = "#64748b";
+    ctx.font = "800 12px 'Plus Jakarta Sans', sans-serif";
+    ctx.fillText("For Vinay Kokda Mentorship:", 530, 680);
+
+    ctx.strokeStyle = "#1e3a8a";
+    ctx.lineWidth = 3.2;
+    ctx.lineCap = "round";
+    ctx.lineJoin = "round";
+
+    // 1. Outer oval loop
+    ctx.beginPath();
+    ctx.ellipse(635, 745, 68, 38, -0.15, 0, Math.PI * 2);
+    ctx.stroke();
+
+    // 2. Center Z glyph
+    ctx.beginPath();
+    ctx.moveTo(615, 735);
+    ctx.quadraticCurveTo(630, 730, 648, 740);
+    ctx.lineTo(618, 758);
+    ctx.lineTo(644, 762);
+    ctx.stroke();
+
+    // 3. Base knot
+    ctx.beginPath();
+    ctx.arc(642, 764, 4.5, 0, Math.PI * 2);
+    ctx.stroke();
+
+    // 4. Vertical wavy tail
+    ctx.beginPath();
+    ctx.moveTo(642, 769);
+    ctx.quadraticCurveTo(645, 790, 640, 805);
+    ctx.quadraticCurveTo(638, 818, 636, 828);
+    ctx.stroke();
+
+    ctx.strokeStyle = "#94a3b8";
+    ctx.lineWidth = 1.2;
+    ctx.beginPath();
+    ctx.moveTo(520, 840);
+    ctx.lineTo(755, 840);
+    ctx.stroke();
+
+    ctx.fillStyle = "#0f172a";
+    ctx.font = "900 14px 'Plus Jakarta Sans', sans-serif";
+    ctx.fillText("Authorized Signatory", 565, 862);
+
+    ctx.fillStyle = "#64748b";
+    ctx.font = "700 12px 'Plus Jakarta Sans', sans-serif";
+    ctx.fillText("Vinay Kokda (Creator & Strategist)", 535, 882);
+
+    // Legal footer
+    ctx.strokeStyle = "#e2e8f0";
+    ctx.beginPath();
+    ctx.moveTo(45, 930);
+    ctx.lineTo(775, 930);
+    ctx.stroke();
+
+    ctx.fillStyle = "#64748b";
+    ctx.font = "600 11.5px 'Plus Jakarta Sans', sans-serif";
+    ctx.fillText("Terms: Strictly 100% Non-Refundable calendar reservation. Google Meet credentials dispatched to attendee.", 85, 960);
+    ctx.fillText("© Vinay Kokda • @vinaykokda • Official Digital Receipt", 250, 1120);
+
+    var filename = "VinayKokda-Invoice-" + (b.passId || "VIP") + ".png";
+    var dataUrl = canvas.toDataURL("image/png");
+
+    var downloadLink = document.createElement("a");
+    downloadLink.href = dataUrl;
+    downloadLink.download = filename;
+    document.body.appendChild(downloadLink);
+    downloadLink.click();
+    setTimeout(function() {
+      if (downloadLink.parentNode) {
+        document.body.removeChild(downloadLink);
+      }
+    }, 1500);
+
+    if (canvas.toBlob && navigator.canShare) {
+      canvas.toBlob(function(blob) {
+        if (!blob) return;
+        try {
+          var file = new File([blob], filename, { type: "image/png" });
+          if (navigator.canShare({ files: [file] })) {
+            navigator.share({
+              files: [file],
+              title: "Vinay Kokda Mentorship Invoice",
+              text: "Official Tax Invoice & VIP Pass (" + (b.passId || "") + ")"
+            }).catch(function(e) {});
+          }
+        } catch(shareErr) {}
+      }, "image/png");
+    }
+
+    showToast("Receipt downloading / saved to Gallery! 📥", "success");
+    if (dlBtn) {
+      dlBtn.disabled = false;
+      dlBtn.innerHTML = "<span>✓</span> Downloaded!";
+      setTimeout(function() {
+        dlBtn.innerHTML = "<span>📥</span> Download to Gallery (Photo)";
+      }, 3000);
+    }
+  } catch (err) {
+    console.error("Canvas export error:", err);
+    window.print();
+    if (dlBtn) {
+      dlBtn.disabled = false;
+      dlBtn.innerHTML = "<span>📥</span> Download to Gallery (Photo)";
     }
   }
 }
 
+function roundRect(ctx, x, y, width, height, radius, fill, stroke) {
+  if (typeof radius === 'undefined') radius = 5;
+  ctx.beginPath();
+  ctx.moveTo(x + radius, y);
+  ctx.lineTo(x + width - radius, y);
+  ctx.quadraticCurveTo(x + width, y + height, x + width - radius, y + height);
+  ctx.lineTo(x + radius, y + height);
+  ctx.quadraticCurveTo(x, y + height, x, y + height - radius);
+  ctx.lineTo(x, y + radius);
+  ctx.quadraticCurveTo(x, y, x + radius, y);
+  ctx.closePath();
+  if (fill) ctx.fill();
+  if (stroke) ctx.stroke();
+}
+
+function renderQrFallback(imgEl) {
+  imgEl.src = "https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=" + encodeURIComponent("upi://pay?pa=" + UPI_ID + "&pn=Vinay%20Kokda&am=499&cu=INR");
+}
+
 window.addEventListener('DOMContentLoaded', function() {
-  initScrollObserver();
+  initLocalCache();
+  fetchLiveBookedSlots();
 });
 </script>
 
